@@ -1,0 +1,133 @@
+import styled from 'styled-components'
+import { Link } from 'react-router-dom'
+
+export const Container = styled.div`
+  width: 622px;
+`
+
+export const BookWrapper = styled.div`
+  min-height: calc(100vh - 179px);
+`
+
+export const Book = styled.div`
+  background: white;
+  border: 1px solid #e0e0e0;
+  padding: 16px;
+  width: 100%;
+  margin-left: -16px;
+  margin-top: -16px;
+  margin-bottom: 24px;
+`
+
+export const Rating = styled.div``
+
+export const Name = styled.h2`
+  font-size: 18px;
+  font-weight: 600;
+  margin-top: 0;
+  margin-bottom: 6px;
+`
+
+export const ByAuthor = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 18px;
+  font-size: 15px;
+  color: grey;
+`
+export const Author = styled(Link)`
+  color: blue;
+  margin-left: 2px;
+  font-weight: 500;
+  letter-spacing: 0.2px;
+`
+
+export const Description = styled.p`
+  margin-top: 0px;
+  margin-bottom: 0px;
+  font-size: 15px;
+  line-height: 21px;
+`
+
+export const Image = styled.img`
+  height: 300px;
+  width: 200px;
+  align-self: flex-start;
+`
+
+export const Tabs = styled.div`
+  display: flex;
+  flex-direcion: row;
+  margin: 32px 0;
+`
+
+export const Tab = styled(Link)`
+  margin-right: 16px;
+  color: grey;
+  text-decoration: none;
+  ${(props) =>
+    props.selected &&
+    `
+    color: black;
+    cursor: default;
+  `}
+  ${(props) =>
+    !props.selected &&
+    `
+    :hover {
+      color: black;
+      text-decoration: underline;
+    }
+  `}
+`
+
+export const Chapters = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+
+export const Chapter = styled.div`
+  display: flex;
+  flex-direcion: row;
+  align-items: center;
+  position: relative;
+  font-size: 15px;
+  margin-bottom: 12px;
+`
+
+export const Episode = styled.div`
+  display: flex;
+  flex-direcion: row;
+  align-items: center;
+  position: relative;
+  margin-bottom: 16px;
+`
+
+export const Title = styled(Link).attrs({ className: 'title' })`
+  color: black;
+  text-decoration: none;
+  font-weight: 500;
+  :hover {
+    text-decoration: underline;
+  }
+`
+
+export const Label = styled.span`
+  color: hsla(0, 0%, 60%, 1);
+  width: 88px;
+  font-size: 15px;
+`
+
+export const Details = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-left: 16px;
+  margin-top: 12px;
+  width: 100%;
+`
+
+export const Break = styled.br`
+  content: '';
+  display: block;
+  margin-bottom: 4px;
+`
