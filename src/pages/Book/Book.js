@@ -1,5 +1,5 @@
 import React from 'react'
-import { useParams, useHistory } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { useQuery } from 'urql'
 import { getBookQuery } from 'api'
 
@@ -8,49 +8,9 @@ import Rating from 'components/Rating'
 import Comments from 'components/Comments'
 import Flex from 'components/Flex'
 
+import Episodes from './Episodes'
+import Chapters from './Chapters'
 import * as S from './Book.styled'
-
-const Chapters = ({ book }) => {
-  const { push } = useHistory()
-
-  return (
-    <S.Chapters>
-      {book.chapters.map((chapter, index) => (
-        <S.Chapter>
-          <S.Label
-            onClick={() => push(`/books/${book.id}/${index + 1}`)}
-          >{`Chapter ${index + 1}`}</S.Label>
-          <S.Title
-            key={chapter.id}
-            to={`/books/${book.id}/${index + 1}`}
-            style={{ fontWeight: '400' }}
-          >
-            {chapter.title}
-          </S.Title>
-        </S.Chapter>
-      ))}
-    </S.Chapters>
-  )
-}
-
-// {book.chapters
-//   .filter((chapter) => chapter.voices.length > 0)
-//   .map((chapter, index) => (
-//     <S.Chapter key={chapter.id} to={`/books/${book.id}/${index + 1}`}>
-//       {chapter.title}
-//     </S.Chapter>
-//   ))}
-const Episodes = ({ book }) => (
-  <S.Chapters>
-    {book.chapters.map((chapter, index) => (
-      <S.Episode>
-        <S.Title key={chapter.id} to={`/books/${book.id}/${index + 1}`}>
-          {index + 1}. {chapter.title}
-        </S.Title>
-      </S.Episode>
-    ))}
-  </S.Chapters>
-)
 
 export default ({ tab }) => {
   const { book: bookId } = useParams()
@@ -86,7 +46,7 @@ export default ({ tab }) => {
                 <S.Author>{`by ${book.author.username}`}</S.Author>
                 */}
                 </Flex>
-                <Rating ratings={book.ratings} />
+                <Rating ratings={book.ratings} bookId={book.id} />
               </Flex>
               {/*
             <S.Description>{book.description}</S.Description>

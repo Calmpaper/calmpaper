@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Link } from 'react-router-dom'
+import { Link as RouterLink } from 'react-router-dom'
 
 export const Container = styled.div`
   width: 622px;
@@ -25,7 +25,7 @@ export const Name = styled.h2`
   font-size: 18px;
   font-weight: 600;
   margin-top: 0;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
 `
 
 export const ByAuthor = styled.div`
@@ -34,10 +34,13 @@ export const ByAuthor = styled.div`
   margin-bottom: 18px;
   font-size: 15px;
   color: grey;
+
+  cursor: default;
 `
-export const Author = styled(Link)`
+export const Author = styled.span`
   color: blue;
-  margin-left: 2px;
+  text-decoration: none;
+  margin-left: 3px;
   font-weight: 500;
   letter-spacing: 0.2px;
 `
@@ -61,7 +64,7 @@ export const Tabs = styled.div`
   margin: 32px 0;
 `
 
-export const Tab = styled(Link)`
+export const Tab = styled(RouterLink)`
   margin-right: 16px;
   color: grey;
   text-decoration: none;
@@ -95,6 +98,11 @@ export const Chapter = styled.div`
   margin-bottom: 12px;
 `
 
+export const Episodes = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+
 export const Episode = styled.div`
   display: flex;
   flex-direcion: row;
@@ -103,7 +111,7 @@ export const Episode = styled.div`
   margin-bottom: 16px;
 `
 
-export const Title = styled(Link).attrs({ className: 'title' })`
+export const Title = styled(RouterLink).attrs({ className: 'title' })`
   color: black;
   text-decoration: none;
   font-weight: 500;
@@ -130,4 +138,13 @@ export const Break = styled.br`
   content: '';
   display: block;
   margin-bottom: 4px;
+`
+
+export const Link = styled(RouterLink)`
+  color: blue;
+  text-decoration: none;
+  margin-bottom: 24px;
+  :hover {
+    text-decoration: underline;
+  }
 `

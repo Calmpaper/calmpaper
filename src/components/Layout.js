@@ -32,11 +32,6 @@ const Join = () => {
       Join
     </Btn>
   )
-  // return (
-  //   <Link to="/join">
-  //     <Btn right>Join</Btn>
-  //   </Link>
-  // )
 }
 
 const AddBook = () => {
@@ -98,6 +93,14 @@ const NextEpisode = ({ bookId, chapterPage }) => {
   )
 }
 
+const NextChapter = ({ bookId, chapterPage }) => {
+  return (
+    <Link to={`/books/${bookId}/${parseInt(chapterPage) + 1}/text`}>
+      <Btn right>Next Chapter</Btn>
+    </Link>
+  )
+}
+
 export default ({ children }) => {
   const { user } = useContext(UserContext)
   const { pathname } = useLocation()
@@ -105,21 +108,23 @@ export default ({ children }) => {
   const episodesMatch = useRouteMatch('/books/:book/episodes')
   const chaptersMatch = useRouteMatch('/books/:book/chapters')
   const episodeMatch = useRouteMatch('/books/:book/:chapter')
+  const chapterMatch = useRouteMatch('/books/:book/:chapter/text')
 
   const showNextEpisode =
     episodeMatch &&
     episodeMatch.isExact &&
     episodeMatch.params.chapter !== 'episodes' &&
     episodeMatch.params.chapter !== 'chapters'
+  const showNextChapter = chapterMatch
   const showBackToBook = showNextEpisode
   const showBackToBooks =
-    // const showAddVoice = showNextEpisode
     (bookMatch && bookMatch.isExact) || episodesMatch || chaptersMatch
+  // const showAddVoice = showNextEpisode
   const showBack = pathname !== '/' && !showBackToBooks && !showBackToBook
   const showAddBook = user && pathname === '/'
   const showAddChapter =
     user && ((bookMatch && bookMatch.isExact) || episodesMatch || chaptersMatch)
-  const showJoin = !user && !showNextEpisode
+  const showJoin = !user && !showNextEpisode && !showNextChapter
 
   return (
     <div>
@@ -131,6 +136,13 @@ export default ({ children }) => {
         <NextEpisode
           bookId={episodeMatch.params.book}
           chapterPage={episodeMatch.params.chapter}
+        />
+      )}
+
+      {showNextChapter && (
+        <NextChapter
+          bookId={chapterMatch.params.book}
+          chapterPage={chapterMatch.params.chapter}
         />
       )}
       {showAddBook && <AddBook />}

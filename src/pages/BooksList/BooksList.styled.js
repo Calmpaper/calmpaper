@@ -32,7 +32,7 @@ export const Book = styled.div`
 `
 
 export const Details = styled.div`
-  padding: 12px;
+  padding: 12px 12px 8px;
 `
 
 export const Image = styled.img`

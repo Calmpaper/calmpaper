@@ -28,3 +28,30 @@ export const createChapterMutation = `
     }
   }
 `
+
+export const setRatingMutation = `
+  mutation($id: Int, $stars: Int!, $bookId: Int, $chapterId: Int, $voiceId: Int) {
+    setRating(id: $id, stars: $stars, bookId: $bookId, chapterId: $chapterId, voiceId: $voiceId) {
+      id
+      stars
+      book {
+        ratings {
+          stars
+        }
+      }
+      chapter {
+        ratings {
+          stars
+        }
+      }
+      voice {
+        ratings {
+          stars
+        }
+      }
+      author {
+        username
+      }
+    }
+  }
+`

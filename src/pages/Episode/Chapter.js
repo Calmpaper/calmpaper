@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom'
 import { useQuery } from 'urql'
 import { getChapterByBookQuery } from 'api'
 
+// import Editor from 'components/Editor/index.vue'
 import Loader from 'components/Loader'
 
 export default () => {
@@ -27,6 +28,7 @@ export default () => {
 
   return (
     <div className="story">
+      <vue-widget title="Vuidget live example"></vue-widget>
       <h1>
         Arcflame, the strongest <br />
         tree-growing dragon

@@ -5,6 +5,8 @@ import { getChapterQuery } from 'api'
 
 import Loader from 'components/Loader'
 import Rating from 'components/Rating'
+import Player from 'components/Player'
+import VoiceActors from 'components/VoiceActors'
 import Comments from 'components/Comments'
 import Flex from 'components/Flex'
 
@@ -28,22 +30,20 @@ export default () => {
 
   return (
     <S.Container>
-      <S.Episode>
+      <S.Episode column spaceBetween>
         <Flex row spaceBetween alignCenter>
           <S.Title>{chapter.title}</S.Title>
           <Rating ratings={chapter.ratings} />
         </Flex>
-        <S.Play>play</S.Play>
-        <S.Voices>
-          {chapter.voices.map((voice) => (
-            <S.Voice key={voice.id}>voice</S.Voice>
-          ))}
-        </S.Voices>
+        <Flex row spaceBetween alignEnd>
+          <Player />
+          <VoiceActors voices={chapter.voices} />
+        </Flex>
       </S.Episode>
       {showComments ? (
         <Comments />
       ) : (
-        <Flex row justifyCenter>
+        <Flex row justifyEnd>
           <button onClick={() => setShowComments(true)}>Show comments</button>
         </Flex>
       )}

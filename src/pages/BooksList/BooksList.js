@@ -19,7 +19,7 @@ const Book = ({ book }) => {
       />
       <S.Details>
         <S.Name>{book.name}</S.Name>
-        <Rating />
+        <Rating ratings={book.ratings} readOnly quiet />
       </S.Details>
     </S.Book>
   )
