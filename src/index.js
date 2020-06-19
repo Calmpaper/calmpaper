@@ -4,6 +4,7 @@ import { createClient, Provider } from 'urql'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 import UserProvider from 'context/UserContext'
+import PlayerProvider from 'context/PlayerContext'
 
 import BooksList from 'pages/BooksList/BooksList'
 import Book from 'pages/Book/Book'
@@ -26,39 +27,41 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider value={client}>
       <Router>
-        <UserProvider>
-          <Layout>
-            <Switch>
-              <Route path="/books/:book/:chapter/text">
-                <Chapter />
-              </Route>
-              <Route path="/books/:book/episodes">
-                <Book tab="episodes" />
-              </Route>
-              <Route path="/books/:book/chapters">
-                <Book tab="chapters" />
-              </Route>
-              <Route path="/books/:book/new-chapter">
-                <NewChapter />
-              </Route>
-              <Route path="/books/:book/:chapter">
-                <Episode />
-              </Route>
-              <Route path="/books/:book">
-                <Book tab="episodes" />
-              </Route>
-              <Route path="/books">
-                <BooksList />
-              </Route>
-              <Route path="/new-story">
-                <NewBook />
-              </Route>
-              <Route path="/">
-                <BooksList />
-              </Route>
-            </Switch>
-          </Layout>
-        </UserProvider>
+        <PlayerProvider>
+          <UserProvider>
+            <Layout>
+              <Switch>
+                <Route path="/books/:book/:chapter/text">
+                  <Chapter />
+                </Route>
+                <Route path="/books/:book/episodes">
+                  <Book tab="episodes" />
+                </Route>
+                <Route path="/books/:book/chapters">
+                  <Book tab="chapters" />
+                </Route>
+                <Route path="/books/:book/new-chapter">
+                  <NewChapter />
+                </Route>
+                <Route path="/books/:book/:chapter">
+                  <Episode />
+                </Route>
+                <Route path="/books/:book">
+                  <Book tab="episodes" />
+                </Route>
+                <Route path="/books">
+                  <BooksList />
+                </Route>
+                <Route path="/new-story">
+                  <NewBook />
+                </Route>
+                <Route path="/">
+                  <BooksList />
+                </Route>
+              </Switch>
+            </Layout>
+          </UserProvider>
+        </PlayerProvider>
       </Router>
     </Provider>
   </React.StrictMode>,

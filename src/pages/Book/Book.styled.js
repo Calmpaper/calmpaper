@@ -61,7 +61,7 @@ export const Image = styled.img`
 export const Tabs = styled.div`
   display: flex;
   flex-direcion: row;
-  margin: 32px 0;
+  margin: 32px 0 28px;
 `
 
 export const Tab = styled(RouterLink)`
@@ -95,7 +95,7 @@ export const Chapter = styled.div`
   align-items: center;
   position: relative;
   font-size: 15px;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 `
 
 export const Episodes = styled.div`

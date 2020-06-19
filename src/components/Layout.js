@@ -27,6 +27,7 @@ const Join = () => {
         padding: '0 12px',
         cursor: 'pointer',
         marginTop: -1,
+        outline: 'none',
       }}
     >
       Join
@@ -93,10 +94,10 @@ const NextEpisode = ({ bookId, chapterPage }) => {
   )
 }
 
-const NextChapter = ({ bookId, chapterPage }) => {
+const AddVoice = ({ bookId, chapterPage }) => {
   return (
     <Link to={`/books/${bookId}/${parseInt(chapterPage) + 1}/text`}>
-      <Btn right>Next Chapter</Btn>
+      <Btn right>Add voice</Btn>
     </Link>
   )
 }
@@ -140,11 +141,12 @@ export default ({ children }) => {
       )}
 
       {showNextChapter && (
-        <NextChapter
-          bookId={chapterMatch.params.book}
-          chapterPage={chapterMatch.params.chapter}
+        <AddVoice
+          bookId={episodeMatch.params.book}
+          chapterPage={episodeMatch.params.chapter}
         />
       )}
+
       {showAddBook && <AddBook />}
       {showAddChapter && <AddChapter book={bookMatch.params.book} />}
       {children}

@@ -36,7 +36,10 @@ export default () => {
           <Rating ratings={chapter.ratings} />
         </Flex>
         <Flex row spaceBetween alignEnd>
-          <Player />
+          <Player
+            initial={3}
+            initia={chapter.voices.length > 0 ? chapter.voices[0].id : null}
+          />
           <VoiceActors voices={chapter.voices} />
         </Flex>
       </S.Episode>
