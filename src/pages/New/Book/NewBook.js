@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { UserContext } from 'context'
 import { useHistory } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { useMutation } from 'urql'
@@ -8,11 +9,15 @@ import FileInput from 'components/Input/FileInput'
 import { Form, Input, Textarea, Button, Error } from './NewBook.styled'
 
 export default () => {
+  const { username } = useContext(UserContext)
   const { register, handleSubmit, errors } = useForm()
   const { push } = useHistory()
 
-  const onSubmit = (data) => {
-    createBook(data).then(({ data: { createOneBook: book } }) => {
+  console.log(username)
+  const submit = (data) => {
+    const allData = { ...data, username }
+    console.log(allData)
+    createBook(allData).then(({ data: { createOneBook: book } }) => {
       push(`/books/${book.id}`)
     })
   }
@@ -23,7 +28,7 @@ export default () => {
   if (error) return <p>Oh no... {error.message}</p>
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit)}>
+    <Form onSubmit={handleSubmit(submit)}>
       <FileInput />
 
       <Input

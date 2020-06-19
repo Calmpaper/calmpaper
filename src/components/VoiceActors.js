@@ -1,14 +1,14 @@
-import React, { useState, useEffect, useContext } from 'react'
-import useSound from 'use-sound'
+import React, { useEffect, useContext } from 'react'
 import { PlayerContext } from 'context'
+import useSound from 'use-sound'
 import styled from 'styled-components'
 import Flex from 'components/Flex'
 
-import track1 from '../assets/tracks/Anthony Rother - Automat.mp3'
-import track2 from '../assets/tracks/Dreams - Not Phazed (APRON33).mp3'
-import track3 from '../assets/tracks/Fakundo Ed - Kontent 3000.mp3'
-import track4 from '../assets/tracks/Yunzero _Angel 2_.mp3'
-import track5 from '../assets/tracks/Hidden Valley Logging Company - _2,000ft_.mp3'
+import track1 from '../assets/tracks/aphex/0035 1-Audio.mp3'
+import track2 from '../assets/tracks/aphex/disk prep calrec2 barn dance [slo].mp3'
+import track3 from '../assets/tracks/aphex/hat 2b 2012b.mp3'
+import track4 from '../assets/tracks/aphex/hat5c 0001 rec-4.mp3'
+import track5 from '../assets/tracks/aphex/piano un1 arpej.mp3'
 
 const Avatar = styled.img`
   width: 36px;

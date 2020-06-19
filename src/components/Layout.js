@@ -1,9 +1,9 @@
 import React, { useContext } from 'react'
 import { UserContext } from 'context'
+import { ModalContext } from 'context'
+import { useHistory, useLocation, useRouteMatch, Link } from 'react-router-dom'
 import { useQuery } from 'urql'
 import { getBookQuery } from 'api'
-import { Link } from 'react-router-dom'
-import { useHistory, useLocation, useRouteMatch } from 'react-router-dom'
 import styled from 'styled-components'
 
 const Btn = styled.button`
@@ -11,25 +11,27 @@ const Btn = styled.button`
   top: 36px;
   ${(props) => props.left && 'left: 64px'};
   ${(props) => props.right && 'right: 64px'};
+  ${(props) =>
+    props.blue &&
+    ` background: blue;
+      color: white;
+      border: 4px solid blue;
+      padding: 0 12px;
+      cursor: pointer;
+      marginTop: -1px;
+      outline: none;
+  `}
+`
+
+const Filter = styled.div`
+  ${(props) => props.blurred && 'filter: blur(3px);'};
 `
 
 const Join = () => {
-  const { setUser } = useContext(UserContext)
+  const { setShowModal } = useContext(ModalContext)
 
   return (
-    <Btn
-      right
-      onClick={() => setUser({ name: 'Andre' })}
-      style={{
-        background: 'blue',
-        color: 'white',
-        border: '4px solid blue',
-        padding: '0 12px',
-        cursor: 'pointer',
-        marginTop: -1,
-        outline: 'none',
-      }}
-    >
+    <Btn right onClick={() => setShowModal(true)} blue>
       Join
     </Btn>
   )
@@ -104,6 +106,7 @@ const AddVoice = ({ bookId, chapterPage }) => {
 
 export default ({ children }) => {
   const { user } = useContext(UserContext)
+  const { showModal } = useContext(ModalContext)
   const { pathname } = useLocation()
   const bookMatch = useRouteMatch('/books/:book')
   const episodesMatch = useRouteMatch('/books/:book/episodes')
@@ -126,11 +129,25 @@ export default ({ children }) => {
   const showAddChapter =
     user && ((bookMatch && bookMatch.isExact) || episodesMatch || chaptersMatch)
   const showJoin = !user && !showNextEpisode && !showNextChapter
+  // const showJoin = !!user
 
   return (
     <div>
-      {showJoin && <Join />}
       {showBack && <Back />}
+      {!showJoin ? (
+        <>
+          {showAddBook && <AddBook />}
+          {showAddChapter && <AddChapter book={bookMatch.params.book} />}
+          {showNextChapter && (
+            <AddVoice
+              bookId={episodeMatch.params.book}
+              chapterPage={episodeMatch.params.chapter}
+            />
+          )}
+        </>
+      ) : (
+        <Join />
+      )}
       {showBackToBooks && <BackToBooks />}
       {showBackToBook && <BackToBook bookId={episodeMatch.params.book} />}
       {showNextEpisode && (
@@ -140,16 +157,7 @@ export default ({ children }) => {
         />
       )}
 
-      {showNextChapter && (
-        <AddVoice
-          bookId={episodeMatch.params.book}
-          chapterPage={episodeMatch.params.chapter}
-        />
-      )}
-
-      {showAddBook && <AddBook />}
-      {showAddChapter && <AddChapter book={bookMatch.params.book} />}
-      {children}
+      <Filter blurred={showModal}>{children}</Filter>
     </div>
   )
 }

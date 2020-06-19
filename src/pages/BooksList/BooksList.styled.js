@@ -32,6 +32,10 @@ export const Book = styled.div`
 `
 
 export const Details = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 92px;
   padding: 12px 12px 8px;
 `
 
@@ -44,6 +48,8 @@ export const Name = styled.h2`
   font-size: 15px;
   font-weight: 600;
   margin-bottom: 8px;
+  max-width: 176px;
+  line-height: 18px;
 `
 
 export const Description = styled.p`

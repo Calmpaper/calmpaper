@@ -25,6 +25,9 @@ export default ({ tab }) => {
   if (fetching) return <Loader />
   if (error) return <p>Oh no... {error.message}</p>
 
+  console.log('book')
+  console.log(book)
+
   return (
     <S.Container>
       <S.BookWrapper>
@@ -40,11 +43,10 @@ export default ({ tab }) => {
                   <S.Name>{book.name}</S.Name>
                   <S.ByAuthor>
                     by
-                    <S.Author>Author</S.Author>
+                    <S.Author to={`/users/${book.author.username}`}>
+                      {book.author.username}
+                    </S.Author>
                   </S.ByAuthor>
-                  {/*
-                <S.Author>{`by ${book.author.username}`}</S.Author>
-                */}
                 </Flex>
                 <Rating ratings={book.ratings} bookId={book.id} />
               </Flex>
@@ -52,20 +54,23 @@ export default ({ tab }) => {
             <S.Description>{book.description}</S.Description>
             */}
               <S.Description>
-                When Ryan Glasser, (an Emo kid by heart) Dies after having a
-                good day at school, turn horribly bad, he is forced to Stand
-                before his maker. With Ryan Thinking life was just a game he
-                could just throw away without any Consequences, He gets
-                sentenced to live his next life in a a real life RPG world full
-                of Swords, Magic, Misery, and Mondays with nothing but a
-                Cellphone full of his Music to get by in this Afterlife.
+                Aumee is known as 'wannfota' by many in the Waystland: the bird
+                with black feet. She is owned by Daya, a renowned witch who
+                trains young women as her spies before selling them off as
+                wives. In order to maintain what little freedom she has as
+                Daya's assassin, she obeys any and all commands with no
+                questions asked.
                 <S.Break />
-                This wonderful place seems like perfect place to spend eternity
-                right? Well, Not exactly.
+                That changes when Aumee senses that Daya is after something
+                important. After bargaining her freedom for the spellbook that
+                Daya is after, Aumee is determined to find the book no matter
+                the costs.
                 <S.Break />
-                This place is supposed to be an alternative to going to hell,
-                but due to some unforeseen circumstances and events that are
-                going to unfold on him, Ryan
+                All she has to do is track down a spellbook, but she soon finds
+                that her desire for freedom is further from her reach than she
+                had ever thought. Forced to work with Daya's cursed informant,
+                Fal, Aumee must bargain with a set of twins who own the book in
+                order to fulfill her end of the deal.
               </S.Description>
 
               {book.chapters.length > 0 && (

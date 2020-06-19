@@ -29,6 +29,7 @@ export const Name = styled.h2`
   font-weight: 600;
   margin-top: 0;
   margin-bottom: 8px;
+  max-width: 248px;
 `
 
 export const ByAuthor = styled.div`
@@ -40,12 +41,15 @@ export const ByAuthor = styled.div`
 
   cursor: default;
 `
-export const Author = styled.span`
+export const Author = styled(RouterLink)`
   color: blue;
   text-decoration: none;
   margin-left: 3px;
   font-weight: 500;
   letter-spacing: 0.2px;
+  :hover {
+    text-decoration: underline;
+  }
 `
 
 export const Description = styled.p`
@@ -64,7 +68,7 @@ export const Image = styled.img`
 export const Tabs = styled.div`
   display: flex;
   flex-direcion: row;
-  margin: 32px 0 28px;
+  margin: 32px 0;
 `
 
 export const Tab = styled(RouterLink)`
@@ -98,7 +102,7 @@ export const Chapter = styled.div`
   align-items: center;
   position: relative;
   font-size: 15px;
-  margin-bottom: 14px;
+  margin-bottom: 16px;
 `
 
 export const Episodes = styled.div`

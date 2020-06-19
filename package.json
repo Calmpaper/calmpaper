@@ -6,6 +6,7 @@
     "disqus-react": "^1.0.8",
     "graphql": "^15.1.0",
     "html5-file-selector": "^2.1.0",
+    "localforage": "^1.7.4",
     "react": "^16.13.1",
     "react-audio-player": "^0.13.0",
     "react-dom": "^16.13.1",

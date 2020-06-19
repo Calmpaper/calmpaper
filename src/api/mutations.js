@@ -1,8 +1,26 @@
+export const createUserMutation = `
+  mutation($username: String!, $avatar: String) {
+    createOneUser(data: {
+      username: $username
+      avatar: $avatar
+    }) {
+      id
+      username
+      avatar
+    }
+  }
+`
+
 export const createBookMutation = `
-  mutation($name: String!, $description: String!) {
+  mutation($name: String!, $description: String!, $username: String!) {
     createOneBook(data: {
       name: $name
       description: $description
+      author: {
+        connect: {
+          username: $username
+        }
+      }
     }) {
       id
       name
@@ -12,15 +30,20 @@ export const createBookMutation = `
 `
 
 export const createChapterMutation = `
-  mutation($title: String!, $content: String!, $bookId: Int!) {
+  mutation($title: String!, $content: String!, $bookId: Int!, $username: String!) {
     createOneChapter(data: {
+      title: $title
+      content: $content
+      author: {
+        connect: {
+          username: $username
+        }
+      }
       book: {
         connect: {
           id: $bookId
         }
       }
-      title: $title
-      content: $content
     }) {
       id
       title
@@ -30,8 +53,24 @@ export const createChapterMutation = `
 `
 
 export const setRatingMutation = `
-  mutation($id: Int, $stars: Int!, $bookId: Int, $chapterId: Int, $voiceId: Int) {
-    setRating(id: $id, stars: $stars, bookId: $bookId, chapterId: $chapterId, voiceId: $voiceId) {
+  mutation(
+    $id: Int,
+    $stars: Int!,
+    $authorUsername: String!
+    $userId: Int,
+    $bookId: Int,
+    $chapterId: Int,
+    $voiceId: Int,
+  ) {
+    setRating(
+    id: $id,
+    stars: $stars,
+    authorUsername: $authorUsername
+    userId: $userId,
+    bookId: $bookId,
+    chapterId: $chapterId,
+    voiceId: $voiceId,
+    ) {
       id
       stars
       book {
@@ -51,6 +90,12 @@ export const setRatingMutation = `
       }
       author {
         username
+      }
+      user {
+        username
+        ratings {
+          stars
+        }
       }
     }
   }

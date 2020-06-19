@@ -1,3 +1,26 @@
+export const getUserQuery = `
+  query($username: String!) {
+    user(where: {
+      username: $username
+    }) {
+      id
+      username
+      avatar
+      ratings {
+        stars
+      }
+      books {
+        id
+        name
+        image
+        ratings {
+          stars
+        }
+      }
+    }
+  }
+`
+
 export const getBooksQuery = `
   query {
     books {

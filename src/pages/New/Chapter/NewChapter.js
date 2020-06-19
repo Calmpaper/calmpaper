@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { UserContext } from 'context'
 import { useHistory, useParams } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { useMutation } from 'urql'
@@ -7,6 +8,7 @@ import { createChapterMutation } from 'api'
 import { Form, Input, Textarea, Button, Error } from './NewChapter.styled'
 
 export default () => {
+  const { user: { username } = {} } = useContext(UserContext)
   const { book: bookId } = useParams()
   const { push } = useHistory()
   const { register, handleSubmit, errors } = useForm()
@@ -14,6 +16,7 @@ export default () => {
   const onSubmit = (data) => {
     createChapter({
       ...data,
+      username,
       bookId: parseInt(bookId),
     }).then(({ data: { createOneChapter: chapter } }) => {
       push(`/books/${bookId}`)
