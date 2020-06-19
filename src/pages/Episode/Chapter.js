@@ -5,12 +5,10 @@ import { useParams } from 'react-router-dom'
 import { useQuery } from 'urql'
 import { getChapterByBookQuery } from 'api'
 
-// import Editor from 'components/Editor/index.vue'
 import Loader from 'components/Loader'
 
 export default () => {
   const { book: bookId, chapter: chapterPage } = useParams()
-  // console.log(chapterPage)
 
   const [{ data: { chapterByBook = [] } = {}, fetching, error }] = useQuery({
     query: getChapterByBookQuery,
@@ -24,11 +22,20 @@ export default () => {
   if (fetching) return <Loader />
   if (error) return <p>Oh no... {error.message}</p>
 
-  console.log(chapter)
-
   return (
     <div className="story">
-      <vue-widget title="Vuidget live example"></vue-widget>
+      <antcmd-editor vce-ready>
+        <div className="page">
+          <div className="editor">
+            <div className="editor__content">
+              <div contentEditable="true" tabIndex={0} className="ProseMirror">
+                <h1 className>Title</h1>
+              </div>
+            </div>
+          </div>
+        </div>
+      </antcmd-editor>
+      {/*
       <h1>
         Arcflame, the strongest <br />
         tree-growing dragon
@@ -133,6 +140,7 @@ export default () => {
         The monsters were emotional. This was the song that started it all. A
         new era of change.
       </div>
+      */}
     </div>
   )
 }

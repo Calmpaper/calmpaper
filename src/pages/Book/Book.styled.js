@@ -1,6 +1,9 @@
 import styled from 'styled-components'
 import { Link as RouterLink } from 'react-router-dom'
 
+import { ReactComponent as PlayIconComponent } from 'assets/icons/play.svg'
+import { ReactComponent as StopIconComponent } from 'assets/icons/stop.svg'
+
 export const Container = styled.div`
   width: 622px;
 `
@@ -68,11 +71,11 @@ export const Tab = styled(RouterLink)`
   margin-right: 16px;
   color: grey;
   text-decoration: none;
+  cursor: default;
   ${(props) =>
     props.selected &&
     `
     color: black;
-    cursor: default;
   `}
   ${(props) =>
     !props.selected &&
@@ -95,7 +98,7 @@ export const Chapter = styled.div`
   align-items: center;
   position: relative;
   font-size: 15px;
-  margin-bottom: 10px;
+  margin-bottom: 14px;
 `
 
 export const Episodes = styled.div`
@@ -146,5 +149,25 @@ export const Link = styled(RouterLink)`
   margin-bottom: 24px;
   :hover {
     text-decoration: underline;
+  }
+`
+
+export const Play = styled(PlayIconComponent)`
+  width: 18px;
+  height: 18px;
+  fill: blue;
+  margin-right: 3px;
+  :hover {
+    fill: #ae00ff;
+  }
+`
+
+export const Stop = styled(StopIconComponent)`
+  width: 18px;
+  height: 18px;
+  fill: blue;
+  margin-right: 3px;
+  :hover {
+    fill: #ae00ff;
   }
 `

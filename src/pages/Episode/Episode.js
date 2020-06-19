@@ -37,7 +37,7 @@ export default () => {
         </Flex>
         <Flex row spaceBetween alignEnd>
           <Player
-            initial={3}
+            initial={1}
             initia={chapter.voices.length > 0 ? chapter.voices[0].id : null}
           />
           <VoiceActors voices={chapter.voices} />
