@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useState, useContext } from 'react'
 import { UserContext } from 'context'
 import { useHistory } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
@@ -9,14 +9,13 @@ import FileInput from 'components/Input/FileInput'
 import { Form, Input, Textarea, Button, Error } from './NewBook.styled'
 
 export default () => {
+  const [image, setImage] = useState(null)
   const { username } = useContext(UserContext)
   const { register, handleSubmit, errors } = useForm()
   const { push } = useHistory()
 
-  console.log(username)
   const submit = (data) => {
-    const allData = { ...data, username }
-    console.log(allData)
+    const allData = { ...data, username, image }
     createBook(allData).then(({ data: { createOneBook: book } }) => {
       push(`/books/${book.id}`)
     })
@@ -29,7 +28,7 @@ export default () => {
 
   return (
     <Form onSubmit={handleSubmit(submit)}>
-      <FileInput />
+      <FileInput setImage={setImage} />
 
       <Input
         name="name"

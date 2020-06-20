@@ -3,7 +3,6 @@ import Rating from 'react-rating'
 import { useMutation } from 'urql'
 import { setRatingMutation } from 'api'
 import { UserContext } from 'context'
-import { median, round } from './helpers'
 
 export default ({
   ratings = [],
@@ -16,14 +15,21 @@ export default ({
   quiet = false,
 }) => {
   const { username } = useContext(UserContext)
-  const initialRating = ratings.length > 0 ? round(median(ratings), 0.5) : 0
+
+  let sum = 0
+  for (let i = 0; i < ratings.length; i++) {
+    sum += parseInt(ratings[i].stars, 10) //don't forget to add the base
+  }
+
+  var avg = sum / ratings.length
+
+  const initialRating = ratings.length > 0 ? avg : 0
   const [stars, setStars] = useState(initialRating)
   const [ratingId, setRatingId] = useState(undefined)
   // eslint-disable-next-line no-unused-vars
   const [data, setRating] = useMutation(setRatingMutation)
 
   const submit = (value) => {
-    console.log(userId)
     setRating({
       stars: value,
       authorUsername: username,

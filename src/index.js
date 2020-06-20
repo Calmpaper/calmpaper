@@ -22,8 +22,7 @@ import 'assets/css/reset.css'
 import 'assets/css/index.css'
 
 const client = createClient({
-  // url: 'https://cors-anywhere.herokuapp.com/http://ec2-52-87-215-106.compute-1.amazonaws.com:4000/',
-  url: 'http://localhost:4000',
+  url: process.env.REACT_APP_BACKEND_URL,
 })
 
 ReactDOM.render(
@@ -46,6 +45,12 @@ ReactDOM.render(
                   </Route>
                   <Route path="/books/:book/new-chapter">
                     <NewChapter />
+                  </Route>
+                  <Route path="/books/:book/new-chapter">
+                    <Book tab="chapters" update={true} />
+                  </Route>
+                  <Route path="/books/:book/:chapter/:voice">
+                    <Episode />
                   </Route>
                   <Route path="/books/:book/:chapter">
                     <Episode />

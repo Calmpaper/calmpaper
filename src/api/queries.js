@@ -27,9 +27,17 @@ export const getBooksQuery = `
       id
       name
       description
+      image
       chapters {
+        id
         title
         image
+        voices {
+          url
+        }
+      }
+      ratings {
+        stars
       }
     }
   }
@@ -43,6 +51,7 @@ export const getBookQuery = `
       id
       name
       description
+      image
       ratings {
         stars
       }
@@ -55,6 +64,7 @@ export const getBookQuery = `
         title
         voices {
           id
+          url
         }
       }
     }

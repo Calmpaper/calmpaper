@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
-import { useParams } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
+import { useParams, useHistory } from 'react-router-dom'
 import { useQuery } from 'urql'
-import { getChapterQuery } from 'api'
+import { getChapterByBookQuery } from 'api'
 
 import Loader from 'components/Loader'
 import Rating from 'components/Rating'
@@ -16,35 +16,44 @@ import * as S from './Episode.styled'
 
 export default () => {
   const [showComments, setShowComments] = useState(false)
-  let { chapter: chapterId } = useParams()
+  let { book: bookId, chapter: chapterPage, voice: voiceId } = useParams()
+  const { pathname } = useHistory()
 
-  const [{ data: { chapter } = {}, fetching, error }] = useQuery({
-    query: getChapterQuery,
+  const [{ data: { chapterByBook = [] } = {}, fetching, error }] = useQuery({
+    query: getChapterByBookQuery,
     variables: {
-      id: parseInt(chapterId),
+      bookId: parseInt(bookId),
+      skip: parseInt(chapterPage) - 1,
     },
   })
+  const chapter = chapterByBook[0]
+
+  useEffect(() => {
+    if (voiceId) {
+      // play()
+    }
+  }, [])
 
   if (fetching) return <Loader />
   if (error) return <p>Oh no... {error.message}</p>
 
+  console.log(chapter.id)
   return (
     <S.Container>
       <S.Episode column spaceBetween>
         <Flex row spaceBetween alignCenter>
           <S.Title>{chapter.title}</S.Title>
-          <Rating ratings={chapter.ratings} />
+          <Rating ratings={chapter.ratings} chapterId={chapter.id} />
         </Flex>
         <Flex row spaceBetween alignEnd>
           <Player
-            initial={1}
-            initia={chapter.voices.length > 0 ? chapter.voices[0].id : null}
+            initial={chapter.voices.length > 0 ? chapter.voices[0].id : null}
           />
           <VoiceActors voices={chapter.voices} />
         </Flex>
       </S.Episode>
       {showComments ? (
-        <Comments />
+        <Comments id={`book${bookId}episode${chapter.id}`} />
       ) : (
         <Flex row justifyEnd>
           <button onClick={() => setShowComments(true)}>Show comments</button>

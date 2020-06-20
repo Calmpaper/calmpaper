@@ -12,6 +12,7 @@ export const Episode = styled(Flex)`
   display: flex;
   flex-direction: column;
   margin-bottom: 24px;
+  margin-top: -4px;
   min-height: 128px;
 `
 

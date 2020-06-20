@@ -12,10 +12,11 @@ export const createUserMutation = `
 `
 
 export const createBookMutation = `
-  mutation($name: String!, $description: String!, $username: String!) {
+  mutation($name: String!, $description: String!, $username: String!, $image: String) {
     createOneBook(data: {
       name: $name
       description: $description
+      image: $image,
       author: {
         connect: {
           username: $username
@@ -25,6 +26,7 @@ export const createBookMutation = `
       id
       name
       description
+      image
     }
   }
 `
@@ -97,6 +99,27 @@ export const setRatingMutation = `
           stars
         }
       }
+    }
+  }
+`
+
+export const createVoiceMutation = `
+  mutation($url: String!, $username: String!, $chapterId: Int!) {
+    createOneVoice(data: {
+      url: $url
+      author: {
+        connect: {
+          username: $username
+        }
+      }
+      chapter: {
+        connect: {
+          id: $chapterId
+        }
+      }
+    }) {
+      id
+      url
     }
   }
 `
