@@ -8,7 +8,6 @@
     "html5-file-selector": "^2.1.0",
     "localforage": "^1.7.4",
     "react": "^16.13.1",
-    "react-audio-player": "^0.13.0",
     "react-dom": "^16.13.1",
     "react-dropzone-uploader": "^2.11.0",
     "react-epic-spinners": "^0.4.1",

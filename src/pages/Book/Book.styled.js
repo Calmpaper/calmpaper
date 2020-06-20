@@ -8,9 +8,7 @@ export const Container = styled.div`
   width: 622px;
 `
 
-export const BookWrapper = styled.div`
-  min-height: calc(100vh - 179px);
-`
+export const BookWrapper = styled.div``
 
 export const Book = styled.div`
   background: white;
@@ -63,6 +61,7 @@ export const Image = styled.img`
   height: 300px;
   width: 200px;
   align-self: flex-start;
+  object-fit: contain;
 `
 
 export const Tabs = styled.div`
@@ -164,6 +163,7 @@ export const Play = styled(PlayIconComponent)`
   :hover {
     fill: #ae00ff;
   }
+  ${(props) => props.playing && 'fill: #ae00ff;'}
 `
 
 export const Stop = styled(StopIconComponent)`
@@ -174,4 +174,5 @@ export const Stop = styled(StopIconComponent)`
   :hover {
     fill: #ae00ff;
   }
+  ${(props) => props.playing && 'fill: #ae00ff;'}
 `

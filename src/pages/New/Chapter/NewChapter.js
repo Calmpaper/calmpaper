@@ -20,6 +20,8 @@ export default () => {
       bookId: parseInt(bookId),
     }).then(({ data: { createOneChapter: chapter } }) => {
       push(`/books/${bookId}`)
+      // todo: use graphql cache fragments
+      window.location.reload()
     })
   }
 

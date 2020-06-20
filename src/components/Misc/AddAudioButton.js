@@ -1,45 +1,52 @@
 import React from 'react'
+import styled from 'styled-components'
 import Dropzone from 'react-dropzone-uploader'
 import { getDroppedOrSelectedFiles } from 'html5-file-selector'
 
-const SERVER_URL = 'http://localhost:4000'
-// const SERVER_URL = 'http://ec2-52-87-215-106.compute-1.amazonaws.com:3000'
+const FILE_STORAGE_URL = process.env.REACT_APP_FILE_STORAGE_URL
 
-const Input = ({ accept, onFiles, files, getFilesFromEvent }) => {
+const Button = styled.button`
+  position: fixed;
+  top: 36px;
+  ${(props) => props.right && 'right: 64px'};
+`
+
+const Label = styled.label`
+  padding: 3px 6px;
+  margin: 0 -6px;
+`
+
+const UploadButton = ({ accept, onFiles, files, getFilesFromEvent }) => {
   return (
-    <label className="add-voice-btn">
-      Add your voice
-      <input
-        style={{ display: 'none' }}
-        type="file"
-        accept={accept}
-        multiple
-        onChange={(e) => {
-          getFilesFromEvent(e).then((chosenFiles) => {
-            onFiles(chosenFiles)
-          })
-        }}
-      />
-    </label>
+    <Button right>
+      <Label>
+        Add voice
+        <input
+          style={{ display: 'none' }}
+          type="file"
+          accept={accept}
+          multiple
+          onChange={(e) => {
+            getFilesFromEvent(e).then((chosenFiles) => {
+              onFiles(chosenFiles)
+            })
+          }}
+        />
+      </Label>
+    </Button>
   )
 }
 
 const Preview = ({ meta: { percent } }) => {
-  return (
-    <button className="add-voice-btn progress">{Math.round(percent)}%</button>
-  )
+  return <button disabled>{Math.round(percent)}%</button>
 }
 
 const audio =
   'https://github.com/justinmc/react-audio-player/raw/master/example/files/George_Gershwin_playing_Rhapsody_in_Blue.ogg'
 
-const CustomInput = ({ addVoice }) => {
+const AudioFileInput = ({ setVoice }) => {
   const handleSubmit = (files, allFiles) => {
-    console.log('handle submit')
-    console.log(files)
-    console.log(files.map((f) => f.meta))
     allFiles.forEach((f) => f.remove())
-    addVoice(audio)
   }
 
   const getFilesFromEvent = (e) => {
@@ -54,13 +61,10 @@ const CustomInput = ({ addVoice }) => {
 
   const handleChangeStatus = (props, status) => {
     const { meta, xhr, remove } = props
-    console.log(status)
-    console.log(props)
 
     if (status === 'done') {
       const { path } = JSON.parse(xhr.response)
-      console.log(path)
-      addVoice(`${SERVER_URL}/${path}`)
+      setVoice(`${FILE_STORAGE_URL}/${path}`)
       remove()
     }
 
@@ -78,18 +82,18 @@ const CustomInput = ({ addVoice }) => {
       accept="audio/*"
       onChangeStatus={handleChangeStatus}
       getUploadParams={() => ({
-        url: `${SERVER_URL}/files`,
+        url: `https://cors-anywhere.herokuapp.com/${FILE_STORAGE_URL}/files`,
       })}
       onSubmit={handleSubmit}
       getFilesFromEvent={getFilesFromEvent}
       maxFiles={1}
       multiple={false}
       canCancel={false}
-      InputComponent={Input}
+      InputComponent={UploadButton}
       PreviewComponent={Preview}
       SubmitButtonComponent={() => <div />}
     />
   )
 }
 
-export default CustomInput
+export default AudioFileInput

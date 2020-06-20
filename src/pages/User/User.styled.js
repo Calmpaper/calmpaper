@@ -4,6 +4,21 @@ import Flex from 'components/Flex'
 
 export const Container = styled.div`
   width: 622px;
+  .dzu-previewImage {
+    width: 38px;
+    height: 38px;
+    margin-right: 8px;
+    border-radius: 100%;
+    border: 1px solid rgba(0, 0, 0, 0);
+    user-select: none;
+    background: #fafafa;
+    border: 1px solid #e0e0e0;
+    box-sizing: border-box;
+    :hover {
+      border-color: blue;
+    }
+    ${(props) => props.playing && 'border-color: #ae00ff;'}
+  }
 `
 
 export const User = styled(Flex)`
@@ -13,6 +28,7 @@ export const User = styled(Flex)`
   width: 100%;
   margin-top: -16px;
   margin-bottom: 24px;
+  box-sizing: border-box;
 `
 
 export const Username = styled.h2`

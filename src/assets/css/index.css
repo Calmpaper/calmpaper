@@ -160,3 +160,7 @@ h1 > br {
   line-height: 32px;
   margin: 64px 0 32px;
 }
+
+progress {
+  display: none;
+}

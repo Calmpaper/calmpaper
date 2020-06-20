@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useEffect, useContext } from 'react'
 import { UserContext } from 'context'
 import { ModalContext } from 'context'
 import { useHistory, useLocation, useRouteMatch, Link } from 'react-router-dom'
@@ -89,6 +89,16 @@ const BackToBook = ({ bookId }) => {
 }
 
 const NextEpisode = ({ bookId, chapterPage }) => {
+  const [{ data: { book } = {} }] = useQuery({
+    query: getBookQuery,
+    variables: {
+      id: parseInt(bookId),
+    },
+  })
+
+  if (!book) return null
+  if (book.chapters.length === parseInt(chapterPage)) return null
+
   return (
     <Link to={`/books/${bookId}/${parseInt(chapterPage) + 1}`}>
       <Btn right>Next Episode</Btn>
@@ -97,6 +107,7 @@ const NextEpisode = ({ bookId, chapterPage }) => {
 }
 
 const AddVoice = ({ bookId, chapterPage }) => {
+  return null
   return (
     <Link to={`/books/${bookId}/${parseInt(chapterPage) + 1}/text`}>
       <Btn right>Add voice</Btn>

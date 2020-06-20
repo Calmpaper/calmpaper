@@ -17,6 +17,8 @@ export const Book = styled.div`
   margin-bottom: 16px;
   margin-right: 8px;
 
+  min-width: 200px;
+
   :nth-child(3n) {
     margin-right: 0px;
   }
@@ -42,6 +44,10 @@ export const Details = styled.div`
 export const Image = styled.img`
   height: 300px;
   width: 200px;
+  min-height: 300px;
+  min-width: 200px;
+
+  object-fit: contain;
 `
 
 export const Name = styled.h2`

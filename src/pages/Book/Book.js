@@ -1,5 +1,5 @@
-import React from 'react'
-import { useParams } from 'react-router-dom'
+import React, { useEffect } from 'react'
+import { useParams, useHistory } from 'react-router-dom'
 import { useQuery } from 'urql'
 import { getBookQuery } from 'api'
 
@@ -12,21 +12,39 @@ import Episodes from './Episodes'
 import Chapters from './Chapters'
 import * as S from './Book.styled'
 
-export default ({ tab }) => {
+export default ({ tab, update }) => {
   const { book: bookId } = useParams()
+  const { pathname } = useHistory()
 
-  const [{ data: { book } = {}, fetching, error }] = useQuery({
+  const [{ data: { book } = {}, fetching, error }, execute] = useQuery({
+    pause: !bookId,
     query: getBookQuery,
     variables: {
       id: parseInt(bookId),
     },
   })
 
+  useEffect(() => {
+    if (update) {
+      execute()
+    }
+  }, [])
+
+  // useEffect(() => {
+  //   if (book) {
+  //     execute()
+  //   }
+  //   // execute({ requestPolicy: 'network-only' })()
+  // }, [book])
+
+  useEffect(() => {
+    if (book && book.chapters && book.chapters.length > 0) {
+      // console.log(book.chapters)
+    }
+  }, [book])
+
   if (fetching) return <Loader />
   if (error) return <p>Oh no... {error.message}</p>
-
-  console.log('book')
-  console.log(book)
 
   return (
     <S.Container>
@@ -34,10 +52,13 @@ export default ({ tab }) => {
         <S.Book>
           <Flex row alignCenter>
             <S.Image
-              src="https://www.royalroadcdn.com/covers/32502-heart-of-cultivation-full.jpg?time=1591047951"
+              src={
+                book.image ||
+                'https://www.royalroadcdn.com/covers/32502-heart-of-cultivation-full.jpg?time=1591047951'
+              }
               alt={book.name}
             />
-            <S.Details>
+            <S.Details style={{ minHeight: 288 }}>
               <Flex row spaceBetween>
                 <Flex column>
                   <S.Name>{book.name}</S.Name>
@@ -50,29 +71,7 @@ export default ({ tab }) => {
                 </Flex>
                 <Rating ratings={book.ratings} bookId={book.id} />
               </Flex>
-              {/*
-            <S.Description>{book.description}</S.Description>
-            */}
-              <S.Description>
-                Aumee is known as 'wannfota' by many in the Waystland: the bird
-                with black feet. She is owned by Daya, a renowned witch who
-                trains young women as her spies before selling them off as
-                wives. In order to maintain what little freedom she has as
-                Daya's assassin, she obeys any and all commands with no
-                questions asked.
-                <S.Break />
-                That changes when Aumee senses that Daya is after something
-                important. After bargaining her freedom for the spellbook that
-                Daya is after, Aumee is determined to find the book no matter
-                the costs.
-                <S.Break />
-                All she has to do is track down a spellbook, but she soon finds
-                that her desire for freedom is further from her reach than she
-                had ever thought. Forced to work with Daya's cursed informant,
-                Fal, Aumee must bargain with a set of twins who own the book in
-                order to fulfill her end of the deal.
-              </S.Description>
-
+              <S.Description>{book.description}</S.Description>
               {book.chapters.length > 0 && (
                 <>
                   <S.Tabs>
@@ -97,7 +96,7 @@ export default ({ tab }) => {
           </Flex>
         </S.Book>
       </S.BookWrapper>
-      <Comments />
+      <Comments id={`book${book.id}`} />
     </S.Container>
   )
 }
