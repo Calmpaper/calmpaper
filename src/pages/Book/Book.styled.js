@@ -1,9 +1,6 @@
 import styled from 'styled-components'
 import { Link as RouterLink } from 'react-router-dom'
 
-import { ReactComponent as PlayIconComponent } from 'assets/icons/play.svg'
-import { ReactComponent as StopIconComponent } from 'assets/icons/stop.svg'
-
 export const Container = styled.div`
   width: 622px;
 `
@@ -100,20 +97,6 @@ export const Chapter = styled.div`
   flex-direcion: row;
   align-items: center;
   position: relative;
-  font-size: 15px;
-  margin-bottom: 16px;
-`
-
-export const Episodes = styled.div`
-  display: flex;
-  flex-direction: column;
-`
-
-export const Episode = styled.div`
-  display: flex;
-  flex-direcion: row;
-  align-items: center;
-  position: relative;
   margin-bottom: 16px;
 `
 
@@ -128,8 +111,7 @@ export const Title = styled(RouterLink).attrs({ className: 'title' })`
 
 export const Label = styled.span`
   color: hsla(0, 0%, 60%, 1);
-  width: 88px;
-  font-size: 15px;
+  width: 16px;
 `
 
 export const Details = styled.div`
@@ -153,26 +135,4 @@ export const Link = styled(RouterLink)`
   :hover {
     text-decoration: underline;
   }
-`
-
-export const Play = styled(PlayIconComponent)`
-  width: 18px;
-  height: 18px;
-  fill: blue;
-  margin-right: 3px;
-  :hover {
-    fill: #ae00ff;
-  }
-  ${(props) => props.playing && 'fill: #ae00ff;'}
-`
-
-export const Stop = styled(StopIconComponent)`
-  width: 18px;
-  height: 18px;
-  fill: blue;
-  margin-right: 3px;
-  :hover {
-    fill: #ae00ff;
-  }
-  ${(props) => props.playing && 'fill: #ae00ff;'}
 `

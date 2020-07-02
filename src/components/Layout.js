@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react'
+import React, { useContext } from 'react'
 import { UserContext } from 'context'
 import { ModalContext } from 'context'
 import { useHistory, useLocation, useRouteMatch, Link } from 'react-router-dom'
@@ -39,8 +39,8 @@ const Join = () => {
 
 const AddBook = () => {
   return (
-    <Link to="/new-story">
-      <Btn right>Add Story</Btn>
+    <Link to="/new-book">
+      <Btn right>Add Book</Btn>
     </Link>
   )
 }

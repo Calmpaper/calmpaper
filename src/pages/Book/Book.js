@@ -8,7 +8,6 @@ import Rating from 'components/Rating'
 import Comments from 'components/Comments'
 import Flex from 'components/Flex'
 
-import Episodes from './Episodes'
 import Chapters from './Chapters'
 import * as S from './Book.styled'
 
@@ -29,13 +28,6 @@ export default ({ tab, update }) => {
       execute()
     }
   }, [])
-
-  // useEffect(() => {
-  //   if (book) {
-  //     execute()
-  //   }
-  //   // execute({ requestPolicy: 'network-only' })()
-  // }, [book])
 
   useEffect(() => {
     if (book && book.chapters && book.chapters.length > 0) {
@@ -69,27 +61,32 @@ export default ({ tab, update }) => {
                     </S.Author>
                   </S.ByAuthor>
                 </Flex>
-                <Rating ratings={book.ratings} bookId={book.id} />
+                <Rating ratings={book.reviews} bookId={book.id} />
               </Flex>
               <S.Description>{book.description}</S.Description>
               {book.chapters.length > 0 && (
                 <>
                   <S.Tabs>
                     <S.Tab
-                      selected={tab === 'episodes'}
-                      to={`/books/${book.id}/episodes`}
+                      selected={tab === 'details'}
+                      to={`/books/${book.id}`}
                     >
-                      Episodes
+                      Details
                     </S.Tab>
                     <S.Tab
-                      selected={tab === 'chapters'}
-                      to={`/books/${book.id}/chapters`}
+                      selected={tab === 'glossary'}
+                      to={`/books/${book.id}/glossary`}
                     >
-                      Table of Content
+                      Glossary
+                    </S.Tab>
+                    <S.Tab
+                      selected={tab === 'reviews'}
+                      to={`/books/${book.id}/reviews`}
+                    >
+                      Reviews
                     </S.Tab>
                   </S.Tabs>
-                  {tab === 'episodes' && <Episodes book={book} />}
-                  {tab === 'chapters' && <Chapters book={book} />}
+                  <Chapters book={book} />
                 </>
               )}
             </S.Details>

@@ -4,7 +4,6 @@ import { useQuery } from 'urql'
 import { getUserQuery } from 'api'
 
 import Loader from 'components/Loader'
-import Rating from 'components/Rating'
 import Books from './Books'
 import Flex from 'components/Flex'
 import AvatarInput from 'components/Input/AvatarInput'
@@ -54,7 +53,6 @@ export default () => {
           <AvatarInput avatar={avatar} setImage={setImage} />
           <S.Username>{user.username}</S.Username>
         </Flex>
-        <Rating ratings={user.ratings} userId={user.id} />
       </S.User>
       <Books books={user.books} />
     </S.Container>
