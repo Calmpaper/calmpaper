@@ -32,14 +32,14 @@ export default () => {
 
       <Input
         name="name"
-        placeholder="Name of your story"
+        placeholder="Name"
         ref={register({ required: true })}
       />
       {errors.name && <Error>Book name is required.</Error>}
 
       <Textarea
         name="description"
-        placeholder="What's your story about?"
+        placeholder="What's your book about?"
         ref={register({ required: true })}
       />
       {errors.description && <Error>Book description is required.</Error>}

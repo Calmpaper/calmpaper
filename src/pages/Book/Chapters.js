@@ -6,13 +6,12 @@ const Chapters = ({ book }) => {
     <S.Chapters>
       {book.chapters.map((chapter, index) => (
         <S.Chapter>
-          <S.Label>{`Chapter ${index + 1}`}</S.Label>
           <S.Title
             key={chapter.id}
-            to={`/books/${book.id}/${index + 1}/text`}
+            to={`/books/${book.id}/${index + 1}`}
             style={{ fontWeight: '400' }}
           >
-            {chapter.title}
+            {`${index + 1}. ${chapter.title}`}
           </S.Title>
         </S.Chapter>
       ))}

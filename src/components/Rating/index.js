@@ -4,16 +4,7 @@ import { useMutation } from 'urql'
 import { setRatingMutation } from 'api'
 import { UserContext } from 'context'
 
-export default ({
-  ratings = [],
-  userId,
-  bookId,
-  chapterId,
-  voiceId,
-
-  readOnly = false,
-  quiet = false,
-}) => {
+export default ({ ratings = [], bookId, readOnly = false, quiet = false }) => {
   const { username } = useContext(UserContext)
 
   let sum = 0
@@ -34,14 +25,10 @@ export default ({
       stars: value,
       authorUsername: username,
       id: ratingId,
-      userId,
       bookId,
-      chapterId,
-      voiceId,
     }).then(({ data: { setRating: res } = {} }) => {
       setStars(res.stars)
       setRatingId(res.id)
-      // push(`/books/${book.id}`)
     })
   }
 
