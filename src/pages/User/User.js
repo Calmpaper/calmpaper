@@ -1,31 +1,29 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
+import { UserContext } from 'context'
 import { useParams } from 'react-router-dom'
 import { useQuery } from 'urql'
 import { getUserQuery } from 'api'
 
 import Loader from 'components/Loader'
+import Header from 'components/Layout/Header'
+import Footer from 'components/Layout/Footer'
 import Books from './Books'
 import Flex from 'components/Flex'
-import AvatarInput from 'components/Input/AvatarInput'
+// import AvatarInput from 'components/Input/AvatarInput'
 
 import * as S from './User.styled'
 
-const hashcode = (s) =>
-  s.split('').reduce((a, b) => {
-    a = (a << 5) - a + b.charCodeAt(0)
-    return a & a
-  }, 0)
-
 export default () => {
-  const { username } = useParams()
+  const { id: userId } = useParams()
+  const { logout, user: loggedUser } = useContext(UserContext)
   const [image, setImage] = useState(null)
 
   const [{ data: { user } = {}, fetching, error }] = useQuery({
     query: getUserQuery,
     variables: {
-      username: username,
+      id: parseInt(userId),
     },
-    pause: !username,
+    pause: !userId,
   })
 
   useEffect(() => {
@@ -40,21 +38,47 @@ export default () => {
 
   if (fetching) return <Loader />
   if (error) return <p>Oh no... {error.message}</p>
-  console.log(user)
-
-  const avatar = `https://www.gravatar.com/avatar/${hashcode(
-    username,
-  )}?d=robohash&f=y`
 
   return (
-    <S.Container>
-      <S.User row spaceBetween alignCenter>
-        <Flex row alignCenter>
-          <AvatarInput avatar={avatar} setImage={setImage} />
-          <S.Username>{user.username}</S.Username>
+    <>
+      <Header />
+      <Flex
+        alignCenter
+        justifyCenter
+        style={{ width: '100vw', height: '100%', marginTop: 128 }}
+      >
+        <Flex column alignEnd>
+          <S.Container>
+            <S.User row spaceBetween alignCenter>
+              <Flex row alignCenter>
+                <img
+                  width="32"
+                  height="32"
+                  src={user.avatar}
+                  style={{ marginRight: 12, borderRadius: '100%' }}
+                  alt={user.givenname}
+                />
+                <S.Username>{user.fullname}</S.Username>
+              </Flex>
+            </S.User>
+            <Books books={user.books} />
+          </S.Container>
+          {loggedUser && loggedUser.id === user.id && (
+            <Flex
+              alignCenter
+              justifyCenter
+              className="btn btn-br"
+              style={{
+                alignSelf: 'flex-end',
+              }}
+              onClick={logout}
+            >
+              Log out
+            </Flex>
+          )}
         </Flex>
-      </S.User>
-      <Books books={user.books} />
-    </S.Container>
+      </Flex>
+      <Footer centered />
+    </>
   )
 }

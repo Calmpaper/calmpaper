@@ -5,7 +5,7 @@ export const setRatingMutation = `
     $authorUsername: String!
     $bookId: Int,
   ) {
-    setRating(
+    setReview(
     id: $id,
     stars: $stars,
     authorUsername: $authorUsername
@@ -14,13 +14,34 @@ export const setRatingMutation = `
       id
       stars
       book {
-        ratings {
+        reviews {
           stars
         }
       }
       author {
-        username
+        fullname
       }
+    }
+  }
+`
+
+export const addReviewMutation = `
+  mutation($stars: Int!, $message: String, $authorId: Int!, $bookId: Int!) {
+    createOneReview(data: {
+      stars: $stars
+      message: $message
+      author: {
+        connect: {
+          id: $authorId
+        }
+      }
+      book: {
+        connect: {
+          id: $bookId
+        }
+      }
+    }) {
+      id
     }
   }
 `

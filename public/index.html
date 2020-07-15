@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Stories</title>
+    <title>Calmpaper</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
     <meta
       name="description"
-      content="Web site created using create-react-app"
+      content="Find your next reading"
     />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
 
@@ -17,30 +17,1551 @@
     />
     <script src="https://use.fontawesome.com/8560ea6e51.js"></script>
 
+    <style>
+            html,
+            body {
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+
+            .gnc-notification-header {
+                height: 48px;
+                padding: 0 16px 0 12px;
+
+                text-align: center;
+
+                background: #fff;
+                box-shadow: inset 0 -1px 0 0 rgba(0, 0, 0, .1);
+            }
+
+            .gnc-notification-header__title {
+                position: relative;
+
+                display: inline-block;
+
+                font: bold 18px/45px 'Inter', sans-serif;
+
+                color: #000;
+            }
+    </style>
+  <style type="text/css">.gnc-notification-center_hoverable .popup-services {
+    position: absolute;
+    z-index: 5;
+    top: 60px;
+    right: 15px;
+    bottom: initial;
+    left: initial;
+
+    visibility: hidden;
+
+    padding: 5px 0;
+
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, .06), 0 10px 20px -5px rgba(0, 0, 0, .3);
+}
+
+.gnc-notification-center_hoverable .popup-services_visible {
+    visibility: visible;
+}
+
+.gnc-notification-list__services {
+    position: relative;
+
+    overflow: hidden;
+
+    border-bottom: 1px solid;
+    border-bottom-color: rgba(0, 0, 0, .1);
+    background-color: #f3f5f8;
+
+    transition: box-shadow .1s ease-out 0s;
+    -ms-overflow-style: none;
+}
+
+.gnc-notification-list__services::-webkit-scrollbar {
+    display: none;
+}
+
+.gnc-notification-list__services-left,
+.gnc-notification-list__services-right {
+    position: absolute;
+    z-index: 2;
+    top: 10px;
+
+    width: 36px;
+    height: 36px;
+
+    cursor: pointer;
+}
+
+.gnc-notification-list__services-left::before,
+.gnc-notification-list__services-right::before,
+.gnc-notification-list__services-left::after,
+.gnc-notification-list__services-right::after {
+    position: absolute;
+
+    content: '';
+}
+
+.gnc-notification-list__services-left::before,
+.gnc-notification-list__services-right::before {
+    z-index: 1;
+    top: -10px;
+    right: -15px;
+    bottom: -10px;
+    left: -24px;
+
+    background: #fff;
+    /* stylelint-disable-next-line */
+    background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, .5) 17%, rgba(255, 255, 255, .7) 100%);
+}
+
+.gnc-notification-list__services-left::after,
+.gnc-notification-list__services-right::after {
+    z-index: 2;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    border-radius: 50%;
+    /* stylelint-disable-next-line */
+    background: #fff url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxNicgaGVpZ2h0PScxNicgdmlld0JveD0nMCAwIDE2IDE2Jz48cGF0aCBmaWxsPScjMzMzJyBkPSdNMTMgNy45OTlMNS40MDYgMTYgNCAxNC41MTdsNi4xODctNi41MThMNCAxLjQ4MiA1LjQwNiAweicvPjwvc3ZnPg==') center center no-repeat;
+    background-size: 16px 16px;
+    box-shadow: 1px 1px 10px 0 rgba(0, 0, 0, .2);
+}
+
+.gnc-notification-list__services-left {
+    left: 10px;
+
+    transform: scale(-1, 1);
+}
+
+.gnc-notification-list__services-right {
+    right: 10px;
+}
+
+.gnc-notification-list__services-inner {
+    position: relative;
+
+    display: flex;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    flex-shrink: 0;
+
+    height: 54px;
+    margin-bottom: -30px;
+    padding-top: 8px;
+    padding-bottom: 30px;
+
+    -webkit-transform: translate3d(0, 0, 0);
+}
+
+.gnc-notification-list__services .gnc-service-logo {
+    display: inline-block;
+
+    width: 36px;
+    height: 36px;
+    margin-top: 3px;
+    margin-left: 3px;
+
+    vertical-align: top;
+}
+
+.gnc-notification-center_hoverable .popup-services .gnc-service-logo {
+    width: 26px;
+    height: 26px;
+    margin-top: 0;
+    margin-left: 0;
+}
+
+.gnc-notification-list__service {
+    display: flex;
+    flex: 0 0 auto;
+    flex-flow: row nowrap;
+    align-content: center;
+    align-items: center;
+}
+
+.gnc-notification-list__service_circle {
+    position: relative;
+
+    overflow: hidden;
+
+    width: 42px;
+    height: 42px;
+
+    cursor: pointer;
+
+    border-radius: 100px;
+    background-color: #fff;
+
+    transition: background-color 250ms ease-out, width 250ms ease-out;
+}
+
+.gnc-notification-list__service_circle::before {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    display: block;
+
+    content: '';
+
+    border: 1px solid rgba(0, 0, 0, .1);
+    border-radius: 100px;
+}
+
+.gnc-notification-center_hoverable .gnc-notification-list__service_circle:hover::before {
+    border-color: rgba(0, 0, 0, .2);
+}
+
+.gnc-notification-list__service-name {
+    font-size: 13px;
+    line-height: 1;
+}
+
+.gnc-notification-list__date-label {
+    padding: 8px 12px;
+
+    font: bold 15px/1 sans-serif;
+}
+
+.gnc-notification-list__later {
+    padding-top: 15px;
+
+    box-shadow: inset 0 1px 0 0 rgba(0, 0, 0, .05);
+}
+
+.gnc-notification-center_hoverable .gnc-notification-list__services {
+    overflow: visible;
+    -ms-overflow-style: auto;
+}
+
+.gnc-notification-center_hoverable .gnc-notification-list__services-inner_sort.gnc-notification-list__services-inner {
+    position: static;
+
+    overflow-x: initial;
+    flex-shrink: none;
+    justify-content: space-between;
+
+    margin-bottom: 0;
+    padding: 8px 12px 0;
+
+    white-space: nowrap;
+
+    -webkit-transform: none;
+}
+
+.gnc-notification-center_hoverable .popup-services .gnc-notification-list__service {
+    display: block;
+
+    padding: 0 15px;
+
+    line-height: 28px;
+    cursor: pointer;
+}
+
+.gnc-notification-center_hoverable .popup-services .gnc-notification-list__service_circle {
+    flex: none;
+
+    width: auto;
+    height: auto;
+    padding: 0 15px;
+
+    background: none;
+}
+
+.gnc-notification-center_hoverable .popup-services .gnc-notification-list__service_circle::before {
+    content: none;
+}
+
+.gnc-notification-center_hoverable .popup-services .gnc-notification-list__service-name {
+    padding: 6px 16px 0 8px;
+
+    font-weight: normal;
+}
+
+.gnc-notification-center_hoverable .popup-services_visible .gnc-notification-list__service-name {
+    visibility: visible;
+}
+
+.gnc-notification-center_hoverable .gnc-notification-list__services-inner_sort .gnc-notification-list__service {
+    display: inline-block;
+    flex: none;
+
+    padding: 0;
+}
+
+.gnc-notification-center_hoverable .popup-services .gnc-notification-list__service:hover {
+    background-color: #ffeba0;
+}
+</style><style type="text/css">.gnc-settings {
+    display: none;
+
+    vertical-align: top;
+
+    background: #f3f5f8;
+
+    animation-duration: .15s;
+
+    animation-fill-mode: forwards;
+}
+
+.gnc-settings_open {
+    display: block;
+
+    animation-name: showSettings;
+}
+
+.gnc-settings_closed {
+    animation-name: hideSettings;
+}
+
+.gnc-settings__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    width: 100%;
+    height: 40px;
+
+    cursor: pointer;
+
+    background: #fff;
+    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, .06);
+    -webkit-tap-highlight-color: transparent;
+}
+
+.gnc-settings__content {
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    flex-grow: 1;
+
+    height: calc(100vh - 48px);
+}
+
+.gnc-settings__service-name {
+    margin-left: 12px;
+
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.gnc-settings__open-icon {
+    width: 12px;
+    height: 7.4px;
+    margin-right: 12px;
+
+    cursor: pointer;
+
+    opacity: .7;
+
+    transition: transform 300ms;
+}
+
+.gnc-settings__open-icon_upsidedown {
+    transform: rotateZ(180deg);
+}
+
+.gnc-settings__form {
+    display: none;
+
+    padding: 12px;
+
+    font-size: 13px;
+
+    background-color: #f8f8f8;
+}
+
+.gnc-settings__setting-name {
+    margin-left: 7px;
+}
+
+.gnc-settings__checkbox {
+    display: none;
+}
+
+.gnc-settings__label {
+    display: flex;
+    align-items: center;
+
+    margin-bottom: 6px;
+
+    cursor: pointer;
+}
+
+.gnc-settings__checkbox-box {
+    z-index: 0;
+
+    width: 14px;
+    height: 14px;
+
+    border-radius: 3px;
+    background-color: #fff;
+    background-clip: padding-box;
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .2);
+}
+
+.gnc-settings__checkbox-box_checked {
+    background-color: #555;
+}
+
+.gnc-settings__checkbox-tick {
+    display: none;
+
+    width: 14px;
+    height: 14px;
+    /* stylelint-disable-next-line */
+    background: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2211%22%20height%3D%229%22%20viewBox%3D%220%200%2014%2011%22%3E%3Cpath%20fill%3D%22%23FFF%22%20fill-rule%3D%22evenodd%22%20d%3D%22M5.358%206.866l6.01-6.01%201.804%201.802-6.01%206.01-1.804%201.804L.55%205.664%202.353%203.86l3.005%203.006z%22%2F%3E%3C%2Fsvg%3E') 50% 50% no-repeat;
+}
+
+.gnc-settings__form-item {
+    display: block;
+
+    margin-bottom: 4px;
+    margin-left: 22px;
+}
+
+.gnc-settings__checkbox-box_checked .gnc-settings__checkbox-tick,
+.gnc-settings__form_visible {
+    display: block;
+}
+
+@-moz-keyframes hideSettings {
+    0% {
+        opacity: 1;
+    }
+
+    99% {
+        display: none;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@-webkit-keyframes hideSettings {
+    0% {
+        opacity: 1;
+    }
+
+    99% {
+        display: none;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@-o-keyframes hideSettings {
+    0% {
+        opacity: 1;
+    }
+
+    99% {
+        display: none;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes hideSettings {
+    0% {
+        opacity: 1;
+    }
+
+    99% {
+        display: none;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@-moz-keyframes showSettings {
+    0% {
+        opacity: 0;
+    }
+
+    1% {
+        display: block;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes showSettings {
+    0% {
+        opacity: 0;
+    }
+
+    1% {
+        display: block;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@-o-keyframes showSettings {
+    0% {
+        opacity: 0;
+    }
+
+    1% {
+        display: block;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes showSettings {
+    0% {
+        opacity: 0;
+    }
+
+    1% {
+        display: block;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+</style><style type="text/css">.gnc-notification-center a,
+.gnc-notification-center button {
+    margin: 0;
+    padding: 0;
+
+    text-decoration: none;
+
+    border: none;
+    border-radius: 0;
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.gnc-notification-center label,
+.gnc-notification-center svg,
+.gnc-notification-center path,
+.gnc-notification-center img {
+    -webkit-tap-highlight-color: transparent;
+}
+
+.gnc-notification-center {
+    overflow: hidden;
+
+    height: 100%;
+
+    user-select: none;
+    white-space: nowrap;
+
+    -webkit-tap-highlight-color: transparent;
+}
+
+.gnc-notification-main {
+    vertical-align: top;
+
+    animation-duration: .15s;
+
+    animation-fill-mode: forwards;
+}
+
+.gnc-notification-main_visible {
+    animation-name: showMain;
+}
+
+/* Усиливаем селектор чтобы не переопределялось свойство display в стилях, подключаемых ниже */
+.gnc-notification-main.gnc-notification-main_invisible {
+    display: none;
+
+    animation-name: hideMain;
+}
+
+.gnc-notification-center .gnc-notifications-item {
+    position: relative;
+}
+
+.gnc-notification-center .gnc-notifications-item__link {
+    position: absolute;
+    z-index: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.gnc-notification-center .gnc-notifications-item__inner a {
+    z-index: 1;
+
+    text-transform: capitalize;
+}
+
+@-moz-keyframes hideMain {
+    0% {
+        opacity: 1;
+    }
+
+    99% {
+        display: none;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@-webkit-keyframes hideMain {
+    0% {
+        opacity: 1;
+    }
+
+    99% {
+        display: none;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@-o-keyframes hideMain {
+    0% {
+        opacity: 1;
+    }
+
+    99% {
+        display: none;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes hideMain {
+    0% {
+        opacity: 1;
+    }
+
+    99% {
+        display: none;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@-moz-keyframes showMain {
+    0% {
+        opacity: 0;
+    }
+
+    1% {
+        display: block;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes showMain {
+    0% {
+        opacity: 0;
+    }
+
+    1% {
+        display: block;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@-o-keyframes showMain {
+    0% {
+        opacity: 0;
+    }
+
+    1% {
+        display: block;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes showMain {
+    0% {
+        opacity: 0;
+    }
+
+    1% {
+        display: block;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+</style><style type="text/css">.gnc-notification-header button {
+    background-color: transparent;
+}
+
+.gnc-notification-header {
+    position: relative;
+
+    flex-shrink: 0;
+
+    height: 48px;
+    padding: 0 16px 0 12px;
+
+    text-align: center;
+
+    background: #fff;
+    box-shadow: inset 0 -1px 0 0 rgba(0, 0, 0, .1);
+}
+
+.gnc-notification-header__kebab {
+    width: 40px;
+    height: 40px;
+}
+
+.gnc-notification-header .gnc-notification-header__kebab {
+    position: absolute;
+}
+
+.gnc-notification-header__filter {
+    left: 0;
+
+    width: 40px;
+    height: 40px;
+}
+
+.gnc-notification-header__controls {
+    position: absolute;
+    top: 11px;
+    right: 15px;
+
+    width: 54px;
+    height: 24px;
+}
+
+.gnc-notification-header_mobile .gnc-notification-header__controls {
+    right: 0;
+}
+
+.gnc-notification-header__filter,
+.gnc-notification-header__more {
+    position: absolute;
+
+    width: 24px;
+    height: 100%;
+}
+
+.gnc-notification-header__more {
+    right: 0;
+}
+
+.gnc-notification-header__filter .gnc-notifications-item__menu-kebab > svg {
+    margin: 4px 0;
+}
+
+.gnc-notification-header_zero-right-padding {
+    padding-right: 0;
+}
+
+.gnc-notification-header__settings {
+    position: absolute;
+    top: 9px;
+    right: 12px;
+
+    width: 24px;
+    height: 24px;
+
+    cursor: pointer;
+
+    opacity: .4;
+}
+
+.gnc-notification-center_hoverable .gnc-notification-header__settings:hover {
+    opacity: 1;
+}
+
+.gnc-notification-header__settings_mobile {
+    right: 41px;
+    left: initial;
+}
+
+.gnc-notification-header__title {
+    position: relative;
+
+    display: inline-block;
+
+    font: bold 18px/45px 'Inter', sans-serif;
+
+    color: #000;
+}
+
+.gnc-notification-header__menu {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+
+    width: 24px;
+    height: 24px;
+
+    cursor: pointer;
+
+    opacity: .4;
+}
+
+.gnc-notification-center_hoverable .gnc-notification-header__menu:not([disabled]):hover {
+    cursor: pointer;
+
+    opacity: 1;
+}
+
+.gnc-notification-header__menu[disabled] {
+    opacity: .4;
+}
+
+.gnc-notification-header__unviewed {
+    position: absolute;
+    top: 14px;
+    right: 33px;
+
+    display: none;
+
+    font-size: 13px;
+
+    color: #000;
+}
+</style><style type="text/css">.gnc-notification-list {
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    flex-grow: 1;
+
+    box-sizing: border-box;
+    height: calc(100vh - 48px);
+    margin: 0;
+
+    /* Необходимо, чтобы кебаб у непрочитанных уведомлений не перекрывал попап с настройками */
+    opacity: .99;
+}
+
+.gnc-notification-list::before,
+.gnc-notification-list::after {
+    display: block;
+
+    height: 12px;
+
+    content: '';
+}
+
+.gnc-notification-list_empty {
+    z-index: 1;
+
+    min-height: 200px;
+    padding-top: 55px;
+
+    text-align: center;
+
+    background-color: #f8f8f8;
+}
+
+.gnc-notification-list__message {
+    display: inline-block;
+
+    padding: 0 82px;
+
+    font-size: 18px;
+    font-weight: 300;
+    text-align: center;
+    white-space: normal;
+
+    opacity: .3;
+    color: #000;
+}
+
+.gnc-notification-list__date-label {
+    padding-left: 23px;
+
+    font-size: 13px;
+
+    color: #999;
+    box-shadow: none;
+}
+
+.gnc-notification-list_mobile .gnc-notification-list__date-label {
+    font-size: 15px;
+}
+</style><style type="text/css">/* stylelint-disable */
+
+.gnc-link {
+    position: relative;
+    z-index: 1;
+}
+
+.gnc-service-logo {
+    flex-shrink: 0;
+
+    width: 16px;
+    height: 16px;
+}
+
+.gnc-notifications-item__menu {
+    z-index: 3;
+
+    height: 24px;
+}
+
+.gnc-notifications-item__menu-kebab .gnc-service-logo {
+    max-width: 22px;
+    max-height: 22px;
+    margin: 1px;
+
+    border-radius: 4px;
+    background-color: #fff;
+}
+
+.gnc-avatar {
+    width: 16px;
+    height: 16px;
+    margin-right: 6px;
+
+    border-radius: 50%;
+    background: transparent;
+    object-fit: cover;
+    box-shadow: none;
+}
+
+.gnc-avatar__service-circle {
+    width: 16px;
+    height: 16px;
+}
+
+.gnc-avatar__service-circle_small {
+    position: absolute;
+    z-index: 1;
+    right: 0;
+    bottom: 0;
+
+    transform: scale(.5) translate(32px, 38px);
+}
+
+.gnc-avatar__user {
+    width: 40px;
+    height: 40px;
+
+    border-radius: 40px;
+    object-fit: cover;
+}
+
+.gnc-notifications-item__preview-image {
+    box-sizing: border-box;
+    width: 36px;
+    height: 36px;
+    margin-top: 0;
+
+    border: 1px solid rgba(0, 0, 0, .1);
+    border-radius: 4px;
+    background-size: cover;
+}
+
+.gnc-notifications-item-wrapper {
+    position: relative;
+
+    padding: 0 24px 0 12px;
+
+    user-select: none;
+    white-space: nowrap;
+
+    background: #fff;
+
+    transition: background-color .1s;
+}
+
+.gnc-notifications-item-wrapper:first-of-type {
+    box-shadow: none;
+}
+
+.gnc-notifications-item-wrapper_not-viewed .gnc-notifications-item-wrapper__inner {
+    background: #e6efff;
+}
+
+.gnc-notification-center_hoverable .gnc-notifications-item-wrapper:hover .gnc-notifications-item-wrapper__inner {
+    background: #d9e7ff;
+}
+
+.gnc-notifications-item {
+    position: relative;
+
+    display: inline-block;
+
+    width: 100%;
+
+    vertical-align: top;
+}
+
+.gnc-notifications-item-wrapper__inner {
+    border-radius: 8px;
+}
+
+.gnc-notifications-item__inner {
+    display: flex;
+    flex-shrink: 0;
+    justify-content: space-between;
+
+    box-sizing: border-box;
+    width: 100%;
+    padding: 12px;
+
+    cursor: pointer;
+    white-space: normal;
+}
+
+.gnc-notifications-item_is-viewed {
+    transition: transform .15s ease-out;
+}
+
+.gnc-notifications-item__avatar {
+    position: relative;
+
+    flex-shrink: 0;
+
+    width: 40px;
+    margin-right: 12px;
+    padding-bottom: 4px;
+}
+
+.gnc-notifications-item__avatar .gnc-link {
+    display: block;
+
+    width: 40px;
+    height: 40px;
+}
+
+.gnc-notifications-item__content {
+    overflow: hidden;
+    flex-basis: 100%;
+
+    margin-right: auto;
+
+    font-size: 13px;
+    line-height: 15px;
+    white-space: pre-line;
+
+    color: #000;
+}
+
+.gnc-notifications-item__misc {
+    margin-top: 4px;
+}
+
+.gnc-notifications-item__preview {
+    float: right;
+    overflow: hidden;
+    flex-shrink: 0;
+
+    margin: 0 0 4px 12px;
+
+    text-align: right;
+}
+
+.gnc-notification-header__kebab {
+    position: relative;
+
+    height: 24px;
+}
+
+.gnc-notifications-item__menu-kebab {
+    z-index: 1;
+
+    cursor: pointer;
+
+    opacity: 0;
+    background: none;
+}
+
+.gnc-notification-header__filter .gnc-notifications-item__menu-kebab svg {
+    margin-right: 6px;
+}
+
+.gnc-notifications-item__menu-kebab_visible {
+    opacity: .4;
+}
+
+.gnc-notifications-item__menu-kebab_visible:hover {
+    opacity: 1;
+}
+
+.gnc-notification-header__logo .gnc-notifications-item__menu-kebab_visible {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 24px;
+    height: 24px;
+
+    opacity: 1;
+    border-radius: 4px;
+}
+
+.gnc-notification-header__logo .gnc-notifications-item__menu-kebab_visible:hover {
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .2);
+}
+
+.gnc-notification-header__filter .gnc-notifications-item__popup-option.gnc-notification-list__current-service {
+    cursor: initial;
+
+    opacity: .5;
+}
+
+.gnc-notification-header__filter .gnc-notification-list__service-name {
+    margin-left: 8px;
+}
+
+.gnc-notifications-item-wrapper:hover .gnc-notifications-item__menu-kebab {
+    opacity: .4;
+}
+
+.gnc-notifications-item-wrapper:hover .gnc-notifications-item__menu-kebab:hover {
+    opacity: 1;
+}
+
+.gnc-notifications-item__popup {
+    position: absolute;
+    z-index: 2;
+    top: 36px;
+    right: 3px;
+
+    display: block;
+    visibility: hidden;
+    overflow-y: auto;
+
+    max-height: 70vh;
+    padding: 6px 0;
+
+    cursor: pointer;
+
+    opacity: 0;
+    border-radius: 6px;
+    background: #fff;
+    box-shadow: 0 10px 20px -5px rgba(0, 0, 0, .3);
+
+    transition-duration: 150ms;
+    transition-property: top, visibility, opacity;
+}
+
+.gnc-notifications-item-wrapper:last-of-type .gnc-notifications-item__popup {
+    top: -46px; /* чтобы в конце не было большого отступа */
+}
+
+.gnc-notifications-item__popup_visible {
+    z-index: 3;
+
+    visibility: visible;
+
+    opacity: 1;
+}
+
+.gnc-notifications-item__popup-option {
+    height: 28px;
+    padding: 0 14px;
+
+    font-size: 13px;
+    line-height: 28px;
+    text-align: left;
+    white-space: nowrap;
+
+    color: #000;
+}
+
+.gnc-notifications-item__popup-option:hover {
+    background-color: #eceef2;
+}
+
+.gnc-notifications-item__popup-option.gnc-notifications-item__popup-option_disabled {
+    cursor: default;
+
+    color: rgba(0, 0, 0, .3);
+}
+
+.gnc-notifications-item__popup-option.gnc-notifications-item__popup-option_disabled:hover {
+    background-color: #fff;
+}
+
+.gnc-notification-header__filter .gnc-notifications-item__popup-option {
+    display: flex;
+    align-items: center;
+
+    opacity: 1;
+}
+
+.gnc-notification-list__current-service:hover {
+    background-color: inherit;
+}
+
+.gnc-notifications-item__menu-kebab_absolute {
+    position: absolute;
+}
+
+.gnc-notification-message__span {
+    align-self: end;
+
+    height: 32px;
+    margin-right: auto;
+
+    font-size: 13px;
+    font-weight: bold;
+    word-wrap: break-word;
+    word-break: break-word;
+
+    color: #000;
+}
+
+.gnc-notifications-item_is-viewed .gnc-notification-message__span,
+.gnc-notifications-item_is-viewed .gnc-notifications-item__content,
+.gnc-notification-message_with-username .gnc-notification-message__span:not(.gnc-notification-message_type_user) {
+    font-weight: normal;
+}
+
+.relative-date {
+    width: 91px;
+    height: 15px;
+
+    font-size: 13px;
+
+    color: rgba(0, 0, 0, .3);
+}
+
+.gnc-notification-center_hoverable .gnc-link_see-more {
+    display: inline-block;
+
+    padding-top: 12px;
+
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+    user-select: none;
+
+    color: #999;
+}
+
+.gnc-notification-center_hoverable .gnc-link_see-more:hover {
+    color: #000;
+}
+
+.gnc-notification-center .gnc-notifications-item__inner a span {
+    color: #0a48b8;
+}
+
+.gnc-notification-center .gnc-notifications-item__inner a:hover span {
+    color: #d00;
+}
+
+.gnc-notifications-item-wrapper .gnc-notifications-item-wrapper__inner::after {
+    position: absolute;
+    top: 0;
+    right: 12px;
+    left: 12px;
+
+    height: 1px;
+
+    content: '';
+
+    background: rgba(0, 0, 0, .1);
+}
+
+.gnc-notifications-item-wrapper:first-of-type .gnc-notifications-item-wrapper__inner::after,
+.gnc-notifications-item-wrapper_not-viewed .gnc-notifications-item-wrapper__inner::after,
+.gnc-notifications-item-wrapper_not-viewed + .gnc-notifications-item-wrapper .gnc-notifications-item-wrapper__inner::after,
+.gnc-notification-center_hoverable .gnc-notifications-item-wrapper:hover .gnc-notifications-item-wrapper__inner::after,
+.gnc-notification-center_hoverable .gnc-notifications-item-wrapper:hover + .gnc-notifications-item-wrapper .gnc-notifications-item-wrapper__inner::after,
+.gnc-notification-list__date-label + .gnc-notifications-item-wrapper .gnc-notifications-item-wrapper__inner::after {
+    background: transparent;
+}
+
+.gnc-notification-center_hoverable .gnc-notifications-item-wrapper:hover + .gnc-expand-button::after {
+    box-shadow: none;
+}
+
+.gnc-notifications-item-wrapper_not-viewed + .gnc-notifications-item-wrapper_not-viewed .gnc-notifications-item-wrapper__inner::after {
+    background: #fff;
+}
+
+.gnc-notifications-item-wrapper_not-viewed,
+.gnc-notification-center_hoverable .gnc-notifications-item-wrapper:hover {
+    background: transparent;
+}
+
+.gnc-notifications-item-wrapper_not-viewed.gnc-notifications-item-wrapper_next-unread .gnc-notifications-item-wrapper__inner {
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.gnc-notification-center_hoverable .gnc-notifications-item-wrapper_not-viewed:hover .gnc-notifications-item-wrapper__inner {
+    background: #d8e5ff;
+}
+
+/* no top radius if unread & previous is unread */
+
+.gnc-notifications-item-wrapper_not-viewed + .gnc-notifications-item-wrapper_not-viewed .gnc-notifications-item-wrapper__inner {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.gnc-notifications-item__inner .gnc-notifications-item__menu {
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    /* half of icon height */
+    margin-top: -12px;
+}
+
+.gnc-notifications-item__inner .gnc-notifications-item__menu-kebab {
+    height: 36px;
+}
+
+.gnc-notifications-item__misc {
+    margin: 0;
+
+    white-space: nowrap;
+}
+
+.gnc-notifications-item__service-name {
+    margin-right: 8px;
+
+    font-weight: bold;
+
+    color: #000;
+}
+
+.gnc-notifications-item__avatar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+
+    width: auto;
+    margin-right: 12px;
+}
+
+/* touch overrides */
+
+.gnc-expand-button__text {
+    max-width: 250px;
+}
+
+.gnc-notifications-item__content,
+.relative-date,
+.gnc-expand-button__text {
+    font-size: 13px;
+    font-weight: normal;
+    line-height: 16px;
+}
+
+.gnc-notifications-item__content,
+.gnc-expand-button__text,
+.gnc-notification-message__span {
+    color: #333;
+}
+
+.gnc-notifications-item-wrapper_mobile .gnc-notifications-item__content,
+.gnc-notifications-item-wrapper_mobile .relative-date,
+.gnc-notifications-item-wrapper_mobile .gnc-expand-button__text,
+.gnc-notifications-item-wrapper_mobile .gnc-notification-message__span {
+    font-size: 15px;
+    line-height: 18px;
+}
+
+.gnc-notifications-item-wrapper_mobile .gnc-notifications-item__avatar {
+    margin-top: 2px;
+    margin-bottom: 3px;
+}
+
+.gnc-notifications-item-wrapper_mobile .gnc-notifications-item__preview-image {
+    width: 48px;
+    height: 48px;
+}
+
+.gnc-notifications-item-wrapper_mobile .gnc-notifications-item__service-name {
+    margin-right: 7px;
+}
+
+.gnc-notifications-item-wrapper_mobile .gnc-notifications-item__popup-option {
+    font-size: 15px;
+}
+
+.gnc-notifications-item-wrapper__expanded-item {
+    position: relative;
+
+    height: 42px;
+
+    opacity: 0;
+
+    transition: height .2s ease-in  0s, opacity .2s ease-in .2s;
+}
+
+.gnc-notifications-item-wrapper__expanded-item + .gnc-notifications-item-wrapper__expanded-item {
+    height: 0;
+}
+</style><style type="text/css">/* stylelint-disable */
+
+.gnc-expand-button {
+    position: relative;
+
+    padding: 0 24px 0 12px;
+
+    text-align: left;
+
+    background: #fff;
+
+    user-select: none;
+    white-space: nowrap;
+
+    transition: background-color .1s, opacity .1s;
+}
+
+.gnc-expand-button_hidable {
+    opacity: 0;
+}
+
+.gnc-expand-button__inner {
+    width: 100%;
+}
+
+.gnc-expand-button .gnc-notifications-item-wrapper__inner::after {
+    right: 36px;
+    left: 24px;
+}
+
+.gnc-expand-button__content {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+
+    height: 42px;
+    padding: 0 12px;
+
+    cursor: pointer;
+    text-align: left;
+}
+
+.gnc-expand-button__icon {
+    width: 16px;
+    height: 16px;
+
+    padding-right: 6px;
+}
+
+.gnc-expand-button__icon svg {
+    width: 16px;
+    height: 16px;
+}
+
+.gnc-expand-button__text {
+    position: relative;
+
+    display: inline-block;
+
+    max-width: 250px;
+
+    font-size: 13px;
+    font-weight: normal;
+}
+
+.gnc-expand-button_mobile .gnc-expand-button__text {
+    font-size: 15px;
+}
+
+.gnc-expand-button__text::after {
+    position: absolute;
+    top: 5px;
+    left: 100%;
+
+    width: 12px;
+    height: 8px;
+    margin-left: 5px;
+
+    content: '';
+
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath fill='%23333' fill-rule='evenodd' d='M.34 1.88L6 7.54l5.66-5.66L10.24.46 6 4.71 1.76.46.34 1.88z' clip-rule='evenodd'/%3E%3C/svg%3E%0A");
+}
+
+.gnc-expand-button_mobile .gnc-expand-button__text::after {
+    top: 6px;
+}
+</style><style type="text/css">html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+#service-container { /* stylelint-disable-line */
+    overflow: hidden;
+
+    width: 100vw;
+    height: 100%;
+}
+
+.gnc-notification-main {
+    display: block;
+
+    -webkit-backface-visibility: hidden;
+}
+
+.gnc-notification-list_has-services {
+    height: calc(100vh - 48px);
+}
+
+.gnc-notifications-item {
+    -webkit-text-size-adjust: 100%;
+}
+
+.gnc-settings {
+    z-index: 3;
+
+    flex: 1;
+
+    -webkit-backface-visibility: hidden;
+}
+
+.gnc-settings__content {
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    height: calc(100vh - 48px);
+}
+</style>
+
     <!--
     <link
       href="https://vuidget-source.danajanoskova.sk/css/app.css"
       rel="stylesheet"
     />
     -->
-    <script src="https://vuidget-source.danajanoskova.sk/js/app.js"></script>
-    <link
-      rel="preload"
-      href="https://antcmd.ignatif.vercel.app/_nuxt/runtime.js"
-      as="script"
-    />
-    <link
-      rel="preload"
-      href="https://antcmd.ignatif.vercel.app/_nuxt/vendors.app.js"
-      as="script"
-    />
-    <link
-      rel="preload"
-      href="https://antcmd.ignatif.vercel.app/_nuxt/app.js"
-      as="script"
-    />
-
-    <link rel="preload" href="%PUBLIC_URL%/localforage.js" as="script" />
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>

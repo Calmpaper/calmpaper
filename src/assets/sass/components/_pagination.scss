@@ -1,0 +1,25 @@
+.pagination {
+    margin-top: 120px;
+    padding: 0 100px;
+    &__link {
+        font-weight: 600;
+        font-size: 12px;
+        text-transform: uppercase;
+        color: #A8A8AE;
+    }
+    &__link.active {
+        color: #484954;
+    }
+    .icon {
+        margin: 0 10px;
+        height: 10px;
+        width: 10px;
+        fill: #D4D3D7;
+    }
+}
+
+@media screen and (max-width: 1450px) {
+    .pagination {
+        padding: 0 30px;
+    }
+}

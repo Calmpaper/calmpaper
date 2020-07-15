@@ -1,22 +1,47 @@
-export const createChapterMutation = `
-  mutation($title: String!, $content: String!, $bookId: Int!, $username: String!) {
-    createOneChapter(data: {
+import gql from 'graphql-tag'
+
+export const createChapterMutation = gql`
+  mutation($title: String!, $content: String!, $bookId: Int!, $userId: Int!) {
+    createChapter(
       title: $title
       content: $content
-      author: {
-        connect: {
-          username: $username
-        }
-      }
-      book: {
-        connect: {
-          id: $bookId
-        }
-      }
-    }) {
+      userId: $userId
+      bookId: $bookId
+    ) {
       id
       title
       content
+    }
+  }
+`
+
+export const updateChapterMutation = gql`
+  mutation($title: String!, $content: String!, $chapterId: Int!) {
+    updateOneChapter(
+      where: { id: $chapterId }
+      data: { title: $title, content: $content }
+    ) {
+      id
+      title
+      content
+    }
+  }
+`
+
+export const incrementChapterViewsMutation = gql`
+  mutation($chapterId: Int!) {
+    incrementChapterViews(chapterId: $chapterId) {
+      id
+      title
+      views
+    }
+  }
+`
+
+export const deleteChapterMutation = gql`
+  mutation($id: Int!) {
+    deleteOneChapter(where: { id: $id }) {
+      id
     }
   }
 `

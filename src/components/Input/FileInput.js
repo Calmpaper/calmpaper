@@ -2,7 +2,35 @@ import React from 'react'
 import Dropzone from 'react-dropzone-uploader'
 import { getDroppedOrSelectedFiles } from 'html5-file-selector'
 
-const FILE_STORAGE_URL = process.env.REACT_APP_FILE_STORAGE_URL
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL
+
+const Input = ({ accept, onFiles, files, getFilesFromEvent }) => {
+  const text = files.length > 0 ? 'Add more files' : 'Choose files'
+
+  return (
+    <label className="input btn-add-img">
+      <div>
+        <svg className="icon icon-plus">
+          <use xlinkHref="#icon-plus" />
+        </svg>
+        <span className="btn-add-img__title">
+          250x350 pixels is recommended
+        </span>
+      </div>
+      <input
+        style={{ display: 'none' }}
+        type="file"
+        accept={accept}
+        multiple
+        onChange={(e) => {
+          getFilesFromEvent(e).then((chosenFiles) => {
+            onFiles(chosenFiles)
+          })
+        }}
+      />
+    </label>
+  )
+}
 
 const CustomInput = ({ setImage }) => {
   const handleSubmit = (files, allFiles) => {
@@ -18,11 +46,11 @@ const CustomInput = ({ setImage }) => {
   }
 
   const handleChangeStatus = (props, status) => {
-    const { meta, xhr, remove } = props
+    const { meta, xhr } = props
 
     if (status === 'done') {
       const { path } = JSON.parse(xhr.response)
-      setImage(`${FILE_STORAGE_URL}/${path}`)
+      setImage(`${BACKEND_URL}/${path}`)
 
       // remove()
     }
@@ -39,7 +67,7 @@ const CustomInput = ({ setImage }) => {
       accept="image/*"
       onChangeStatus={handleChangeStatus}
       getUploadParams={() => ({
-        url: `https://cors-anywhere.herokuapp.com/${FILE_STORAGE_URL}/files`,
+        url: `${BACKEND_URL}/files`,
       })}
       onSubmit={handleSubmit}
       getFilesFromEvent={getFilesFromEvent}
@@ -48,6 +76,7 @@ const CustomInput = ({ setImage }) => {
       canCancel={false}
       inputContent=""
       SubmitButtonComponent={() => <div />}
+      InputComponent={Input}
     />
   )
 }

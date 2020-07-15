@@ -1,21 +1,28 @@
-import React, { useEffect } from 'react'
-import { useParams, useHistory } from 'react-router-dom'
-import { useQuery } from 'urql'
-import { getBookQuery } from 'api'
+import React, { useEffect, useContext } from 'react'
+import { UserContext } from 'context'
+import { useParams } from 'react-router-dom'
+import { useQuery, useMutation } from 'urql'
+import {
+  getBookQuery,
+  incrementBookViewsMutation,
+  sendBookCommentMutation,
+} from 'api'
 
 import Loader from 'components/Loader'
-import Rating from 'components/Rating'
+import Header from 'components/Layout/Header'
+import Footer from 'components/Layout/Footer'
 import Comments from 'components/Comments'
-import Flex from 'components/Flex'
 
-import Chapters from './Chapters'
-import * as S from './Book.styled'
+import About from './About'
+import Tabs from './Tabs'
+import Author from './Author'
+import Actions from './Actions'
 
 export default ({ tab, update }) => {
   const { book: bookId } = useParams()
-  const { pathname } = useHistory()
+  const { user } = useContext(UserContext)
 
-  const [{ data: { book } = {}, fetching, error }, execute] = useQuery({
+  const [{ data: { book } = {}, fetching, error }] = useQuery({
     pause: !bookId,
     query: getBookQuery,
     variables: {
@@ -23,77 +30,50 @@ export default ({ tab, update }) => {
     },
   })
 
-  useEffect(() => {
-    if (update) {
-      execute()
-    }
-  }, [])
+  // eslint-disable-next-line no-unused-vars
+  const [_, sendBookComment] = useMutation(sendBookCommentMutation)
+
+  // eslint-disable-next-line no-unused-vars
+  const [__, incrementBookViews] = useMutation(incrementBookViewsMutation)
 
   useEffect(() => {
-    if (book && book.chapters && book.chapters.length > 0) {
-      // console.log(book.chapters)
-    }
-  }, [book])
+    incrementBookViews({ bookId: parseInt(bookId) })
+  }, [bookId, incrementBookViews])
+
+  const sendComment = (body) => {
+    sendBookComment({
+      bookId: parseInt(bookId),
+      userId: parseInt(user.id),
+      body,
+    })
+  }
 
   if (fetching) return <Loader />
   if (error) return <p>Oh no... {error.message}</p>
 
   return (
-    <S.Container>
-      <S.BookWrapper>
-        <S.Book>
-          <Flex row alignCenter>
-            <S.Image
-              src={
-                book.image ||
-                'https://www.royalroadcdn.com/covers/32502-heart-of-cultivation-full.jpg?time=1591047951'
-              }
-              alt={book.name}
-            />
-            <S.Details style={{ minHeight: 288 }}>
-              <Flex row spaceBetween>
-                <Flex column>
-                  <S.Name>{book.name}</S.Name>
-                  <S.ByAuthor>
-                    by
-                    <S.Author to={`/users/${book.author.username}`}>
-                      {book.author.username}
-                    </S.Author>
-                  </S.ByAuthor>
-                </Flex>
-                <Rating ratings={book.reviews} bookId={book.id} />
-              </Flex>
-              <S.Description>{book.description}</S.Description>
-              {book.chapters.length > 0 && (
-                <>
-                  <S.Tabs>
-                    <S.Tab
-                      selected={tab === 'details'}
-                      to={`/books/${book.id}`}
-                    >
-                      Details
-                    </S.Tab>
-                    <S.Tab
-                      selected={tab === 'glossary'}
-                      to={`/books/${book.id}/glossary`}
-                    >
-                      Glossary
-                    </S.Tab>
-                    <S.Tab
-                      selected={tab === 'reviews'}
-                      to={`/books/${book.id}/reviews`}
-                    >
-                      Reviews
-                    </S.Tab>
-                  </S.Tabs>
-                  <Chapters book={book} />
-                </>
+    <>
+      <Header />
+      <div className="page-about-book">
+        <div className="two-col">
+          <div className="col-content">
+            <div className="items">
+              <About book={book} />
+              <Tabs book={book} tab={tab} />
+              {user && user.id === book.author.id && (
+                <div style={{ marginTop: 16 }}>
+                  <Actions bookId={book.id} book={book} />
+                </div>
               )}
-            </S.Details>
-          </Flex>
-        </S.Book>
-      </S.BookWrapper>
-      <Comments id={`book${book.id}`} />
-    </S.Container>
+              <div style={{ marginTop: 48 }}>
+                <Comments comments={book.comments} onSubmit={sendComment} />
+              </div>
+              <Footer />
+            </div>
+          </div>
+          {book.author && <Author author={book.author} />}
+        </div>
+      </div>
+    </>
   )
 }

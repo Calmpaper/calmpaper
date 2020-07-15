@@ -1,72 +1,40 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { createClient, Provider as URQLProvider } from 'urql'
-import {
-  BrowserRouter as RouterProvider,
-  Switch,
-  Route,
-} from 'react-router-dom'
+import { BrowserRouter as RouterProvider } from 'react-router-dom'
 
 import UserProvider from 'context/UserContext'
 import ModalProvider from 'context/ModalContext'
+import GetStreamProvider from 'context/GetStreamContext'
 
-import BooksList from 'pages/BooksList/BooksList'
-import Book from 'pages/Book/Book'
-import Chapter from 'pages/Chapter/Chapter'
-import User from 'pages/User/User'
+import Layout from 'components/Layout/Layout'
+import Routes from './routes'
 
-import NewBook from 'pages/New/Book/NewBook'
-import NewChapter from 'pages/New/Chapter/NewChapter'
-
-import Layout from 'components/Layout'
-
-import 'assets/css/reset.css'
+import 'assets/css/yandex.css'
+import 'assets/sass/main.scss'
+import 'assets/css/main.css'
 import 'assets/css/index.css'
 
 const client = createClient({
   url: process.env.REACT_APP_BACKEND_URL,
+  fetchOptions: () => {
+    const token = window.localStorage.getItem('jwt')
+    return {
+      headers: { authorization: token ? `Bearer ${token}` : '' },
+    }
+  },
 })
 
 const Providers = ({ children }) => (
   <URQLProvider value={client}>
     <RouterProvider>
       <UserProvider>
-        <ModalProvider>{children}</ModalProvider>
+        <GetStreamProvider>
+          <ModalProvider>{children}</ModalProvider>
+        </GetStreamProvider>
       </UserProvider>
     </RouterProvider>
   </URQLProvider>
-)
-
-const Routes = () => (
-  <Switch>
-    <Route path="/books/:book/glossary">
-      <Book tab="glossary" />
-    </Route>
-    <Route path="/books/:book/reviews">
-      <Book tab="reviews" />
-    </Route>
-    <Route path="/books/:book/new-chapter">
-      <NewChapter />
-    </Route>
-    <Route path="/books/:book/:chapter">
-      <Chapter />
-    </Route>
-    <Route path="/books/:book">
-      <Book tab="details" />
-    </Route>
-    <Route path="/books">
-      <BooksList />
-    </Route>
-    <Route path="/new-book">
-      <NewBook />
-    </Route>
-    <Route path="/users/:username">
-      <User />
-    </Route>
-    <Route path="/">
-      <BooksList />
-    </Route>
-  </Switch>
 )
 
 ReactDOM.render(
