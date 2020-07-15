@@ -1,5 +1,4 @@
 import React, { useState, createContext } from 'react'
-import Modal from 'pages/Login/Modal'
 
 const ModalContext = createContext()
 
@@ -15,7 +14,6 @@ const ModalProvider = ({ children }) => {
         close,
       }}
     >
-      {showModal && <Modal />}
       {children}
     </ModalContext.Provider>
   )

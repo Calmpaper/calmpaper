@@ -27,7 +27,6 @@ const Input = ({
   avatar,
 }) => {
   const text = files.length > 0 ? 'Add more files' : 'Choose files'
-  console.log(avatar)
 
   return (
     <label>
@@ -83,7 +82,7 @@ const CustomInput = ({ avatar, setImage }) => {
       accept="image/*"
       onChangeStatus={handleChangeStatus}
       getUploadParams={() => ({
-        url: `https://cors-anywhere.herokuapp.com/${FILE_STORAGE_URL}/files`,
+        url: `${FILE_STORAGE_URL}`,
       })}
       onSubmit={handleSubmit}
       getFilesFromEvent={getFilesFromEvent}

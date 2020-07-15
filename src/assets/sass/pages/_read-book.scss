@@ -1,0 +1,173 @@
+.page-read-book {
+    .container {
+        width: 800px;
+    }
+    .read-book-main {
+        padding-top: 100px;
+        text-align: center;
+        img {
+            display: block;
+            margin: auto;
+            max-width: 500px;
+            height: auto;
+            box-shadow: 0px 30px 30px rgba(44, 26, 22, 0.2);
+        }
+        .title.size01 {
+            margin-top: 50px;
+            margin-bottom: 20px;
+            font-size: 46px;
+            line-height: 135%;
+        }
+        .author {
+            font-weight: 500;
+            font-size: 16px;
+            color: #57586C;
+        }
+        .about-num-panel {
+            margin-top: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            .all-views {
+                padding-top: 4px;
+                .about-num-panel-label {
+                    margin-top: 13px;
+                }
+            }
+        }
+        .about-num-panel .panel-num {
+            font-size: 18px;
+        }
+        .about-num-panel .icon-box {
+            width: 28px;
+            height: 28px;
+            .icon {
+                height: 16px;
+                width: 16px;
+            }
+        }
+        .about-num-panel .panel-num {
+            font-size: 18px;
+        }
+        .about-num-panel .outline-box {
+            font-size: 15px;
+            background: #FDFDFD;
+            border: 1px solid #D8D8D8;
+            box-sizing: border-box;
+            border-radius: 6px;
+            display: block;
+            font-weight: 600;
+            text-align: center;
+            color: #040027;
+            padding: 5px 7px;
+        }
+        .about-num-panel-label {
+            font-size: 14px;
+        }
+        .about-num-panel a:last-child {
+            margin-right: 0;
+        }
+    }
+    .read-book-text .container {
+        padding: 0;
+        margin-top: 70px;
+        padding-top: 60px;
+        border-top: 1px solid #EBEAEB;
+        .text p {
+            font-size: 16px;
+        }
+        .title.size04 {
+            font-weight: 500;
+            font-size: 14px;
+            text-transform: uppercase;
+            color: #AFAFB8;
+            margin-bottom: 30px;
+        }
+    }
+    .read-book-author {
+        padding-top: 25px;
+        .container {
+            background: #FDFDFD;
+            border: 1px solid #EEEEEE;
+            box-sizing: border-box;
+            border-radius: 8px;
+            padding: 30px 35px;
+        }
+        .row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .col01 {
+            display: flex;
+            align-items: center;
+            padding-right: 20px;
+            box-sizing: border-box;
+            .avatar {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                background-size: cover;
+                margin-right: 12px;
+            }
+            .item-title {
+                font-size: 14px;
+                font-family: $font-title;
+                font-weight: 600;
+                color: #000000;
+            }
+            .item-subtitle {
+                margin-top: 4px;
+                font-size: 14px;
+                font-family: $font-title;
+                font-weight: 400;
+                color: #555555;
+            }
+        }
+        .col02 {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding-left: 35px;
+            margin-left: 0;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            border-left: 1px solid #EEEEEE;
+            width: 43%;
+            .item-quote {
+                font-size: 16px;
+                font-family: $font-title;
+                color: #000000;
+            }
+            .icon {
+                width: 20px;
+                height: 20px;
+                fill: #7C818E;
+                margin-right: 18px;
+            }
+        }
+        .col03 {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-left: 20px;
+            box-sizing: border-box;
+            .btn-color {
+                background: #D04D43;
+                .icon {
+                    fill: #fff;
+                    height: 20px;
+                    width: 20px;
+                    margin-right: 8px;
+                }
+            }
+        }
+    }
+    .comments {
+        margin-top: 55px;
+        .container {
+            padding-bottom: 30px;
+            border-bottom: 1px solid #EBEAEB;
+        }
+    }
+}
