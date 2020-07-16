@@ -30,7 +30,10 @@ const User = ({ user }) => (
 )
 
 const LoginBtn = () => (
-  <a href="http://localhost:4000/auth/google" className="btn-login">
+  <a
+    href={`http://ec2-52-87-215-106.compute-1.amazonaws.com:4000/auth/google`}
+    className="btn-login"
+  >
     Log In
   </a>
 )
@@ -54,14 +57,6 @@ export default () => {
                 <Create />
               </li>
             )}
-            <li className="header-nav__item">
-              <a
-                href="https://calmpaper.trydiscourse.com/"
-                className="header-nav__link"
-              >
-                Forum
-              </a>
-            </li>
             {user && (
               <li className="header-nav__item" style={{ position: 'relative' }}>
                 <Notifications />
