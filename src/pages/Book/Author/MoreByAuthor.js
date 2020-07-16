@@ -38,7 +38,7 @@ export default ({ books = [] }) => {
                   <svg className="icon icon-rating">
                     <use xlinkHref="#icon-rating" />
                   </svg>
-                  <span>{avg}</span>
+                  <span>{book.reviews.length}</span>
                 </div>
                 <div className="catalog-stat__box">
                   <svg className="icon icon-eye">

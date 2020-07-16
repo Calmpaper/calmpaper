@@ -76,7 +76,6 @@ const CustomInput = ({ avatar, setImage }) => {
     }
   }
 
-  // getUploadParams={() => ({ url: 'http://localhost:3000/files' })}
   return (
     <Dropzone
       accept="image/*"

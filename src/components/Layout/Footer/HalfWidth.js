@@ -24,13 +24,12 @@ export default () => (
       </div>
       <div className="row">
         <div className="footer-social">
-          <span>© 2020 Scribble Hub</span>
-          <a href="/" target="_blank">
+          <span>© 2020 Calmpaper</span>
+          {/*
+          <a href="https://twitter.com/calmpaper" target="_blank">
             Twitter
           </a>
-          <a href="/" target="_blank">
-            Discord
-          </a>
+          */}
         </div>
       </div>
     </div>
