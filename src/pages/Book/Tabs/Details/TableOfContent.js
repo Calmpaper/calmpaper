@@ -10,7 +10,7 @@ export default ({ chapters, bookId }) => (
       <ul>
         {chapters.map((chapter, index) => (
           <li>
-            <Link to={`/books/${bookId}/${chapter.id}`}>
+            <Link to={`/books/${bookId}/${index + 1}`}>
               <span className="table-title">
                 {`Chapter ${index + 1}: ${chapter.title}`}
               </span>

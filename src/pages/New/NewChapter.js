@@ -6,7 +6,7 @@ import { useMutation } from 'urql'
 import { createChapterMutation, updateChapterMutation } from 'api'
 
 import Header from 'components/Layout/Header'
-import Footer from 'components/Layout/Header'
+import Footer from 'atomic/molecules/footer'
 
 export default () => {
   const { user } = useContext(UserContext)
@@ -32,7 +32,10 @@ export default () => {
         ...data,
         chapterId: chapter.id,
       }).then(({ data: { updateOneChapter: chapter } }) => {
-        push(`/books/${bookId}/${chapter.id}`)
+        const chapterPage =
+          chapter.book.chapters.findIndex((c) => c.id === chapter.id) + 1
+
+        push(`/books/${bookId}/${chapterPage}`)
       })
     } else {
       createChapter({
@@ -40,18 +43,15 @@ export default () => {
         userId: user.id,
         bookId: parseInt(bookId),
       }).then(({ data: { createChapter: chapter } }) => {
-        const bookFeed = client.feed('book', bookId)
-        bookFeed.addActivity({
-          actor: client.currentUser,
-          verb: 'add',
-          object: `chapter:${chapter.id}`,
-        })
-        push(`/books/${bookId}`)
+        console.log(chapter.book.chapters)
+        const chapterPage =
+          chapter.book.chapters.findIndex((c) => c.id === chapter.id) + 1
+        push(`/books/${bookId}/${chapterPage}`)
       })
     }
   }
 
-  const [_, updateChapter] = useMutation(updateChapterMutation)
+  const [, updateChapter] = useMutation(updateChapterMutation)
   const [{ fetching, error }, createChapter] = useMutation(
     createChapterMutation,
   )

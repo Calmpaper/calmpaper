@@ -1,10 +1,10 @@
 import React, { useContext } from 'react'
 import { UserContext } from 'context'
 
-import Footer from 'components/Layout/Footer'
+import Flex from 'atomic/atoms/flex'
+import Loader from 'atomic/atoms/loader'
+import Footer from 'atomic/molecules/footer'
 import Header from 'components/Layout/Header'
-import Loader from 'components/Loader'
-import Flex from 'components/Flex'
 
 import Hero from './Hero'
 import Trending from './Feed/Trending'

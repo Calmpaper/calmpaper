@@ -11,6 +11,11 @@ export const createChapterMutation = gql`
       id
       title
       content
+      book {
+        chapters {
+          id
+        }
+      }
     }
   }
 `
@@ -24,6 +29,11 @@ export const updateChapterMutation = gql`
       id
       title
       content
+      book {
+        chapters {
+          id
+        }
+      }
     }
   }
 `

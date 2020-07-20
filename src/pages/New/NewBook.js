@@ -6,7 +6,7 @@ import { useMutation } from 'urql'
 import { createBookMutation, updateBookMutation } from 'api'
 
 import Header from 'components/Layout/Header'
-import Footer from 'components/Layout/Footer'
+import Footer from 'atomic/molecules/footer'
 import FileInput from 'components/Input/FileInput'
 
 export default () => {

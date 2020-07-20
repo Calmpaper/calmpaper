@@ -45,3 +45,27 @@ export const addReviewMutation = `
     }
   }
 `
+
+export const updateReviewMutation = `
+  mutation($reviewId: Int!, $stars: Int!, $message: String) {
+    updateOneReview(
+      where: { id: $reviewId }
+      data: {
+        stars: $stars
+        message: $message
+      }
+    ) {
+      id
+    }
+  }
+`
+
+export const deleteReviewMutation = `
+  mutation($reviewId: Int!) {
+    deleteOneReview(
+      where: { id: $reviewId }
+    ) {
+      id
+    }
+  }
+`

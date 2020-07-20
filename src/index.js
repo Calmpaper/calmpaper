@@ -11,7 +11,7 @@ import Layout from 'components/Layout/Layout'
 import Routes from './routes'
 
 import 'assets/css/yandex.css'
-import 'assets/sass/main.scss'
+// import 'assets/sass/main.scss'
 import 'assets/css/main.css'
 import 'assets/css/index.css'
 
