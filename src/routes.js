@@ -2,7 +2,6 @@ import React from 'react'
 import { Switch, Route } from 'react-router-dom'
 
 import Home from 'pages/Home/Home'
-import BooksList from 'pages/BooksList/BooksList'
 import Book from 'pages/Book/Book'
 import Chapter from 'pages/Chapter/Chapter'
 import User from 'pages/User/User'
@@ -29,9 +28,6 @@ const Routes = () => (
     </Route>
     <Route path="/books/:book">
       <Book tab="details" />
-    </Route>
-    <Route path="/books">
-      <BooksList />
     </Route>
     <Route path="/new-book">
       <NewBook />

@@ -58,6 +58,9 @@ export const getLastChaptersQuery = gql`
       }
       book {
         ...Book
+        chapters {
+          id
+        }
         genres {
           ...Genre
         }
@@ -85,12 +88,18 @@ export const getChapterByBookQuery = gql`
           id
           stars
         }
+        chapters {
+          id
+        }
       }
       author {
         ...User
         books {
           id
         }
+      }
+      likes {
+        ...Like
       }
       comments(orderBy: { createdAt: desc }) {
         ...Comment

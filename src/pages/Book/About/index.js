@@ -55,7 +55,7 @@ export default ({ book }) => {
           <p
             className="about-book-author"
             onClick={() => push(`/users/${book.author.id}`)}
-          >{`by ${book.author.fullname}`}</p>
+          >{`by ${book.author.username || book.author.fullname}`}</p>
         )}
         <Ratings book={book} />
         <div className="about-book-main-btn">

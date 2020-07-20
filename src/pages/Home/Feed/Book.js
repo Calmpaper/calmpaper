@@ -12,7 +12,9 @@ const Book = ({ book = {} }) => {
         />
         <h3 className="catalog-title">{book.name}</h3>
         {book.author && (
-          <p className="catalog-author">{book.author.fullname}</p>
+          <p className="catalog-author">
+            {book.author.username || book.author.fullname}
+          </p>
         )}
         {book.reviews.length > 0 && (
           <Rating ratings={book.reviews} readOnly quiet />

@@ -25,13 +25,13 @@ const User = ({ user }) => (
       src={user.avatar}
       style={{ borderRadius: '100%', marginRight: 6 }}
     />
-    {user.givenname}
+    {user.username || user.givenname}
   </Link>
 )
 
 const LoginBtn = () => (
   <a
-    href={`http://ec2-52-87-215-106.compute-1.amazonaws.com:4000/auth/google`}
+    href={`${process.env.REACT_APP_BACKEND_URL}/auth/google`}
     className="btn-login"
   >
     Log In

@@ -12,7 +12,9 @@ export default ({ author }) => (
               style={{ backgroundImage: `url('${author.avatar}')` }}
             />
             <div className="item-info">
-              <h3 className="item-title">{author.fullname}</h3>
+              <h3 className="item-title">
+                {author.username || author.fullname}
+              </h3>
               <p className="item-subtitle">{`${author.books.length} ${
                 author.books.length === 1 ? 'book' : 'books'
               }`}</p>

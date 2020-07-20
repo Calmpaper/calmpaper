@@ -38,7 +38,9 @@ export default ({ author }) => {
           style={{ backgroundImage: `url('${author.avatar}')` }}
         />
         <div className="author-info">
-          <div className="author-name">{author.fullname}</div>
+          <div className="author-name">
+            {author.username || author.fullname}
+          </div>
           <div className="author-country">{`${author.followers.length} ${
             author.followers.length === 1 ? 'follower' : 'followers'
           }`}</div>

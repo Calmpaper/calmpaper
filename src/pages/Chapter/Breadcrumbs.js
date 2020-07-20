@@ -15,8 +15,6 @@ export default ({ chapter }) => (
     <svg className="icon icon-arrow-right">
       <use xlinkHref="#icon-arrow-right" />
     </svg>
-    <span href className="pagination__link active">
-      {chapter.title}
-    </span>
+    <span className="pagination__link active">{chapter.title}</span>
   </div>
 )

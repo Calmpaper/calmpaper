@@ -10,7 +10,7 @@ import {
 
 import Loader from 'components/Loader'
 import Header from 'components/Layout/Header'
-import Footer from 'components/Layout/Footer'
+import Footer from 'atomic/molecules/footer'
 import Comments from 'components/Comments'
 
 import About from './About'

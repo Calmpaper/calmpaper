@@ -10,8 +10,14 @@ import {
   removeLikeMutation,
 } from 'api'
 
-import Likes from './Likes'
+import Like from 'atomic/atoms/like'
+// import More from 'atomic/atoms/more'
 import Replies from '../Replies'
+
+// // eslint-disable-next-line no-unused-vars
+// const [__, deleteComment] = useMutation(deleteCommentMutation)
+// const onDelete = () => deleteComment({ id: commentId })
+// commentId,
 import More from './More'
 import Input from '../Input'
 
@@ -23,17 +29,10 @@ const Comment = ({ comment }) => {
   const [showReplies, setShowReplies] = useState(false)
   const [showReplyInput, setShowReplyInput] = useState(false)
 
-  // eslint-disable-next-line no-unused-vars
-  const [_, editComment] = useMutation(editCommentMutation)
-
-  // eslint-disable-next-line no-unused-vars
-  const [__, sendCommentReply] = useMutation(sendCommentReplyMutation)
-
-  // eslint-disable-next-line no-unused-vars
-  const [___, setLike] = useMutation(setLikeMutation)
-
-  // eslint-disable-next-line no-unused-vars
-  const [____, removeLike] = useMutation(removeLikeMutation)
+  const [, editComment] = useMutation(editCommentMutation)
+  const [, sendCommentReply] = useMutation(sendCommentReplyMutation)
+  const [, setLike] = useMutation(setLikeMutation)
+  const [, removeLike] = useMutation(removeLikeMutation)
 
   const onEdit = (value) => {
     editComment({ id: comment.id, body: value })
@@ -50,20 +49,13 @@ const Comment = ({ comment }) => {
     })
   }
 
-  const like = user && comment.likes.find((like) => like.author.id === user.id)
-  const onLike = () => {
+  const onLike = (like) => {
+    if (!user) return
+
     if (like) {
-      removeLike({
-        likeId: parseInt(like.id),
-      })
-      userFeed.removeActivity({ foreignId: `like:${like.id}` })
+      removeLike({ likeId: parseInt(like.id) })
     } else {
-      setLike({
-        authorId: user.id,
-        commentId: comment.id,
-      }).then(({ data: { setCommentLike: res = {} } = {} }) => {
-        console.log(res)
-      })
+      setLike({ authorId: user.id, commentId: comment.id })
     }
   }
 
@@ -85,7 +77,7 @@ const Comment = ({ comment }) => {
         ) : (
           <>
             <h4 className="comment-title">
-              {comment.author.fullname}{' '}
+              {comment.author.username || comment.author.fullname}{' '}
               <span>· {moment(comment.createdAt).fromNow()}</span>
             </h4>
             <div className="comment-text">
@@ -130,7 +122,13 @@ const Comment = ({ comment }) => {
                   : { width: '12px' }
               }
             />
-            <Likes likes={comment.likes} onLike={onLike} isLiked={!!like} />
+            <Like
+              likes={comment.likes}
+              like={
+                user && comment.likes.find((like) => like.author.id === user.id)
+              }
+              onLike={onLike}
+            />
           </div>
           {user && user.id === comment.author.id && (
             <div className="comment-context-menu__container">

@@ -22,6 +22,10 @@ export default ({ chapter }) => {
         likeId: parseInt(like.id),
       })
     } else {
+      console.log('author')
+      console.log(user)
+      console.log('chapter')
+      console.log(chapter)
       setLike({
         authorId: user.id,
         chapterId: chapter.id,
@@ -35,9 +39,9 @@ export default ({ chapter }) => {
     <div className="read-book-text">
       <div className="container">
         <div className="row" style={{ display: 'flex', alignItems: 'center' }}>
+          {/*
           <button
             className={`comment-like__button ${isLiked ? '_active' : ''}`}
-            onClick={() => {}}
             style={{ marginRight: 8 }}
             onClick={onLike}
           >
@@ -49,6 +53,7 @@ export default ({ chapter }) => {
               <use xlinkHref="#like--inline" />
             </svg>
           </button>
+          */}
           {chapter.likes.length > 0 && (
             <span style={{ marginRight: 12 }}>{chapter.likes.length}</span>
           )}

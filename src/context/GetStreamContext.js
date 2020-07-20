@@ -32,8 +32,6 @@ const GetStreamProvider = ({ children }) => {
   useEffect(() => {
     if (notificationsFeed) {
       notificationsFeed.get().then(({ results }) => {
-        console.log('results')
-        console.log(results)
         setNotifications(results)
       })
     }

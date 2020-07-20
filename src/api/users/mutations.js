@@ -63,3 +63,12 @@ export const unfollowUserMutation = gql`
   }
   ${UserFragment}
 `
+
+export const editUsernameMutation = gql`
+  mutation($userId: Int!, $username: String) {
+    updateOneUser(where: { id: $userId }, data: { username: $username }) {
+      id
+      username
+    }
+  }
+`
