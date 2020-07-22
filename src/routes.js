@@ -5,9 +5,8 @@ import Home from 'pages/Home/Home'
 import Book from 'pages/Book/Book'
 import Chapter from 'pages/Chapter/Chapter'
 import User from 'pages/User/User'
-
-import NewBook from 'pages/New/NewBook'
-import NewChapter from 'pages/New/NewChapter'
+import NewBook from 'pages/NewBook/NewBook'
+import NewChapter from 'pages/NewChapter/NewChapter'
 
 const Routes = () => (
   <Switch>

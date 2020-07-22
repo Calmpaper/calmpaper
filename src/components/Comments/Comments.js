@@ -10,7 +10,7 @@ export default ({
   style,
   inputStyle,
 }) => (
-  <div className="comments">
+  <div className="comments" id="comments-section">
     <div className="container">
       <div className="row">
         <div className="comments-count">{`Comments ${comments.length}`}</div>

@@ -1,8 +1,8 @@
 import gql from 'graphql-tag'
 
-export const getTagsQuery = gql`
+export const getGenresQuery = gql`
   query {
-    tags {
+    genres {
       id
       label
     }

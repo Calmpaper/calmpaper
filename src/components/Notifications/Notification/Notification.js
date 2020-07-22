@@ -5,11 +5,40 @@ import moment from 'moment'
 import Flex from 'components/Flex'
 import { useQuery } from 'urql'
 import * as S from './Notification.styled'
-import { getBookQuery, getChapterQuery } from 'api'
+import { getUserQuery, getBookQuery, getChapterQuery } from 'api'
+
+const UserAvatar = ({ userId }) => {
+  const [{ data: { user } = {}, fetching }] = useQuery({
+    pause: !userId,
+    query: getUserQuery,
+    variables: {
+      id: parseInt(userId),
+    },
+  })
+  if (fetching || !user) return null
+  return (
+    <S.Avatar className="avatar">
+      <img src={user.avatar} alt={`${user.avatar}-pic`} />
+    </S.Avatar>
+  )
+}
+
+const User = ({ userId }) => {
+  const [{ data: { user } = {}, fetching }] = useQuery({
+    pause: !userId,
+    query: getUserQuery,
+    variables: {
+      id: parseInt(userId),
+    },
+  })
+  if (fetching || !user) return null
+  return <S.User>{user.username || user.givenname}</S.User>
+}
 
 export default ({ notification, closeNotifications: close }) => {
   const { user: loggedUser } = useContext(UserContext)
-  console.log(notification)
+
+  const isSeen = notification.is_seen
 
   // if (notification.object.startsWith('book') && notification.verb === 'start') {
   //   notificationBody = (
@@ -96,7 +125,7 @@ export default ({ notification, closeNotifications: close }) => {
   const bookId = activities[0].bookId
   const chapterId = activities[0].chapterId
 
-  const [{ data: { book } = {}, fetching: bookFetching, error }] = useQuery({
+  const [{ data: { book } = {}, fetching: bookFetching }] = useQuery({
     pause: !bookId,
     query: getBookQuery,
     variables: {
@@ -116,8 +145,12 @@ export default ({ notification, closeNotifications: close }) => {
 
   if (bookFetching || chapterFetching) return <div>loading...</div>
 
-  const cover = book.image
-  const title = book.name
+  const chapterPage =
+    chapterId &&
+    book.chapters.findIndex((c) => c.id === parseInt(chapterId)) + 1
+
+  const cover = book && book.image
+  const title = book && book.name
   const subtitle = chapter ? chapter.title : null
 
   let body = ''
@@ -125,36 +158,36 @@ export default ({ notification, closeNotifications: close }) => {
   /* ---------------------------------------------------- */
   let users
   if (notification.activity_count === 1) {
-    users = <S.User>{activities[0].user.givenname}</S.User>
+    users = <User userId={activities[0].userId} />
   }
   if (notification.activity_count === 2) {
     users = (
       <>
-        <S.User>{activities[0].user.givenname}</S.User>
+        <User userId={activities[0].userId} />
         {` and `}
-        <S.User>{activities[1].user.givenname}</S.User>
+        <User userId={activities[1].userId} />
       </>
     )
   }
   if (notification.activity_count === 3) {
     users = (
       <>
-        <S.User>{activities[0].user.givenname}</S.User>
+        <User userId={activities[0].userId} />
         {`, `}
-        <S.User>{activities[1].user.givenname}</S.User>
+        <User userId={activities[1].userId} />
         {` and `}
-        <S.User>{activities[2].user.givenname}</S.User>
+        <User userId={activities[2].userId} />
       </>
     )
   }
   if (notification.activity_count > 3) {
     users = (
       <>
-        <S.User>{activities[0].user.givenname}</S.User>
+        <User userId={activities[0].userId} />
         {`, `}
-        <S.User>{activities[1].user.givenname}</S.User>
+        <User userId={activities[1].userId} />
         {`, `}
-        <S.User>{activities[2].user.givenname}</S.User>
+        <User userId={activities[2].userId} />
         {` and ${activities.length - 3} others`}
       </>
     )
@@ -164,17 +197,26 @@ export default ({ notification, closeNotifications: close }) => {
   /* ---------------------------------------------------- */
   let action = ` started following your book`
   let link = `/books/${bookId}`
+
   if (notification.verb === 'add') {
-    link = `/books/${bookId}/${chapterId}`
-    action = ` added a new chapter`
+    if (activities[0].object.startsWith('book')) {
+      link = `/books/${bookId}`
+      action = ` started a new book`
+    }
+    if (activities[0].object.startsWith('chapter')) {
+      link = `/books/${bookId}/${chapterPage}`
+      action = ` added a new chapter`
+    }
   }
   if (notification.verb === 'like') {
     if (activities[0].object.startsWith('comment')) {
-      link = chapterId ? `/books/${bookId}/${chapterId}` : `/books/${bookId}`
+      link = chapterPage
+        ? `/books/${bookId}/${chapterPage}`
+        : `/books/${bookId}`
       action = ` liked your comment`
     }
     if (activities[0].object.startsWith('chapter')) {
-      link = `/books/${bookId}/${chapterId}`
+      link = `/books/${bookId}/${chapterPage}`
       action = ` liked your chapter`
     }
     if (activities[0].object.startsWith('book')) {
@@ -183,7 +225,7 @@ export default ({ notification, closeNotifications: close }) => {
     }
   }
   if (notification.verb === 'reply') {
-    link = chapterId ? `/books/${bookId}/${chapterId}` : `/books/${bookId}`
+    link = chapterPage ? `/books/${bookId}/${chapterPage}` : `/books/${bookId}`
     action = ` replied to your comment`
   }
 
@@ -193,9 +235,14 @@ export default ({ notification, closeNotifications: close }) => {
       action = ` commented on your book`
     }
     if (activities[0].object.startsWith('chapter')) {
-      link = `/books/${bookId}/${chapterId}`
+      link = `/books/${bookId}/${chapterPage}`
       action = ` commented on your chapter`
     }
+  }
+
+  if (notification.verb === 'review') {
+    link = `/books/${bookId}/reviews`
+    action = ` left a review on your book`
   }
   /* ---------------------------------------------------- */
 
@@ -214,14 +261,7 @@ export default ({ notification, closeNotifications: close }) => {
       >
         {activities.map(
           (activity, index) =>
-            index < 5 && (
-              <S.Avatar className="avatar">
-                <img
-                  src={activity.user.avatar}
-                  alt={`${activity.user.avatar}-pic`}
-                />
-              </S.Avatar>
-            ),
+            index < 5 && <UserAvatar userId={activity.userId} />,
         )}
       </div>
     </Flex>
@@ -229,7 +269,9 @@ export default ({ notification, closeNotifications: close }) => {
 
   return (
     <Link to={link} onClick={close}>
-      <S.Notification>
+      <S.Notification
+        style={!isSeen ? { background: 'hsl(218 94% 97% / 1)' } : {}}
+      >
         <Flex row alignStart>
           <S.BookCover src={cover} alt="book_cover" />
           <Flex column style={{ width: '100%', paddingTop: 6 }}>

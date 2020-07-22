@@ -1,34 +1,51 @@
 import React, { useState, useContext } from 'react'
-import { UserContext, GetStreamContext } from 'context'
+import { UserContext } from 'context'
 import { useHistory, useLocation } from 'react-router-dom'
-import { useForm } from 'react-hook-form'
-import { useMutation } from 'urql'
-import { createBookMutation, updateBookMutation } from 'api'
+import { useForm, Controller } from 'react-hook-form'
+import { useMutation, useQuery } from 'urql'
+import {
+  createBookMutation,
+  updateBookMutation,
+  getGenresQuery,
+  getTagsQuery,
+} from 'api'
 
 import Header from 'components/Layout/Header'
 import Footer from 'atomic/molecules/footer'
 import FileInput from 'components/Input/FileInput'
 
+import Genres from './Genres'
+import Tags from './Tags'
+
 export default () => {
   const { user } = useContext(UserContext)
-  const { client, notificationsFeed, addActivity } = useContext(
-    GetStreamContext,
-  )
   const { state: { book } = {} } = useLocation()
   const [image, setImage] = useState(book ? book.image : null)
-  const { register, handleSubmit, errors } = useForm({
+  const { register, control, handleSubmit, errors, setValue } = useForm({
     defaultValues: book
       ? {
           image: book.image,
           name: book.name,
           description: book.description,
+          tags: book.tags,
+          genres: book.genres,
         }
       : {},
   })
+
   const { push } = useHistory()
 
+  const [{ data: { genres = [] } = {} }] = useQuery({ query: getGenresQuery })
+  const [{ data: { tags = [] } = {} }] = useQuery({ query: getTagsQuery })
+
   const submit = (data) => {
-    const allData = { ...data, userId: parseInt(user.id), image }
+    const allData = {
+      ...data,
+      userId: parseInt(user.id),
+      image,
+      tags: (data.tags || []).map((i) => ({ id: i.value })),
+      genres: (data.genres || []).map((i) => ({ id: i.id })),
+    }
     if (book) {
       updateBook({ ...allData, bookId: book.id }).then(
         ({ data: { updateOneBook: book } }) => {
@@ -36,24 +53,13 @@ export default () => {
         },
       )
     } else {
-      createBook(allData).then(({ data: { createBook: book } }) => {
-        // const bookFeed = client.feed('book', book.id)
-        // notificationsFeed.follow('book', book.id)
-        // console.log(bookFeed)
-        // bookFeed.addActivity({
-        //   actor: client.currentUser,
-        //   to: [`user:${user.id}`],
-        //   verb: 'start',
-        //   object: `book:${book.id}`,
-        //   book,
-        //   user,
-        // })
+      createBook(allData).then(({ data: { createOneBook: book } }) => {
         push(`/books/${book.id}`)
       })
     }
   }
 
-  const [_, updateBook] = useMutation(updateBookMutation)
+  const [, updateBook] = useMutation(updateBookMutation)
   const [{ fetching, error }, createBook] = useMutation(createBookMutation)
   if (error) return <p>Oh no... {error.message}</p>
 
@@ -112,6 +118,14 @@ export default () => {
                 ref={register({ required: true })}
               />
             </div>
+            <Controller
+              name="genres"
+              control={control}
+              as={Genres}
+              genres={genres}
+              setValue={setValue}
+            />
+            <Controller name="tags" control={control} as={Tags} tags={tags} />
             <div className="block block09 add-series-btn">
               <button className="btn btn-color" type="submit">
                 {!fetching ? 'Add series' : 'Adding...'}

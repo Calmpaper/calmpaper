@@ -2,11 +2,13 @@ import gql from 'graphql-tag'
 
 export const createChapterMutation = gql`
   mutation($title: String!, $content: String!, $bookId: Int!, $userId: Int!) {
-    createChapter(
-      title: $title
-      content: $content
-      userId: $userId
-      bookId: $bookId
+    createOneChapter(
+      data: {
+        title: $title
+        content: $content
+        author: { connect: { id: $userId } }
+        book: { connect: { id: $bookId } }
+      }
     ) {
       id
       title

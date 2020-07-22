@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react'
-import { UserContext, GetStreamContext } from 'context'
+import { UserContext } from 'context'
 import { useParams } from 'react-router-dom'
 import { useMutation } from 'urql'
 import { addReviewMutation } from 'api'
@@ -8,9 +8,8 @@ import Flex from 'components/Flex'
 import Input from 'components/Comments/Input'
 import Review from './Review'
 
-const AddReview = ({ book }) => {
+const AddReview = ({ book, reexecuteQuery }) => {
   const { book: bookId } = useParams()
-  const { addActivity } = useContext(GetStreamContext)
   const [stars, setStars] = useState(0)
   const { user } = useContext(UserContext)
   const [{ error }, addReview] = useMutation(addReviewMutation)
@@ -21,15 +20,8 @@ const AddReview = ({ book }) => {
       message,
       authorId: user.id,
       bookId: parseInt(bookId),
-    })
-
-    // TODO: done NOTIFICATION: send comment "Maxim Ignatev review your book"
-    addActivity({
-      verb: 'review',
-      object: `book:${bookId}`,
-      user,
-      book,
-    })
+      bookAuthorId: book.author.id,
+    }).then((r) => reexecuteQuery())
   }
   if (error) return <p>Oh no... {error.message}</p>
 
@@ -71,14 +63,16 @@ const AddReview = ({ book }) => {
   )
 }
 
-export default ({ reviews, book }) => {
+export default ({ reviews, book, reexecuteQuery }) => {
   const { user } = useContext(UserContext)
   const hasLeftReview =
     user && reviews.find((review) => review.author.id === user.id)
 
   return (
     <Flex column className="comments" style={{ marginTop: 36 }}>
-      {user && !hasLeftReview && <AddReview book={book} />}
+      {user && !hasLeftReview && (
+        <AddReview book={book} reexecuteQuery={reexecuteQuery} />
+      )}
       {reviews.map((review) => (
         <Review review={review} />
       ))}

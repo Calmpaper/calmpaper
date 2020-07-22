@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import Details from './Details'
 import Reviews from './Reviews'
 
-export default ({ book, tab }) => {
+export default ({ book, tab, reexecuteQuery }) => {
   return (
     <div className="about-book-info">
       <div className="about-book-tabs">
@@ -23,7 +23,13 @@ export default ({ book, tab }) => {
       </div>
 
       {tab === 'details' && <Details book={book} />}
-      {tab === 'reviews' && <Reviews book={book} reviews={book.reviews} />}
+      {tab === 'reviews' && (
+        <Reviews
+          book={book}
+          reviews={book.reviews}
+          reexecuteQuery={reexecuteQuery}
+        />
+      )}
     </div>
   )
 }

@@ -1,15 +1,40 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { UserContext } from 'context'
 import { useHistory } from 'react-router-dom'
+import { useMutation } from 'urql'
+import { setChapterLike, removeLikeMutation } from 'api'
 
-export default ({ chapter }) => {
+export default ({ chapter, reexecuteQuery }) => {
   const currentPage =
     chapter.book.chapters.findIndex((c) => c.id === chapter.id) + 1
   const pagesCount = chapter.book.chapters.length
   const { push } = useHistory()
+  const { user } = useContext(UserContext)
 
-  const onComment = () => {}
+  const onComment = () => {
+    document.getElementById('comments-section').scrollIntoView()
+  }
 
-  const onLike = () => {}
+  const [, setLike] = useMutation(setChapterLike)
+  const [, removeLike] = useMutation(removeLikeMutation)
+
+  const like = user && chapter.likes.find((like) => like.author.id === user.id)
+  const isLiked = !!like
+
+  const onLike = () => {
+    if (!user) return null
+
+    if (like) {
+      removeLike({
+        likeId: parseInt(like.id),
+      }).then((r) => reexecuteQuery())
+    } else {
+      setLike({
+        authorId: user.id,
+        chapterId: chapter.id,
+      }).then((r) => reexecuteQuery())
+    }
+  }
 
   const onSettings = () => {}
 
@@ -33,7 +58,10 @@ export default ({ chapter }) => {
           </button>
         )}
         <button className="widget-btn" onClick={onLike}>
-          <svg className="icon icon-like">
+          <svg
+            className="icon icon-like"
+            style={isLiked ? { fill: 'red' } : {}}
+          >
             <use xlinkHref="#icon-like" />
           </svg>
         </button>
@@ -48,12 +76,12 @@ export default ({ chapter }) => {
             <use xlinkHref="#icon-list" />
           </svg>
         </button>
-        */}
         <button className="widget-btn" onClick={onSettings}>
           <svg className="icon icon-setting">
             <use xlinkHref="#icon-setting" />
           </svg>
         </button>
+        */}
 
         {currentPage !== pagesCount && (
           <button

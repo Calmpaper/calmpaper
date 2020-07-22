@@ -45,8 +45,10 @@ export default ({ sort }) => {
                       {chapter.book.genres.length > 0 && (
                         <ul className="item-category">
                           {chapter.book.genres.map((genre) => (
-                            <li key={genre.id}>
-                              <a href>{genre.label}</a>
+                            <li key={genre.id} style={{ marginRight: 8 }}>
+                              <a style={{ fontWeight: 400 }} href="/">
+                                {genre.label}
+                              </a>
                             </li>
                           ))}
                         </ul>
