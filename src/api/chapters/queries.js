@@ -88,7 +88,7 @@ export const getChapterByBookQuery = gql`
           id
           stars
         }
-        chapters {
+        chapters(orderBy: { createdAt: asc }) {
           id
         }
       }

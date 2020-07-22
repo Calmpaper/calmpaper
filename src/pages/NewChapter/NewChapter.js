@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { UserContext, GetStreamContext } from 'context'
+import { UserContext } from 'context'
 import { useHistory, useParams, useLocation } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { useMutation } from 'urql'
@@ -10,8 +10,7 @@ import Footer from 'atomic/molecules/footer'
 
 export default () => {
   const { user } = useContext(UserContext)
-  const { client } = useContext(GetStreamContext)
-  const { book: bookId, chapter: chapterId } = useParams()
+  const { book: bookId } = useParams()
   const { push } = useHistory()
   const { state: { chapter } = {} } = useLocation()
   const { register, handleSubmit, errors } = useForm({
@@ -22,9 +21,6 @@ export default () => {
         }
       : {},
   })
-
-  // if useParams().bookId -> fetch that book and fill forms.
-  // -> save method updates the book
 
   const submit = (data) => {
     if (chapter) {
@@ -42,7 +38,7 @@ export default () => {
         ...data,
         userId: user.id,
         bookId: parseInt(bookId),
-      }).then(({ data: { createChapter: chapter } }) => {
+      }).then(({ data: { createOneChapter: chapter } }) => {
         console.log(chapter.book.chapters)
         const chapterPage =
           chapter.book.chapters.findIndex((c) => c.id === chapter.id) + 1
@@ -118,39 +114,4 @@ export default () => {
       <Footer centered />
     </>
   )
-
-  // return (
-  //   <>
-  //     <Header />
-  //     <div className="asdh2jj">
-  //       <Form onSubmit={handleSubmit(onSubmit)}>
-  //         <Input
-  //           name="title"
-  //           placeholder="Chapter title"
-  //           ref={register({ required: true })}
-  //         />
-  //         {errors.title && <Error>Chapter title is required.</Error>}
-
-  //         <Textarea
-  //           name="content"
-  //           placeholder="Your story"
-  //           ref={register({ required: true })}
-  //         />
-  //         {errors.content && <Error>Content is required.</Error>}
-
-  //         <Button
-  //           primary
-  //           type="submit"
-  //           className="btn btn-color"
-  //           style={{
-  //             marginTop: '24px',
-  //             alignSelf: 'flex-end',
-  //           }}
-  //         >
-  //           {!fetching ? 'Add chapter' : 'Hold a moment...'}
-  //         </Button>
-  //       </Form>
-  //     </div>
-  //   </>
-  // )
 }

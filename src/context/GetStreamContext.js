@@ -17,6 +17,16 @@ const GetStreamProvider = ({ children }) => {
   const [notificationsFeed, setNotificationsFeed] = useState(undefined)
   const [notifications, setNotifications] = useState([])
 
+  const markNotificationsAsSeen = () => {
+    notificationsFeed.get({ mark_seen: true })
+    setNotifications((notifications) =>
+      notifications.map((n) => ({
+        ...n,
+        is_seen: true,
+      })),
+    )
+  }
+
   useEffect(() => {
     if (user) {
       const client = connect(API_1, user.getStreamToken, API_2, API_3)
@@ -60,8 +70,9 @@ const GetStreamProvider = ({ children }) => {
         client,
         userFeed,
         notificationsFeed,
-
         notifications,
+        markNotificationsAsSeen,
+
         addActivity,
       }}
     >

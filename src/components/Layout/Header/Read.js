@@ -6,7 +6,7 @@ const ReadingList = ({ books, close }) => {
   return (
     <div
       className="sidebar-box sidebar-catalog btn-br"
-      style={{ position: 'absolute', top: 64, padding: '16px 24px' }}
+      style={{ position: 'absolute', top: 72, padding: '16px 24px' }}
     >
       {books.map((book) => (
         <Link

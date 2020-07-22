@@ -55,6 +55,9 @@ export const setChapterLike = gql`
       author {
         ...User
       }
+      chapter {
+        id
+      }
     }
   }
   ${UserFragment}
@@ -72,6 +75,9 @@ export const removeLikeMutation = gql`
   mutation($likeId: Int!) {
     deleteOneLike(where: { id: $likeId }) {
       id
+      chapter {
+        id
+      }
     }
   }
 `

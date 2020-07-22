@@ -1,7 +1,6 @@
 import React, { useState, useContext } from 'react'
 import moment from 'moment'
-import { UserContext, GetStreamContext } from 'context'
-import { useParams } from 'react-router-dom'
+import { UserContext } from 'context'
 import { useMutation } from 'urql'
 import {
   editCommentMutation,
@@ -22,9 +21,7 @@ import More from './More'
 import Input from '../Input'
 
 const Comment = ({ comment }) => {
-  const { book: bookId, chapter: chapterId } = useParams()
   const { user } = useContext(UserContext)
-  const { userFeed, addActivity } = useContext(GetStreamContext)
   const [isEditing, setEditing] = useState(false)
   const [showReplies, setShowReplies] = useState(false)
   const [showReplyInput, setShowReplyInput] = useState(false)

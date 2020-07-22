@@ -5,6 +5,7 @@ export const getUserQuery = gql`
   query($id: Int!) {
     user(where: { id: $id }) {
       ...User
+      givenname
       favoriteBooks {
         ...Book
         chapters {

@@ -25,7 +25,10 @@ export default () => {
   const { user } = useContext(UserContext)
   const { book: bookId, chapter: chapterPage } = useParams()
 
-  const [{ data: { chapterByBook = [] } = {}, fetching, error }] = useQuery({
+  const [
+    { data: { chapterByBook = [] } = {}, fetching, error },
+    reexecuteQuery,
+  ] = useQuery({
     query: getChapterByBookQuery,
     variables: {
       bookId: parseInt(bookId),
@@ -37,14 +40,15 @@ export default () => {
   const [, sendChapterComment] = useMutation(sendChapterCommentMutation)
   const [, incrementChapterViews] = useMutation(incrementChapterViewsMutation)
 
-  // TODO: increment chapter view
   useEffect(() => {
-    // incrementChapterViews({
-    //   chapterId: chapter.id,
-    // })
-  }, [])
+    if (!fetching && chapter) {
+      incrementChapterViews({
+        chapterId: chapter.id,
+      })
+    }
+  }, [fetching])
 
-  if (fetching) return <Loader />
+  if (fetching && !chapter) return <Loader />
   if (error) return <p>Oh no... {error.message}</p>
 
   const sendComment = (body) => {
@@ -70,7 +74,7 @@ export default () => {
 
         <Actions chapter={chapter} />
 
-        <ChapterNavigation chapter={chapter} />
+        <ChapterNavigation chapter={chapter} reexecuteQuery={reexecuteQuery} />
 
         <Comments comments={chapter.comments} onSubmit={sendComment} />
       </div>

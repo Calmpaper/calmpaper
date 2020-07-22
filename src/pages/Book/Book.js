@@ -22,7 +22,7 @@ export default ({ tab, update }) => {
   const { book: bookId } = useParams()
   const { user } = useContext(UserContext)
 
-  const [{ data: { book } = {}, fetching, error }] = useQuery({
+  const [{ data: { book } = {}, fetching, error }, reexecuteQuery] = useQuery({
     pause: !bookId,
     query: getBookQuery,
     variables: {
@@ -30,11 +30,8 @@ export default ({ tab, update }) => {
     },
   })
 
-  // eslint-disable-next-line no-unused-vars
-  const [_, sendBookComment] = useMutation(sendBookCommentMutation)
-
-  // eslint-disable-next-line no-unused-vars
-  const [__, incrementBookViews] = useMutation(incrementBookViewsMutation)
+  const [, sendBookComment] = useMutation(sendBookCommentMutation)
+  const [, incrementBookViews] = useMutation(incrementBookViewsMutation)
 
   useEffect(() => {
     incrementBookViews({ bookId: parseInt(bookId) })
@@ -59,7 +56,7 @@ export default ({ tab, update }) => {
           <div className="col-content">
             <div className="items">
               <About book={book} />
-              <Tabs book={book} tab={tab} />
+              <Tabs book={book} tab={tab} reexecuteQuery={reexecuteQuery} />
               {user && user.id === book.author.id && (
                 <div style={{ marginTop: 16 }}>
                   <Actions bookId={book.id} book={book} />

@@ -6,12 +6,18 @@ export const createBookMutation = gql`
     $description: String!
     $image: String
     $userId: Int!
+    $tags: [TagWhereUniqueInput!]
+    $genres: [GenreWhereUniqueInput!]
   ) {
-    createBook(
-      name: $name
-      description: $description
-      image: $image
-      userId: $userId
+    createOneBook(
+      data: {
+        name: $name
+        description: $description
+        image: $image
+        author: { connect: { id: $userId } }
+        tags: { connect: $tags }
+        genres: { connect: $genres }
+      }
     ) {
       id
       name

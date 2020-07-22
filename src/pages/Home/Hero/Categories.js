@@ -14,7 +14,7 @@ export default () => (
             background: '#5BC1EE',
           }}
         >
-          Action
+          Diary
         </a>
         <a
           href="/"
@@ -25,7 +25,7 @@ export default () => (
             background: '#E8857A',
           }}
         >
-          Adventure
+          Biography
         </a>
         <a
           href="/"
@@ -36,7 +36,7 @@ export default () => (
             background: '#7FBFC7',
           }}
         >
-          Psychological
+          Business
         </a>
       </div>
       <div
@@ -57,7 +57,7 @@ export default () => (
             backgroundImage: `url(${cat})`,
           }}
         >
-          Fantasy
+          Technology
         </a>
       </div>
       <div className="col" style={{ width: '170px' }}>
@@ -70,7 +70,7 @@ export default () => (
             background: '#3A8EEF',
           }}
         >
-          Isekai
+          Science
         </a>
         <a
           href="/"
@@ -81,7 +81,7 @@ export default () => (
             background: '#3ABD98',
           }}
         >
-          Comedy
+          History
         </a>
       </div>
     </div>

@@ -10,7 +10,7 @@ import Ratings from './Ratings'
 
 export default ({ book }) => {
   const { user } = useContext(UserContext)
-  const { notificationsFeed, addActivity } = useContext(GetStreamContext)
+  const { notificationsFeed } = useContext(GetStreamContext)
   const { push } = useHistory()
   const isFavorite =
     user && book.readers.find((reader) => reader.id === user.id)
@@ -24,22 +24,12 @@ export default ({ book }) => {
   )
 
   const addToLibrary = () => {
-    // TODO: NOTIFICATION: send comment "Maxim Ignatev liked your book"
-    // + Subscribe for book updates
     if (isFavorite) {
-      notificationsFeed.unfollow('book', book.id)
       removeBookFromFavorites({ userId: user.id, bookId: book.id })
+      notificationsFeed.unfollow('book', book.id)
     } else {
       addBookToFavorites({ userId: user.id, bookId: book.id })
       notificationsFeed.follow('book', book.id)
-
-      // addActivity({
-      //   verb: 'follow',
-      //   to: [`notifications:${book.author.id}`],
-      //   object: `book:${book.id}`,
-      //   user,
-      //   bookId: book.id,
-      // })
     }
   }
 
@@ -60,10 +50,7 @@ export default ({ book }) => {
         <Ratings book={book} />
         <div className="about-book-main-btn">
           {book.chapters.length > 0 && (
-            <Link
-              to={`/books/${book.id}/${book.chapters[0].id}`}
-              className="btn btn-color"
-            >
+            <Link to={`/books/${book.id}/1`} className="btn btn-color">
               Read book
             </Link>
           )}
@@ -81,7 +68,7 @@ export default ({ book }) => {
           className="about-book-main-img"
           style={{
             background: `url('${book.image}')`,
-            backgroundSize: 'contain',
+            backgroundSize: 'cover',
             backgroundPosition: 'center',
           }}
         />
