@@ -19,7 +19,9 @@ const Stars = ({ reviews }) => {
         </div>
         <div className="panel-num">{avg}</div>
       </div>
-      <div className="about-num-panel-label">{reviews.length}</div>
+      <div className="about-num-panel-label">{`${reviews.length} ${
+        reviews.length === 1 ? 'review' : 'reviews'
+      }`}</div>
     </a>
   )
 }
@@ -60,7 +62,7 @@ export default ({ book }) => (
         </div>
         <div className="panel-num">{book.readers.length}</div>
       </div>
-      <div className="about-num-panel-label">Readers</div>
+      <div className="about-num-panel-label">Add to library</div>
     </a>
   </div>
 )

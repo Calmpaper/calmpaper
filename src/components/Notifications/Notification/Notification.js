@@ -145,6 +145,8 @@ export default ({ notification, closeNotifications: close }) => {
 
   if (bookFetching || chapterFetching) return <div>loading...</div>
 
+  if (!book) return null
+
   const chapterPage =
     chapterId &&
     book.chapters.findIndex((c) => c.id === parseInt(chapterId)) + 1
@@ -248,22 +250,10 @@ export default ({ notification, closeNotifications: close }) => {
 
   body = (
     <Flex row justifyBetween alignCenter>
-      <S.Body>
+      <S.Body style={{ fontSize: 13 }}>
         {users}
         {action}
       </S.Body>
-
-      <div
-        className="avatars"
-        style={{
-          marginRight: '6px',
-        }}
-      >
-        {activities.map(
-          (activity, index) =>
-            index < 5 && <UserAvatar userId={activity.userId} />,
-        )}
-      </div>
     </Flex>
   )
 
@@ -272,29 +262,50 @@ export default ({ notification, closeNotifications: close }) => {
       <S.Notification
         style={!isSeen ? { background: 'hsl(218 94% 97% / 1)' } : {}}
       >
-        <Flex row alignStart>
-          <S.BookCover src={cover} alt="book_cover" />
-          <Flex column style={{ width: '100%', paddingTop: 6 }}>
-            <h4
-              className="comment-title"
-              style={{ fontSize: 17, marginBottom: 6, marginTop: 0 }}
-            >
-              {title}{' '}
-              {subtitle && (
-                <span
-                  style={{
-                    color: '#000000',
-                    fontWeight: 500,
-                    opacity: 0.6,
-                    fontSize: '17px',
-                  }}
-                >
-                  · {subtitle}
-                </span>
-              )}
-            </h4>
-            {body}
+        <Flex row justifyBetween alignCenter>
+          <Flex row alignStart>
+            <S.BookCover src={cover} alt="book_cover" />
+            <Flex column style={{ width: '100%', paddingTop: 6 }}>
+              <h4
+                className="comment-title"
+                style={{
+                  fontSize: 16,
+                  marginBottom: 8,
+                  marginTop: 0,
+                  display: 'flex',
+                  flexDirection: 'column',
+                }}
+              >
+                {title}
+                {subtitle && (
+                  <span
+                    style={{
+                      color: '#000000',
+                      fontWeight: 500,
+                      opacity: 0.6,
+                      fontSize: '15px',
+                      marginTop: 6,
+                    }}
+                  >
+                    {subtitle}
+                  </span>
+                )}
+              </h4>
+              {body}
+            </Flex>
           </Flex>
+
+          <div
+            className="avatars"
+            style={{
+              marginRight: '6px',
+            }}
+          >
+            {activities.map(
+              (activity, index) =>
+                index < 5 && <UserAvatar userId={activity.userId} />,
+            )}
+          </div>
         </Flex>
       </S.Notification>
     </Link>

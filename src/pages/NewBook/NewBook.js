@@ -10,6 +10,7 @@ import {
   getTagsQuery,
 } from 'api'
 
+import TextareaAutosize from 'react-textarea-autosize'
 import Header from 'components/Layout/Header'
 import Footer from 'atomic/molecules/footer'
 import FileInput from 'components/Input/FileInput'
@@ -109,13 +110,14 @@ export default () => {
                   <span className="red-title">{` (required)`}</span>
                 )}
               </h3>
-              <textarea
+              <TextareaAutosize
                 name="description"
                 type="text"
                 className="input textarea"
                 placeholder="Enter your description"
                 defaultValue={''}
                 ref={register({ required: true })}
+                minRows={6}
               />
             </div>
             <Controller

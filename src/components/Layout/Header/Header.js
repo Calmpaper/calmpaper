@@ -38,7 +38,7 @@ const LoginBtn = () => (
   </a>
 )
 
-export default () => {
+export default ({ home }) => {
   const { user } = useContext(UserContext)
 
   return (
@@ -55,6 +55,16 @@ export default () => {
             {user && (
               <li className="header-nav__item">
                 <Create />
+              </li>
+            )}
+            {!home && !user && (
+              <li className="header-nav__item">
+                <a
+                  href={`${process.env.REACT_APP_BACKEND_URL}/auth/google`}
+                  className="btn-login"
+                >
+                  Sign Up
+                </a>
               </li>
             )}
             {user && (

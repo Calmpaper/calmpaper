@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form'
 import { useMutation } from 'urql'
 import { createChapterMutation, updateChapterMutation } from 'api'
 
+import TextareaAutosize from 'react-textarea-autosize'
 import Header from 'components/Layout/Header'
 import Footer from 'atomic/molecules/footer'
 
@@ -94,13 +95,14 @@ export default () => {
                   <span className="red-title">{` (required)`}</span>
                 )}
               </h3>
-              <textarea
+              <TextareaAutosize
                 name="content"
                 type="text"
                 className="input textarea"
                 placeholder="Content"
                 defaultValue={''}
                 ref={register({ required: true })}
+                minRows={6}
               />
             </div>
             <div className="block block09 add-series-btn">
