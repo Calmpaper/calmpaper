@@ -11,9 +11,7 @@ export default ({ chapters, bookId }) => (
         {chapters.map((chapter, index) => (
           <li>
             <Link to={`/books/${bookId}/${index + 1}`}>
-              <span className="table-title">
-                {`Chapter ${index + 1}: ${chapter.title}`}
-              </span>
+              <span className="table-title">{`${chapter.title}`}</span>
               <span className="table-time">49 mins ago</span>
             </Link>
           </li>

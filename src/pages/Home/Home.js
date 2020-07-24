@@ -29,7 +29,7 @@ export default () => {
           <Header fullWidth />
           <Hero />
           <Flex column>
-            <Trending />
+            <Trending style={{ paddingTop: 48 }} />
             <LastBooks />
             <LastChapters />
           </Flex>

@@ -26,7 +26,7 @@ export default ({ centered = false }) => (
       <div className="row">
         <Links />
       </div>
-      <div className="row">
+      <div className="row" style={{ marginTop: 32 }}>
         <div className="footer-social">
           <span>© 2020 Calmpaper</span>
         </div>

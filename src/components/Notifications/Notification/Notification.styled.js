@@ -17,11 +17,11 @@ export const BookCover = styled.img`
 
 export const User = styled.span`
   font-weight: 500;
-  font-size: 14px;
+  font-size: 13px;
 `
 
 export const Body = styled.div`
-  font-size: 14px !important;
+  font-size: 13px !important;
   white-space: pre-wrap;
   line-height: 19px;
 `
@@ -29,7 +29,7 @@ export const Body = styled.div`
 export const Name = styled.span`
   font-weight: 500;
   color: hsl(255, 8%, 22%);
-  font-size: 14px;
+  font-size: 13px;
   margin-right: 4px;
   display: inline-block;
 `

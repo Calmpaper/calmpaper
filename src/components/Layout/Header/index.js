@@ -5,7 +5,7 @@ export default ({ fullWidth = false, withLine }) =>
   fullWidth ? (
     <header>
       <div className="container">
-        <Header />
+        <Header home />
       </div>
     </header>
   ) : (

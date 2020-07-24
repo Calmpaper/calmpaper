@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 export default ({ books = [] }) => {
   return (
     <div className="sidebar-box sidebar-catalog">
-      <h4 className="title size04">More by auhtor</h4>
+      <h4 className="title size04">More by author</h4>
       {books.map((book) => {
         let sum = 0
         for (let i = 0; i < book.reviews.length; i++) {

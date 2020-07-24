@@ -5,7 +5,7 @@ import { getBooksQuery } from 'api'
 import Loader from 'components/Loader'
 import Book from './Book'
 
-export default ({ sort }) => {
+export default ({ sort, style = {} }) => {
   const [{ data: { books } = {}, fetching, error }] = useQuery({
     query: getBooksQuery,
   })
@@ -28,16 +28,18 @@ export default ({ sort }) => {
   })
 
   return (
-    <div className="catalog catalog01">
+    <div className="catalog catalog01" style={style}>
       <div className="container">
         <div className="row">
           <h2 className="title size02">Trending</h2>
         </div>
 
         <div className="row">
-          {topRatedBooks.map((book) => (
-            <Book book={book} key={book.id} />
-          ))}
+          {topRatedBooks
+            .filter((b) => b.chapters.length > 0 && b.image)
+            .map((book) => (
+              <Book book={book} key={book.id} />
+            ))}
         </div>
       </div>
     </div>
