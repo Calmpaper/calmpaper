@@ -3,12 +3,18 @@ import React from 'react'
 const Links = () => (
   <ul className="footer-nav">
     <li>
-      <a href="https://www.iubenda.com/terms-and-conditions/31556758">
+      <a
+        href="https://www.iubenda.com/terms-and-conditions/31556758"
+        target="_blank"
+      >
         Privacy Policy
       </a>
     </li>
     <li>
-      <a href="https://www.iubenda.com/terms-and-conditions/31556758">
+      <a
+        href="https://www.iubenda.com/terms-and-conditions/31556758"
+        target="_blank"
+      >
         Terms of Service
       </a>
     </li>
