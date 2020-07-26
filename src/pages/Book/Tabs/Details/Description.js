@@ -10,6 +10,7 @@ export default ({ description }) => (
       dangerouslySetInnerHTML={{
         __html: description.replace(/(?:\r\n|\r|\n)/g, '<br />'),
       }}
+      style={{ lineHeight: '160%' }}
     />
   </div>
 )

@@ -10,6 +10,7 @@ export default ({ chapter }) => (
           dangerouslySetInnerHTML={{
             __html: chapter.content.replace(/(?:\r\n|\r|\n)/g, '<br />'),
           }}
+          style={{ lineHeight: '160%' }}
         />
         {/*
         <div className="text">{chapter.content}</div>
