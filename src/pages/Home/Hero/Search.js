@@ -5,7 +5,7 @@ export default () => (
     className="main-search"
     style={{ display: 'flex', justifyContent: 'center' }}
   >
-    <a href={`https://calmpaper.com/books/8`}>
+    <a href={`https://calmpaper.com/books/8/1`}>
       <button type="submit" style={{ position: 'relative', width: 139 }}>
         Learn more
       </button>
