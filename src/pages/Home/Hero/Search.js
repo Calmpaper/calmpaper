@@ -5,9 +5,11 @@ export default () => (
     className="main-search"
     style={{ display: 'flex', justifyContent: 'center' }}
   >
-    <button type="submit" style={{ position: 'relative' }}>
-      Sign up
-    </button>
+    <a href={`https://calmpaper.com/books/8`}>
+      <button type="submit" style={{ position: 'relative', width: 139 }}>
+        Learn more
+      </button>
+    </a>
   </div>
 )
 

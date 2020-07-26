@@ -10,11 +10,11 @@ export default () => (
     style={{ backgroundImage: `url(${homeBg})`, height: 600 }}
   >
     <div className="row">
-      <h3 className="main-subtitle"> Community for readers & writers </h3>
+      <h3 className="main-subtitle">Start writing your books now!</h3>
       <h1 className="main-title">
-        Offer your thoughts
+        A place for anyone
         <br />
-        through books.
+        to write books
       </h1>
       <Search />
       {/*
