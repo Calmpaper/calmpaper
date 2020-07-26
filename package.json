@@ -1,8 +1,9 @@
 {
-  "name": "stories",
-  "version": "0.1.0",
+  "name": "calmpaper",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
+    "@zeit/next-sass": "^1.0.1",
     "getstream": "^4.5.4",
     "graphql": "^15.1.0",
     "graphql-tag": "^2.10.4",
@@ -54,6 +55,13 @@
     "semi": false,
     "trailingComma": "all"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "eslint": "^7.5.0",
+    "eslint-config-airbnb": "^18.2.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-jsx-a11y": "^6.3.1",
+    "eslint-plugin-react": "^7.20.3",
+    "eslint-plugin-react-hooks": "^4.0.8"
+  },
   "peerDependencies": {}
 }
