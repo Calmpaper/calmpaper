@@ -64,10 +64,10 @@ export default ({ home }) => {
                 <Notifications />
               </li>
             )}
-            {user ? <User user={user} /> : <LoginBtn />}
+            {!user && <LoginBtn />}
           </ul>
         </nav>
-        {!user && (
+        {!user ? (
           <li className="header-nav__item">
             <a
               href={`${process.env.REACT_APP_BACKEND_URL}/auth/google`}
@@ -76,6 +76,8 @@ export default ({ home }) => {
               Sign Up
             </a>
           </li>
+        ) : (
+          <User user={user} />
         )}
       </div>
     </div>
