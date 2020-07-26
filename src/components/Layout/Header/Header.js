@@ -30,12 +30,14 @@ const User = ({ user }) => (
 )
 
 const LoginBtn = () => (
-  <a
-    href={`${process.env.REACT_APP_BACKEND_URL}/auth/google`}
-    className="btn-login"
-  >
-    Log In
-  </a>
+  <li className="header-nav__item" style={{ position: 'relative' }}>
+    <a
+      className="header-nav__link"
+      href={`${process.env.REACT_APP_BACKEND_URL}/auth/google`}
+    >
+      Log In
+    </a>
+  </li>
 )
 
 export default ({ home }) => {
@@ -57,24 +59,24 @@ export default ({ home }) => {
                 <Create />
               </li>
             )}
-            {!home && !user && (
-              <li className="header-nav__item">
-                <a
-                  href={`${process.env.REACT_APP_BACKEND_URL}/auth/google`}
-                  className="btn-login"
-                >
-                  Sign Up
-                </a>
-              </li>
-            )}
             {user && (
               <li className="header-nav__item" style={{ position: 'relative' }}>
                 <Notifications />
               </li>
             )}
+            {user ? <User user={user} /> : <LoginBtn />}
           </ul>
         </nav>
-        {user ? <User user={user} /> : <LoginBtn />}
+        {!user && (
+          <li className="header-nav__item">
+            <a
+              href={`${process.env.REACT_APP_BACKEND_URL}/auth/google`}
+              className="btn-login"
+            >
+              Sign Up
+            </a>
+          </li>
+        )}
       </div>
     </div>
   )

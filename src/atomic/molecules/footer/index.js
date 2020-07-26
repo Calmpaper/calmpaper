@@ -3,19 +3,28 @@ import React from 'react'
 const Links = () => (
   <ul className="footer-nav">
     <li>
-      <a href="/">Help center</a>
+      <a href="https://www.iubenda.com/terms-and-conditions/31556758">
+        Privacy Policy
+      </a>
     </li>
     <li>
-      <a href="/">Privacy Policy</a>
+      <a href="https://www.iubenda.com/terms-and-conditions/31556758">
+        Terms of Service
+      </a>
     </li>
     <li>
-      <a href="/">Terms of Service</a>
+      <a href="https://calmpaper.com/books/8/1">About Us</a>
     </li>
     <li>
-      <a href="/">About Us</a>
-    </li>
-    <li>
-      <a href="/">Contact Us</a>
+      <a
+        href="/"
+        onClick={(e) => {
+          e.preventDefault()
+          document.getElementById('voicestorychatButton').click()
+        }}
+      >
+        Contact Us
+      </a>
     </li>
   </ul>
 )
