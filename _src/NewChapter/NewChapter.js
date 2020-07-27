@@ -40,7 +40,6 @@ export default () => {
         userId: user.id,
         bookId: parseInt(bookId),
       }).then(({ data: { createOneChapter: chapter } }) => {
-        console.log(chapter.book.chapters)
         const chapterPage =
           chapter.book.chapters.findIndex((c) => c.id === chapter.id) + 1
         push(`/books/${bookId}/${chapterPage}`)

@@ -1,25 +1,18 @@
-/* eslint-disable react/react-in-jsx-scope */
-const hero = () => <div>hero</div>
-const search = () => <div>search</div>
-const categories = () => <div>categories</div>
-const books_feed = () => <div>books_feed</div>
-const chapters_feed = () => <div>chapters_feed</div>
+import * as templates from 'components/templates'
+import { getHome } from 'api'
 
-const organisms = {
-  hero,
-  search,
-  categories,
-  books_feed,
-  chapters_feed,
+const Home = ({ home }) => (
+  <templates.home books={home.books} chapters={home.chapters} />
+)
+
+export const getStaticProps = async () => {
+  const home = await getHome()
+
+  return {
+    props: {
+      home,
+    },
+  }
 }
 
-export default () => (
-  <div>
-    <organisms.hero />
-    <organisms.search />
-    <organisms.categories />
-    <organisms.books_feed title="Trending" sort="trending" />
-    <organisms.books_feed title="Latest series" sort="newest" />
-    <organisms.chapters_feed title="Latest updates" sort="newest" />
-  </div>
-)
+export default Home

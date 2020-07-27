@@ -1,43 +1,15 @@
-import React, { useState, useEffect, createContext } from 'react'
-import { useLocation, useHistory } from 'react-router-dom'
-import * as QueryString from 'query-string'
+import { useState, useEffect, createContext } from 'react'
 import { useQuery } from 'urql'
 import { getMeQuery } from 'api'
+import * as QueryString from 'query-string'
 
 const UserContext = createContext()
 
 const UserProvider = ({ children }) => {
-  const { search, pathname } = useLocation()
-  const { replace } = useHistory()
-  const [jwt, setJwt] = useState(window.localStorage.getItem('jwt'))
-
-  const [{ data: { me: user } = {}, fetching }, reexecuteQuery] = useQuery({
-    query: getMeQuery,
-    pause: !jwt,
-  })
-
-  const logout = () => {
-    window.localStorage.removeItem('jwt')
-    setJwt(null)
-    replace(pathname)
-  }
-
-  useEffect(() => {
-    const params = QueryString.parse(search)
-    if (params.token) {
-      window.localStorage.setItem('jwt', params.token)
-      reexecuteQuery({ requestPolicy: 'network-only' })
-      setJwt(params.token)
-      replace(pathname)
-    }
-  }, [search, replace, reexecuteQuery, pathname])
-
   return (
     <UserContext.Provider
       value={{
-        user: jwt ? user : null,
-        fetching,
-        logout,
+        user: null,
       }}
     >
       {children}

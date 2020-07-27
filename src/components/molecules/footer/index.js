@@ -1,26 +1,15 @@
-import React from 'react'
+import * as atoms from 'components/atoms'
 
 const Links = () => (
   <ul className="footer-nav">
-    <li>
-      <a href="/">Help center</a>
-    </li>
-    <li>
-      <a href="/">Privacy Policy</a>
-    </li>
-    <li>
-      <a href="/">Terms of Service</a>
-    </li>
-    <li>
-      <a href="/">About Us</a>
-    </li>
-    <li>
-      <a href="/">Contact Us</a>
-    </li>
+    <atoms.footer_link />
+    <atoms.footer_link />
+    <atoms.footer_link />
+    <atoms.footer_link />
   </ul>
 )
 
-export default ({ centered = false }) => (
+export const footer = ({ centered = true }) => (
   <footer className={centered ? '' : 'footer-col'}>
     <div className="container">
       <div className="row">

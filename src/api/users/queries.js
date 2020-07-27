@@ -45,3 +45,11 @@ export const getMeQuery = gql`
   ${UserFragment}
   ${BookFragment}
 `
+
+export const getUsersQuery = gql`
+  query {
+    users {
+      id
+    }
+  }
+`

@@ -8,6 +8,19 @@ import {
   GenreFragment,
 } from '../fragments'
 
+export const getChaptersQuery = gql`
+  query {
+    chapters {
+      id
+      title
+      content
+      book {
+        id
+      }
+    }
+  }
+`
+
 export const getChapterQuery = gql`
   query($id: Int!) {
     chapter(where: { id: $id }) {

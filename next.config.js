@@ -1,10 +1,17 @@
 const path = require('path')
-const withSass = require('@zeit/next-sass')
+const withImages = require('next-images')
+const withPWA = require('next-pwa')
 
-module.exports = withSass({
+module.exports = withImages({
+  // withPWA({
+  // pwa: {
+  //   dest: 'public',
+  // },
+
   webpack(config) {
     config.resolve.modules.push(path.resolve('./'))
 
     return config
   },
+  // }),
 })

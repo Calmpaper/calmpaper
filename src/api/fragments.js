@@ -72,3 +72,49 @@ export const ReviewFragment = gql`
     message
   }
 `
+
+export const BooksFragment = gql`
+  fragment Books on Book {
+    books {
+      ...Book
+      description
+      chapters {
+        ...Chapter
+      }
+      reviews {
+        stars
+      }
+      author {
+        ...User
+      }
+    }
+  }
+  ${UserFragment}
+  ${BookFragment}
+  ${ChapterFragment}
+`
+
+export const ChaptersFragment = gql`
+  fragment Chapters on Chapter {
+    chapters {
+      ...Chapter
+      createdAt
+      author {
+        ...User
+      }
+      book {
+        ...Book
+        chapters {
+          id
+        }
+        genres {
+          ...Genre
+        }
+      }
+    }
+  }
+  ${UserFragment}
+  ${BookFragment}
+  ${ChapterFragment}
+  ${GenreFragment}
+`

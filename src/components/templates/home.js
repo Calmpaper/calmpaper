@@ -1,22 +1,17 @@
-/* eslint-disable react/react-in-jsx-scope */
-const hero = () => <div>hero</div>
-const search = () => <div>search</div>
-const books_feed = () => <div>books_feed</div>
-const chapters_feed = () => <div>chapters_feed</div>
+import * as molecules from 'components/molecules'
+import * as organisms from 'components/organisms'
 
-const organisms = {
-  hero,
-  search,
-  books_feed,
-  chapters_feed,
-}
-
-export default () => (
-  <div>
-    <organisms.hero />
-    <organisms.search />
-    <organisms.books_feed title="Trending" sort="trending" />
-    <organisms.books_feed title="Latest series" sort="newest" />
-    <organisms.chapters_feed title="Latest updates" sort="newest" />
+export const home = ({ books, chapters }) => (
+  <div className="page-home">
+    <molecules.header />
+    <molecules.hero />
+    <organisms.books_feed books={books} title="Trending" sort="trending" />
+    <organisms.books_feed books={books} title="Latest series" sort="newest" />
+    <organisms.chapters_feed
+      chapters={chapters}
+      title="Latest updates"
+      sort="newest"
+    />
+    <molecules.footer />
   </div>
 )
