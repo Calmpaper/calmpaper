@@ -23,6 +23,16 @@ const UserProvider = ({ children }) => {
   }
 
   useEffect(() => {
+    if (user) {
+      window.analytics.identify({
+        id: user.id,
+        username: user.username || user.fullname,
+        email: user.email,
+      })
+    }
+  }, [user])
+
+  useEffect(() => {
     const params = QueryString.parse(search)
     if (params.token) {
       window.localStorage.setItem('jwt', params.token)

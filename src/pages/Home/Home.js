@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useEffect, useContext } from 'react'
 import { UserContext } from 'context'
 
 import Flex from 'atomic/atoms/flex'
@@ -13,6 +13,10 @@ import LastChapters from './Feed/LastChapters'
 
 export default () => {
   const { user, fetching } = useContext(UserContext)
+
+  useEffect(() => {
+    window.analytics.track('visit-home')
+  }, [])
 
   if (fetching) {
     return (
