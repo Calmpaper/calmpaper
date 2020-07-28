@@ -41,6 +41,13 @@ export default () => {
         bookId: parseInt(bookId),
       }).then(({ data: { createOneChapter: chapter } }) => {
         console.log(chapter.book.chapters)
+
+        window.analytics.track('create-chapter', {
+          chapterId: chapter.id,
+          chapterTitle: chapter.title,
+          bookId: chapter.book.id,
+          bookName: chapter.book.name,
+        })
         const chapterPage =
           chapter.book.chapters.findIndex((c) => c.id === chapter.id) + 1
         push(`/books/${bookId}/${chapterPage}`)

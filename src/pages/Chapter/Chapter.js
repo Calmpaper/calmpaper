@@ -37,6 +37,17 @@ export default () => {
   })
   const chapter = chapterByBook[0]
 
+  useEffect(() => {
+    if (chapter) {
+      window.analytics.track('visit-chapter', {
+        chapterId: chapter.id,
+        bookId: chapter.book.id,
+        chapterTitle: chapter.title,
+        bookName: chapter.book.name,
+      })
+    }
+  }, [chapter])
+
   const [, sendChapterComment] = useMutation(sendChapterCommentMutation)
   const [, incrementChapterViews] = useMutation(incrementChapterViewsMutation)
 

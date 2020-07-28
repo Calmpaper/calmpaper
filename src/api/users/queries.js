@@ -29,6 +29,7 @@ export const getMeQuery = gql`
     me {
       ...User
       givenname
+      email
       username
       getStreamToken
       favoriteBooks {
