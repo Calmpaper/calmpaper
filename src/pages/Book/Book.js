@@ -31,13 +31,13 @@ export default ({ tab, update }) => {
   })
 
   useEffect(() => {
-    if (book) {
-      window.analytics.track('visit-book', {
+    if (book && window.analytics) {
+      window.analytics.page('book', {
         bookId: book.id,
         bookName: book.name,
       })
     }
-  }, [book])
+  }, [book, window.analytics])
 
   const [, sendBookComment] = useMutation(sendBookCommentMutation)
   const [, incrementBookViews] = useMutation(incrementBookViewsMutation)

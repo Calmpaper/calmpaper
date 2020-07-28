@@ -32,14 +32,30 @@ export default ({
   return (
     <Flex row alignCenter style={style}>
       {user && showAvatar && <S.Avatar src={user.avatar} alt={user.fullname} />}
-      <S.InputWrapper row alignCenter justifyBetween active={value !== ''}>
+      <S.InputWrapper
+        row
+        alignCenter
+        justifyBetween
+        active={value !== ''}
+        style={{
+          height: 'auto',
+          alignItems: 'flex-end',
+          paddingRight: 0,
+          position: 'relative',
+        }}
+      >
         <S.Input
           placeholder={placeholder}
           value={value}
           style={inputStyle}
           onChange={(e) => setValue(e.target.value)}
-          onKeyDown={({ key }) => key === 'Enter' && canSubmit && submit(value)}
+          onKeyDown={({ key, shiftKey }) =>
+            shiftKey && key === 'Enter' && canSubmit && submit(value)
+          }
           autoFocus={autoFocus}
+          style={{
+            resize: 'none',
+          }}
         />
         <S.SendButton
           onClick={() => canSubmit && submit(value)}

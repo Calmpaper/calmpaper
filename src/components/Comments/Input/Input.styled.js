@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import Flex from 'components/Flex'
+import TextareaAutosize from 'react-textarea-autosize'
 
 export const InputWrapper = styled(Flex)`
   height: 50px;
@@ -7,12 +8,12 @@ export const InputWrapper = styled(Flex)`
   padding: 12px 16px 10px;
   box-sizing: border-box;
   border: 1px solid #e6e6e6;
-  width: 320px;
+  width: 420px;
   transition: width 0.3s ease-out;
   ${(props) =>
     props.active &&
     `
-    width: 340px;
+    width: 450px;
   `}
 `
 
@@ -23,7 +24,7 @@ export const Avatar = styled.img`
   margin-right: 18px;
 `
 
-export const Input = styled.input`
+export const Input = styled(TextareaAutosize)`
   border: none;
   margin: -12px -16px -10px;
   padding: 12px 16px 10px;
@@ -45,6 +46,10 @@ export const SendButton = styled.button`
   padding-left: 2px;
   opacity: 0;
   transition: opacity 0.3s ease-in-out;
+  position: absolute;
+  right: 16px;
+  bottom: 5px;
+  right: 5px;
   ${(props) =>
     props.active &&
     `
