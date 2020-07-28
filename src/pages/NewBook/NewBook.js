@@ -55,10 +55,11 @@ export default () => {
       )
     } else {
       createBook(allData).then(({ data: { createOneBook: book } }) => {
-        window.analytics.track('create-book', {
-          bookId: book.id,
-          bookName: book.name,
-        })
+        window.analytics &&
+          window.analytics.track('create-book', {
+            bookId: book.id,
+            bookName: book.name,
+          })
         push(`/books/${book.id}`)
       })
     }

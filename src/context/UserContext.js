@@ -24,11 +24,11 @@ const UserProvider = ({ children }) => {
 
   useEffect(() => {
     if (user) {
-      window.analytics.identify({
-        id: user.id,
-        username: user.username || user.fullname,
-        email: user.email,
-      })
+      window.analytics &&
+        window.analytics.identify(user.id, {
+          username: user.username || user.fullname,
+          email: user.email,
+        })
     }
   }, [user])
 

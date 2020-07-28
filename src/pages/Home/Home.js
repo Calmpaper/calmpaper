@@ -15,8 +15,10 @@ export default () => {
   const { user, fetching } = useContext(UserContext)
 
   useEffect(() => {
-    window.analytics.track('visit-home')
-  }, [])
+    if (window.analytics) {
+      window.analytics.page('home')
+    }
+  }, [window.analytics])
 
   if (fetching) {
     return (
