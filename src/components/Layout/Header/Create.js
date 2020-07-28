@@ -45,7 +45,7 @@ const AddBook = () => {
 const AddChapter = ({ bookId }) => {
   return (
     <Link to={`/books/${bookId}/new-chapter`} className="header-nav__link">
-      Create
+      Add chapter
     </Link>
   )
 }
@@ -65,15 +65,16 @@ export default () => {
   })
 
   if (!bookId || (book && book.author.id !== user.id)) return <AddBook />
+  return <AddChapter bookId={bookId} />
 
-  return (
-    <span
-      className="header-nav__link"
-      onClick={() => setShowDropdown(!showDropdown)}
-      style={{ cursor: 'pointer' }}
-    >
-      Create
-      {showDropdown && <CreatePopup bookId={bookId} />}
-    </span>
-  )
+  // return (
+  //   <span
+  //     className="header-nav__link"
+  //     onClick={() => setShowDropdown(!showDropdown)}
+  //     style={{ cursor: 'pointer' }}
+  //   >
+  //     Create
+  //     {showDropdown && <CreatePopup bookId={bookId} />}
+  //   </span>
+  // )
 }
