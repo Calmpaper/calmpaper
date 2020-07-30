@@ -28,7 +28,7 @@ const Count = ({ likes }) => (
   </span>
 )
 
-export default ({ likes, like, onLike }) => {
+export const like = ({ likes, like, onLike }) => {
   return (
     <div className="comment-footer__controls-likes">
       <Thumb like={like} onLike={onLike} />

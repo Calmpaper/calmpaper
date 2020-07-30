@@ -64,7 +64,9 @@ const getHomeQuery = gql`
 `
 
 export const getHome = async () => {
-  const { data } = await client.query(getHomeQuery).toPromise()
+  const { data, error } = await client.query(getHomeQuery).toPromise()
+  console.log(data)
+  console.log(error)
 
   return data
 }

@@ -1,0 +1,25 @@
+.progress {
+    display: flex;
+    align-items: center;
+    &__line {
+        position: relative;
+        background: #EEEEF0;
+        border-radius: 10px;
+        height: 6px;
+        width: 122px;
+    }
+    &__stat {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        background: #FFD43A;
+        border-radius: 10px;
+    }
+    &__num {
+        margin-left: 8px;
+        font-weight: 500;
+        font-size: 11px;
+        color: #57586C;
+    }
+}

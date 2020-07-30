@@ -1,5 +1,5 @@
 import Head from 'next/head'
-
+import { PageTransition } from 'next-page-transitions'
 import { Provider as URQLProvider } from 'urql'
 import UserProvider from 'context/UserContext'
 
@@ -9,6 +9,7 @@ import 'assets/css/yandex.css'
 import 'assets/sass/main.scss'
 
 import client from 'api/client'
+import * as atoms from 'components/atoms'
 
 const Providers = ({ children }) => (
   <URQLProvider value={client}>
@@ -63,7 +64,18 @@ const App = ({ Component, pageProps }) => {
         <link rel="shortcut icon" href="/icons/favicon.ico" />
       </Head>
       <Providers>
-        <Component {...pageProps} />
+        <PageTransition
+          timeout={400}
+          loadingComponent={<atoms.loader />}
+          loadingTimeout={{
+            enter: 400,
+            exit: 0,
+          }}
+          classNames="page-transition"
+          loadingClassNames="loading-indicator"
+        >
+          <Component {...pageProps} />
+        </PageTransition>
       </Providers>
       <style jsx>
         {`

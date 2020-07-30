@@ -1,0 +1,38 @@
+/***** Averta Font *****/
+
+@font-face {
+  font-family: Averta;
+  src: url(../../fonts/AvertaRegular.otf);
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: Averta;
+  src: url(../../fonts/AvertaBold.otf);
+  font-weight: 600;
+}
+
+/***** Inter Font *****/
+
+@font-face {
+  font-family: Inter;
+  src: url(../../fonts/Inter-Bold.woff);
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: Inter;
+  src: url(../../fonts/Inter-Regular.woff);
+  font-weight: 400;
+}
+
+$font-main: 'Inter', sans-serif;
+$font-title: 'Averta', sans-serif;
+$font-size: 16px;
+* {
+  font-family: $font-main;
+  font-size: $font-size;
+  color: $color-main;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+}

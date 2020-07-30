@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-const Flex = styled.div`
+export const flex = styled.div`
   display: flex;
   ${(props) => props.row && 'flex-direction: row'};
   ${(props) => props.column && 'flex-direction: column'};
@@ -11,5 +11,3 @@ const Flex = styled.div`
   ${(props) => props.alignCenter && 'align-items: center'};
   ${(props) => props.alignEnd && 'align-items: flex-end'};
 `
-
-export default Flex

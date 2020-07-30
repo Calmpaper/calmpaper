@@ -25,7 +25,13 @@ export const chapters_feed = ({ chapters, sort }) => {
               const chapterPage =
                 chapter.book.chapters.findIndex((c) => c.id === chapter.id) + 1
 
-              return <molecules.chapter key={chapter.id} />
+              return (
+                <molecules.chapter
+                  chapter={chapter}
+                  chapterPage={chapterPage}
+                  key={chapter.id}
+                />
+              )
             })}
         </div>
       </div>

@@ -1,0 +1,4 @@
+// <cover />
+// <name />
+// <author />
+// <rating />

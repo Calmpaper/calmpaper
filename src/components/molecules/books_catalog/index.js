@@ -1,6 +1,7 @@
 import Link from 'next/link'
 
 export const books_catalog = ({ books = [] }) => {
+  if (books.length === 0) return null
   return (
     <div className="sidebar-box sidebar-catalog">
       <h4 className="title size04">More by author</h4>
