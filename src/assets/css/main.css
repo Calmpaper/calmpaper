@@ -1081,9 +1081,9 @@ header.header-line {
   color: #949495;
 }
 .comments .comment-text P {
-  font-size: 15px;
-  color: #555;
-  line-height: 170%;
+  font-size: 14px;
+  color: #555555;
+  line-height: 150%;
 }
 .comments .btn-more {
   margin-top: 10px;
