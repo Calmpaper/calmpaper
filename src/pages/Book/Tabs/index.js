@@ -1,8 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import Details from './Details'
-import Reviews from './Reviews'
+import Details from '../Details'
+import Reviews from '../Reviews'
 
 export default ({ book, tab, reexecuteQuery }) => {
   return (
