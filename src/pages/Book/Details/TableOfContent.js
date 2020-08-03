@@ -1,4 +1,5 @@
 import React from 'react'
+import moment from 'moment'
 import { Link } from 'react-router-dom'
 
 export default ({ chapters, bookId }) => (
@@ -12,7 +13,9 @@ export default ({ chapters, bookId }) => (
           <li>
             <Link to={`/books/${bookId}/${index + 1}`}>
               <span className="table-title">{`${chapter.title}`}</span>
-              <span className="table-time">49 mins ago</span>
+              <span className="table-time">
+                {moment(chapter.createdAt).fromNow()}
+              </span>
             </Link>
           </li>
         ))}

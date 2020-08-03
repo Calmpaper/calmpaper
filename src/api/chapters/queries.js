@@ -35,7 +35,7 @@ export const getChapterQuery = gql`
       }
       comments(orderBy: { createdAt: desc }) {
         ...Comment
-        replies(orderBy: { createdAt: desc }) {
+        replies(orderBy: { createdAt: asc }) {
           ...Comment
         }
       }
@@ -103,7 +103,7 @@ export const getChapterByBookQuery = gql`
       }
       comments(orderBy: { createdAt: desc }) {
         ...Comment
-        replies(orderBy: { createdAt: desc }) {
+        replies(orderBy: { createdAt: asc }) {
           ...Comment
         }
       }

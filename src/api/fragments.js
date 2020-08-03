@@ -21,6 +21,7 @@ export const ChapterFragment = gql`
   fragment Chapter on Chapter {
     id
     title
+    createdAt
   }
 `
 

@@ -98,7 +98,7 @@ export const getBookQuery = gql`
       }
       comments(orderBy: { createdAt: desc }) {
         ...Comment
-        replies(orderBy: { createdAt: desc }) {
+        replies(orderBy: { createdAt: asc }) {
           ...Comment
         }
       }
