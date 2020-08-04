@@ -1,11 +1,10 @@
 import Head from 'next/head'
-import { PageTransition } from 'next-page-transitions'
-import { Provider as URQLProvider } from 'urql'
 import UserProvider from 'context/UserContext'
+import { Provider as URQLProvider } from 'urql'
 
 import 'assets/css/main.css'
 import 'assets/css/index.css'
-import 'assets/css/yandex.css'
+// import 'assets/css/yandex.css'
 import 'assets/sass/main.scss'
 
 import client from 'api/client'
@@ -60,34 +59,16 @@ const App = ({ Component, pageProps }) => {
           sizes="16x16"
           href="/icons/favicon-16x16.png"
         />
+
         <link rel="manifest" href="/manifest.json" />
-        <link rel="shortcut icon" href="/icons/favicon.ico" />
+        <link rel="shortcut icon" href="/img/ico.png" />
       </Head>
       <Providers>
-        <PageTransition
-          timeout={400}
-          loadingComponent={<atoms.loader />}
-          loadingTimeout={{
-            enter: 400,
-            exit: 0,
-          }}
-          classNames="page-transition"
-          loadingClassNames="loading-indicator"
-        >
-          <Component {...pageProps} />
-        </PageTransition>
+        <atoms.loader />
+        <Component {...pageProps} />
       </Providers>
       <style jsx>
         {`
-          @font-face {
-            font-family: 'Inter';
-            src: url(/fonts/Inter-Light.woff);
-            src: url(/fonts/Inter-Regular.woff);
-            src: url(/fonts/Inter-Medium.otf);
-            src: url(/fonts/Inter-SemiBold.otf);
-            src: url(/fonts/Inter-Bold.woff);
-          }
-
           @font-face {
             font-family: 'Avetra';
             src: url(/fonts/AvertaLight.otf);
@@ -98,6 +79,10 @@ const App = ({ Component, pageProps }) => {
           }
         `}
       </style>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet"
+      />
     </>
   )
 }

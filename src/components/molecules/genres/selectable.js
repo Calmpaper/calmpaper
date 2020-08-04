@@ -1,22 +1,4 @@
-import React from 'react'
-
-const Genre = ({ genre, isSelected, onSelect }) => {
-  return (
-    <li key={genre.id}>
-      <button
-        className={isSelected ? 'green' : 'light'}
-        onClick={(e) => {
-          e.preventDefault()
-          onSelect(genre, isSelected)
-        }}
-      >
-        {genre.label}
-      </button>
-    </li>
-  )
-}
-
-export default ({ genres = [], value = [], onChange }) => {
+export const genres = ({ genres = [], value = [], onChange }) => {
   const onSelect = (genre, isSelected) => {
     if (isSelected) {
       onChange(value.filter((g) => g.id !== genre.id))

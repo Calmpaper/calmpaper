@@ -8,7 +8,7 @@ import create from './create'
 import sign_in from './sign_in'
 import sign_up from './sign_up'
 
-const wrapper = ({ children, home }) =>
+const wrapper = ({ children, home, withLine }) =>
   home ? (
     <header>
       <div className="container">{children}</div>
@@ -21,11 +21,11 @@ const wrapper = ({ children, home }) =>
 
 const components = { wrapper, read, create, sign_in, sign_up }
 
-export const header = ({ home = true, withLine = false }) => {
+export const header = ({ home = false, withLine = false }) => {
   const { user } = useContext(UserContext)
 
   return (
-    <components.wrapper home={home}>
+    <components.wrapper home={home} withLine={withLine}>
       <div className="container">
         <div className="row">
           <atoms.logo />

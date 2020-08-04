@@ -3,7 +3,7 @@ import * as organisms from 'components/organisms'
 
 export const home = ({ books, chapters }) => (
   <div className="page-home">
-    <molecules.header />
+    <molecules.header home />
     <molecules.hero />
     <organisms.books_feed books={books} title="Trending" sort="trending" />
     <organisms.books_feed books={books} title="Latest series" sort="newest" />

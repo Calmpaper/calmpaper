@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom'
 import { useMutation } from 'urql'
 import { setChapterLike, removeLikeMutation } from 'api'
 
-export default ({ chapter, reexecuteQuery }) => {
+export const chapter_navigation = ({ chapter, reexecuteQuery }) => {
   const currentPage =
     chapter.book.chapters.findIndex((c) => c.id === chapter.id) + 1
   const pagesCount = chapter.book.chapters.length
