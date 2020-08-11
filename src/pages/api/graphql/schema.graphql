@@ -2173,8 +2173,11 @@ type User {
   givenname: String
   googleId: String
   id: Int!
+  image: String
   likes: [Like!]!
+  name: String
   reviews: [Review!]!
+  stripeUserId: Int
   username: String
 }
 
@@ -2194,8 +2197,11 @@ input UserCreateInput {
   getStreamToken: String
   givenname: String
   googleId: String
+  image: String
   likes: LikeCreateManyWithoutAuthorInput
+  name: String
   reviews: ReviewCreateManyWithoutAuthorInput
+  stripeUserId: Int
   updatedAt: DateTime
   username: String
 }
@@ -2255,8 +2261,11 @@ input UserCreateWithoutBooksInput {
   getStreamToken: String
   givenname: String
   googleId: String
+  image: String
   likes: LikeCreateManyWithoutAuthorInput
+  name: String
   reviews: ReviewCreateManyWithoutAuthorInput
+  stripeUserId: Int
   updatedAt: DateTime
   username: String
 }
@@ -2276,8 +2285,11 @@ input UserCreateWithoutChaptersInput {
   getStreamToken: String
   givenname: String
   googleId: String
+  image: String
   likes: LikeCreateManyWithoutAuthorInput
+  name: String
   reviews: ReviewCreateManyWithoutAuthorInput
+  stripeUserId: Int
   updatedAt: DateTime
   username: String
 }
@@ -2297,8 +2309,11 @@ input UserCreateWithoutCommentsInput {
   getStreamToken: String
   givenname: String
   googleId: String
+  image: String
   likes: LikeCreateManyWithoutAuthorInput
+  name: String
   reviews: ReviewCreateManyWithoutAuthorInput
+  stripeUserId: Int
   updatedAt: DateTime
   username: String
 }
@@ -2318,8 +2333,11 @@ input UserCreateWithoutFavoriteBooksInput {
   getStreamToken: String
   givenname: String
   googleId: String
+  image: String
   likes: LikeCreateManyWithoutAuthorInput
+  name: String
   reviews: ReviewCreateManyWithoutAuthorInput
+  stripeUserId: Int
   updatedAt: DateTime
   username: String
 }
@@ -2339,8 +2357,11 @@ input UserCreateWithoutFollowersInput {
   getStreamToken: String
   givenname: String
   googleId: String
+  image: String
   likes: LikeCreateManyWithoutAuthorInput
+  name: String
   reviews: ReviewCreateManyWithoutAuthorInput
+  stripeUserId: Int
   updatedAt: DateTime
   username: String
 }
@@ -2360,8 +2381,11 @@ input UserCreateWithoutFollowingInput {
   getStreamToken: String
   givenname: String
   googleId: String
+  image: String
   likes: LikeCreateManyWithoutAuthorInput
+  name: String
   reviews: ReviewCreateManyWithoutAuthorInput
+  stripeUserId: Int
   updatedAt: DateTime
   username: String
 }
@@ -2382,7 +2406,10 @@ input UserCreateWithoutLikesInput {
   getStreamToken: String
   givenname: String
   googleId: String
+  image: String
+  name: String
   reviews: ReviewCreateManyWithoutAuthorInput
+  stripeUserId: Int
   updatedAt: DateTime
   username: String
 }
@@ -2403,7 +2430,10 @@ input UserCreateWithoutReviewsInput {
   getStreamToken: String
   givenname: String
   googleId: String
+  image: String
   likes: LikeCreateManyWithoutAuthorInput
+  name: String
+  stripeUserId: Int
   updatedAt: DateTime
   username: String
 }
@@ -2432,10 +2462,13 @@ input UserScalarWhereInput {
   givenname: NullableStringFilter
   googleId: NullableStringFilter
   id: IntFilter
+  image: NullableStringFilter
   likes: LikeFilter
+  name: NullableStringFilter
   NOT: [UserScalarWhereInput!]
   OR: [UserScalarWhereInput!]
   reviews: ReviewFilter
+  stripeUserId: NullableIntFilter
   updatedAt: DateTimeFilter
   username: NullableStringFilter
 }
@@ -2456,8 +2489,11 @@ input UserUpdateInput {
   getStreamToken: String
   givenname: String
   googleId: String
+  image: String
   likes: LikeUpdateManyWithoutAuthorInput
+  name: String
   reviews: ReviewUpdateManyWithoutAuthorInput
+  stripeUserId: Int
   updatedAt: DateTime
   username: String
 }
@@ -2472,6 +2508,9 @@ input UserUpdateManyDataInput {
   getStreamToken: String
   givenname: String
   googleId: String
+  image: String
+  name: String
+  stripeUserId: Int
   updatedAt: DateTime
   username: String
 }
@@ -2577,8 +2616,11 @@ input UserUpdateWithoutBooksDataInput {
   getStreamToken: String
   givenname: String
   googleId: String
+  image: String
   likes: LikeUpdateManyWithoutAuthorInput
+  name: String
   reviews: ReviewUpdateManyWithoutAuthorInput
+  stripeUserId: Int
   updatedAt: DateTime
   username: String
 }
@@ -2598,8 +2640,11 @@ input UserUpdateWithoutChaptersDataInput {
   getStreamToken: String
   givenname: String
   googleId: String
+  image: String
   likes: LikeUpdateManyWithoutAuthorInput
+  name: String
   reviews: ReviewUpdateManyWithoutAuthorInput
+  stripeUserId: Int
   updatedAt: DateTime
   username: String
 }
@@ -2619,8 +2664,11 @@ input UserUpdateWithoutCommentsDataInput {
   getStreamToken: String
   givenname: String
   googleId: String
+  image: String
   likes: LikeUpdateManyWithoutAuthorInput
+  name: String
   reviews: ReviewUpdateManyWithoutAuthorInput
+  stripeUserId: Int
   updatedAt: DateTime
   username: String
 }
@@ -2640,8 +2688,11 @@ input UserUpdateWithoutFavoriteBooksDataInput {
   getStreamToken: String
   givenname: String
   googleId: String
+  image: String
   likes: LikeUpdateManyWithoutAuthorInput
+  name: String
   reviews: ReviewUpdateManyWithoutAuthorInput
+  stripeUserId: Int
   updatedAt: DateTime
   username: String
 }
@@ -2661,8 +2712,11 @@ input UserUpdateWithoutFollowersDataInput {
   getStreamToken: String
   givenname: String
   googleId: String
+  image: String
   likes: LikeUpdateManyWithoutAuthorInput
+  name: String
   reviews: ReviewUpdateManyWithoutAuthorInput
+  stripeUserId: Int
   updatedAt: DateTime
   username: String
 }
@@ -2682,8 +2736,11 @@ input UserUpdateWithoutFollowingDataInput {
   getStreamToken: String
   givenname: String
   googleId: String
+  image: String
   likes: LikeUpdateManyWithoutAuthorInput
+  name: String
   reviews: ReviewUpdateManyWithoutAuthorInput
+  stripeUserId: Int
   updatedAt: DateTime
   username: String
 }
@@ -2704,7 +2761,10 @@ input UserUpdateWithoutLikesDataInput {
   getStreamToken: String
   givenname: String
   googleId: String
+  image: String
+  name: String
   reviews: ReviewUpdateManyWithoutAuthorInput
+  stripeUserId: Int
   updatedAt: DateTime
   username: String
 }
@@ -2725,7 +2785,10 @@ input UserUpdateWithoutReviewsDataInput {
   getStreamToken: String
   givenname: String
   googleId: String
+  image: String
   likes: LikeUpdateManyWithoutAuthorInput
+  name: String
+  stripeUserId: Int
   updatedAt: DateTime
   username: String
 }
@@ -2806,10 +2869,13 @@ input UserWhereInput {
   givenname: NullableStringFilter
   googleId: NullableStringFilter
   id: IntFilter
+  image: NullableStringFilter
   likes: LikeFilter
+  name: NullableStringFilter
   NOT: [UserWhereInput!]
   OR: [UserWhereInput!]
   reviews: ReviewFilter
+  stripeUserId: NullableIntFilter
   updatedAt: DateTimeFilter
   username: NullableStringFilter
 }
@@ -2819,5 +2885,6 @@ input UserWhereUniqueInput {
   getStreamToken: String
   googleId: String
   id: Int
+  stripeUserId: Int
   username: String
 }

@@ -1,9 +1,8 @@
+import { signIn } from 'next-auth/client'
+
 export default () => (
   <li className="header-nav__item" style={{ position: 'relative' }}>
-    <a
-      className="header-nav__link"
-      href={`${process.env.REACT_APP_BACKEND_URL}/auth/google`}
-    >
+    <a className="header-nav__link" onClick={signIn}>
       Log In
     </a>
   </li>

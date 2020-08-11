@@ -1,5 +1,6 @@
 import { useContext } from 'react'
 import { UserContext } from 'context'
+import { signIn, signOut, useSession } from 'next-auth/client'
 
 import * as atoms from 'components/atoms'
 
@@ -7,6 +8,19 @@ import read from './read'
 import create from './create'
 import sign_in from './sign_in'
 import sign_up from './sign_up'
+
+const User = ({ user }) => (
+  <a
+    href={`/api/auth/signout`}
+    onClick={(e) => {
+      e.preventDefault()
+      signOut()
+    }}
+  >
+    {user.name}
+  </a>
+)
+// <div onClick={signOut}>{user.name}</div>
 
 const wrapper = ({ children, home, withLine }) =>
   home ? (
@@ -22,7 +36,9 @@ const wrapper = ({ children, home, withLine }) =>
 const components = { wrapper, read, create, sign_in, sign_up }
 
 export const header = ({ home = false, withLine = false }) => {
-  const { user } = useContext(UserContext)
+  const [session, loading] = useSession()
+  console.log('session')
+  console.log(session)
 
   return (
     <components.wrapper home={home} withLine={withLine}>
@@ -39,35 +55,33 @@ export const header = ({ home = false, withLine = false }) => {
                 <atoms.header_link.sign_in />
                 <atoms.header_link.sign_up />
                 */}
-                {user && (
+                {session && (
                   <li className="header-nav__item">
                     <components.read />
-                    <Read />
                   </li>
                 )}
-                {user && (
+                {session && (
                   <li className="header-nav__item">
                     <components.create />
-                    <Create />
                   </li>
                 )}
-                {user && (
+                {/*session && (
                   <li
                     className="header-nav__item"
                     style={{ position: 'relative' }}
                   >
                     <components.notifications />
                   </li>
-                )}
-                {!user && <components.sign_in />}
+                )*/}
+                {!session && <components.sign_in />}
               </ul>
             </nav>
-            {!user ? (
+            {!session ? (
               <li className="header-nav__item">
                 <components.sign_up />
               </li>
             ) : (
-              <User user={user} />
+              <User user={session.user} />
             )}
           </div>
         </div>

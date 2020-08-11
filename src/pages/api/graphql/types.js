@@ -4,6 +4,8 @@ const User = objectType({
   name: 'User',
   definition(t) {
     t.model.id()
+    t.model.name()
+    t.model.image()
     t.model.username()
     t.model.firstname()
     t.model.givenname()
@@ -20,6 +22,7 @@ const User = objectType({
     t.model.followers({ pagination: false })
     t.model.googleId()
     t.model.getStreamToken()
+    t.model.stripeUserId()
   },
 })
 

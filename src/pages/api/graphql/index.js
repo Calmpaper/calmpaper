@@ -40,6 +40,7 @@ export const schema = makeSchema({
   outputs: {
     schema: path.join(
       process.cwd(),
+      'src',
       'pages',
       'api',
       'graphql',

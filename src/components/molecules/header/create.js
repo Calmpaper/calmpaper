@@ -51,6 +51,7 @@ const AddChapter = ({ bookId }) => {
 }
 
 export default () => {
+  return <div>yo</div>
   const [showDropdown, setShowDropdown] = useState(false)
   const bookMatch = useRouteMatch('/books/:book')
   const bookId = bookMatch && bookMatch.params.book
