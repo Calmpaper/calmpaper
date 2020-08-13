@@ -6,12 +6,10 @@ import cookie from 'js-cookie'
 import { PrismaClient } from '@prisma/client'
 const { sign } = require('jsonwebtoken')
 
-const APP_SECRET = 'appsecret321'
-
 const prisma = new PrismaClient()
 
 const options = {
-  secret: APP_SECRET,
+  secret: process.env.APP_SECRET,
   providers: [
     Providers.Google({
       clientId: process.env.GOOGLE_ID,
@@ -19,7 +17,7 @@ const options = {
     }),
   ],
 
-  // session: { jwt: true },
+  session: { jwt: true },
 
   // A database is optional, but required to persist accounts in a database
   adapter: Adapters.Prisma.Adapter({
@@ -34,6 +32,7 @@ const options = {
 
   callbacks: {
     session: async (session, user, sessionToken) => {
+      console.log('--------------------------------')
       console.log('Session is checked')
       console.log('Session:', session)
       console.log('User:', user)
@@ -43,21 +42,22 @@ const options = {
 
       return Promise.resolve(session)
     },
-    signIn: async (user, account, profile) => {
-      const token = sign({ userId: user.id }, APP_SECRET)
-      cookie.set('token', token, { expires: 1 })
+    jwt: async (token, user, account, profile, isNewUser) => {
+      console.log('--------------------------------')
+      console.log('Jwt is checked')
+      console.log(token)
+      console.log('User:', user)
+      console.log('Account:', account)
+      console.log('Profile:', profile)
 
-      console.log('signIn callback')
-      console.log('token:', token)
+      const isSignIn = user ? true : false
+      if (isSignIn) {
+        token.userId = user.id
+        token = { ...token, ...profile, ...user }
+      }
 
-      return Promise.resolve(true)
+      return Promise.resolve(token)
     },
-    //   // console.log('Profile:', profile)
-    //   // email: 'ignatif@gmail.com',
-    //   // name: 'Максим Игнатьев',
-    //   // given_name: 'Максим',
-    //   // family_name: 'Игнатьев',
-    //   // picture: 'https://lh3.googleusercontent.com/a-/AOh14GjXoe9UPPQuZqPbvIO6cDQa0CVsC1Ex6HODtsZzYA',
   },
 }
 

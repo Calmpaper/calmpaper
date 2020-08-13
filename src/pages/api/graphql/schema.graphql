@@ -4,8 +4,8 @@
 
 type Book {
   author: User
-  chapters(orderBy: ChapterOrderByInput): [Chapter!]!
-  comments(orderBy: CommentOrderByInput, skip: Int): [Comment!]!
+  chapters(orderBy: [ChapterOrderByInput!]): [Chapter!]!
+  comments(orderBy: [CommentOrderByInput!], skip: Int): [Comment!]!
   createdAt: DateTime!
   description: String!
   genres: [Genre!]!
@@ -32,6 +32,7 @@ input BookCreateInput {
   readers: UserCreateManyWithoutFavoriteBooksInput
   reviews: ReviewCreateManyWithoutBookInput
   tags: TagCreateManyWithoutBooksInput
+  Transaction: TransactionCreateManyWithoutBookInput
   views: Int
 }
 
@@ -75,6 +76,11 @@ input BookCreateOneWithoutReviewsInput {
   create: BookCreateWithoutReviewsInput
 }
 
+input BookCreateOneWithoutTransactionInput {
+  connect: BookWhereUniqueInput
+  create: BookCreateWithoutTransactionInput
+}
+
 input BookCreateWithoutAuthorInput {
   chapters: ChapterCreateManyWithoutBookInput
   comments: CommentCreateManyWithoutBookInput
@@ -87,6 +93,7 @@ input BookCreateWithoutAuthorInput {
   readers: UserCreateManyWithoutFavoriteBooksInput
   reviews: ReviewCreateManyWithoutBookInput
   tags: TagCreateManyWithoutBooksInput
+  Transaction: TransactionCreateManyWithoutBookInput
   views: Int
 }
 
@@ -102,6 +109,7 @@ input BookCreateWithoutChaptersInput {
   readers: UserCreateManyWithoutFavoriteBooksInput
   reviews: ReviewCreateManyWithoutBookInput
   tags: TagCreateManyWithoutBooksInput
+  Transaction: TransactionCreateManyWithoutBookInput
   views: Int
 }
 
@@ -117,6 +125,7 @@ input BookCreateWithoutCommentsInput {
   readers: UserCreateManyWithoutFavoriteBooksInput
   reviews: ReviewCreateManyWithoutBookInput
   tags: TagCreateManyWithoutBooksInput
+  Transaction: TransactionCreateManyWithoutBookInput
   views: Int
 }
 
@@ -132,6 +141,7 @@ input BookCreateWithoutGenresInput {
   readers: UserCreateManyWithoutFavoriteBooksInput
   reviews: ReviewCreateManyWithoutBookInput
   tags: TagCreateManyWithoutBooksInput
+  Transaction: TransactionCreateManyWithoutBookInput
   views: Int
 }
 
@@ -147,6 +157,7 @@ input BookCreateWithoutLikesInput {
   readers: UserCreateManyWithoutFavoriteBooksInput
   reviews: ReviewCreateManyWithoutBookInput
   tags: TagCreateManyWithoutBooksInput
+  Transaction: TransactionCreateManyWithoutBookInput
   views: Int
 }
 
@@ -162,6 +173,7 @@ input BookCreateWithoutReadersInput {
   name: String!
   reviews: ReviewCreateManyWithoutBookInput
   tags: TagCreateManyWithoutBooksInput
+  Transaction: TransactionCreateManyWithoutBookInput
   views: Int
 }
 
@@ -177,6 +189,7 @@ input BookCreateWithoutReviewsInput {
   name: String!
   readers: UserCreateManyWithoutFavoriteBooksInput
   tags: TagCreateManyWithoutBooksInput
+  Transaction: TransactionCreateManyWithoutBookInput
   views: Int
 }
 
@@ -192,6 +205,23 @@ input BookCreateWithoutTagsInput {
   name: String!
   readers: UserCreateManyWithoutFavoriteBooksInput
   reviews: ReviewCreateManyWithoutBookInput
+  Transaction: TransactionCreateManyWithoutBookInput
+  views: Int
+}
+
+input BookCreateWithoutTransactionInput {
+  author: UserCreateOneWithoutBooksInput
+  chapters: ChapterCreateManyWithoutBookInput
+  comments: CommentCreateManyWithoutBookInput
+  createdAt: DateTime
+  description: String!
+  genres: GenreCreateManyWithoutBooksInput
+  image: String
+  likes: LikeCreateManyWithoutBookInput
+  name: String!
+  readers: UserCreateManyWithoutFavoriteBooksInput
+  reviews: ReviewCreateManyWithoutBookInput
+  tags: TagCreateManyWithoutBooksInput
   views: Int
 }
 
@@ -202,13 +232,13 @@ input BookFilter {
 }
 
 input BookOrderByInput {
-  authorId: OrderByArg
-  createdAt: OrderByArg
-  description: OrderByArg
-  id: OrderByArg
-  image: OrderByArg
-  name: OrderByArg
-  views: OrderByArg
+  authorId: SortOrder
+  createdAt: SortOrder
+  description: SortOrder
+  id: SortOrder
+  image: SortOrder
+  name: SortOrder
+  views: SortOrder
 }
 
 input BookScalarWhereInput {
@@ -228,6 +258,7 @@ input BookScalarWhereInput {
   readers: UserFilter
   reviews: ReviewFilter
   tags: TagFilter
+  Transaction: TransactionFilter
   views: IntFilter
 }
 
@@ -244,6 +275,7 @@ input BookUpdateInput {
   readers: UserUpdateManyWithoutFavoriteBooksInput
   reviews: ReviewUpdateManyWithoutBookInput
   tags: TagUpdateManyWithoutBooksInput
+  Transaction: TransactionUpdateManyWithoutBookInput
   views: Int
 }
 
@@ -344,6 +376,15 @@ input BookUpdateOneWithoutReviewsInput {
   upsert: BookUpsertWithoutReviewsInput
 }
 
+input BookUpdateOneWithoutTransactionInput {
+  connect: BookWhereUniqueInput
+  create: BookCreateWithoutTransactionInput
+  delete: Boolean
+  disconnect: Boolean
+  update: BookUpdateWithoutTransactionDataInput
+  upsert: BookUpsertWithoutTransactionInput
+}
+
 input BookUpdateWithoutAuthorDataInput {
   chapters: ChapterUpdateManyWithoutBookInput
   comments: CommentUpdateManyWithoutBookInput
@@ -356,6 +397,7 @@ input BookUpdateWithoutAuthorDataInput {
   readers: UserUpdateManyWithoutFavoriteBooksInput
   reviews: ReviewUpdateManyWithoutBookInput
   tags: TagUpdateManyWithoutBooksInput
+  Transaction: TransactionUpdateManyWithoutBookInput
   views: Int
 }
 
@@ -371,6 +413,7 @@ input BookUpdateWithoutChaptersDataInput {
   readers: UserUpdateManyWithoutFavoriteBooksInput
   reviews: ReviewUpdateManyWithoutBookInput
   tags: TagUpdateManyWithoutBooksInput
+  Transaction: TransactionUpdateManyWithoutBookInput
   views: Int
 }
 
@@ -386,6 +429,7 @@ input BookUpdateWithoutCommentsDataInput {
   readers: UserUpdateManyWithoutFavoriteBooksInput
   reviews: ReviewUpdateManyWithoutBookInput
   tags: TagUpdateManyWithoutBooksInput
+  Transaction: TransactionUpdateManyWithoutBookInput
   views: Int
 }
 
@@ -401,6 +445,7 @@ input BookUpdateWithoutGenresDataInput {
   readers: UserUpdateManyWithoutFavoriteBooksInput
   reviews: ReviewUpdateManyWithoutBookInput
   tags: TagUpdateManyWithoutBooksInput
+  Transaction: TransactionUpdateManyWithoutBookInput
   views: Int
 }
 
@@ -416,6 +461,7 @@ input BookUpdateWithoutLikesDataInput {
   readers: UserUpdateManyWithoutFavoriteBooksInput
   reviews: ReviewUpdateManyWithoutBookInput
   tags: TagUpdateManyWithoutBooksInput
+  Transaction: TransactionUpdateManyWithoutBookInput
   views: Int
 }
 
@@ -431,6 +477,7 @@ input BookUpdateWithoutReadersDataInput {
   name: String
   reviews: ReviewUpdateManyWithoutBookInput
   tags: TagUpdateManyWithoutBooksInput
+  Transaction: TransactionUpdateManyWithoutBookInput
   views: Int
 }
 
@@ -446,6 +493,7 @@ input BookUpdateWithoutReviewsDataInput {
   name: String
   readers: UserUpdateManyWithoutFavoriteBooksInput
   tags: TagUpdateManyWithoutBooksInput
+  Transaction: TransactionUpdateManyWithoutBookInput
   views: Int
 }
 
@@ -461,6 +509,23 @@ input BookUpdateWithoutTagsDataInput {
   name: String
   readers: UserUpdateManyWithoutFavoriteBooksInput
   reviews: ReviewUpdateManyWithoutBookInput
+  Transaction: TransactionUpdateManyWithoutBookInput
+  views: Int
+}
+
+input BookUpdateWithoutTransactionDataInput {
+  author: UserUpdateOneWithoutBooksInput
+  chapters: ChapterUpdateManyWithoutBookInput
+  comments: CommentUpdateManyWithoutBookInput
+  createdAt: DateTime
+  description: String
+  genres: GenreUpdateManyWithoutBooksInput
+  image: String
+  likes: LikeUpdateManyWithoutBookInput
+  name: String
+  readers: UserUpdateManyWithoutFavoriteBooksInput
+  reviews: ReviewUpdateManyWithoutBookInput
+  tags: TagUpdateManyWithoutBooksInput
   views: Int
 }
 
@@ -502,6 +567,11 @@ input BookUpsertWithoutLikesInput {
 input BookUpsertWithoutReviewsInput {
   create: BookCreateWithoutReviewsInput!
   update: BookUpdateWithoutReviewsDataInput!
+}
+
+input BookUpsertWithoutTransactionInput {
+  create: BookCreateWithoutTransactionInput!
+  update: BookUpdateWithoutTransactionDataInput!
 }
 
 input BookUpsertWithWhereUniqueWithoutAuthorInput {
@@ -546,6 +616,7 @@ input BookWhereInput {
   readers: UserFilter
   reviews: ReviewFilter
   tags: TagFilter
+  Transaction: TransactionFilter
   views: IntFilter
 }
 
@@ -561,7 +632,7 @@ input BooleanFilter {
 type Chapter {
   author: User
   book: Book
-  comments(orderBy: CommentOrderByInput, skip: Int): [Comment!]!
+  comments(orderBy: [CommentOrderByInput!], skip: Int): [Comment!]!
   content: String!
   createdAt: DateTime!
   id: Int!
@@ -582,6 +653,7 @@ input ChapterCreateInput {
   likes: LikeCreateManyWithoutChapterInput
   reviews: ReviewCreateManyWithoutChapterInput
   title: String
+  Transaction: TransactionCreateManyWithoutChapterInput
   views: Int
 }
 
@@ -610,6 +682,11 @@ input ChapterCreateOneWithoutReviewsInput {
   create: ChapterCreateWithoutReviewsInput
 }
 
+input ChapterCreateOneWithoutTransactionInput {
+  connect: ChapterWhereUniqueInput
+  create: ChapterCreateWithoutTransactionInput
+}
+
 input ChapterCreateWithoutAuthorInput {
   book: BookCreateOneWithoutChaptersInput
   comments: CommentCreateManyWithoutChapterInput
@@ -619,6 +696,7 @@ input ChapterCreateWithoutAuthorInput {
   likes: LikeCreateManyWithoutChapterInput
   reviews: ReviewCreateManyWithoutChapterInput
   title: String
+  Transaction: TransactionCreateManyWithoutChapterInput
   views: Int
 }
 
@@ -631,6 +709,7 @@ input ChapterCreateWithoutBookInput {
   likes: LikeCreateManyWithoutChapterInput
   reviews: ReviewCreateManyWithoutChapterInput
   title: String
+  Transaction: TransactionCreateManyWithoutChapterInput
   views: Int
 }
 
@@ -643,6 +722,7 @@ input ChapterCreateWithoutCommentsInput {
   likes: LikeCreateManyWithoutChapterInput
   reviews: ReviewCreateManyWithoutChapterInput
   title: String
+  Transaction: TransactionCreateManyWithoutChapterInput
   views: Int
 }
 
@@ -655,6 +735,7 @@ input ChapterCreateWithoutLikesInput {
   image: String
   reviews: ReviewCreateManyWithoutChapterInput
   title: String
+  Transaction: TransactionCreateManyWithoutChapterInput
   views: Int
 }
 
@@ -667,6 +748,20 @@ input ChapterCreateWithoutReviewsInput {
   image: String
   likes: LikeCreateManyWithoutChapterInput
   title: String
+  Transaction: TransactionCreateManyWithoutChapterInput
+  views: Int
+}
+
+input ChapterCreateWithoutTransactionInput {
+  author: UserCreateOneWithoutChaptersInput
+  book: BookCreateOneWithoutChaptersInput
+  comments: CommentCreateManyWithoutChapterInput
+  content: String!
+  createdAt: DateTime
+  image: String
+  likes: LikeCreateManyWithoutChapterInput
+  reviews: ReviewCreateManyWithoutChapterInput
+  title: String
   views: Int
 }
 
@@ -677,14 +772,14 @@ input ChapterFilter {
 }
 
 input ChapterOrderByInput {
-  authorId: OrderByArg
-  bookId: OrderByArg
-  content: OrderByArg
-  createdAt: OrderByArg
-  id: OrderByArg
-  image: OrderByArg
-  title: OrderByArg
-  views: OrderByArg
+  authorId: SortOrder
+  bookId: SortOrder
+  content: SortOrder
+  createdAt: SortOrder
+  id: SortOrder
+  image: SortOrder
+  title: SortOrder
+  views: SortOrder
 }
 
 input ChapterScalarWhereInput {
@@ -701,6 +796,7 @@ input ChapterScalarWhereInput {
   OR: [ChapterScalarWhereInput!]
   reviews: ReviewFilter
   title: NullableStringFilter
+  Transaction: TransactionFilter
   views: IntFilter
 }
 
@@ -714,6 +810,7 @@ input ChapterUpdateInput {
   likes: LikeUpdateManyWithoutChapterInput
   reviews: ReviewUpdateManyWithoutChapterInput
   title: String
+  Transaction: TransactionUpdateManyWithoutChapterInput
   views: Int
 }
 
@@ -781,6 +878,15 @@ input ChapterUpdateOneWithoutReviewsInput {
   upsert: ChapterUpsertWithoutReviewsInput
 }
 
+input ChapterUpdateOneWithoutTransactionInput {
+  connect: ChapterWhereUniqueInput
+  create: ChapterCreateWithoutTransactionInput
+  delete: Boolean
+  disconnect: Boolean
+  update: ChapterUpdateWithoutTransactionDataInput
+  upsert: ChapterUpsertWithoutTransactionInput
+}
+
 input ChapterUpdateWithoutAuthorDataInput {
   book: BookUpdateOneWithoutChaptersInput
   comments: CommentUpdateManyWithoutChapterInput
@@ -790,6 +896,7 @@ input ChapterUpdateWithoutAuthorDataInput {
   likes: LikeUpdateManyWithoutChapterInput
   reviews: ReviewUpdateManyWithoutChapterInput
   title: String
+  Transaction: TransactionUpdateManyWithoutChapterInput
   views: Int
 }
 
@@ -802,6 +909,7 @@ input ChapterUpdateWithoutBookDataInput {
   likes: LikeUpdateManyWithoutChapterInput
   reviews: ReviewUpdateManyWithoutChapterInput
   title: String
+  Transaction: TransactionUpdateManyWithoutChapterInput
   views: Int
 }
 
@@ -814,6 +922,7 @@ input ChapterUpdateWithoutCommentsDataInput {
   likes: LikeUpdateManyWithoutChapterInput
   reviews: ReviewUpdateManyWithoutChapterInput
   title: String
+  Transaction: TransactionUpdateManyWithoutChapterInput
   views: Int
 }
 
@@ -826,6 +935,7 @@ input ChapterUpdateWithoutLikesDataInput {
   image: String
   reviews: ReviewUpdateManyWithoutChapterInput
   title: String
+  Transaction: TransactionUpdateManyWithoutChapterInput
   views: Int
 }
 
@@ -837,6 +947,20 @@ input ChapterUpdateWithoutReviewsDataInput {
   createdAt: DateTime
   image: String
   likes: LikeUpdateManyWithoutChapterInput
+  title: String
+  Transaction: TransactionUpdateManyWithoutChapterInput
+  views: Int
+}
+
+input ChapterUpdateWithoutTransactionDataInput {
+  author: UserUpdateOneWithoutChaptersInput
+  book: BookUpdateOneWithoutChaptersInput
+  comments: CommentUpdateManyWithoutChapterInput
+  content: String
+  createdAt: DateTime
+  image: String
+  likes: LikeUpdateManyWithoutChapterInput
+  reviews: ReviewUpdateManyWithoutChapterInput
   title: String
   views: Int
 }
@@ -864,6 +988,11 @@ input ChapterUpsertWithoutLikesInput {
 input ChapterUpsertWithoutReviewsInput {
   create: ChapterCreateWithoutReviewsInput!
   update: ChapterUpdateWithoutReviewsDataInput!
+}
+
+input ChapterUpsertWithoutTransactionInput {
+  create: ChapterCreateWithoutTransactionInput!
+  update: ChapterUpdateWithoutTransactionDataInput!
 }
 
 input ChapterUpsertWithWhereUniqueWithoutAuthorInput {
@@ -894,6 +1023,7 @@ input ChapterWhereInput {
   OR: [ChapterWhereInput!]
   reviews: ReviewFilter
   title: NullableStringFilter
+  Transaction: TransactionFilter
   views: IntFilter
 }
 
@@ -911,7 +1041,7 @@ type Comment {
   isChild: Boolean!
   likes: [Like!]!
   parent: Comment
-  replies(orderBy: CommentOrderByInput): [Comment!]!
+  replies(orderBy: [CommentOrderByInput!]): [Comment!]!
 }
 
 input CommentCreateInput {
@@ -1029,14 +1159,14 @@ input CommentFilter {
 }
 
 input CommentOrderByInput {
-  authorId: OrderByArg
-  body: OrderByArg
-  bookId: OrderByArg
-  chapterId: OrderByArg
-  createdAt: OrderByArg
-  id: OrderByArg
-  isChild: OrderByArg
-  parentId: OrderByArg
+  authorId: SortOrder
+  body: SortOrder
+  bookId: SortOrder
+  chapterId: SortOrder
+  createdAt: SortOrder
+  id: SortOrder
+  isChild: SortOrder
+  parentId: SortOrder
 }
 
 input CommentScalarWhereInput {
@@ -1774,17 +1904,12 @@ input NullableStringFilter {
   startsWith: String
 }
 
-enum OrderByArg {
-  asc
-  desc
-}
-
 type Query {
   book(where: BookWhereUniqueInput!): Book
-  books(orderBy: BookOrderByInput, skip: Int): [Book!]!
+  books(orderBy: [BookOrderByInput!], skip: Int): [Book!]!
   chapter(where: ChapterWhereUniqueInput!): Chapter
   chapterByBook(bookId: Int, skip: Int): [Chapter!]!
-  chapters(orderBy: ChapterOrderByInput, skip: Int, where: ChapterWhereInput): [Chapter!]!
+  chapters(orderBy: [ChapterOrderByInput!], skip: Int, where: ChapterWhereInput): [Chapter!]!
   comment(where: CommentWhereUniqueInput!): Comment
   comments(skip: Int): [Comment!]!
   genres(skip: Int): [Genre!]!
@@ -2055,6 +2180,11 @@ input ReviewWhereUniqueInput {
   id: Int
 }
 
+enum SortOrder {
+  asc
+  desc
+}
+
 input StringFilter {
   contains: String
   endsWith: String
@@ -2155,6 +2285,137 @@ input TagWhereInput {
 }
 
 input TagWhereUniqueInput {
+  id: Int
+}
+
+input TransactionCreateManyWithoutBookInput {
+  connect: [TransactionWhereUniqueInput!]
+  create: [TransactionCreateWithoutBookInput!]
+}
+
+input TransactionCreateManyWithoutChapterInput {
+  connect: [TransactionWhereUniqueInput!]
+  create: [TransactionCreateWithoutChapterInput!]
+}
+
+input TransactionCreateWithoutBookInput {
+  chapter: ChapterCreateOneWithoutTransactionInput
+  currency: String!
+  paymentId: Int!
+  totalAmount: Int!
+}
+
+input TransactionCreateWithoutChapterInput {
+  book: BookCreateOneWithoutTransactionInput
+  currency: String!
+  paymentId: Int!
+  totalAmount: Int!
+}
+
+input TransactionFilter {
+  every: TransactionWhereInput
+  none: TransactionWhereInput
+  some: TransactionWhereInput
+}
+
+input TransactionScalarWhereInput {
+  AND: [TransactionScalarWhereInput!]
+  bookId: NullableIntFilter
+  chapterId: NullableIntFilter
+  currency: StringFilter
+  id: IntFilter
+  NOT: [TransactionScalarWhereInput!]
+  OR: [TransactionScalarWhereInput!]
+  paymentId: IntFilter
+  totalAmount: IntFilter
+}
+
+input TransactionUpdateManyDataInput {
+  currency: String
+  paymentId: Int
+  totalAmount: Int
+}
+
+input TransactionUpdateManyWithoutBookInput {
+  connect: [TransactionWhereUniqueInput!]
+  create: [TransactionCreateWithoutBookInput!]
+  delete: [TransactionWhereUniqueInput!]
+  deleteMany: [TransactionScalarWhereInput!]
+  disconnect: [TransactionWhereUniqueInput!]
+  set: [TransactionWhereUniqueInput!]
+  update: [TransactionUpdateWithWhereUniqueWithoutBookInput!]
+  updateMany: [TransactionUpdateManyWithWhereNestedInput!]
+  upsert: [TransactionUpsertWithWhereUniqueWithoutBookInput!]
+}
+
+input TransactionUpdateManyWithoutChapterInput {
+  connect: [TransactionWhereUniqueInput!]
+  create: [TransactionCreateWithoutChapterInput!]
+  delete: [TransactionWhereUniqueInput!]
+  deleteMany: [TransactionScalarWhereInput!]
+  disconnect: [TransactionWhereUniqueInput!]
+  set: [TransactionWhereUniqueInput!]
+  update: [TransactionUpdateWithWhereUniqueWithoutChapterInput!]
+  updateMany: [TransactionUpdateManyWithWhereNestedInput!]
+  upsert: [TransactionUpsertWithWhereUniqueWithoutChapterInput!]
+}
+
+input TransactionUpdateManyWithWhereNestedInput {
+  data: TransactionUpdateManyDataInput!
+  where: TransactionScalarWhereInput!
+}
+
+input TransactionUpdateWithoutBookDataInput {
+  chapter: ChapterUpdateOneWithoutTransactionInput
+  currency: String
+  paymentId: Int
+  totalAmount: Int
+}
+
+input TransactionUpdateWithoutChapterDataInput {
+  book: BookUpdateOneWithoutTransactionInput
+  currency: String
+  paymentId: Int
+  totalAmount: Int
+}
+
+input TransactionUpdateWithWhereUniqueWithoutBookInput {
+  data: TransactionUpdateWithoutBookDataInput!
+  where: TransactionWhereUniqueInput!
+}
+
+input TransactionUpdateWithWhereUniqueWithoutChapterInput {
+  data: TransactionUpdateWithoutChapterDataInput!
+  where: TransactionWhereUniqueInput!
+}
+
+input TransactionUpsertWithWhereUniqueWithoutBookInput {
+  create: TransactionCreateWithoutBookInput!
+  update: TransactionUpdateWithoutBookDataInput!
+  where: TransactionWhereUniqueInput!
+}
+
+input TransactionUpsertWithWhereUniqueWithoutChapterInput {
+  create: TransactionCreateWithoutChapterInput!
+  update: TransactionUpdateWithoutChapterDataInput!
+  where: TransactionWhereUniqueInput!
+}
+
+input TransactionWhereInput {
+  AND: [TransactionWhereInput!]
+  book: BookWhereInput
+  bookId: NullableIntFilter
+  chapter: ChapterWhereInput
+  chapterId: NullableIntFilter
+  currency: StringFilter
+  id: IntFilter
+  NOT: [TransactionWhereInput!]
+  OR: [TransactionWhereInput!]
+  paymentId: IntFilter
+  totalAmount: IntFilter
+}
+
+input TransactionWhereUniqueInput {
   id: Int
 }
 

@@ -5,6 +5,7 @@ const client = createClient({
   url: 'http://localhost:3000/api/graphql',
   // url: process.env.REACT_APP_BACKEND_URL,
   fetchOptions: () => {
+    fetch('http://localhost:3000/api/auth/jwt')
     const token = cookie.get('token')
     return {
       headers: { authorization: token ? `Bearer ${token}` : '' },
