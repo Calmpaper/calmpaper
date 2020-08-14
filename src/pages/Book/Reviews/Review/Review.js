@@ -9,8 +9,8 @@ import {
 } from 'api'
 
 import Rating from 'react-rating'
-import Flex from 'atomic/atoms/flex'
-import Like from 'atomic/atoms/like'
+import Flex from 'components/atoms/flex'
+import Like from 'components/atoms/like'
 import More from './More'
 
 import * as S from './Review.styled'

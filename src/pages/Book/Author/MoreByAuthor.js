@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 export default ({ books = [] }) => {
+  if (books.length === 0) return null
   return (
     <div className="sidebar-box sidebar-catalog">
       <h4 className="title size04">More by author</h4>
@@ -10,6 +11,9 @@ export default ({ books = [] }) => {
         for (let i = 0; i < book.reviews.length; i++) {
           sum += parseInt(book.reviews[i].stars, 10) //don't forget to add the base
         }
+        console.log('book')
+        console.log(book)
+        console.log(book.id)
 
         var avg = sum / book.reviews.length || 0
 

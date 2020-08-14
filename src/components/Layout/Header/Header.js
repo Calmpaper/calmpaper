@@ -44,42 +44,47 @@ export default ({ home }) => {
   const { user } = useContext(UserContext)
 
   return (
-    <div className="row">
-      <Logo user={user} />
-      <div className="col">
-        <nav className="header-nav">
-          <ul className="header-nav__list">
-            {user && (
-              <li className="header-nav__item">
-                <Read />
-              </li>
-            )}
-            {user && (
-              <li className="header-nav__item">
-                <Create />
-              </li>
-            )}
-            {user && (
-              <li className="header-nav__item" style={{ position: 'relative' }}>
-                <Notifications />
-              </li>
-            )}
-            {!user && <LoginBtn />}
-          </ul>
-        </nav>
-        {!user ? (
-          <li className="header-nav__item">
-            <a
-              href={`${process.env.REACT_APP_BACKEND_URL}/auth/google`}
-              className="btn-login"
-            >
-              Sign Up
-            </a>
-          </li>
-        ) : (
-          <User user={user} />
-        )}
+    <>
+      <div className="row">
+        <Logo user={user} />
+        <div className="col">
+          <nav className="header-nav">
+            <ul className="header-nav__list">
+              {user && (
+                <li className="header-nav__item">
+                  <Read />
+                </li>
+              )}
+              {user && (
+                <li className="header-nav__item">
+                  <Create />
+                </li>
+              )}
+              {user && (
+                <li
+                  className="header-nav__item"
+                  style={{ position: 'relative' }}
+                >
+                  <Notifications />
+                </li>
+              )}
+              {!user && <LoginBtn />}
+            </ul>
+          </nav>
+          {!user ? (
+            <li className="header-nav__item">
+              <a
+                href={`${process.env.REACT_APP_BACKEND_URL}/auth/google`}
+                className="btn-login"
+              >
+                Sign Up
+              </a>
+            </li>
+          ) : (
+            <User user={user} />
+          )}
+        </div>
       </div>
-    </div>
+    </>
   )
 }

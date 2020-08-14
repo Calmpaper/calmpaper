@@ -7,7 +7,7 @@ import { createChapterMutation, updateChapterMutation } from 'api'
 
 import TextareaAutosize from 'react-textarea-autosize'
 import Header from 'components/Layout/Header'
-import Footer from 'atomic/molecules/footer'
+import Footer from 'components/molecules/footer'
 
 export default () => {
   const { user } = useContext(UserContext)

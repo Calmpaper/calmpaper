@@ -9,8 +9,8 @@ import {
   removeLikeMutation,
 } from 'api'
 
-import Like from 'atomic/atoms/like'
-// import More from 'atomic/atoms/more'
+import Like from 'components/atoms/like'
+// import More from 'components/atoms/more'
 import Replies from '../Replies'
 
 // // eslint-disable-next-line no-unused-vars

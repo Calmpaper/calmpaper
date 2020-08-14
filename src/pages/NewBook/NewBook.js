@@ -12,7 +12,7 @@ import {
 
 import TextareaAutosize from 'react-textarea-autosize'
 import Header from 'components/Layout/Header'
-import Footer from 'atomic/molecules/footer'
+import Footer from 'components/molecules/footer'
 import FileInput from 'components/Input/FileInput'
 
 import Genres from './Genres'

@@ -8,7 +8,7 @@ import { editUsernameMutation } from 'api'
 
 import Loader from 'components/Loader'
 import Header from 'components/Layout/Header'
-import Footer from 'atomic/molecules/footer'
+import Footer from 'components/molecules/footer'
 import Books from './Books'
 import Flex from 'components/Flex'
 // import AvatarInput from 'components/Input/AvatarInput'

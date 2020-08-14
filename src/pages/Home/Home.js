@@ -1,9 +1,9 @@
 import React, { useEffect, useContext } from 'react'
 import { UserContext } from 'context'
 
-import Flex from 'atomic/atoms/flex'
-import Loader from 'atomic/atoms/loader'
-import Footer from 'atomic/molecules/footer'
+import Flex from 'components/atoms/flex'
+import Loader from 'components/atoms/loader'
+import Footer from 'components/molecules/footer'
 import Header from 'components/Layout/Header'
 
 import Hero from './Hero'

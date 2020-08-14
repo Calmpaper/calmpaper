@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react'
 import { UserContext } from 'context'
 import { useMutation } from 'urql'
 import { setChapterLike, removeLikeMutation } from 'api'
-import Like from 'atomic/atoms/like'
+import Like from 'components/atoms/like'
 import MoreMenu from './More'
 
 export default ({ chapter }) => {

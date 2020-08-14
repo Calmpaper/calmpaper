@@ -46,6 +46,22 @@ export const followUserMutation = gql`
   ${UserFragment}
 `
 
+export const updateUserMutation = gql`
+  mutation($stripeId: Int!, $userId: Int!) {
+    updateOneUser(where: { id: $userId }, data: { stripeId: $stripeId }) {
+      id
+      following {
+        ...User
+      }
+      followers {
+        ...User
+      }
+      stripeId
+    }
+  }
+  ${UserFragment}
+`
+
 export const unfollowUserMutation = gql`
   mutation($followingId: Int!, $followerId: Int!) {
     updateOneUser(

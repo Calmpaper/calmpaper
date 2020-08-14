@@ -14,6 +14,5 @@ export default ({ book }) => (
     {book.chapters.length > 0 && (
       <TableOfContent chapters={book.chapters} bookId={book.id} />
     )}
-    <Actions />
   </>
 )
