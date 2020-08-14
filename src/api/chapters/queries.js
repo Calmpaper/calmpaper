@@ -6,6 +6,7 @@ import {
   LikeFragment,
   CommentFragment,
   GenreFragment,
+  DonationFragment,
 } from '../fragments'
 
 export const getChapterQuery = gql`
@@ -27,6 +28,9 @@ export const getChapterQuery = gql`
       author {
         ...User
         books {
+          id
+        }
+        followers {
           id
         }
       }
@@ -97,9 +101,15 @@ export const getChapterByBookQuery = gql`
         books {
           id
         }
+        followers {
+          id
+        }
       }
       likes {
         ...Like
+      }
+      donations {
+        ...Donation
       }
       comments(orderBy: { createdAt: desc }) {
         ...Comment
@@ -114,4 +124,5 @@ export const getChapterByBookQuery = gql`
   ${ChapterFragment}
   ${CommentFragment}
   ${LikeFragment}
+  ${DonationFragment}
 `

@@ -28,10 +28,12 @@ export const getMeQuery = gql`
   query {
     me {
       ...User
+      firstname
       givenname
       email
       username
       getStreamToken
+      stripeId
       favoriteBooks {
         ...Book
         chapters {

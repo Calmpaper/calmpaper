@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { UserContext } from 'context'
 import { useParams } from 'react-router-dom'
 import { useQuery, useMutation } from 'urql'
@@ -10,8 +10,9 @@ import {
 
 import Loader from 'components/Loader'
 import Header from 'components/Layout/Header'
-import Footer from 'atomic/molecules/footer'
+import Footer from 'components/molecules/footer'
 import Comments from 'components/Comments'
+import DonationModal from 'components/DonationModal'
 
 import About from './About'
 import Tabs from './Tabs'
@@ -19,6 +20,7 @@ import Author from './Author'
 import Actions from './Actions'
 
 export default ({ tab, update }) => {
+  const [showDonationModal, setShowDonationModal] = useState(false)
   const { book: bookId } = useParams()
   const { user } = useContext(UserContext)
 
@@ -71,15 +73,31 @@ export default ({ tab, update }) => {
                   <Actions bookId={book.id} book={book} />
                 </div>
               )}
+
+              <button
+                onClick={() => setShowDonationModal(true)}
+                className="btn btn-color"
+                style={{ marginTop: 16 }}
+              >
+                Donate
+              </button>
               <div style={{ marginTop: 48 }}>
                 <Comments comments={book.comments} onSubmit={sendComment} />
               </div>
               <Footer />
             </div>
           </div>
-          {book.author && <Author author={book.author} />}
+          {book.author && <Author author={book.author} bookId={bookId} />}
         </div>
       </div>
+      {showDonationModal && (
+        <DonationModal
+          bookId={book.id}
+          show={showDonationModal}
+          close={() => setShowDonationModal(false)}
+          author={book.author}
+        />
+      )}
     </>
   )
 }

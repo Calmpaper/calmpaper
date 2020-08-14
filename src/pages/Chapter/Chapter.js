@@ -10,10 +10,10 @@ import {
 
 import Loader from 'components/Loader'
 import Header from 'components/Layout/Header'
-import Footer from 'atomic/molecules/footer'
+import Footer from 'components/molecules/footer'
 import Comments from 'components/Comments'
 
-import ChapterNavigation from 'atomic/molecules/chapter_navigation'
+import ChapterNavigation from 'components/molecules/chapter_navigation'
 import Breadcrumbs from './Breadcrumbs'
 import Book from './Book'
 import Content from './Content'
@@ -81,7 +81,7 @@ export default () => {
         </div>
         <Content chapter={chapter} />
 
-        <Author author={chapter.author} />
+        <Author author={chapter.author} chapterId={chapter.id} />
 
         <Actions chapter={chapter} />
 

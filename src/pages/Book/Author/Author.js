@@ -1,20 +1,19 @@
-import React, { useContext } from 'react'
+import React, { useState, useContext } from 'react'
 import { UserContext, GetStreamContext } from 'context'
 import { useHistory } from 'react-router-dom'
 import { useMutation } from 'urql'
 import { followUserMutation, unfollowUserMutation } from 'api'
+import DonationModal from 'components/DonationModal'
 
-export default ({ author }) => {
+export default ({ author, bookId }) => {
+  const [showDonationModal, setShowDonationModal] = useState(false)
   const { user } = useContext(UserContext)
   const { notificationsFeed } = useContext(GetStreamContext)
   const { push } = useHistory()
   const isFollowing = user && user.following.find((u) => u.id === author.id)
 
-  // eslint-disable-next-line no-unused-vars
-  const [_, followUser] = useMutation(followUserMutation)
-
-  // eslint-disable-next-line no-unused-vars
-  const [__, unfollowUser] = useMutation(unfollowUserMutation)
+  const [, followUser] = useMutation(followUserMutation)
+  const [, unfollowUser] = useMutation(unfollowUserMutation)
 
   const follow = () => {
     if (isFollowing) {
@@ -50,6 +49,12 @@ export default ({ author }) => {
         <button className="btn btn-line btn-br" onClick={follow}>
           {isFollowing ? 'Unfollow' : 'Follow'}
         </button>
+        <button
+          className="btn btn-line btn-br"
+          onClick={() => setShowDonationModal(true)}
+        >
+          Donate
+        </button>
         {/*
         <button className="btn btn-line btn-br" onClick={message}>
           Message
@@ -59,6 +64,14 @@ export default ({ author }) => {
         </button>
         */}
       </div>
+      {showDonationModal && (
+        <DonationModal
+          bookId={bookId}
+          show={showDonationModal}
+          close={() => setShowDonationModal(false)}
+          author={author}
+        />
+      )}
     </div>
   )
 }

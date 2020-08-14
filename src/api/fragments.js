@@ -5,6 +5,8 @@ export const UserFragment = gql`
     id
     fullname
     username
+    givenname
+    firstname
     avatar
   }
 `
@@ -72,4 +74,18 @@ export const ReviewFragment = gql`
     stars
     message
   }
+`
+
+export const DonationFragment = gql`
+  fragment Donation on Donation {
+    id
+    amount
+    currency
+    message
+    createdAt
+    payer {
+      ...User
+    }
+  }
+  ${UserFragment}
 `
