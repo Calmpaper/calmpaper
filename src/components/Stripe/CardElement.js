@@ -167,7 +167,7 @@ const CardForm = ({
           {processing ? 'Processing...' : 'Pay'}
         </button>
       </Flex>
-      {error && <span style={{ color: 'red' }}>{error}</span>}
+      {error && <span style={{ color: 'red' }}>{error.message}</span>}
     </form>
   )
 }

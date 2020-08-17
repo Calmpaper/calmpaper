@@ -74,13 +74,15 @@ export default ({ tab, update }) => {
                 </div>
               )}
 
-              <button
-                onClick={() => setShowDonationModal(true)}
-                className="btn btn-color"
-                style={{ marginTop: 16 }}
-              >
-                Donate
-              </button>
+              {book.author.stripeId && (
+                <button
+                  onClick={() => setShowDonationModal(true)}
+                  className="btn btn-color"
+                  style={{ marginTop: 16 }}
+                >
+                  Donate
+                </button>
+              )}
               <div style={{ marginTop: 48 }}>
                 <Comments comments={book.comments} onSubmit={sendComment} />
               </div>

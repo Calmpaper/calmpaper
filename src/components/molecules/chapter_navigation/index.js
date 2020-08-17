@@ -9,7 +9,10 @@ const Donation = ({ donation }) => (
   <div className="user-box">
     <div
       className="user-box__avatar"
-      style={{ backgroundImage: `url(${donation.payer.avatar})` }}
+      style={{
+        backgroundImage: `url(${donation.payer.avatar})`,
+        backgroundSize: 'cover',
+      }}
     />
     <div className="user-box__info">
       <div className="user-box__inline">
@@ -21,7 +24,7 @@ const Donation = ({ donation }) => (
         </div>
       </div>
       <div className="user-box__comment">{donation.message}</div>
-      <div className="user-box__money">{`$${donation.amount}`}</div>
+      <div className="user-box__money">{`$${donation.amount / 100}`}</div>
     </div>
   </div>
 )

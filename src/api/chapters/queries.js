@@ -104,6 +104,7 @@ export const getChapterByBookQuery = gql`
         followers {
           id
         }
+        stripeId
       }
       likes {
         ...Like

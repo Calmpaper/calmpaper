@@ -12,7 +12,7 @@ export default ({ fullWidth = false, withLine }) => {
   return (
     <>
       {showDonationsAnnouncement && (
-        <Flex row alignCenter className="row announcement">
+        <Flex row alignCenter justifyBetween className="row announcement">
           <Flex row alignCenter>
             <div className="badge">
               <div className="badge-bg bg-primary-2-copy" />
@@ -36,6 +36,13 @@ export default ({ fullWidth = false, withLine }) => {
               </div>
             </div>
           </Flex>
+          <button
+            className="btn btn-color"
+            onClick={() => setShowStripeSetupModal(true)}
+            style={{ marginRight: 30, height: 32 }}
+          >
+            Start earning
+          </button>
         </Flex>
       )}
       {fullWidth ? (

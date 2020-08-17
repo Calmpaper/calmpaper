@@ -89,6 +89,7 @@ export const getBookQuery = gql`
         followers {
           id
         }
+        stripeId
       }
       chapters {
         ...Chapter
