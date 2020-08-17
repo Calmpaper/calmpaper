@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Modal from 'react-modal'
 import CurrencyInput from 'react-currency-input'
 
@@ -12,13 +12,8 @@ import { Elements } from '@stripe/react-stripe-js'
 
 import Card from 'components/Stripe/CardElement'
 
-const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY, {
-  stripeAccount: 'acct_1HG19ZKN8A4dtuJR',
-})
-
-const isBookingConfirmed = false
-
 const DonationModal = ({ show, close, chapter, chapterId, bookId, author }) => {
+  const [isDone, setDone] = useState(false)
   const [amount, setAmount] = useState('5.00')
   const [floatAmount, setFloatAmount] = useState(5.0)
 
@@ -50,7 +45,7 @@ const DonationModal = ({ show, close, chapter, chapterId, bookId, author }) => {
       className="donation-modal"
     >
       <div className="content">
-        {!isBookingConfirmed && (
+        {!isDone && (
           <div className="completed">
             <img
               src="https://kavholm.com/static/confirmed.svg"
@@ -87,7 +82,9 @@ const DonationModal = ({ show, close, chapter, chapterId, bookId, author }) => {
               amount={floatAmount}
               author={author}
               onSuccess={() => {
+                // setDone(true)
                 alert('Success')
+                window.location.reload()
                 close()
               }}
             />
@@ -173,8 +170,26 @@ const DonationModal = ({ show, close, chapter, chapterId, bookId, author }) => {
   )
 }
 
-export default (props) => (
-  <Elements stripe={stripePromise}>
-    <DonationModal {...props} />
-  </Elements>
-)
+export default (props) => {
+  const [stripe, setStripe] = useState(null)
+
+  useEffect(() => {
+    if (props.author) {
+      const stripePromise = loadStripe(
+        process.env.REACT_APP_STRIPE_PUBLIC_KEY,
+        {
+          stripeAccount: props.author.stripeId,
+        },
+      )
+      setStripe(stripePromise)
+    }
+  }, [props.author])
+
+  if (!stripe) return null
+
+  return (
+    <Elements stripe={stripe}>
+      <DonationModal {...props} />
+    </Elements>
+  )
+}

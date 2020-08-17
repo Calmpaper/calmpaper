@@ -49,12 +49,14 @@ export default ({ author, bookId }) => {
         <button className="btn btn-line btn-br" onClick={follow}>
           {isFollowing ? 'Unfollow' : 'Follow'}
         </button>
-        <button
-          className="btn btn-line btn-br"
-          onClick={() => setShowDonationModal(true)}
-        >
-          Donate
-        </button>
+        {author.stripeId && (
+          <button
+            className="btn btn-line btn-br"
+            onClick={() => setShowDonationModal(true)}
+          >
+            Donate
+          </button>
+        )}
         {/*
         <button className="btn btn-line btn-br" onClick={message}>
           Message

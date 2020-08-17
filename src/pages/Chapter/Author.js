@@ -27,12 +27,14 @@ export default ({ chapterId, author }) => {
               </div>
             </div>
           </Link>
-          <button
-            onClick={() => setShowDonationModal(true)}
-            className="btn btn-color"
-          >
-            Donate
-          </button>
+          {author.stripeId && (
+            <button
+              onClick={() => setShowDonationModal(true)}
+              className="btn btn-color"
+            >
+              Donate
+            </button>
+          )}
           {showDonationModal && (
             <DonationModal
               chapterId={chapterId}
