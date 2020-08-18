@@ -9,13 +9,7 @@ const Book = ({ book }) => {
 
   return (
     <S.Book onClick={() => push(`/books/${book.id}`)}>
-      <S.Image
-        src={
-          book.image ||
-          'https://www.royalroadcdn.com/covers/32502-heart-of-cultivation-full.jpg?time=1591047951'
-        }
-        alt={book.name}
-      />
+      <S.Image src={book.image || '/img/placeholder.jpg'} alt={book.name} />
       <S.Details>
         <S.Name>{book.name}</S.Name>
         <Rating ratings={book.reviews} readOnly quiet />

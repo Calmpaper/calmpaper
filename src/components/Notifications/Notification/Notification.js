@@ -151,7 +151,7 @@ export default ({ notification, closeNotifications: close }) => {
     chapterId &&
     book.chapters.findIndex((c) => c.id === parseInt(chapterId)) + 1
 
-  const cover = book && book.image
+  const cover = book && (book.image || '/img/placeholder.jpg')
   const title = book && book.name
   const subtitle = chapter ? chapter.title : null
 

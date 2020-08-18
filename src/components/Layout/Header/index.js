@@ -7,7 +7,8 @@ import Header from './Header'
 export default ({ fullWidth = false, withLine }) => {
   const [showStripeSetupModal, setShowStripeSetupModal] = useState(false)
   const { user } = useContext(UserContext)
-  const showDonationsAnnouncement = user && !user.stripeId
+  // const showDonationsAnnouncement = user && !user.stripeId
+  const showDonationsAnnouncement = false
 
   return (
     <>

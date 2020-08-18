@@ -11,11 +11,13 @@ import StripeProvider from 'context/StripeContext'
 import Layout from 'components/Layout/Layout'
 import Routes from './routes'
 
-import 'assets/css/yandex.css'
 // import 'assets/sass/main.scss'
+
 import 'assets/css/main.css'
+
 import 'assets/css/index.css'
-import 'assets/css/stripe.css'
+import 'assets/css/yandex.css'
+// import 'assets/css/stripe.css'
 
 const client = createClient({
   url: process.env.REACT_APP_BACKEND_URL,

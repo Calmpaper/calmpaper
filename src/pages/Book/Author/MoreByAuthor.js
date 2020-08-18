@@ -22,7 +22,9 @@ export default ({ books = [] }) => {
             <div
               className="catalog-img"
               style={{
-                backgroundImage: `url('${book.image}')`,
+                backgroundImage: `url('${
+                  book.image || '/img/placeholder.jpg'
+                }')`,
               }}
             />
             <div className="catalog-info">

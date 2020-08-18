@@ -1,10 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-export default ({ chapter }) => (
+export default ({ author, chapter }) => (
   <div className="pagination">
-    <Link to="/" className="pagination__link">
-      Home
+    <Link to={`/users/${author.id}`} className="pagination__link">
+      {author.username || author.fullname}
     </Link>
     <svg className="icon icon-arrow-right">
       <use xlinkHref="#icon-arrow-right" />
