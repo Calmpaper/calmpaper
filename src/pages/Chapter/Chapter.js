@@ -74,7 +74,7 @@ export default () => {
     <>
       <Header withLine />
       <div className="page-read-book">
-        <Breadcrumbs chapter={chapter} />
+        <Breadcrumbs chapter={chapter} author={chapter.author} />
         <div className="read-book-main">
           <Book book={chapter.book} />
           <Ratings chapter={chapter} />

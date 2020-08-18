@@ -35,11 +35,9 @@ export default ({ sort, style = {} }) => {
         </div>
 
         <div className="row">
-          {topRatedBooks
-            .filter((b) => b.chapters.length > 0 && b.image)
-            .map((book) => (
-              <Book book={book} key={book.id} />
-            ))}
+          {topRatedBooks.map((book) => (
+            <Book book={book} key={book.id} />
+          ))}
         </div>
       </div>
     </div>

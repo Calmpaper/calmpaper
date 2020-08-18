@@ -52,10 +52,7 @@ export default ({ tags, onChange, value = [] }) => {
           },
         })}
       />
-      <div class="select-text">
-        Each novel is limited to 25 tags. You can search for tags using the
-        search bar below.
-      </div>
+      <div class="select-text">Each book is limited to 25 tags.</div>
     </div>
   )
 }

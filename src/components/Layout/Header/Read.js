@@ -19,7 +19,7 @@ const ReadingList = ({ books, close }) => {
           <div
             className="catalog-img"
             style={{
-              backgroundImage: `url('${book.image}')`,
+              backgroundImage: `url('${book.image || '/img/placeholder.jpg'}')`,
               width: 48,
               height: 64,
             }}

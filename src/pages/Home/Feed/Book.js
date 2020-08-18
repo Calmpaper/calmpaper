@@ -8,7 +8,9 @@ const Book = ({ book = {} }) => {
       <Link to={`/books/${book.id}`}>
         <div
           className="catalog-img"
-          style={{ backgroundImage: `url('${book.image}')` }}
+          style={{
+            backgroundImage: `url('${book.image || '/img/placeholder.jpg'}')`,
+          }}
         />
         <h3 className="catalog-title">{book.name}</h3>
         {book.author && (

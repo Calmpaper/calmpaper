@@ -14,7 +14,7 @@ const Input = ({ accept, onFiles, files, getFilesFromEvent }) => {
           <use xlinkHref="#icon-plus" />
         </svg>
         <span className="btn-add-img__title">
-          250x350 pixels is recommended
+          400x600 pixels is recommended
         </span>
       </div>
       <input

@@ -67,7 +67,7 @@ export default ({ book }) => {
         <div
           className="about-book-main-img"
           style={{
-            background: `url('${book.image}')`,
+            background: `url('${book.image || '/img/placeholder.jpg'}')`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
           }}
