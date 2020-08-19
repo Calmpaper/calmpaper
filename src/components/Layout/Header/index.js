@@ -47,14 +47,17 @@ export default ({ fullWidth = false, withLine }) => {
         </Flex>
       )}
       {fullWidth ? (
-        <header style={showDonationsAnnouncement ? { top: 52 } : {}}>
+        <header
+          className="header"
+          style={showDonationsAnnouncement ? { top: 52 } : {}}
+        >
           <div className="container">
             <Header home />
           </div>
         </header>
       ) : (
         <header
-          className={`header-black ${withLine ? 'header-line' : ''}`}
+          className={`header header-black ${withLine ? 'header-line' : ''}`}
           style={showDonationsAnnouncement ? { top: 52 } : {}}
         >
           <Header />

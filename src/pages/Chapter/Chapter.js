@@ -85,10 +85,10 @@ export default () => {
 
         <Actions chapter={chapter} />
 
-        <ChapterNavigation chapter={chapter} reexecuteQuery={reexecuteQuery} />
-
         <Comments comments={chapter.comments} onSubmit={sendComment} />
       </div>
+
+      <ChapterNavigation chapter={chapter} reexecuteQuery={reexecuteQuery} />
       <Footer centered />
     </>
   )
