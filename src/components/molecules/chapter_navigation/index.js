@@ -88,20 +88,23 @@ export default ({ chapter, reexecuteQuery }) => {
 
   const isFirstPage = currentPage === 1
   const isLastPage = currentPage === pagesCount
+  const isOnlyPage = pagesCount === 1
 
   return (
     <div className="page-widgets in">
       <div className="widget-page-menu">
-        <div className="container">
-          <button
-            className={`widget-page-menu__btn-nav btn-prev ${
-              isFirstPage ? 'disabled' : ''
-            }`}
-            style={isFirstPage ? { cursor: 'disabled' } : {}}
-            onClick={!isFirstPage && toPreviousChapter}
-          >
-            Previous
-          </button>
+        <div className="container" style={{ minHeight: 40 }}>
+          {!isOnlyPage && (
+            <button
+              className={`widget-page-menu__btn-nav btn-prev ${
+                isFirstPage ? 'disabled' : ''
+              }`}
+              style={isFirstPage ? { cursor: 'disabled' } : {}}
+              onClick={!isFirstPage && toPreviousChapter}
+            >
+              Previous
+            </button>
+          )}
 
           <button className="widget-btn" onClick={onLike}>
             <svg
@@ -129,15 +132,17 @@ export default ({ chapter, reexecuteQuery }) => {
             </svg>
           </button>
 */}
-          <button
-            className={`widget-page-menu__btn-nav btn-next ${
-              isLastPage ? 'disabled' : ''
-            }`}
-            style={isLastPage ? { cursor: 'disabled' } : {}}
-            onClick={!isLastPage && toNextChapter}
-          >
-            Next page
-          </button>
+          {!isOnlyPage && (
+            <button
+              className={`widget-page-menu__btn-nav btn-next ${
+                isLastPage ? 'disabled' : ''
+              }`}
+              style={isLastPage ? { cursor: 'disabled' } : {}}
+              onClick={!isLastPage && toNextChapter}
+            >
+              Next page
+            </button>
+          )}
         </div>
       </div>
       <div
