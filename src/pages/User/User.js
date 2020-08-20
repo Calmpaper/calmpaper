@@ -4,14 +4,14 @@ import { useParams } from 'react-router-dom'
 import { useQuery } from 'urql'
 import { getUserQuery } from 'api'
 import { useMutation } from 'urql'
-import { editUsernameMutation } from 'api'
+import { editUserMutation } from 'api'
 
 import Loader from 'components/Loader'
 import Header from 'components/Layout/Header'
 import Footer from 'components/molecules/footer'
 import Books from './Books'
 import Flex from 'components/Flex'
-// import AvatarInput from 'components/Input/AvatarInput'
+import AvatarInput from 'components/Input/AvatarInput'
 
 import * as S from './User.styled'
 
@@ -22,7 +22,7 @@ export default () => {
   const { logout, user: loggedUser } = useContext(UserContext)
   const [image, setImage] = useState(null)
 
-  const [, editUsername] = useMutation(editUsernameMutation)
+  const [, editUser] = useMutation(editUserMutation)
 
   const [{ data: { user } = {}, fetching, error }] = useQuery({
     query: getUserQuery,
@@ -59,13 +59,17 @@ export default () => {
             <S.User row spaceBetween alignCenter>
               <Flex row alignCenter justifyBetween style={{ width: '100%' }}>
                 <Flex row alignCenter>
-                  <img
-                    width="32"
-                    height="32"
-                    src={user.avatar}
-                    style={{ marginRight: 12, borderRadius: '100%' }}
-                    alt={user.givenname}
-                  />
+                  {isEditing ? (
+                    <AvatarInput avatar={user.avatar} setImage={setImage} />
+                  ) : (
+                    <img
+                      width="32"
+                      height="32"
+                      src={user.avatar}
+                      style={{ marginRight: 12, borderRadius: '100%' }}
+                      alt={user.givenname}
+                    />
+                  )}
                   {isEditing ? (
                     <input
                       value={editingValue}
@@ -81,9 +85,10 @@ export default () => {
                   (isEditing ? (
                     <button
                       onClick={() => {
-                        editUsername({
+                        editUser({
                           userId: loggedUser.id,
                           username: editingValue,
+                          avatar: image,
                         })
                         setEditing(false)
                       }}

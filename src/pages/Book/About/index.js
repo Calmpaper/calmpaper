@@ -51,7 +51,7 @@ export default ({ book }) => {
         <div className="about-book-main-btn">
           {book.chapters.length > 0 && (
             <Link to={`/books/${book.id}/1`} className="btn btn-color">
-              Read book
+              Read now
             </Link>
           )}
           <button
@@ -67,7 +67,7 @@ export default ({ book }) => {
         <div
           className="about-book-main-img"
           style={{
-            background: `url('${book.image || '/img/placeholder.jpg'}')`,
+            background: `url("${book.image || '/img/placeholder.jpg'}")`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
           }}

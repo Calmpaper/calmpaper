@@ -88,7 +88,7 @@ export default () => {
               className="block block01 add-series-img"
               style={{ marginTop: 0 }}
             >
-              <h3 className="title size04">Image</h3>
+              <h3 className="title size04">Cover image</h3>
               <FileInput setImage={setImage} />
             </div>
 

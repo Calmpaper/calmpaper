@@ -58,6 +58,7 @@ export default ({ tab, update }) => {
 
   if (fetching) return <Loader />
   if (error) return <p>Oh no... {error.message}</p>
+  console.log(book)
 
   return (
     <>
@@ -92,6 +93,7 @@ export default ({ tab, update }) => {
           {book.author && <Author author={book.author} bookId={bookId} />}
         </div>
       </div>
+      <Footer tel />
       {showDonationModal && (
         <DonationModal
           bookId={book.id}

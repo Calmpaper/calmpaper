@@ -15,6 +15,7 @@ import * as serviceWorker from './serviceWorker'
 // import 'assets/sass/main.scss'
 
 import 'assets/css/index.css'
+import 'assets/home02.scss'
 import 'assets/css/yandex.css'
 import 'assets/css/main.css'
 

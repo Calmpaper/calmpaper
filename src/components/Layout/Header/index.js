@@ -4,7 +4,7 @@ import Flex from 'components/atoms/flex'
 import StripeSetupModal from 'components/Stripe/PaymentSetupModal'
 import Header from './Header'
 
-export default ({ fullWidth = false, withLine }) => {
+export default ({ fullWidth = false, withLine, black = false }) => {
   const [showStripeSetupModal, setShowStripeSetupModal] = useState(false)
   const { user } = useContext(UserContext)
   // const showDonationsAnnouncement = user && !user.stripeId
@@ -48,7 +48,7 @@ export default ({ fullWidth = false, withLine }) => {
       )}
       {fullWidth ? (
         <header
-          className="header"
+          className={`header ${black ? 'header-black' : ''}`}
           style={showDonationsAnnouncement ? { top: 52 } : {}}
         >
           <div className="container">

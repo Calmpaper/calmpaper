@@ -143,7 +143,7 @@ export default ({ notification, closeNotifications: close }) => {
     },
   )
 
-  if (bookFetching || chapterFetching) return <div>loading...</div>
+  if (bookFetching || chapterFetching) return null
 
   if (!book) return null
 
