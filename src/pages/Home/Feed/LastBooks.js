@@ -14,7 +14,7 @@ export default ({ sort }) => {
   if (error) return <p>Oh no... {error.message}</p>
 
   return (
-    <div className="catalog catalog02">
+    <div className="catalog catalog02" style={{ marginTop: 80 }}>
       <div className="container">
         <div className="row">
           <h2 className="title size02">Latest series</h2>

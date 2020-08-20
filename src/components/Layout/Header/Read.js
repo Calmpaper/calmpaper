@@ -9,13 +9,7 @@ const ReadingList = ({ books, close }) => {
       style={{ position: 'absolute', top: 72, padding: '16px 24px' }}
     >
       {books.map((book) => (
-        <Link
-          to={`/books/${book.id}/${
-            book.chapters[0] ? book.chapters[0].id : ''
-          }`}
-          key={book.id}
-          onClick={close}
-        >
+        <Link to={`/books/${book.id}`} key={book.id} onClick={close}>
           <div
             className="catalog-img"
             style={{
@@ -27,14 +21,17 @@ const ReadingList = ({ books, close }) => {
 
           <div className="catalog-info">
             <h3 className="catalog-title">{book.name}</h3>
-            <p className="catalog-author" />
+            <p className="catalog-author">
+              {book.author.username || book.author.fullname}
+            </p>
+            {/*
             <div className="progress">
               <div className="progress__line">
-                {/* TODO: chapters progress */}
                 <span className="progress__stat" style={{ width: '0%' }} />
               </div>
               <div className="progress__num">0%</div>
             </div>
+            */}
           </div>
         </Link>
       ))}

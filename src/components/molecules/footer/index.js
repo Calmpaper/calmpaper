@@ -22,21 +22,17 @@ const Links = () => (
       <a href="https://calmpaper.com/books/8/1">About Us</a>
     </li>
     <li>
-      <a
-        href="/"
-        onClick={(e) => {
-          e.preventDefault()
-          document.getElementById('voicestorychatButton').click()
-        }}
-      >
-        Contact Us
-      </a>
+      <a href="mailto:hi@calmpaper.com">Contact Us</a>
     </li>
   </ul>
 )
 
-export default ({ centered = false }) => (
-  <footer className={centered ? '' : 'footer-col'}>
+export default ({ centered = false, tel = false }) => (
+  <footer
+    className={`${
+      centered ? '' : tel ? 'footer-tel' : 'footer-desc footer-col'
+    }`}
+  >
     <div className="container">
       <div className="row">
         <Links />

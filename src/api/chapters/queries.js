@@ -53,10 +53,11 @@ export const getChapterQuery = gql`
 `
 
 export const getLastChaptersQuery = gql`
-  query {
-    chapters(orderBy: { createdAt: desc }, where: { NOT: { book: null } }) {
+  query($skip: Int!) {
+    chaptersFeed(skip: $skip) {
       ...Chapter
       createdAt
+      content
       author {
         ...User
       }

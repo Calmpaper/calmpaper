@@ -9,7 +9,7 @@ const Book = ({ book = {} }) => {
         <div
           className="catalog-img"
           style={{
-            backgroundImage: `url('${book.image || '/img/placeholder.jpg'}')`,
+            backgroundImage: `url("${book.image || '/img/placeholder.jpg'}")`,
           }}
         />
         <h3 className="catalog-title">{book.name}</h3>

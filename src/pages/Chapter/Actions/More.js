@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useMutation } from 'urql'
 import { useHistory } from 'react-router-dom'
 import { deleteChapterMutation } from 'api'
+import ConfirmationModal from 'components/ConfirmationModal'
 
 export default ({ bookId, chapterId, chapter, hide }) => {
+  const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false)
   const { push } = useHistory()
 
   // eslint-disable-next-line no-unused-vars
@@ -38,10 +40,7 @@ export default ({ bookId, chapterId, chapter, hide }) => {
         <button
           type="button"
           className="zen-ui-context-menu__item comment-menu-item _remove"
-          onClick={() => {
-            onDelete()
-            push(`/books/${bookId}`)
-          }}
+          onClick={() => setShowDeleteConfirmation(true)}
         >
           <span className="zen-ui-context-menu__item-icon-container">
             <svg
@@ -61,6 +60,21 @@ export default ({ bookId, chapterId, chapter, hide }) => {
           </span>
         </button>
       </div>
+
+      {showDeleteConfirmation && (
+        <ConfirmationModal
+          show={showDeleteConfirmation}
+          close={() => {
+            setShowDeleteConfirmation(false)
+            hide()
+          }}
+          onDelete={() => {
+            onDelete()
+            setShowDeleteConfirmation(false)
+            push(`/`)
+          }}
+        />
+      )}
     </div>
   )
 }

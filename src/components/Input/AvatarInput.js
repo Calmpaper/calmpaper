@@ -5,8 +5,8 @@ import { getDroppedOrSelectedFiles } from 'html5-file-selector'
 
 const Avatar = styled.img`
   background-image: url("${(props) => props.src}");
-  width: 38px;
-  height: 38px;
+  width: 32px;
+  height: 32px;
   border-radius: 100%;
   border: 1px solid rgba(0, 0, 0, 0);
   user-select: none;
@@ -20,7 +20,7 @@ const Avatar = styled.img`
   ${(props) => props.playing && 'border-color: #ae00ff;'}
 `
 
-const FILE_STORAGE_URL = process.env.REACT_APP_FILE_STORAGE_URL
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL
 
 const Input = ({
   a: { accept, onFiles, files, getFilesFromEvent } = {},
@@ -65,7 +65,8 @@ const CustomInput = ({ avatar, setImage }) => {
     if (status === 'done') {
       const { path } = JSON.parse(xhr.response)
 
-      setImage(`${FILE_STORAGE_URL}/${path}`)
+      setImage(`${BACKEND_URL}/${path}`)
+      document.getElementsByTagName('progress')[0].style.display = 'none'
       // remove()
     }
 
@@ -81,7 +82,7 @@ const CustomInput = ({ avatar, setImage }) => {
       accept="image/*"
       onChangeStatus={handleChangeStatus}
       getUploadParams={() => ({
-        url: `${FILE_STORAGE_URL}`,
+        url: `${BACKEND_URL}/files`,
       })}
       onSubmit={handleSubmit}
       getFilesFromEvent={getFilesFromEvent}

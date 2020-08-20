@@ -8,6 +8,9 @@ export const getUserQuery = gql`
       givenname
       favoriteBooks {
         ...Book
+        author {
+          ...User
+        }
         chapters {
           id
         }
@@ -36,6 +39,9 @@ export const getMeQuery = gql`
       stripeId
       favoriteBooks {
         ...Book
+        author {
+          ...User
+        }
         chapters {
           id
         }

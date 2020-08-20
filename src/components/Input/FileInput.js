@@ -51,6 +51,7 @@ const CustomInput = ({ setImage }) => {
     if (status === 'done') {
       const { path } = JSON.parse(xhr.response)
       setImage(`${BACKEND_URL}/${path}`)
+      document.getElementsByTagName('progress')[0].style.display = 'none'
 
       // remove()
     }
