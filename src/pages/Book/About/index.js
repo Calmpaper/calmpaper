@@ -44,7 +44,15 @@ export default ({ book }) => {
         {book.author && (
           <p
             className="about-book-author"
-            onClick={() => push(`/users/${book.author.id}`)}
+            onClick={() =>
+              push(
+                `/users/${
+                  book.author.username
+                    ? `@${book.author.username}`
+                    : book.author.id
+                }`,
+              )
+            }
           >{`by ${book.author.username || book.author.fullname}`}</p>
         )}
         <Ratings book={book} />
@@ -59,7 +67,13 @@ export default ({ book }) => {
             onClick={addToLibrary}
             style={book.chapters.length === 0 ? { marginLeft: 0 } : {}}
           >
-            {isFavorite ? `Remove` : `Add to Library`}
+            {isFavorite ? `Remove` : `Follow`}
+
+            <span className="icon-dropdown">
+              <svg className="icon icon-arrow-down">
+                <use xlinkHref="#icon-arrow-down" />
+              </svg>
+            </span>
           </button>
         </div>
       </div>

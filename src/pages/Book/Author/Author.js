@@ -30,7 +30,9 @@ export default ({ author, bookId }) => {
       <h4 className="title size04">Author</h4>
       <div
         className="sidebar-author-info"
-        onClick={() => push(`/users/${author.id}`)}
+        onClick={() =>
+          push(`/users/${author.username ? `@${author.username}` : author.id}`)
+        }
       >
         <div
           className="author-avatar"

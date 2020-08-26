@@ -18,7 +18,17 @@ import * as S from './User.styled'
 export default () => {
   const [isEditing, setEditing] = useState(false)
   const [editingValue, setEditingValue] = useState(null)
-  const { id: userId } = useParams()
+  const { id: slug } = useParams()
+
+  let userId
+  let username
+
+  if (slug.startsWith('@')) {
+    username = slug.substring(1)
+  } else {
+    userId = slug
+  }
+
   const { logout, user: loggedUser } = useContext(UserContext)
   const [image, setImage] = useState(null)
 
@@ -26,10 +36,9 @@ export default () => {
 
   const [{ data: { user } = {}, fetching, error }] = useQuery({
     query: getUserQuery,
-    variables: {
-      id: parseInt(userId),
-    },
-    pause: !userId,
+    variables: username ? { username } : { id: parseInt(userId) },
+
+    pause: !slug,
   })
 
   useEffect(() => {

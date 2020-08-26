@@ -9,7 +9,9 @@ export default ({ chapterId, author }) => {
     <div className="read-book-author">
       <div className="container">
         <div className="row">
-          <Link to={`/users/${author.id}`}>
+          <Link
+            to={`/users/${author.username ? `@${author.username}` : author.id}`}
+          >
             <div className="col col01">
               <div
                 className="avatar"
