@@ -2,8 +2,8 @@ import gql from 'graphql-tag'
 import { UserFragment, BookFragment } from '../fragments'
 
 export const getUserQuery = gql`
-  query($id: Int!) {
-    user(where: { id: $id }) {
+  query($id: Int, $username: String) {
+    user(where: { id: $id, username: $username }) {
       ...User
       givenname
       favoriteBooks {

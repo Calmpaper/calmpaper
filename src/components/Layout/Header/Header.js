@@ -9,7 +9,7 @@ import Create from './Create'
 
 const User = ({ user }) => (
   <Link
-    to={`/users/${user.id}`}
+    to={`/users/${user.username ? `@${user.username}` : user.id}`}
     className="btn-login"
     style={{
       width: 'auto',
@@ -72,7 +72,7 @@ export default ({ home }) => {
             </ul>
           </nav>
           {!user ? (
-            <li className="header-nav__item">
+            <li className="header-nav__item" style={{ marginRight: 0 }}>
               <a
                 href={`${process.env.REACT_APP_BACKEND_URL}/auth/google`}
                 className="btn-login"

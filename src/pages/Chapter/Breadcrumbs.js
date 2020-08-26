@@ -3,7 +3,10 @@ import { Link } from 'react-router-dom'
 
 export default ({ author, chapter }) => (
   <div className="pagination">
-    <Link to={`/users/${author.id}`} className="pagination__link">
+    <Link
+      to={`/users/${author.username ? `@${author.username}` : author.id}`}
+      className="pagination__link"
+    >
       {author.username || author.fullname}
     </Link>
     <svg className="icon icon-arrow-right">

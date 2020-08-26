@@ -11,6 +11,8 @@ const Chapter = ({ chapter }) => {
   const chapterPage =
     chapter.book.chapters.findIndex((c) => c.id === chapter.id) + 1
 
+  var regex = /(<([^>]+)>)/gi
+
   return (
     <Link to={`/books/${chapter.book.id}/${chapterPage}`} className="item">
       <div
@@ -28,12 +30,14 @@ const Chapter = ({ chapter }) => {
           </h3>
           <div
             className="item-time"
-            style={{ minWidth: '190px', marginLeft: 8 }}
+            style={{ minWidth: '190px', marginLeft: 8, textAlign: 'end' }}
           >{`${chapter.author.username || chapter.author.fullname}, ${moment(
             chapter.createdAt,
           ).fromNow()}`}</div>
         </div>
-        <p className="item-text">{`${chapter.content.substring(0, 240)}...`}</p>
+        <p className="item-text">{`${chapter.content
+          .replace(regex, '')
+          .substring(0, 120)}...`}</p>
         <ul className="item-category">
           {chapter.book.genres.map((genre) => (
             <li key={genre.id}>

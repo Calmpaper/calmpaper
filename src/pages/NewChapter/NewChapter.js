@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useState, useContext } from 'react'
 import { UserContext } from 'context'
 import { useHistory, useParams, useLocation } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
@@ -7,10 +7,12 @@ import { createChapterMutation, updateChapterMutation } from 'api'
 
 import TextareaAutosize from 'react-textarea-autosize'
 import Header from 'components/Layout/Header'
+import Editor from 'components/Editor'
 import Footer from 'components/molecules/footer'
 
 export default () => {
   const { user } = useContext(UserContext)
+  const [value, setValue] = useState('')
   const { book: bookId } = useParams()
   const { push } = useHistory()
   const { state: { chapter } = {} } = useLocation()
@@ -37,6 +39,7 @@ export default () => {
     } else {
       createChapter({
         ...data,
+        content: value,
         userId: user.id,
         bookId: parseInt(bookId),
       }).then(({ data: { createOneChapter: chapter } }) => {
@@ -103,6 +106,8 @@ export default () => {
                   <span className="red-title">{` (required)`}</span>
                 )}
               </h3>
+              <Editor value={value} setValue={setValue} />
+              {/*
               <TextareaAutosize
                 name="content"
                 type="text"
@@ -112,6 +117,7 @@ export default () => {
                 ref={register({ required: true })}
                 minRows={6}
               />
+            */}
             </div>
             <div className="block block09 add-series-btn">
               <button className="btn btn-color" type="submit">

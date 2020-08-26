@@ -62,7 +62,7 @@ export default ({ book }) => (
         </div>
         <div className="panel-num">{book.readers.length}</div>
       </div>
-      <div className="about-num-panel-label">Add to library</div>
+      <div className="about-num-panel-label">Followers</div>
     </a>
   </div>
 )

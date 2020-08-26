@@ -54,17 +54,20 @@ export default () => {
 }
 
 const Landing = () => (
-  <div className="page-home04" style={{ paddingTop: '100px' }}>
+  <div
+    className="page-home04 landing-new"
+    style={{ paddingTop: '100px', zoom: '80%' }}
+  >
     <div className="main">
       <div className="container">
         <div className="row">
           <h1 className="main-title">
             A platform for <br />
-            your books.
+            ongoing books.
           </h1>
           <p className="main-text">
-            The easiest way to host, publish, and earn from your books. Build a
-            community, collect donations and more.
+            Why wait 300 pages later to share your book? Publish your book and
+            grow your readers after finishing the first page.
           </p>
           <a
             href={`${process.env.REACT_APP_BACKEND_URL}/auth/google`}
@@ -85,15 +88,15 @@ const Landing = () => (
             </div>
             <h2 className="item-title">Write Anything</h2>
             <p className="item-text">
-              Write guides, stories, autobiographies, fiction, non-fiction...
-              etc. Anything you want.
+              Write as much or as little as you want. What matters is quality
+              not quantity.
             </p>
           </div>
           <div className="item">
             <div className="item-img">
               <img src="img/home04/home-img02.svg" alt="home-img" />
             </div>
-            <h2 className="item-title">Raise a Community today</h2>
+            <h2 className="item-title">Raise a Community</h2>
             <p className="item-text">
               Encourage discussions with a comments section whenever you add a
               new chapter.
@@ -107,12 +110,76 @@ const Landing = () => (
                 className="item-img"
               />
             </div>
-            <h2 className="item-title">
-              Collect Donations &amp; Subscriptions
-            </h2>
+            <h2 className="item-title">Start earning</h2>
             <p className="item-text">
-              Accept payments with Stripe, Paypal &amp; Cryptocurrencies with 0%
-              fees.
+              Let your readers subscribe and donate to you, while you write on
+              your own time.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+)
+
+const LandingOld = () => (
+  <div className="page-home04" style={{ paddingTop: '100px' }}>
+    <div className="main">
+      <div className="container">
+        <div className="row">
+          <h1 className="main-title">
+            A platform for <br />
+            ongoing books.
+          </h1>
+          <p className="main-text">
+            Why wait 300 pages later to share your book? Publish your book and
+            grow your readers after finishing the first page.
+          </p>
+          <a
+            href={`${process.env.REACT_APP_BACKEND_URL}/auth/google`}
+            className="btn btn-color"
+            style={{ cursor: 'pointer' }}
+          >
+            Get started
+          </a>
+        </div>
+      </div>
+    </div>
+    <div className="items">
+      <div className="container">
+        <div className="row">
+          <div className="item">
+            <div className="item-img">
+              <img src="img/home04/home-img01.svg" alt="home-img" />
+            </div>
+            <h2 className="item-title">Write Anything</h2>
+            <p className="item-text">
+              Write as much or as little as you want. What matters is quality
+              not quantity.
+            </p>
+          </div>
+          <div className="item">
+            <div className="item-img">
+              <img src="img/home04/home-img02.svg" alt="home-img" />
+            </div>
+            <h2 className="item-title">Raise a Community</h2>
+            <p className="item-text">
+              Encourage discussions with a comments section whenever you add a
+              new chapter.
+            </p>
+          </div>
+          <div className="item">
+            <div className="item-img">
+              <img
+                src="img/home04/home-img03.svg"
+                alt="home-img"
+                className="item-img"
+              />
+            </div>
+            <h2 className="item-title">Start earning</h2>
+            <p className="item-text">
+              Let your readers subscribe and donate to you, while you write on
+              your own time.
             </p>
           </div>
         </div>
