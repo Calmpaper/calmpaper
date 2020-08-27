@@ -5,8 +5,8 @@ import { getDroppedOrSelectedFiles } from 'html5-file-selector'
 
 const Avatar = styled.img`
   background-image: url("${(props) => props.src}");
-  width: 32px;
-  height: 32px;
+  width: 40px;
+  height: 40px;
   border-radius: 100%;
   border: 1px solid rgba(0, 0, 0, 0);
   user-select: none;

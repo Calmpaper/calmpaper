@@ -249,3 +249,7 @@
   font-weight: 500;
   line-height: 14px;
 }
+
+.read-book-main img {
+  max-width: 250px !important;
+}

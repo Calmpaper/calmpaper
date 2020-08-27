@@ -16,10 +16,22 @@ const UserProvider = ({ children }) => {
     pause: !jwt,
   })
 
+  const signup = (token) => {
+    window.localStorage.setItem('jwt', token)
+    setJwt(token)
+    replace('/')
+  }
+
   const logout = () => {
     window.localStorage.removeItem('jwt')
     setJwt(null)
     replace(pathname)
+  }
+
+  const login = (token) => {
+    window.localStorage.setItem('jwt', token)
+    setJwt(token)
+    replace('/')
   }
 
   useEffect(() => {
@@ -48,6 +60,8 @@ const UserProvider = ({ children }) => {
         user: jwt ? user : null,
         fetching,
         logout,
+        signup,
+        login,
       }}
     >
       {children}

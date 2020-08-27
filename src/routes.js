@@ -7,6 +7,8 @@ import Chapter from 'pages/Chapter/Chapter'
 import User from 'pages/User/User'
 import NewBook from 'pages/NewBook/NewBook'
 import NewChapter from 'pages/NewChapter/NewChapter'
+import SignUp from 'pages/Auth/SignUp'
+import Login from 'pages/Auth/Login'
 
 const Routes = () => (
   <Switch>
@@ -33,6 +35,12 @@ const Routes = () => (
     </Route>
     <Route path="/users/:id">
       <User />
+    </Route>
+    <Route path="/signup">
+      <SignUp />
+    </Route>
+    <Route path="/login">
+      <Login />
     </Route>
     <Route path="/">
       <Home />

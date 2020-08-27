@@ -2,28 +2,36 @@ import React from 'react'
 import { useHistory } from 'react-router-dom'
 import Rating from 'components/Rating'
 
-import * as S from './Books.styled'
-
 const Book = ({ book }) => {
   const { push } = useHistory()
 
   return (
-    <S.Book onClick={() => push(`/books/${book.id}`)}>
-      <S.Image src={book.image || '/img/placeholder.jpg'} alt={book.name} />
-      <S.Details>
-        <S.Name>{book.name}</S.Name>
+    <div className="col" onClick={() => push(`/books/${book.id}`)}>
+      <a href>
+        <div
+          className="catalog-img"
+          style={{
+            backgroundImage: `url("${book.image || '/img/placeholder.jpg'}")`,
+          }}
+        />
+        <h3 className="catalog-title">{book.name}</h3>
+        <p className="catalog-author">{book.author.fullname}</p>
         <Rating ratings={book.reviews} readOnly quiet />
-      </S.Details>
-    </S.Book>
+      </a>
+    </div>
   )
 }
 
 export default ({ books }) => {
   return (
-    <S.Container>
-      {books.map((book) => (
-        <Book book={book} key={book.id} />
-      ))}
-    </S.Container>
+    <div className="catalog">
+      <div className="container">
+        <div className="row">
+          {books.map((book) => (
+            <Book book={book} key={book.id} />
+          ))}
+        </div>
+      </div>
+    </div>
   )
 }

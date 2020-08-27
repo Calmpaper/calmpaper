@@ -121,7 +121,7 @@ export default () => {
             </div>
             <div className="block block09 add-series-btn">
               <button className="btn btn-color" type="submit">
-                {!fetching ? 'Add chapter' : 'Adding...'}
+                {!fetching ? 'Add page' : 'Adding...'}
               </button>
             </div>
           </form>
