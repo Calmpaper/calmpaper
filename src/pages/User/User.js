@@ -13,8 +13,6 @@ import Books from './Books'
 import Flex from 'components/Flex'
 import AvatarInput from 'components/Input/AvatarInput'
 
-import * as S from './User.styled'
-
 export default () => {
   const [isEditing, setEditing] = useState(false)
   const [editingValue, setEditingValue] = useState(null)
@@ -57,76 +55,105 @@ export default () => {
 
   return (
     <>
-      <Header />
-      <Flex
-        alignCenter
-        justifyCenter
-        style={{ width: '100vw', height: '100%', marginTop: 128 }}
-      >
-        <Flex column alignEnd>
-          <S.Container>
-            <S.User row spaceBetween alignCenter>
-              <Flex row alignCenter justifyBetween style={{ width: '100%' }}>
-                <Flex row alignCenter>
-                  {isEditing ? (
-                    <AvatarInput avatar={user.avatar} setImage={setImage} />
-                  ) : (
-                    <img
-                      width="32"
-                      height="32"
-                      src={user.avatar}
-                      style={{ marginRight: 12, borderRadius: '100%' }}
-                      alt={user.givenname}
-                    />
-                  )}
-                  {isEditing ? (
-                    <input
-                      value={editingValue}
-                      onChange={(e) => setEditingValue(e.target.value)}
-                      autoFocus
-                    />
-                  ) : (
-                    <S.Username>{user.username || user.fullname}</S.Username>
-                  )}
-                </Flex>
+      <Header withLine />
+      <div className="page-home05">
+        <div className="user-block">
+          <div
+            className="container"
+            style={{ backgroundImage: 'url(/img/home05/home05-bg.png)' }}
+          >
+            <div className="row">
+              <div className="item item-user">
+                {isEditing ? (
+                  <AvatarInput avatar={user.avatar} setImage={setImage} />
+                ) : (
+                  <div
+                    className="user-avatar"
+                    style={{ backgroundImage: `url(${user.avatar})` }}
+                  />
+                )}
+
+                <div className="user-info">
+                  <div className="user-name">
+                    {user.fullname || user.username}
+                  </div>
+
+                  {user.username &&
+                    (isEditing ? (
+                      <input
+                        value={editingValue}
+                        onChange={(e) => setEditingValue(e.target.value)}
+                        autoFocus
+                      />
+                    ) : (
+                      <div className="user-town">{`@${user.username}`}</div>
+                    ))}
+                </div>
+              </div>
+              <div className="item item-buttons">
                 {loggedUser &&
-                  loggedUser.id === parseInt(userId) &&
-                  (isEditing ? (
-                    <button
-                      onClick={() => {
-                        editUser({
-                          userId: loggedUser.id,
-                          username: editingValue,
-                          avatar: image,
-                        })
-                        setEditing(false)
+                (loggedUser.id === parseInt(userId) ||
+                  loggedUser.username === username) ? (
+                  <>
+                    <Flex
+                      alignCenter
+                      justifyCenter
+                      className="btn btn-line"
+                      style={{
+                        alignSelf: 'flex-end',
                       }}
+                      onClick={logout}
                     >
-                      Save
-                    </button>
-                  ) : (
-                    <button onClick={() => setEditing(true)}>Edit</button>
-                  ))}
-              </Flex>
-            </S.User>
-            <Books books={user.books} />
-          </S.Container>
-          {loggedUser && loggedUser.id === user.id && (
-            <Flex
-              alignCenter
-              justifyCenter
-              className="btn btn-br"
-              style={{
-                alignSelf: 'flex-end',
-              }}
-              onClick={logout}
-            >
-              Log out
-            </Flex>
-          )}
-        </Flex>
-      </Flex>
-      <Footer centered />
+                      Log out
+                    </Flex>
+                    {isEditing ? (
+                      <button
+                        className="btn btn-line"
+                        onClick={() => {
+                          editUser({
+                            userId: loggedUser.id,
+                            username: editingValue,
+                            avatar: image,
+                          })
+                          setEditing(false)
+                        }}
+                      >
+                        Save
+                      </button>
+                    ) : (
+                      <button
+                        className="btn btn-line"
+                        onClick={() => setEditing(true)}
+                      >
+                        Edit
+                      </button>
+                    )}
+                  </>
+                ) : (
+                  <>
+                    <button className="btn btn-line">Follow</button>
+                    <button className="btn btn-line">Message</button>
+                    <button className="btn btn-line">Tip</button>
+                  </>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="tabs">
+          <div className="container">
+            <div className="row">
+              <a href className="active">
+                All books
+              </a>
+              <a href>Popular</a>
+            </div>
+          </div>
+        </div>
+        <Books books={user.books} />
+
+        <Footer centered />
+      </div>
     </>
   )
 }

@@ -49,11 +49,9 @@ export default ({ fullWidth = false, withLine, black = false }) => {
       {fullWidth ? (
         <header
           className={`header ${black ? 'header-black' : ''}`}
-          style={showDonationsAnnouncement ? { top: 52 } : {}}
+          style={window.location.pathname === '/' && !user ? {} : {}}
         >
-          <div className="container">
-            <Header home />
-          </div>
+          <Header home />
         </header>
       ) : (
         <header

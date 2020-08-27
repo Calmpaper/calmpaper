@@ -41,7 +41,7 @@ export default ({
   return (
     <div
       style={{
-        marginLeft: -5,
+        // marginLeft: -5,
         minWidth: 143,
         cursor: cursorDefault ? 'default' : 'pointer',
       }}

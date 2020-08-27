@@ -31,12 +31,9 @@ const User = ({ user }) => (
 
 const LoginBtn = () => (
   <li className="header-nav__item" style={{ position: 'relative' }}>
-    <a
-      className="header-nav__link"
-      href={`${process.env.REACT_APP_BACKEND_URL}/auth/google`}
-    >
+    <Link className="header-nav__link" to={`/login`}>
       Log In
-    </a>
+    </Link>
   </li>
 )
 
@@ -73,12 +70,9 @@ export default ({ home }) => {
           </nav>
           {!user ? (
             <li className="header-nav__item" style={{ marginRight: 0 }}>
-              <a
-                href={`${process.env.REACT_APP_BACKEND_URL}/auth/google`}
-                className="btn-login"
-              >
+              <Link to={`/signup`} className="btn-login">
                 Sign Up
-              </a>
+              </Link>
             </li>
           ) : (
             <User user={user} />

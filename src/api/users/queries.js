@@ -20,6 +20,9 @@ export const getUserQuery = gql`
         reviews {
           stars
         }
+        author {
+          ...User
+        }
       }
     }
   }

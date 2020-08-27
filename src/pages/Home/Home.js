@@ -61,13 +61,13 @@ const Landing = () => (
     <div className="main">
       <div className="container">
         <div className="row">
-          <h1 className="main-title">
+          <h1 className="main-title" style={{ fontSize: 80 }}>
             A platform for <br />
-            ongoing books.
+            unpublished books.
           </h1>
           <p className="main-text">
-            Why wait 300 pages later to share your book? Publish your book and
-            grow your readers after finishing the first page.
+            Share your unfinished books to your fans after finishing the first
+            page, not 300 pages later
           </p>
           <a
             href={`${process.env.REACT_APP_BACKEND_URL}/auth/google`}
@@ -88,18 +88,18 @@ const Landing = () => (
             </div>
             <h2 className="item-title">Write Anything</h2>
             <p className="item-text">
-              Write as much or as little as you want. What matters is quality
-              not quantity.
+              Write guides, stories, comics, fiction, non-fiction... etc. Your
+              book, your rules.
             </p>
           </div>
           <div className="item">
             <div className="item-img">
               <img src="img/home04/home-img02.svg" alt="home-img" />
             </div>
-            <h2 className="item-title">Raise a Community</h2>
+            <h2 className="item-title">Share to your fans</h2>
             <p className="item-text">
-              Encourage discussions with a comments section whenever you add a
-              new chapter.
+              Let your followers subscribe to your content and comment on every
+              page.
             </p>
           </div>
           <div className="item">
@@ -110,10 +110,10 @@ const Landing = () => (
                 className="item-img"
               />
             </div>
-            <h2 className="item-title">Start earning</h2>
+            <h2 className="item-title">Earn</h2>
             <p className="item-text">
-              Let your readers subscribe and donate to you, while you write on
-              your own time.
+              Allow subscriptions and donations, while you write when you have
+              time.
             </p>
           </div>
         </div>
