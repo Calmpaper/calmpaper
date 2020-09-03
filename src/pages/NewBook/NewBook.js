@@ -60,7 +60,10 @@ export default () => {
             bookId: book.id,
             bookName: book.name,
           })
-        push(`/books/${book.id}`)
+        push({
+          pathname: `/books/${book.id}`,
+          state: { showBookPublishedOverlay: true },
+        })
       })
     }
   }
