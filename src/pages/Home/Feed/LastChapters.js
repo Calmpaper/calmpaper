@@ -37,7 +37,7 @@ const Chapter = ({ chapter }) => {
         </div>
         <p className="item-text">{`${chapter.content
           .replace(regex, '')
-          .substring(0, 120)}...`}</p>
+          .substring(0, 155)}...`}</p>
         <ul className="item-category">
           {chapter.book.genres.map((genre) => (
             <li key={genre.id}>
@@ -53,20 +53,23 @@ const Chapter = ({ chapter }) => {
 export default ({ sort }) => {
   const [page, setPage] = useState(0)
   const [allChapters, setChapters] = useState([])
+  const [refetch, setRefetch] = useState(false)
   const [
     { data: { chaptersFeed: chapters = [] } = {}, fetching, error },
   ] = useQuery({
     query: getLastChaptersQuery,
     variables: {
-      skip: 4 * page,
+      skip: 3 * page,
     },
+    // pause: refetch,
   })
 
   useEffect(() => {
     setChapters((c) => [...c, ...chapters])
+    setRefetch(true)
   }, [chapters])
 
-  if (fetching) return <Loader />
+  if (fetching && !refetch) return <Loader />
   if (error) return <p>Oh no... {error.message}</p>
 
   return (
@@ -84,13 +87,15 @@ export default ({ sort }) => {
           <div
             className="item"
             style={{
-              fontWeight: 500,
+              fontWeight: 400,
               justifyContent: 'center',
-              opacity: 0.8,
+              background: '#fdfdfd',
+              color: '#040027',
+              fontSize: '15px',
             }}
             onClick={() => setPage((p) => p + 1)}
           >
-            Load more
+            {fetching ? 'Loading...' : 'Load more'}
           </div>
           {/*
            */}

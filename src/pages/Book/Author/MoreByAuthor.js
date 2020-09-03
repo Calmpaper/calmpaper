@@ -11,9 +11,6 @@ export default ({ books = [] }) => {
         for (let i = 0; i < book.reviews.length; i++) {
           sum += parseInt(book.reviews[i].stars, 10) //don't forget to add the base
         }
-        console.log('book')
-        console.log(book)
-        console.log(book.id)
 
         var avg = sum / book.reviews.length || 0
 

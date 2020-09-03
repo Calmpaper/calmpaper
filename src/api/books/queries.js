@@ -11,7 +11,7 @@ import {
 
 export const getBooksQuery = gql`
   query {
-    books {
+    books(where: { archived: { not: true } }) {
       ...Book
       description
       chapters {
@@ -32,7 +32,7 @@ export const getBooksQuery = gql`
 
 export const getLatestBooksQuery = gql`
   query {
-    books(orderBy: { createdAt: desc }) {
+    books(orderBy: { createdAt: desc }, where: { archived: { not: true } }) {
       ...Book
       description
       chapters {

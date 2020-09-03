@@ -7,7 +7,7 @@ import { useMutation } from 'urql'
 import { loginMutation } from 'api'
 
 export default () => {
-  const { register, handleSubmit, errors, watch } = useForm()
+  const { register, handleSubmit, errors } = useForm()
   const { login: onLogin } = useContext(UserContext)
 
   const [, login] = useMutation(loginMutation)

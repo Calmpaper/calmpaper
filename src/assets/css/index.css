@@ -253,3 +253,9 @@
 .read-book-main img {
   max-width: 250px !important;
 }
+
+.popup2 {
+  border: 1px solid #ebeaeb;
+  border-radius: 3px;
+  background: white;
+}

@@ -1,4 +1,5 @@
 import React, { useEffect, useContext } from 'react'
+import { Helmet } from 'react-helmet'
 import { UserContext } from 'context'
 
 import Flex from 'components/atoms/flex'
@@ -40,6 +41,10 @@ export default () => {
 
   return (
     <div className="page-home">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Calmpaper</title>
+      </Helmet>
       <Header />
       <Flex column style={{ marginTop: 124 }}>
         <LastChapters />
@@ -54,16 +59,13 @@ export default () => {
 }
 
 const Landing = () => (
-  <div
-    className="page-home04 landing-new"
-    style={{ paddingTop: '100px', zoom: '80%' }}
-  >
+  <div className="page-home04 landing-new" style={{ paddingTop: '100px' }}>
     <div className="main">
       <div className="container">
         <div className="row">
-          <h1 className="main-title" style={{ fontSize: 80 }}>
+          <h1 className="main-title">
             A platform for <br />
-            unpublished books.
+            unfinished books.
           </h1>
           <p className="main-text">
             Share your unfinished books to your fans after finishing the first
@@ -86,7 +88,7 @@ const Landing = () => (
             <div className="item-img">
               <img src="img/home04/home-img01.svg" alt="home-img" />
             </div>
-            <h2 className="item-title">Write Anything</h2>
+            <h2 className="item-title">1. Write Anything</h2>
             <p className="item-text">
               Write guides, stories, comics, fiction, non-fiction... etc. Your
               book, your rules.
@@ -96,7 +98,7 @@ const Landing = () => (
             <div className="item-img">
               <img src="img/home04/home-img02.svg" alt="home-img" />
             </div>
-            <h2 className="item-title">Share to your fans</h2>
+            <h2 className="item-title">2. Share to your fans</h2>
             <p className="item-text">
               Let your followers subscribe to your content and comment on every
               page.
@@ -110,76 +112,10 @@ const Landing = () => (
                 className="item-img"
               />
             </div>
-            <h2 className="item-title">Earn</h2>
+            <h2 className="item-title">3. Earn</h2>
             <p className="item-text">
-              Allow subscriptions and donations, while you write when you have
+              Allow subscriptions and donations, while you write on your own
               time.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-)
-
-const LandingOld = () => (
-  <div className="page-home04" style={{ paddingTop: '100px' }}>
-    <div className="main">
-      <div className="container">
-        <div className="row">
-          <h1 className="main-title">
-            A platform for <br />
-            ongoing books.
-          </h1>
-          <p className="main-text">
-            Why wait 300 pages later to share your book? Publish your book and
-            grow your readers after finishing the first page.
-          </p>
-          <a
-            href={`${process.env.REACT_APP_BACKEND_URL}/auth/google`}
-            className="btn btn-color"
-            style={{ cursor: 'pointer' }}
-          >
-            Get started
-          </a>
-        </div>
-      </div>
-    </div>
-    <div className="items">
-      <div className="container">
-        <div className="row">
-          <div className="item">
-            <div className="item-img">
-              <img src="img/home04/home-img01.svg" alt="home-img" />
-            </div>
-            <h2 className="item-title">Write Anything</h2>
-            <p className="item-text">
-              Write as much or as little as you want. What matters is quality
-              not quantity.
-            </p>
-          </div>
-          <div className="item">
-            <div className="item-img">
-              <img src="img/home04/home-img02.svg" alt="home-img" />
-            </div>
-            <h2 className="item-title">Raise a Community</h2>
-            <p className="item-text">
-              Encourage discussions with a comments section whenever you add a
-              new chapter.
-            </p>
-          </div>
-          <div className="item">
-            <div className="item-img">
-              <img
-                src="img/home04/home-img03.svg"
-                alt="home-img"
-                className="item-img"
-              />
-            </div>
-            <h2 className="item-title">Start earning</h2>
-            <p className="item-text">
-              Let your readers subscribe and donate to you, while you write on
-              your own time.
             </p>
           </div>
         </div>

@@ -18,6 +18,7 @@ import 'assets/css/index.css'
 // import 'assets/home02.scss'
 // import 'assets/css/yandex.css'
 import 'assets/css/main.css'
+import 'assets/css/ADDITIONS.css'
 
 // import 'assets/css/stripe.css'
 
