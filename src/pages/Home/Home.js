@@ -29,7 +29,7 @@ export default () => {
     )
   }
 
-  if (!user) {
+  if (!user && navigator.userAgent !== 'ReactSnap') {
     return (
       <>
         <Header fullWidth black />
