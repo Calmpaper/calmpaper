@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import ReactDOM from 'react-dom'
+import { hydrate, render } from 'react-dom'
 import { createClient, Provider as URQLProvider } from 'urql'
 import { BrowserRouter as RouterProvider } from 'react-router-dom'
 
@@ -117,14 +117,26 @@ const App = () => {
   )
 }
 
-ReactDOM.render(
+const rootElement = document.getElementById('root')
+// if (rootElement.hasChildNodes()) {
+//   hydrate(
+//     <React.StrictMode>
+//       <Providers>
+//         <App />
+//       </Providers>
+//     </React.StrictMode>,
+//     rootElement,
+//   )
+// } else {
+render(
   <React.StrictMode>
     <Providers>
       <App />
     </Providers>
   </React.StrictMode>,
-  document.getElementById('root'),
+  rootElement,
 )
+// }
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

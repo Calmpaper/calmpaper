@@ -27,7 +27,7 @@ export default ({ tab, update }) => {
   const { user } = useContext(UserContext)
   const { location } = useHistory()
   const [showBookPublishedOverlay, setShowBookPublishedOverlay] = useState(
-    location.state.showBookPublishedOverlay,
+    location.state ? location.state.showBookPublishedOverlay : false,
   )
 
   const [{ data: { book } = {}, fetching, error }, reexecuteQuery] = useQuery({

@@ -1,9 +1,0 @@
-.landing-new .items .row {
-  display: flex;
-  flex-direction: row;
-}
-.landing-new .items .item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
