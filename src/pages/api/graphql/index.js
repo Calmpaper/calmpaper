@@ -75,5 +75,5 @@ const server = new ApolloServer({
 })
 
 export default server.createHandler({
-  path: '/api/graphql',
+  url: 'http://localhost:4000',
 })

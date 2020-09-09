@@ -2,13 +2,11 @@ import Head from 'next/head'
 import UserProvider from 'context/UserContext'
 import { Provider as URQLProvider } from 'urql'
 
-import 'assets/css/main.css'
-import 'assets/css/index.css'
-// import 'assets/css/yandex.css'
-import 'assets/sass/main.scss'
-
 import client from 'api/client'
 import * as atoms from 'components/atoms'
+
+import Icons from 'assets/icons'
+import 'assets/css/main.css'
 
 const Providers = ({ children }) => (
   <URQLProvider value={client}>
@@ -64,6 +62,7 @@ const App = ({ Component, pageProps }) => {
         <link rel="shortcut icon" href="/img/ico.png" />
       </Head>
       <Providers>
+        <Icons />
         <atoms.loader />
         <Component {...pageProps} />
       </Providers>
