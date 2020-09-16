@@ -31,11 +31,41 @@ const User = ({ user }) => (
 
 const LoginBtn = () => (
   <li className="header-nav__item" style={{ position: 'relative' }}>
-    <Link className="header-nav__link" to={`/login`}>
+    <a
+      className="header-nav__link"
+      href={`${process.env.REACT_APP_BACKEND_URL}/auth/google`}
+    >
       Log In
-    </Link>
+    </a>
   </li>
 )
+// const LoginBtn = () => (
+//   <li className="header-nav__item" style={{ position: 'relative' }}>
+//     <Link className="header-nav__link" to={`/login`}>
+//       Log In
+//     </Link>
+//   </li>
+// )
+
+const SignupBtn = () => (
+  <li className="header-nav__item" style={{ marginRight: 0 }}>
+    <a
+      className="btn-login"
+      href={`${process.env.REACT_APP_BACKEND_URL}/auth/google`}
+    >
+      Sign Up
+    </a>
+  </li>
+)
+
+// const SignupBtn = () => (
+
+//           <li className="header-nav__item" style={{ marginRight: 0 }}>
+//             <Link to={`/signup`} className="btn-login">
+//               Sign Up
+//             </Link>
+//           </li>
+// )
 
 export default ({ home }) => {
   const { user } = useContext(UserContext)
@@ -68,15 +98,7 @@ export default ({ home }) => {
               {!user && <LoginBtn />}
             </ul>
           </nav>
-          {!user ? (
-            <li className="header-nav__item" style={{ marginRight: 0 }}>
-              <Link to={`/signup`} className="btn-login">
-                Sign Up
-              </Link>
-            </li>
-          ) : (
-            <User user={user} />
-          )}
+          {!user ? <SignupBtn /> : <User user={user} />}
         </div>
       </div>
     </>
