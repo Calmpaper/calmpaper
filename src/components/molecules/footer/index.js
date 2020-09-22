@@ -18,9 +18,11 @@ const Links = () => (
         Terms of Service
       </a>
     </li>
+    {/*
     <li>
       <a href="https://calmpaper.com/books/8/1">About Us</a>
     </li>
+*/}
     <li>
       <a href="mailto:hi@calmpaper.com">Contact Us</a>
     </li>

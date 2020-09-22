@@ -1,8 +1,7 @@
-import React, { useEffect, useContext } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { UserContext } from 'context'
-import { useParams } from 'react-router-dom'
+import { useParams, useHistory } from 'react-router-dom'
 import { useQuery, useMutation } from 'urql'
-import { Helmet } from 'react-helmet'
 import {
   getChapterByBookQuery,
   incrementChapterViewsMutation,
@@ -13,8 +12,10 @@ import Loader from 'components/Loader'
 import Header from 'components/Layout/Header'
 import Footer from 'components/molecules/footer'
 import Comments from 'components/Comments'
+import SharePopup from 'components/Popups/SharePopup'
 
 import ChapterNavigation from 'components/molecules/chapter_navigation'
+import Meta from './Chapter.meta'
 import Breadcrumbs from './Breadcrumbs'
 import Book from './Book'
 import Content from './Content'
@@ -25,6 +26,10 @@ import Actions from './Actions'
 export default () => {
   const { user } = useContext(UserContext)
   const { book: bookId, chapter: chapterPage } = useParams()
+  const { location } = useHistory()
+  const [showSharePopup, setShowSharePopup] = useState(
+    location.state ? location.state.showSharePopup : false,
+  )
 
   const [
     { data: { chapterByBook = [] } = {}, fetching, error },
@@ -70,34 +75,12 @@ export default () => {
       chapterId: chapter.id,
     })
   }
+  console.log(location)
 
   return (
     <>
-      <Helmet>
-        <meta charSet="utf-8" />
-        <title>
-          {`${chapter.title}. ${chapter.book.name} by ${
-            chapter.author.username || chapter.author.fullname
-          } at Calmpaper`}{' '}
-        </title>
-
-        <meta
-          property="og:title"
-          content={`${chapter.title}. ${chapter.book.name} by ${
-            chapter.author.username || chapter.author.fullname
-          } at Calmpaper`}
-        />
-        <meta property="og:description" content={chapter.content} />
-        <meta property="og:image" content={chapter.book.image} />
-        <meta
-          property="og:url"
-          content={`https://calmpaper.org/books/${chapter.book.id}/${chapterPage}`}
-        />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta property="og:site_name" content="Calmpaper" />
-        <meta name="twitter:image:alt" content={`${chapter.book.name} cover`} />
-        <meta name="twitter:site" content="@Calmpaper" />
-      </Helmet>
+      <Meta chapter={chapter} chapterPage={chapterPage} />
+      {showSharePopup && <SharePopup close={() => setShowSharePopup(false)} />}
       <Header withLine />
       <div className="page-read-book">
         <Breadcrumbs chapter={chapter} author={chapter.author} />

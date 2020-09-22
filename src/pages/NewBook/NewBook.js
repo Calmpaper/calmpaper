@@ -62,7 +62,7 @@ export default () => {
           })
         push({
           pathname: `/books/${book.id}`,
-          state: { showBookPublishedOverlay: true },
+          // state: { showBookPublishedOverlay: true },
         })
       })
     }
@@ -97,7 +97,7 @@ export default () => {
 
             <div className="block block02 add-series-title">
               <h3 className="title size04">
-                Name
+                Name*
                 {errors.name && (
                   <span className="red-title">{` (required)`}</span>
                 )}
@@ -113,7 +113,7 @@ export default () => {
             </div>
             <div className="block block03 add-series-desc">
               <h3 className="title size04">
-                Description
+                Description*
                 {errors.description && (
                   <span className="red-title">{` (required)`}</span>
                 )}

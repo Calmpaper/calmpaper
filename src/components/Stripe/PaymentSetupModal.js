@@ -1,36 +1,11 @@
 import React, { useContext } from 'react'
-import Modal from 'react-modal'
-import querystring from 'querystring'
 import { UserContext } from 'context'
-
-import { loadStripe } from '@stripe/stripe-js'
-import {
-  CardElement,
-  Elements,
-  useStripe,
-  useElements,
-} from '@stripe/react-stripe-js'
-
-// var stripe = Stripe('pk_test_51HAaFzCZ9YI3n0PYwByukqUnNaSA1Jv3XGgyXxT71sY8TtUiLRo0Xeixsp6HKRtzdwNbiFjDwnXcCsdfyejLg12p00CQQoXxJN', {
-//   stripeAccount: '{{CONNECTED_STRIPE_ACCOUNT_ID}}'
-// });
-
+import Modal from 'react-modal'
 import Flex from 'components/Flex'
-import Card from 'components/Stripe/CardElement'
+import querystring from 'querystring'
 
-const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY)
-
-// import BookingConfirmedModal from './bookingConfirmedModal';
-// import BookingPayment from './bookingPayment';
-const isBookingConfirmed = false
-
-const BookingConfirmedModal = () => <div>BookingConfirmedModal</div>
-const BookingPayment = () => <div>BookingPayment</div>
-
-const DonationModal = ({ show, close, chapter }) => {
+export default ({ show, close, chapter }) => {
   const { user } = useContext(UserContext)
-  const stripe = useStripe()
-  const elements = useElements()
 
   const handle = () => {
     let stripeConnectParams = {
@@ -191,9 +166,3 @@ const DonationModal = ({ show, close, chapter }) => {
     </Modal>
   )
 }
-
-export default (props) => (
-  <Elements stripe={stripePromise}>
-    <DonationModal {...props} />
-  </Elements>
-)

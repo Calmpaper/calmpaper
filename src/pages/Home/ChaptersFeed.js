@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
+import { UserContext } from 'context'
 import { useQuery } from 'urql'
 import { getLastChaptersQuery } from 'api'
 
@@ -9,12 +10,14 @@ export default ({ sort }) => {
   const [page, setPage] = useState(0)
   const [allChapters, setChapters] = useState([])
   const [refetch, setRefetch] = useState(false)
+  const { user } = useContext(UserContext)
   const [
     { data: { chaptersFeed: chapters = [] } = {}, fetching, error },
   ] = useQuery({
     query: getLastChaptersQuery,
     variables: {
       skip: 3 * page,
+      userId: user.id,
     },
     // pause: refetch,
   })
@@ -31,9 +34,7 @@ export default ({ sort }) => {
     <div className="latest">
       <div className="container">
         <div className="row">
-          <h2 className="title size02">
-            A better place to read and write things that matter
-          </h2>
+          <h2 className="title size02">Updates from books you follow</h2>
         </div>
         <div className="row" style={{ maxWidth: '750px', margin: 'auto' }}>
           {allChapters.map((chapter) => (

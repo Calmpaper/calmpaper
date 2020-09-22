@@ -1,12 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 const Thumb = ({ like, onLike }) => {
-  const isLiked = !!like
+  const [isLiked, setLiked] = useState(!!like)
 
   return (
     <button
       className={`comment-like__button ${isLiked ? '_active' : ''}`}
-      onClick={() => onLike(like)}
+      onClick={() => {
+        onLike(like)
+        setLiked(!isLiked)
+      }}
     >
       <svg
         className={`comment-like__icon ${isLiked ? '_to_active' : ''}`}

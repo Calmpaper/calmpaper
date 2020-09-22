@@ -1,71 +1,13 @@
 import React, { useContext } from 'react'
 import { UserContext } from 'context'
-import { Link } from 'react-router-dom'
 
 import Notifications from 'components/Notifications'
 import Logo from './Logo'
 import Read from './Read'
 import Create from './Create'
-
-const User = ({ user }) => (
-  <Link
-    to={`/users/${user.username ? `@${user.username}` : user.id}`}
-    className="btn-login"
-    style={{
-      width: 'auto',
-      padding: '0 6px',
-      userSelect: 'none',
-      fontWeight: 500,
-    }}
-  >
-    <img
-      width="24"
-      height="24"
-      alt="Avatar"
-      src={user.avatar}
-      style={{ borderRadius: '100%', marginRight: 6 }}
-    />
-    {user.username || user.givenname}
-  </Link>
-)
-
-const LoginBtn = () => (
-  <li className="header-nav__item" style={{ position: 'relative' }}>
-    <a
-      className="header-nav__link"
-      href={`${process.env.REACT_APP_BACKEND_URL}/auth/google`}
-    >
-      Log In
-    </a>
-  </li>
-)
-// const LoginBtn = () => (
-//   <li className="header-nav__item" style={{ position: 'relative' }}>
-//     <Link className="header-nav__link" to={`/login`}>
-//       Log In
-//     </Link>
-//   </li>
-// )
-
-const SignupBtn = () => (
-  <li className="header-nav__item" style={{ marginRight: 0 }}>
-    <a
-      className="btn-login"
-      href={`${process.env.REACT_APP_BACKEND_URL}/auth/google`}
-    >
-      Sign Up
-    </a>
-  </li>
-)
-
-// const SignupBtn = () => (
-
-//           <li className="header-nav__item" style={{ marginRight: 0 }}>
-//             <Link to={`/signup`} className="btn-login">
-//               Sign Up
-//             </Link>
-//           </li>
-// )
+import LoginBtn from './LoginBtn'
+import SignupBtn from './SignupBtn'
+import User from './User'
 
 export default ({ home }) => {
   const { user } = useContext(UserContext)

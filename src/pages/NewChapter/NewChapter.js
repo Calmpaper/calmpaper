@@ -1,14 +1,38 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useRef } from 'react'
 import { UserContext } from 'context'
 import { useHistory, useParams, useLocation } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { useMutation } from 'urql'
 import { createChapterMutation, updateChapterMutation } from 'api'
+import draftToHtml from 'draftjs-to-html'
 
-import TextareaAutosize from 'react-textarea-autosize'
+// import TextareaAutosize from 'react-textarea-autosize'
+import { Editor } from 'react-draft-wysiwyg'
+import { EditorState, convertToRaw, ContentState } from 'draft-js'
+import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
+// import Editor from 'react-medium-editor'
 import Header from 'components/Layout/Header'
-import Editor from 'components/Editor'
+// import Editor from 'components/Editor'
 import Footer from 'components/molecules/footer'
+
+function uploadImageCallBack(file) {
+  return new Promise((resolve, reject) => {
+    const xhr = new XMLHttpRequest() // eslint-disable-line no-undef
+    xhr.open('POST', 'https://api.imgur.com/3/image')
+    xhr.setRequestHeader('Authorization', 'Client-ID 8d26ccd12712fca')
+    const data = new FormData() // eslint-disable-line no-undef
+    data.append('image', file)
+    xhr.send(data)
+    xhr.addEventListener('load', () => {
+      const response = JSON.parse(xhr.responseText)
+      resolve(response)
+    })
+    xhr.addEventListener('error', () => {
+      const error = JSON.parse(xhr.responseText)
+      reject(error)
+    })
+  })
+}
 
 export default () => {
   const { user } = useContext(UserContext)
@@ -34,12 +58,17 @@ export default () => {
         const chapterPage =
           chapter.book.chapters.findIndex((c) => c.id === chapter.id) + 1
 
-        push(`/books/${bookId}/${chapterPage}`)
+        push({
+          pathname: `/books/${bookId}/${chapterPage}`,
+          // state: { showSharePopup: true },
+        })
       })
     } else {
       createChapter({
         ...data,
-        content: value,
+        // content: draftToHtml(value),
+        // content: value,
+        content: draftToHtml(convertToRaw(value.getCurrentContent())),
         userId: user.id,
         bookId: parseInt(bookId),
       }).then(({ data: { createOneChapter: chapter } }) => {
@@ -54,7 +83,10 @@ export default () => {
           })
         const chapterPage =
           chapter.book.chapters.findIndex((c) => c.id === chapter.id) + 1
-        push(`/books/${bookId}/${chapterPage}`)
+        push({
+          pathname: `/books/${bookId}/${chapterPage}`,
+          state: { showSharePopup: true },
+        })
       })
     }
   }
@@ -64,6 +96,8 @@ export default () => {
     createChapterMutation,
   )
   if (error) return <p>Oh no... {error.message}</p>
+
+  const [editorRef, setEditorRef] = useState(null)
 
   return (
     <>
@@ -97,6 +131,12 @@ export default () => {
                 placeholder="Title"
                 ref={register({ required: true })}
                 autoFocus
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    console.log('yoyo')
+                    editorRef.focus()
+                  }
+                }}
               />
             </div>
             <div className="block block03 add-series-desc">
@@ -106,7 +146,47 @@ export default () => {
                   <span className="red-title">{` (required)`}</span>
                 )}
               </h3>
-              <Editor value={value} setValue={setValue} />
+              <Editor
+                editorState={value}
+                toolbarClassName="toolbarClassName"
+                wrapperClassName="input"
+                editorClassName="editorClassName"
+                editorRef={(ref) => setEditorRef(ref)}
+                stripPastedStyles={true}
+                toolbar={{
+                  options: ['inline', 'list', 'link', 'emoji', 'image'],
+                  inline: {
+                    options: ['bold', 'italic', 'underline', 'strikethrough'],
+                  },
+                  list: {
+                    options: ['unordered', 'ordered'],
+                  },
+                  link: {
+                    showOpenOptionOnHover: false,
+                    defaultTargetOption: '_blank',
+                    options: ['link'],
+                  },
+                  image: {
+                    uploadCallback: uploadImageCallBack,
+                    alt: { present: true, mandatory: false },
+                  },
+                }}
+                onEditorStateChange={(editorState) => {
+                  console.log(editorState)
+                  console.log(
+                    draftToHtml(convertToRaw(editorState.getCurrentContent())),
+                  )
+                  setValue(editorState)
+                }}
+              />
+              {/*
+              <Editor
+                text={value}
+                onChange={(text) => setValue(text)}
+                className="input"
+                style={{ minHeight: 300 }}
+              />
+*/}
               {/*
               <TextareaAutosize
                 name="content"

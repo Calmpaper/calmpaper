@@ -14,7 +14,7 @@ export default ({ bookId, chapterId, chapter, hide }) => {
 
   return (
     <div style={{ position: 'absolute', marginLeft: 35, marginTop: 30 }}>
-      <div className="zen-ui-context-menu" style={{ background: 'white' }}>
+      <div className="dropdown" style={{ background: 'white' }}>
         <button
           type="button"
           className="zen-ui-context-menu__item comment-menu-item _edit"

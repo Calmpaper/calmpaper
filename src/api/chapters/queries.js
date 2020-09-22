@@ -52,9 +52,62 @@ export const getChapterQuery = gql`
   ${LikeFragment}
 `
 
+// All:
+// export const getLastChaptersQuery = gql`
+//   query($skip: Int!) {
+//     chaptersFeed(skip: $skip) {
+//       ...Chapter
+//       createdAt
+//       content
+//       author {
+//         ...User
+//       }
+//       book {
+//         ...Book
+//         chapters {
+//           id
+//         }
+//         genres {
+//           ...Genre
+//         }
+//       }
+//     }
+//   }
+//   ${UserFragment}
+//   ${BookFragment}
+//   ${ChapterFragment}
+//   ${GenreFragment}
+// `
+
 export const getLastChaptersQuery = gql`
-  query($skip: Int!) {
-    chaptersFeed(skip: $skip) {
+  query($skip: Int!, $userId: Int!) {
+    chaptersFeed(skip: $skip, userId: $userId) {
+      ...Chapter
+      createdAt
+      content
+      author {
+        ...User
+      }
+      book {
+        ...Book
+        chapters {
+          id
+        }
+        genres {
+          ...Genre
+        }
+      }
+    }
+  }
+  ${UserFragment}
+  ${BookFragment}
+  ${ChapterFragment}
+  ${GenreFragment}
+`
+
+export const getLastChaptersByAuthorQuery = gql`
+  query($skip: Int!, $authorId: Int!) {
+    chaptersFeedByAuthor(skip: $skip, authorId: $authorId) {
       ...Chapter
       createdAt
       content

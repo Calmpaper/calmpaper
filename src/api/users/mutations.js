@@ -81,13 +81,25 @@ export const unfollowUserMutation = gql`
 `
 
 export const editUserMutation = gql`
-  mutation($userId: Int!, $username: String, $avatar: String) {
+  mutation(
+    $userId: Int!
+    $username: String
+    $fullname: String
+    $avatar: String
+  ) {
     updateOneUser(
       where: { id: $userId }
-      data: { username: $username, avatar: $avatar }
+      data: {
+        username: $username
+        fullname: $fullname
+        givenname: $fullname
+        avatar: $avatar
+      }
     ) {
       id
       username
+      fullname
+      givenname
       avatar
     }
   }

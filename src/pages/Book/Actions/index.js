@@ -22,7 +22,6 @@ export default ({ bookId, book }) => {
           <use xlinkHref="#dots-s--inline" />
         </svg>
       </button>
-
       {showDropdown && (
         <MoreMenu
           hide={() => setShowDropdown(false)}
