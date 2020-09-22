@@ -17,7 +17,7 @@ const UserAvatar = ({ userId }) => {
   })
   if (fetching || !user) return null
   return (
-    <S.Avatar className="avatar">
+    <S.Avatar className="ravatar">
       <img src={user.avatar} alt={`${user.avatar}-pic`} />
     </S.Avatar>
   )
@@ -296,7 +296,7 @@ export default ({ notification, closeNotifications: close }) => {
           </Flex>
 
           <div
-            className="avatars"
+            className="ravatars"
             style={{
               marginRight: '6px',
             }}

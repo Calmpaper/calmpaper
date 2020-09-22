@@ -1,21 +1,24 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { UserContext } from 'context'
+import { UserContext, GetStreamContext } from 'context'
 import { useParams } from 'react-router-dom'
 import { useQuery } from 'urql'
 import { getUserQuery } from 'api'
 import { useMutation } from 'urql'
-import { editUserMutation } from 'api'
+import { editUserMutation, followUserMutation, unfollowUserMutation } from 'api'
 
 import Loader from 'components/Loader'
 import Header from 'components/Layout/Header'
 import Footer from 'components/molecules/footer'
 import Books from './Books'
-import Flex from 'components/Flex'
+import Feed from './Feed'
+// import Flex from 'components/Flex'
 import AvatarInput from 'components/Input/AvatarInput'
 
 export default () => {
   const [isEditing, setEditing] = useState(false)
-  const [editingValue, setEditingValue] = useState(null)
+  const [tab, setTab] = useState('feed')
+  const [editingUsername, setEditingUsername] = useState(null)
+  const [editingFullname, setEditingFullname] = useState(null)
   const { id: slug } = useParams()
 
   let userId
@@ -27,7 +30,7 @@ export default () => {
     userId = slug
   }
 
-  const { logout, user: loggedUser } = useContext(UserContext)
+  const { user: loggedUser } = useContext(UserContext)
   const [image, setImage] = useState(null)
 
   const [, editUser] = useMutation(editUserMutation)
@@ -41,14 +44,33 @@ export default () => {
 
   useEffect(() => {
     if (user && user.avatar) {
-      setEditingValue(user.username || user.fullname)
+      setEditingUsername(user.username || `user${user.id}`)
+      setEditingFullname(user.fullname)
       setImage(user.avatar)
     }
   }, [user])
 
   useEffect(() => {
+    setImage(image)
     // update profile image
   }, [image])
+
+  const { notificationsFeed } = useContext(GetStreamContext)
+  const isFollowing =
+    user && loggedUser && loggedUser.following.find((u) => u.id === user.id)
+
+  const [, followUser] = useMutation(followUserMutation)
+  const [, unfollowUser] = useMutation(unfollowUserMutation)
+
+  const follow = () => {
+    if (isFollowing) {
+      notificationsFeed.unfollow('user', user.id)
+      unfollowUser({ followerId: loggedUser.id, followingId: user.id })
+    } else {
+      notificationsFeed.follow('user', user.id)
+      followUser({ followerId: loggedUser.id, followingId: user.id })
+    }
+  }
 
   if (fetching) return <Loader />
   if (error) return <p>Oh no... {error.message}</p>
@@ -56,7 +78,7 @@ export default () => {
   return (
     <>
       <Header withLine />
-      <div className="page-home05">
+      <div className="page-home05 page-home">
         <div className="user-block">
           <div
             className="container"
@@ -69,25 +91,39 @@ export default () => {
                 ) : (
                   <div
                     className="user-avatar"
-                    style={{ backgroundImage: `url(${user.avatar})` }}
+                    style={{ backgroundImage: `url("${user.avatar}")` }}
                   />
                 )}
 
-                <div className="user-info">
-                  <div className="user-name">
-                    {user.fullname || user.username}
-                  </div>
+                <div
+                  className="user-info"
+                  style={
+                    isEditing
+                      ? { display: 'flex', flexDirection: 'column' }
+                      : {}
+                  }
+                >
+                  {isEditing ? (
+                    <input
+                      value={editingFullname}
+                      onChange={(e) => setEditingFullname(e.target.value)}
+                      autoFocus
+                    />
+                  ) : (
+                    <div className="user-name">{user.fullname}</div>
+                  )}
 
-                  {user.username &&
-                    (isEditing ? (
-                      <input
-                        value={editingValue}
-                        onChange={(e) => setEditingValue(e.target.value)}
-                        autoFocus
-                      />
-                    ) : (
-                      <div className="user-town">{`@${user.username}`}</div>
-                    ))}
+                  {isEditing ? (
+                    <input
+                      value={editingUsername}
+                      onChange={(e) => setEditingUsername(e.target.value)}
+                      autoFocus
+                    />
+                  ) : (
+                    <div className="user-town">
+                      {user.username ? `@${user.username}` : `@user${user.id}`}
+                    </div>
+                  )}
                 </div>
               </div>
               <div className="item item-buttons">
@@ -95,24 +131,14 @@ export default () => {
                 (loggedUser.id === parseInt(userId) ||
                   loggedUser.username === username) ? (
                   <>
-                    <Flex
-                      alignCenter
-                      justifyCenter
-                      className="btn btn-line"
-                      style={{
-                        alignSelf: 'flex-end',
-                      }}
-                      onClick={logout}
-                    >
-                      Log out
-                    </Flex>
                     {isEditing ? (
                       <button
                         className="btn btn-line"
                         onClick={() => {
                           editUser({
                             userId: loggedUser.id,
-                            username: editingValue,
+                            username: editingUsername,
+                            fullname: editingFullname,
                             avatar: image,
                           })
                           setEditing(false)
@@ -131,9 +157,13 @@ export default () => {
                   </>
                 ) : (
                   <>
-                    <button className="btn btn-line">Follow</button>
+                    <button className="btn btn-line" onClick={follow}>
+                      {isFollowing ? 'Unfollow' : 'Follow'}
+                    </button>
+                    {/*
                     <button className="btn btn-line">Message</button>
                     <button className="btn btn-line">Tip</button>
+                    */}
                   </>
                 )}
               </div>
@@ -143,14 +173,25 @@ export default () => {
         <div className="tabs">
           <div className="container">
             <div className="row">
-              <a href className="active">
+              <a
+                onClick={() => setTab('feed')}
+                className={tab === 'feed' ? 'active' : ''}
+                style={{ cursor: 'pointer' }}
+              >
+                Feed
+              </a>
+              <a
+                onClick={() => setTab('books')}
+                className={tab === 'books' ? 'active' : ''}
+                style={{ cursor: 'pointer' }}
+              >
                 All books
               </a>
-              <a href>Popular</a>
             </div>
           </div>
         </div>
-        <Books books={user.books} />
+        {tab === 'books' && <Books books={user.books} />}
+        {tab === 'feed' && <Feed authorId={user.id} />}
 
         <Footer centered />
       </div>

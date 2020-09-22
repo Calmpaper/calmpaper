@@ -145,6 +145,7 @@ export default ({ chapter, reexecuteQuery }) => {
           )}
         </div>
       </div>
+      {/*
       <div
         className="widget-donations notification-btn"
         onClick={() => setShowDonations(!showDonations)}
@@ -155,8 +156,9 @@ export default ({ chapter, reexecuteQuery }) => {
         {chapter.donations.length > 0 && (
           <span className="notification-count">{chapter.donations.length}</span>
         )}
-        {showDonations && <DonationsPopup donations={chapter.donations} />}
+            {showDonations && <DonationsPopup donations={chapter.donations} />}
       </div>
+      */}
     </div>
   )
 }

@@ -37,7 +37,7 @@ const CreatePopup = ({ bookId }) => {
 const AddBook = () => {
   return (
     <Link to="/new-book" className="header-nav__link">
-      Add book
+      New book
     </Link>
   )
 }

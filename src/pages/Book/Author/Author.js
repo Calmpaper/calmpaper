@@ -42,23 +42,29 @@ export default ({ author, bookId }) => {
           <div className="author-name">
             {author.username || author.fullname}
           </div>
-          <div className="author-country">{`${author.followers.length} ${
-            author.followers.length === 1 ? 'follower' : 'followers'
-          }`}</div>
+          {author.followers.length > 0 ? (
+            <div className="author-country">{`${author.followers.length} ${
+              author.followers.length === 1 ? 'follower' : 'followers'
+            }`}</div>
+          ) : (
+            <div className="author-country">
+              {user.username ? `@${user.username}` : `@user${user.id}`}
+            </div>
+          )}
         </div>
       </div>
       <div className="buttons">
         <button className="btn btn-line btn-br" onClick={follow}>
           {isFollowing ? 'Unfollow' : 'Follow'}
         </button>
-        {author.stripeId && (
+        {/* author.stripeId && (
           <button
             className="btn btn-line btn-br"
             onClick={() => setShowDonationModal(true)}
           >
             Donate
           </button>
-        )}
+            ) */}
         {/*
         <button className="btn btn-line btn-br" onClick={message}>
           Message

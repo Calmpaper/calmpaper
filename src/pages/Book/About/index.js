@@ -15,11 +15,8 @@ export default ({ book }) => {
   const isFavorite =
     user && book.readers.find((reader) => reader.id === user.id)
 
-  // eslint-disable-next-line no-unused-vars
-  const [_, addBookToFavorites] = useMutation(addBookToFavoritesMutation)
-
-  // eslint-disable-next-line no-unused-vars
-  const [__, removeBookFromFavorites] = useMutation(
+  const [, addBookToFavorites] = useMutation(addBookToFavoritesMutation)
+  const [, removeBookFromFavorites] = useMutation(
     removeBookFromFavoritesMutation,
   )
 
@@ -68,24 +65,38 @@ export default ({ book }) => {
             style={book.chapters.length === 0 ? { marginLeft: 0 } : {}}
           >
             {isFavorite ? `Remove` : `Follow`}
-
+            {/*
             <span className="icon-dropdown">
               <svg className="icon icon-arrow-down">
                 <use xlinkHref="#icon-arrow-down" />
               </svg>
             </span>
+            */}
           </button>
         </div>
       </div>
+
       <div className="col col-img">
-        <div
-          className="about-book-main-img"
-          style={{
-            background: `url("${book.image || '/img/placeholder.jpg'}")`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-          }}
-        />
+        {book.image ? (
+          <div
+            className="about-book-main-img"
+            style={{
+              background: `url("${book.image || '/img/placeholder.jpg'}")`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+            }}
+          />
+        ) : (
+          <div
+            className="about-book-main-img book-cover"
+            style={{ background: `url('/img/book-cover.png' )` }}
+          >
+            <div className="book-cover__title">{book.name}</div>
+            <div className="book-cover__author">{`by ${
+              book.author.username || book.author.fullname
+            }`}</div>
+          </div>
+        )}
       </div>
     </div>
   )

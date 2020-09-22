@@ -1,0 +1,25 @@
+a {
+  color: blue;
+}
+
+strong {
+  font-weight: 600;
+}
+
+.rdw-editor-toolbar {
+  border: none;
+  padding: 0;
+}
+
+.rdw-editor-wrapper {
+  min-height: 330px;
+}
+
+.rdw-editor-main {
+  min-height: 260px;
+}
+
+.public-DraftEditor-content span {
+  color: inherit;
+  font-weight: inherit;
+}

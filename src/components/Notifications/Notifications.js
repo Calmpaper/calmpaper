@@ -3,6 +3,131 @@ import { GetStreamContext } from 'context'
 import Notification from './Notification'
 import * as S from './Notifications.styled'
 
+// <div className="dropdown header-notification">
+//   <button className="dropdown-btn notification-btn">
+//     <svg className="icon icon-bell">
+//       <use xlinkHref="#icon-bell" />
+//     </svg>
+//     <span className="notification-count">25</span>
+//   </button>
+//   <div className="dropdown-box notification-box notification-header-box">
+//     <div className="dropdown-box__title">Notifications</div>
+//     <div className="dropdown-box__body custom-scroll">
+//       {/* user-box */}
+//       <div className="user-box">
+//         <div
+//           className="user-box__avatar"
+//           style={{ backgroundImage: 'url(img/avatar01.jpg)' }}
+//         />
+//         <div className="user-box__info">
+//           <div className="user-box__name">Ryan Putnam</div>
+//           <div className="user-box__inline">
+//             <div className="user-box__comment">Rated your book</div>
+//             <div className="user-box__date">1 day ago</div>
+//           </div>
+//         </div>
+//       </div>
+//       {/* user-box */}
+//       <div className="user-box">
+//         <div
+//           className="user-box__avatar"
+//           style={{ backgroundImage: 'url(img/avatar02.jpg)' }}
+//         />
+//         <div className="user-box__info">
+//           <div className="user-box__name">Riccardo Carlet</div>
+//           <div className="user-box__comment">
+//             Wrote a comment for your book
+//           </div>
+//           <div className="user-box__inline">
+//             <div className="user-box__link">The Glass Hotel</div>
+//             <div className="user-box__date">2 days ago</div>
+//           </div>
+//         </div>
+//       </div>
+//       {/* user-box */}
+//       <div className="user-box">
+//         <div
+//           className="user-box__avatar"
+//           style={{ backgroundImage: 'url(img/avatar03.jpg)' }}
+//         />
+//         <div className="user-box__info">
+//           <div className="user-box__name">Jeremy Goldberg</div>
+//           <div className="user-box__inline">
+//             <div className="user-box__comment">Rated your book</div>
+//             <div className="user-box__date">2 days ago</div>
+//           </div>
+//         </div>
+//       </div>
+//       {/* user-box */}
+//       <div className="user-box">
+//         <div
+//           className="user-box__avatar"
+//           style={{ backgroundImage: 'url(img/avatar04.jpg)' }}
+//         />
+//         <div className="user-box__info">
+//           <div className="user-box__name">Scott Boms</div>
+//           <div className="user-box__inline">
+//             <div className="user-box__comment">
+//               Wrote a comment for your book
+//             </div>
+//             <div className="user-box__inline">
+//               <div className="user-box__link">
+//                 American Dirt: A Novel
+//               </div>
+//               <div className="user-box__date">2 days ago</div>
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+//       {/* user-box */}
+//       <div className="user-box">
+//         <div
+//           className="user-box__avatar"
+//           style={{ backgroundImage: 'url(img/avatar05.jpg)' }}
+//         />
+//         <div className="user-box__info">
+//           <div className="user-box__name">Geunbae "GB" Lee</div>
+//           <div className="user-box__inline">
+//             <div className="user-box__comment">Sent you a message</div>
+//             <div className="user-box__date">5 days ago</div>
+//           </div>
+//         </div>
+//       </div>
+//       {/* user-box */}
+//       <div className="user-box">
+//         <div
+//           className="user-box__avatar"
+//           style={{ backgroundImage: 'url(img/avatar02.jpg)' }}
+//         />
+//         <div className="user-box__info">
+//           <div className="user-box__name">Riccardo Carlet</div>
+//           <div className="user-box__comment">
+//             Wrote a comment for your book
+//           </div>
+//           <div className="user-box__inline">
+//             <div className="user-box__link">The Glass Hotel</div>
+//             <div className="user-box__date">2 days ago</div>
+//           </div>
+//         </div>
+//       </div>
+//       {/* user-box */}
+//       <div className="user-box">
+//         <div
+//           className="user-box__avatar"
+//           style={{ backgroundImage: 'url(img/avatar03.jpg)' }}
+//         />
+//         <div className="user-box__info">
+//           <div className="user-box__name">Jeremy Goldberg</div>
+//           <div className="user-box__inline">
+//             <div className="user-box__comment">Rated your book</div>
+//             <div className="user-box__date">2 days ago</div>
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+//   </div>
+// </div>
+
 const NotificationsDropdown = ({ notifications, hide }) => {
   const { markNotificationsAsSeen } = useContext(GetStreamContext)
 

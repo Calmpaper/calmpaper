@@ -30,9 +30,9 @@ export const getBooksQuery = gql`
   ${ChapterFragment}
 `
 
-export const getLatestBooksQuery = gql`
-  query {
-    books(orderBy: { createdAt: desc }, where: { archived: { not: true } }) {
+export const getFollowedBooksQuery = gql`
+  query($userId: Int!) {
+    books(where: { readers: { some: { id: { equals: $userId } } } }) {
       ...Book
       description
       chapters {
@@ -49,6 +49,35 @@ export const getLatestBooksQuery = gql`
   ${UserFragment}
   ${BookFragment}
   ${ChapterFragment}
+`
+
+export const getLatestBooksQuery = gql`
+  query {
+    books(orderBy: { createdAt: desc }, where: { archived: { not: true } }) {
+      ...Book
+      description
+      chapters {
+        ...Chapter
+      }
+      reviews {
+        stars
+      }
+      author {
+        ...User
+      }
+
+      readers {
+        id
+      }
+      tags {
+        ...Tag
+      }
+    }
+  }
+  ${UserFragment}
+  ${BookFragment}
+  ${ChapterFragment}
+  ${TagFragment}
 `
 
 export const getBookQuery = gql`

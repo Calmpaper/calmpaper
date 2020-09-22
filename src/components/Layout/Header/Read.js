@@ -5,8 +5,15 @@ import { Link } from 'react-router-dom'
 const ReadingList = ({ books, close }) => {
   return (
     <div
-      className="sidebar-box sidebar-catalog btn-br"
-      style={{ position: 'absolute', top: 72, padding: '16px 24px' }}
+      className="sidebar-box sidebar-catalog btn-br dropdown-box"
+      style={{
+        position: 'absolute',
+        top: 72,
+        padding: '16px 24px',
+        visibility: 'visible',
+        opacity: 1,
+        marginLeft: -20,
+      }}
     >
       {books.map((book) => (
         <Link to={`/books/${book.id}`} key={book.id} onClick={close}>

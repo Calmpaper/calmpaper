@@ -5,28 +5,28 @@
   align-items: center;
   min-height: 80vh;
 }
-.dropdown {
-  position: absolute;
-  margin-top: 36px;
-  background: white;
-  padding: 16px 12px;
-  border-radius: 4px;
-  max-width: 233px;
-  top: 36px;
-  border: 1px solid black;
-}
+/* .dropdown { */
+/*   position: absolute; */
+/*   margin-top: 36px; */
+/*   background: white; */
+/*   padding: 16px 12px; */
+/*   border-radius: 4px; */
+/*   max-width: 233px; */
+/*   top: 36px; */
+/*   border: 1px solid black; */
+/* } */
 .dzu-previewImage {
   max-height: 360px;
 }
 
-.btn-br {
-  border: 1px solid rgba(0, 0, 0, 0.5);
-}
+/* .btn-br { */
+/*   border: 1px solid rgba(0, 0, 0, 0.5); */
+/* } */
 
-.btn-br:hover {
-  border: 1px solid black;
-  cursor: pointer;
-}
+/* .btn-br:hover { */
+/*   border: 1px solid black; */
+/*   cursor: pointer; */
+/* } */
 
 /* filter: invert(35%); */
 /* transition: filter 0.2s ease-out; */
@@ -192,28 +192,28 @@
   padding-right: 12px;
 }
 
-.avatars {
-  display: inline-flex;
-  flex-direction: row-reverse;
-}
+/* .avatars { */
+/*   display: inline-flex; */
+/*   flex-direction: row-reverse; */
+/* } */
 
-.avatar {
-  position: relative;
-  border: 2px solid #fff;
-  border-radius: 50%;
-  overflow: hidden;
-  width: 26px;
-  height: 26px;
-}
+/* .avatar { */
+/*   position: relative; */
+/*   border: 2px solid #fff; */
+/*   border-radius: 50%; */
+/*   overflow: hidden; */
+/*   width: 26px; */
+/*   height: 26px; */
+/* } */
 
-.avatar:not(:last-child) {
-  margin-left: -8px;
-}
+/* .avatar:not(:last-child) { */
+/*   margin-left: -8px; */
+/* } */
 
-.avatar img {
-  width: 100%;
-  display: block;
-}
+/* .avatar img { */
+/*   width: 100%; */
+/*   display: block; */
+/* } */
 
 .announcement {
   height: 52px;
@@ -254,8 +254,123 @@
   max-width: 250px !important;
 }
 
-.popup2 {
-  border: 1px solid #ebeaeb;
-  border-radius: 3px;
-  background: white;
+/* .popup2 { */
+/*   border: 1px solid #ebeaeb; */
+/*   border-radius: 3px; */
+/*   background: white; */
+/* } */
+
+.user-block .dzu-previewImage {
+  width: 40px;
+  height: 40px;
+}
+.comment-like__button._active .comment-like__icon {
+  fill: #4375fc;
+}
+.comment-like__button:active {
+  color: #000;
+  fill: #000;
+}
+.comment-like__button {
+  margin: 0;
+  border: 0;
+  padding: 0;
+  display: inline-block;
+  cursor: pointer;
+  outline: none;
+}
+.comment-like__button {
+  font-size: 14px;
+  line-height: 16px;
+}
+.comment-like__tooltip-trigger {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.comment-like__button {
+  margin: 0 4px;
+  position: relative;
+  min-height: 28px;
+  min-width: 34px;
+  vertical-align: top;
+  box-sizing: border-box;
+  padding: 5px 8px;
+  color: rgba(0, 0, 0, 0.4);
+  fill: rgba(0, 0, 0, 0.4);
+}
+.comment-like__button._tight {
+  margin: 0;
+  min-width: 26px;
+  padding: 5px 4px;
+}
+.comment-like__button._active .comment-like__icon {
+  fill: #4275f8;
+}
+.comment-like__button._active._new .comment-like__icon {
+  fill: #00c000;
+}
+.comment-like__button._active._new._is-dislike .comment-like__icon {
+  fill: #f00;
+}
+.comment-like__button._active:hover._new .comment-like__icon {
+  fill: #00a300;
+}
+.comment-like__button._active:hover._new._is-dislike .comment-like__icon {
+  fill: #d10000;
+}
+.comment-like__button:active .comment-like__icon {
+  fill: #3258d7;
+}
+.comment-like__button:active._new .comment-like__icon {
+  fill: #008f00;
+}
+.comment-like__button:active._new._is-dislike .comment-like__icon {
+  fill: #bd0000;
+}
+.comment-like__button._new {
+  -webkit-transform: translateY(-3px);
+  transform: translateY(-3px);
+}
+.comment-like__button._new._is-dislike {
+  -webkit-transform: translateY(3px);
+  transform: translateY(3px);
+}
+.comment-like__icon {
+  left: 8px;
+  top: 5px;
+  width: 18px;
+  height: 18px;
+}
+.comment-like__icon._tight {
+  left: 4px;
+}
+
+.medium-editor-placeholder:after {
+  font-style: inherit !important;
+}
+
+.ravatars {
+  display: inline-flex;
+  flex-direction: row-reverse;
+}
+
+.ravatar {
+  position: relative;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  overflow: hidden;
+  width: 26px;
+  height: 26px;
+}
+
+.ravatar:not(:last-child) {
+  margin-left: -8px;
+}
+
+.ravatar img {
+  width: 100%;
+  display: block;
 }

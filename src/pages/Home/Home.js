@@ -1,25 +1,31 @@
 import React, { useEffect, useContext } from 'react'
 import { Helmet } from 'react-helmet'
 import { UserContext } from 'context'
+import { useHistory } from 'react-router-dom'
 
 import Flex from 'components/atoms/flex'
 import Loader from 'components/atoms/loader'
 import Footer from 'components/molecules/footer'
 import Header from 'components/Layout/Header'
 
-import Hero from './Hero'
-import Trending from './Feed/Trending'
-import LastBooks from './Feed/LastBooks'
-import LastChapters from './Feed/LastChapters'
+import BooksFeed from './BooksFeed'
+import ChaptersFeed from './ChaptersFeed'
 
 export default () => {
   const { user, fetching } = useContext(UserContext)
+  const { push } = useHistory()
 
   useEffect(() => {
     if (window.analytics) {
       window.analytics.page('home')
     }
   }, [window.analytics])
+
+  useEffect(() => {
+    if (user && user.favoriteBooks.length === 0) {
+      push('/explore')
+    }
+  }, [user, push])
 
   if (fetching) {
     return (
@@ -47,11 +53,8 @@ export default () => {
       </Helmet>
       <Header />
       <Flex column style={{ marginTop: 124 }}>
-        <LastChapters />
-        {/*
-        <Trending />
-        */}
-        <LastBooks />
+        <ChaptersFeed />
+        <BooksFeed />
       </Flex>
       <Footer centered />
     </div>
@@ -114,8 +117,8 @@ const Landing = () => (
             </div>
             <h2 className="item-title">3. Earn</h2>
             <p className="item-text">
-              Allow subscriptions and donations, while you write on your own
-              time.
+              Coming soon. Allow subscriptions and donations, while you write on
+              your own time.
             </p>
           </div>
         </div>
