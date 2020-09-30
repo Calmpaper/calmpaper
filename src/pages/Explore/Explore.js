@@ -11,7 +11,9 @@ export default () => {
       <Flex column style={{ marginTop: 124 }}>
         <Explore />
       </Flex>
+      {/*
       <Footer centered />
+      */}
     </div>
   )
 }

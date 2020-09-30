@@ -97,7 +97,7 @@ export default () => {
 
             <div className="block block02 add-series-title">
               <h3 className="title size04">
-                Name*
+                Title*
                 {errors.name && (
                   <span className="red-title">{` (required)`}</span>
                 )}
@@ -144,7 +144,9 @@ export default () => {
           </form>
         </div>
       </div>
+      {/*
       <Footer centered />
+      */}
     </>
   )
 }

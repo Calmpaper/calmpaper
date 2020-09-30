@@ -8,6 +8,8 @@ export default () => {
   const [showInvitePopup, setShowInvitePopup] = useState(false)
   const { user } = useContext(UserContext)
   const { push } = useHistory()
+  console.log('user!!!!1')
+  console.log(user)
 
   return (
     <div className="item" style={{ paddingTop: 0 }}>
@@ -64,7 +66,7 @@ export default () => {
             url={`https://calmpaper.org/invite?from=${CryptoJS.AES.encrypt(
               `user${user.id}`,
               'Look, a smart ass!',
-            ).toString()}`}
+            )}`}
             title="Invite your friends to write"
             invitedCount={user.invited.length || null}
             labelText="Send link (You will autofollow each other)"

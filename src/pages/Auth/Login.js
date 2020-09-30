@@ -97,7 +97,9 @@ export default () => {
           </form>
         </div>
       </div>
+      {/*
       <Footer centered />
+*/}
     </>
   )
 }

@@ -68,7 +68,9 @@ export default () => {
         <ChaptersFeed />
         <BooksFeed />
       </Flex>
+      {/*
       <Footer centered />
+      */}
     </div>
   )
 }

@@ -587,7 +587,9 @@ export default () => {
           </div>
         </div>
       </div>
+      {/*
       <Footer centered />
+      */}
     </>
   )
 }
