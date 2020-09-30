@@ -10,6 +10,7 @@ import Header from 'components/Layout/Header'
 
 import BooksFeed from './BooksFeed'
 import ChaptersFeed from './ChaptersFeed'
+import WelcomeContent from 'pages/Welcome/Content'
 
 export default () => {
   const { user, fetching } = useContext(UserContext)
@@ -22,9 +23,17 @@ export default () => {
   }, [window.analytics])
 
   useEffect(() => {
-    if (user && user.favoriteBooks.length === 0) {
-      push('/explore')
+    if (
+      user &&
+      user.favoriteBooks.length === 0 &&
+      user.books.length === 0 &&
+      user.following.length === 0
+    ) {
+      push('/welcome')
     }
+    // if (user && user.favoriteBooks.length === 0 && user.books.length !== 0) {
+    //   push('/explore')
+    // }
   }, [user, push])
 
   if (fetching) {
@@ -52,7 +61,10 @@ export default () => {
         <title>Calmpaper</title>
       </Helmet>
       <Header />
-      <Flex column style={{ marginTop: 124 }}>
+      <div className="page-empty" style={{ marginTop: -84 }}>
+        <WelcomeContent />
+      </div>
+      <Flex column style={{ marginTop: -128 }}>
         <ChaptersFeed />
         <BooksFeed />
       </Flex>
@@ -71,8 +83,8 @@ const Landing = () => (
             unfinished books.
           </h1>
           <p className="main-text">
-            Share your unfinished books to your fans after finishing the first
-            page, not 300 pages later
+            Share your unfinished books to your friends after finishing the
+            first page, not 300 pages later
           </p>
           <a
             href={`${process.env.REACT_APP_BACKEND_URL}/auth/google`}
@@ -103,8 +115,7 @@ const Landing = () => (
             </div>
             <h2 className="item-title">2. Share to your fans</h2>
             <p className="item-text">
-              Let your followers subscribe to your content and comment on every
-              page.
+              Let your friends follow your books and receive updates.
             </p>
           </div>
           <div className="item">
@@ -115,10 +126,9 @@ const Landing = () => (
                 className="item-img"
               />
             </div>
-            <h2 className="item-title">3. Earn</h2>
+            <h2 className="item-title">3. Get feedback</h2>
             <p className="item-text">
-              Coming soon. Allow subscriptions and donations, while you write on
-              your own time.
+              Get comments and feedback, while you write on your own time.
             </p>
           </div>
         </div>

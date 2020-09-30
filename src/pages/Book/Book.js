@@ -51,7 +51,10 @@ export default ({ tab, update }) => {
   const [, incrementBookViews] = useMutation(incrementBookViewsMutation)
 
   useEffect(() => {
-    incrementBookViews({ bookId: parseInt(bookId) })
+    if (!window.localStorage.getItem(`${window.location.href}-visited`)) {
+      incrementBookViews({ bookId: parseInt(bookId) })
+      window.localStorage.setItem(`${window.location.href}-visited`, true)
+    }
   }, [bookId, incrementBookViews])
 
   const sendComment = (body) => {

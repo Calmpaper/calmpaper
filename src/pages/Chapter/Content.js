@@ -1,4 +1,5 @@
 import React from 'react'
+import SubscribeBanner from 'components/atoms/subscribe-banner'
 
 export default ({ chapter }) => (
   <div className="read-book-text">
@@ -15,6 +16,8 @@ export default ({ chapter }) => (
         {/*
         <div className="text">{chapter.content}</div>
         */}
+
+        <SubscribeBanner book={chapter.book} />
       </div>
     </div>
   </div>

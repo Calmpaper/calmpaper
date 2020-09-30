@@ -9,9 +9,12 @@ import NewBook from 'pages/NewBook/NewBook'
 import NewChapter from 'pages/NewChapter/NewChapter'
 import SignUp from 'pages/Auth/SignUp'
 import Login from 'pages/Auth/Login'
+import AuthFail from 'pages/Auth/Fail'
 import Dashboard from 'pages/Dashboard'
 import Help from 'pages/Help/Help'
 import Explore from 'pages/Explore/Explore'
+import Welcome from 'pages/Welcome/Welcome'
+import Invite from 'pages/Invite/Invite'
 
 const Routes = () => (
   <Switch>
@@ -53,6 +56,15 @@ const Routes = () => (
     </Route>
     <Route path="/explore">
       <Explore />
+    </Route>
+    <Route path="/welcome">
+      <Welcome />
+    </Route>
+    <Route path="/invite">
+      <Invite />
+    </Route>
+    <Route path="/auth-fail">
+      <AuthFail />
     </Route>
     <Route path="/">
       <Home />

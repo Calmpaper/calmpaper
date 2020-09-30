@@ -11,7 +11,14 @@ export default ({ authorId }) => {
   const [allChapters, setChapters] = useState([])
   const [refetch, setRefetch] = useState(false)
   const [
-    { data: { chaptersFeedByAuthor: chapters = [] } = {}, fetching, error },
+    {
+      data: {
+        chaptersFeedByAuthor: chapters = [],
+        chaptersFeedByAuthorCount,
+      } = {},
+      fetching,
+      error,
+    },
   ] = useQuery({
     query: getLastChaptersByAuthorQuery,
     variables: {
@@ -39,21 +46,22 @@ export default ({ authorId }) => {
           {allChapters.map((chapter) => (
             <Chapter chapter={chapter} key={chapter.key} />
           ))}
-          {showLoadMore && (
-            <div
-              className="item"
-              style={{
-                fontWeight: 400,
-                justifyContent: 'center',
-                background: '#fdfdfd',
-                color: '#040027',
-                fontSize: '15px',
-              }}
-              onClick={() => setPage((p) => p + 1)}
-            >
-              {fetching ? 'Loading...' : 'Load more'}
-            </div>
-          )}
+          {allChapters.length < chaptersFeedByAuthorCount &&
+            allChapters.length !== 0 && (
+              <div
+                className="item"
+                style={{
+                  fontWeight: 400,
+                  justifyContent: 'center',
+                  background: '#fdfdfd',
+                  color: '#040027',
+                  fontSize: '15px',
+                }}
+                onClick={() => setPage((p) => p + 1)}
+              >
+                {fetching ? 'Loading...' : 'Load more'}
+              </div>
+            )}
           {/*
            */}
         </div>

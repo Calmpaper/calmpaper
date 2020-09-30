@@ -39,91 +39,12 @@ export default ({ notification, closeNotifications: close }) => {
   const { user: loggedUser } = useContext(UserContext)
 
   const isSeen = notification.is_seen
-
-  // if (notification.object.startsWith('book') && notification.verb === 'start') {
-  //   notificationBody = (
-  //     <S.Body>
-  //       <S.Name>{notification.user.fullname}</S.Name>
-  //       {` started a new book `}
-  //     </S.Body>
-  //   )
-  //   notificationLink = `/books/${notification.book.id}`
-  // }
-
-  // if (notification.object.startsWith('chapter')) {
-  //   // book notifications
-  // }
-
-  // if (
-  //   notification.object.startsWith('comment') &&
-  //   notification.verb === 'like'
-  // ) {
-  //   notificationBody = (
-  //     <S.Body>
-  //       <S.Name>{notification.user.fullname}</S.Name>
-  //       {` liked your comment `}
-  //     </S.Body>
-  //   )
-  //   notificationLink = `/books/${notification.book.id}`
-  // }
-
-  // if (
-  //   notification.object.startsWith('comment') &&
-  //   notification.verb === 'reply'
-  // ) {
-  //   notificationBody = (
-  //     <S.Body>
-  //       <S.Name>{notification.user.fullname}</S.Name>
-  //       {` replied to your comment `}
-  //     </S.Body>
-  //   )
-  //   notificationLink = `/books/${notification.book.id}`
-  // }
-
-  // if (
-  //   notification.object.startsWith('chapter') &&
-  //   notification.verb === 'comment'
-  // ) {
-  //   notificationBody = (
-  //     <S.Body>
-  //       <S.Name>{notification.user.fullname}</S.Name>
-  //       {` commented on your chapter`}
-  //     </S.Body>
-  //   )
-  //   notificationLink = `/books/${notification.chapter.book.id}/${notification.chapter.id}`
-  // }
-
-  // if (
-  //   notification.object.startsWith('book') &&
-  //   notification.verb === 'comment'
-  // ) {
-  //   notificationBody = (
-  //     <S.Body>
-  //       <S.Name>{notification.user.fullname}</S.Name>
-  //       {` commented on your book `}
-  //     </S.Body>
-  //   )
-  //   notificationLink = `/books/${notification.book.id}`
-  // }
-
-  // if (
-  //   notification.object.startsWith('book') &&
-  //   notification.verb === 'review'
-  // ) {
-  //   notificationBody = (
-  //     <S.Body>
-  //       <S.Name>{notification.user.fullname}</S.Name>
-  //       {` reviewed your book `}
-  //     </S.Body>
-  //   )
-  //   notificationLink = `/books/${notification.book.id}/reviews`
-  // }
-
   let { activities } = notification
   // activities = activities.map((activity) => activity.user.id !== loggedUser.id)
 
-  const bookId = activities[0].bookId
-  const chapterId = activities[0].chapterId
+  const bookId = activities && activities[0].bookId
+  const chapterId = activities && activities[0].chapterId
+  const followerId = activities && activities[0].followerId
 
   const [{ data: { book } = {}, fetching: bookFetching }] = useQuery({
     pause: !bookId,
@@ -143,7 +64,55 @@ export default ({ notification, closeNotifications: close }) => {
     },
   )
 
-  if (bookFetching || chapterFetching) return null
+  const [
+    { data: { user: follower } = {}, fetching: isFollowerFetching, error },
+  ] = useQuery({
+    query: getUserQuery,
+    variables: { id: parseInt(followerId) },
+
+    pause: !followerId,
+  })
+
+  if (bookFetching || chapterFetching || isFollowerFetching) return null
+
+  // console.log('follower')
+  // console.log(follower)
+  if (follower) {
+    return (
+      <Link to={`/users/${follower.id}`}>
+        <S.Notification
+          style={!isSeen ? { background: 'hsl(218 94% 97% / 1)' } : {}}
+        >
+          <Flex row justifyBetween alignCenter>
+            <Flex row alignStart>
+              <Flex column style={{ width: '100%', paddingTop: 6 }}>
+                <Flex row justifyBetween alignCenter>
+                  <S.BookCover src={follower.avatar} alt="avatar" hideText />
+                  <S.Body style={{ fontSize: 13 }}>
+                    <S.User>{follower.username || follower.fullname}</S.User>
+                    {` started following you`}
+                  </S.Body>
+                </Flex>
+              </Flex>
+            </Flex>
+
+            {/*
+          <div
+            className="ravatars"
+            style={{
+              marginRight: '6px',
+            }}
+          >
+            <S.Avatar className="ravatar">
+              <img src={follower.avatar} alt={`${follower.avatar}-pic`} />
+            </S.Avatar>
+          </div>
+*/}
+          </Flex>
+        </S.Notification>
+      </Link>
+    )
+  }
 
   if (!book) return null
 
@@ -264,7 +233,7 @@ export default ({ notification, closeNotifications: close }) => {
       >
         <Flex row justifyBetween alignCenter>
           <Flex row alignStart>
-            <S.BookCover src={cover} alt="book_cover" />
+            <S.BookCover src={cover} alt="book_cover" hideText />
             <Flex column style={{ width: '100%', paddingTop: 6 }}>
               <h4
                 className="comment-title"

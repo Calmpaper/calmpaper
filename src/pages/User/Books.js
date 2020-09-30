@@ -1,5 +1,6 @@
 import React from 'react'
 import { useHistory } from 'react-router-dom'
+import BookCover from 'components/atoms/book-cover'
 import Rating from 'components/Rating'
 
 const Book = ({ book }) => {
@@ -8,12 +9,7 @@ const Book = ({ book }) => {
   return (
     <div className="col" onClick={() => push(`/books/${book.id}`)}>
       <a href>
-        <div
-          className="catalog-img"
-          style={{
-            backgroundImage: `url("${book.image || '/img/placeholder.jpg'}")`,
-          }}
-        />
+        <BookCover book={book} isCatalog />
         <h3 className="catalog-title">{book.name}</h3>
         <p className="catalog-author">{book.author.fullname}</p>
         <Rating ratings={book.reviews} readOnly quiet />

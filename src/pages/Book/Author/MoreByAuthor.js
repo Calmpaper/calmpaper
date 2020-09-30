@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import BookCover from 'components/atoms/book-cover'
 
 export default ({ books = [] }) => {
   if (books.length === 0) return null
@@ -16,14 +17,7 @@ export default ({ books = [] }) => {
 
         return (
           <Link to={`/books/${book.id}`} key={book.id}>
-            <div
-              className="catalog-img"
-              style={{
-                backgroundImage: `url('${
-                  book.image || '/img/placeholder.jpg'
-                }')`,
-              }}
-            />
+            <BookCover book={book} isCatalog hideText />
             <div className="catalog-info">
               <h3 className="catalog-title">{book.name}</h3>
               <p className="catalog-author">{book.author.username}</p>

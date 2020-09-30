@@ -20,7 +20,7 @@ export default ({ tags, onChange, value = [] }) => {
 
   return (
     <div class="block block06 add-series-tags">
-      <h3 class="title size04">Tags</h3>
+      <h3 class="title size04">Tags (Optional)</h3>
 
       <Select
         isMulti

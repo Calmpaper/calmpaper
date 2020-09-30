@@ -1,6 +1,12 @@
 import React, { useEffect } from 'react'
 import { hydrate, render } from 'react-dom'
-import { createClient, Provider as URQLProvider } from 'urql'
+import {
+  createClient,
+  Provider as URQLProvider,
+  dedupExchange,
+  fetchExchange,
+} from 'urql'
+import { cacheExchange } from '@urql/exchange-graphcache'
 import { BrowserRouter as RouterProvider } from 'react-router-dom'
 
 import UserProvider from 'context/UserContext'
@@ -28,6 +34,20 @@ import 'medium-editor/dist/css/themes/default.css'
 
 const client = createClient({
   url: process.env.REACT_APP_BACKEND_URL,
+  // exchanges: [
+  //   dedupExchange,
+  //   cacheExchange({
+  //     setCommentLike: (variables, cache, info) => {
+
+  //       return {
+  //         __typename: 'Like',
+  //         id: variables.id,
+  //         // favorite: true,
+  //       }
+  //     },
+  //   }),
+  //   fetchExchange,
+  // ],
   fetchOptions: () => {
     const token = window.localStorage.getItem('jwt')
     return {

@@ -11,6 +11,8 @@ import Header from 'components/Layout/Header'
 import Footer from 'components/molecules/footer'
 import Books from './Books'
 import Feed from './Feed'
+import Followers from './Followers'
+import Following from './Following'
 // import Flex from 'components/Flex'
 import AvatarInput from 'components/Input/AvatarInput'
 
@@ -181,17 +183,30 @@ export default () => {
                 Feed
               </a>
               <a
-                onClick={() => setTab('books')}
-                className={tab === 'books' ? 'active' : ''}
+                onClick={() => setTab('following')}
+                className={tab === 'following' ? 'active' : ''}
                 style={{ cursor: 'pointer' }}
               >
-                All books
+                Following
+              </a>
+              <a
+                onClick={() => setTab('followers')}
+                className={tab === 'followers' ? 'active' : ''}
+                style={{ cursor: 'pointer' }}
+              >
+                Followers
               </a>
             </div>
           </div>
         </div>
-        {tab === 'books' && <Books books={user.books} />}
-        {tab === 'feed' && <Feed authorId={user.id} />}
+        {tab === 'feed' && (
+          <>
+            <Feed authorId={user.id} />
+            <Books books={user.books} />
+          </>
+        )}
+        {tab === 'followers' && <Followers users={user.followers} />}
+        {tab === 'following' && <Following users={user.following} />}
 
         <Footer centered />
       </div>

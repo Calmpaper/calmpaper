@@ -27,7 +27,7 @@ export default ({ genres = [], value = [], onChange }) => {
 
   return (
     <div className="block block04 add-series-genre">
-      <h3 className="title size04">Genre</h3>
+      <h3 className="title size04">Genre (Optional)</h3>
       <ul className="tags">
         {genres.map((genre) => {
           const isSelected = value.findIndex((g) => g.id === genre.id) > -1

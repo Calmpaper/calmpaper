@@ -5,7 +5,7 @@ import Notifications from 'components/Notifications'
 import Logo from './Logo'
 import Read from './Read'
 import Create from './Create'
-import LoginBtn from './LoginBtn'
+// import LoginBtn from './LoginBtn'
 import SignupBtn from './SignupBtn'
 import User from './User'
 
@@ -24,11 +24,7 @@ export default ({ home }) => {
                   <Read />
                 </li>
               )}
-              {user && (
-                <li className="header-nav__item">
-                  <Create />
-                </li>
-              )}
+              {user && <Create />}
               {user && (
                 <li
                   className="header-nav__item"
@@ -37,7 +33,7 @@ export default ({ home }) => {
                   <Notifications />
                 </li>
               )}
-              {!user && <LoginBtn />}
+              {/* !user && <LoginBtn /> */}
             </ul>
           </nav>
           {!user ? <SignupBtn /> : <User user={user} />}

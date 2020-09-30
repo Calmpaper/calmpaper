@@ -6,7 +6,7 @@ const SignupBtn = () => (
       className="btn-login"
       href={`${process.env.REACT_APP_BACKEND_URL}/auth/google`}
     >
-      Sign Up
+      Login
     </a>
   </li>
 )

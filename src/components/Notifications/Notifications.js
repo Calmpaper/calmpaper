@@ -195,7 +195,15 @@ const NotificationsDropdown = ({ notifications, hide }) => {
 }
 
 export default () => {
-  const { notifications } = useContext(GetStreamContext)
+  const { notifications: allNotifications = [] } = useContext(GetStreamContext)
+  const notifications = allNotifications.filter(
+    (notification) =>
+      notification.verb === 'comment' ||
+      notification.verb === 'reply' ||
+      notification.verb === 'like' ||
+      notification.verb === 'review' ||
+      notification.verb === 'follow',
+  )
   const [showDropdown, setShowDropdown] = useState(false)
 
   const unreadCount = notifications.filter((n) => !n.is_seen).length

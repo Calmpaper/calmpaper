@@ -1,9 +1,14 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import BookCover from 'components/atoms/book-cover'
 
 export default ({ book }) => (
   <>
-    <img src={book.image || '/img/placeholder.jpg'} alt={book.name} />
+    {book.image ? (
+      <img src={book.image || '/img/placeholder.jpg'} alt={book.name} />
+    ) : (
+      <BookCover book={book} isChapterPage />
+    )}
     <h1
       className="title size01"
       style={{

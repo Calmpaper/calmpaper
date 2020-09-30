@@ -2,6 +2,8 @@ import React from 'react'
 import moment from 'moment'
 import { Link } from 'react-router-dom'
 
+import BookCover from 'components/atoms/book-cover'
+
 const Chapter = ({ chapter }) => {
   const chapterPage =
     chapter.book.chapters.findIndex((c) => c.id === chapter.id) + 1
@@ -10,14 +12,7 @@ const Chapter = ({ chapter }) => {
 
   return (
     <Link to={`/books/${chapter.book.id}/${chapterPage}`} className="item">
-      <div
-        className="item-img"
-        style={{
-          backgroundImage: `url("${
-            chapter.book.image || '/img/placeholder.jpg'
-          }")`,
-        }}
-      />
+      <BookCover book={chapter.book} isItem hideText />
       <div className="item-info" style={{ width: '100%' }}>
         <div className="item-head">
           <h3 className="item-title">

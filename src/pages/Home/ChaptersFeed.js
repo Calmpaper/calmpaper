@@ -12,7 +12,11 @@ export default ({ sort }) => {
   const [refetch, setRefetch] = useState(false)
   const { user } = useContext(UserContext)
   const [
-    { data: { chaptersFeed: chapters = [] } = {}, fetching, error },
+    {
+      data: { chaptersFeed: chapters = [], chaptersFeedCount } = {},
+      fetching,
+      error,
+    },
   ] = useQuery({
     query: getLastChaptersQuery,
     variables: {
@@ -30,6 +34,8 @@ export default ({ sort }) => {
   if (fetching && !refetch) return <Loader />
   if (error) return <p>Oh no... {error.message}</p>
 
+  if (allChapters.length === 0) return null
+
   return (
     <div className="latest">
       <div className="container">
@@ -40,19 +46,21 @@ export default ({ sort }) => {
           {allChapters.map((chapter) => (
             <Chapter chapter={chapter} key={chapter.key} />
           ))}
-          <div
-            className="item"
-            style={{
-              fontWeight: 400,
-              justifyContent: 'center',
-              background: '#fdfdfd',
-              color: '#040027',
-              fontSize: '15px',
-            }}
-            onClick={() => setPage((p) => p + 1)}
-          >
-            {fetching ? 'Loading...' : 'Load more'}
-          </div>
+          {allChapters.length < chaptersFeedCount && allChapters.length !== 0 && (
+            <div
+              className="item"
+              style={{
+                fontWeight: 400,
+                justifyContent: 'center',
+                background: '#fdfdfd',
+                color: '#040027',
+                fontSize: '15px',
+              }}
+              onClick={() => setPage((p) => p + 1)}
+            >
+              {fetching ? 'Loading...' : 'Load more'}
+            </div>
+          )}
           {/*
            */}
         </div>
