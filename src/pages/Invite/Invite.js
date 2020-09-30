@@ -11,8 +11,8 @@ export default () => {
   const location = useLocation()
   const parsed = queryString.parse(location.search)
 
-  var bytes = CryptoJS.AES.decrypt(parsed.from, 'Look, a smart ass!')
-  var originalText = bytes.toString(CryptoJS.enc.Utf8)
+  var decrypted = CryptoJS.AES.decrypt(parsed.from, 'Look, a smart ass!')
+  var originalText = decrypted.toString(CryptoJS.enc.Utf8)
   const inviteFrom = parseInt(originalText.substring(4))
 
   let userId = inviteFrom

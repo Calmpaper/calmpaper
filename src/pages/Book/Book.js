@@ -139,13 +139,17 @@ export default ({ tab, update }) => {
               <div style={{ marginTop: 48 }}>
                 <Comments comments={book.comments} onSubmit={sendComment} />
               </div>
+              {/*
               <Footer />
+*/}
             </div>
           </div>
           {book.author && <Author author={book.author} bookId={bookId} />}
         </div>
       </div>
+      {/*
       <Footer tel />
+*/}
       {showDonationModal && (
         <DonationModal
           bookId={book.id}

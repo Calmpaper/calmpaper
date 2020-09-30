@@ -12,7 +12,6 @@ export default () => {
           <Content />
         </div>
       </div>
-      <Footer />
     </>
   )
 }

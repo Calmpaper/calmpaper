@@ -63,12 +63,14 @@ export default () => {
                   Profile
                 </Link>
               </li>
+              {/*
               <li>
                 <Link to={'/explore'}>Explore</Link>
               </li>
               <li>
                 <Link to={`/help`}>Help</Link>
               </li>
+  */}
             </ul>
           </div>
           <div className="header-notification-user__footer">

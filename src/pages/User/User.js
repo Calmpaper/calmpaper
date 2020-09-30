@@ -187,14 +187,14 @@ export default () => {
                 className={tab === 'following' ? 'active' : ''}
                 style={{ cursor: 'pointer' }}
               >
-                Following
+                {`Following (${user.following.length})`}
               </a>
               <a
                 onClick={() => setTab('followers')}
                 className={tab === 'followers' ? 'active' : ''}
                 style={{ cursor: 'pointer' }}
               >
-                Followers
+                {`Followers (${user.followers.length})`}
               </a>
             </div>
           </div>
@@ -208,7 +208,9 @@ export default () => {
         {tab === 'followers' && <Followers users={user.followers} />}
         {tab === 'following' && <Following users={user.following} />}
 
+        {/*
         <Footer centered />
+        */}
       </div>
     </>
   )
