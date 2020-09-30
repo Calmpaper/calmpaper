@@ -4,19 +4,17 @@ import {
   TwitterShareButton,
   LinkedinShareButton,
 } from 'react-share'
+import Flex from 'components/Flex'
 
-export default ({ close }) => {
+export default ({
+  close,
+  url = window.location.href,
+  title = 'Invite your friends to read',
+  invitedCount,
+  labelText = 'Send link',
+}) => {
   const [isCopied, setCopied] = useState(false)
-  const url = window.location.href
   const popupRef = useRef()
-  useEffect(() => {
-    // add when mounted
-    document.addEventListener('mousedown', handleClick)
-    // return function to be called when unmounted
-    return () => {
-      document.removeEventListener('mousedown', handleClick)
-    }
-  }, [])
 
   const handleClick = (e) => {
     if (popupRef.current.contains(e.target)) {
@@ -27,6 +25,15 @@ export default ({ close }) => {
     close()
   }
 
+  useEffect(() => {
+    // add when mounted
+    document.addEventListener('mousedown', handleClick)
+    // return function to be called when unmounted
+    return () => {
+      document.removeEventListener('mousedown', handleClick)
+    }
+  }, [])
+
   return (
     <div id="popup-invite" className="popup popup-invite in">
       <div className="popup-wrap">
@@ -36,13 +43,19 @@ export default ({ close }) => {
               src="/img/popup/popup-icon05.svg"
               alt="icon"
               className="popup-head-icon"
+              style={{ marginLeft: 0 }}
             />
-            <h3 className="popup-title">Invite friends to read</h3>
+            <h3 className="popup-title">{title}</h3>
           </div>
           <div className="popup-body">
             <img src="/img/popup/popup-invite.svg" alt="invite" />
             <div className="popup-form">
-              <div className="popup-form-title">Send link</div>
+              <div
+                className="popup-form-title"
+                style={{ textAlign: 'initial' }}
+              >
+                {labelText}
+              </div>
               <form>
                 <input type="text" className="input" defaultValue={url} />
                 {isCopied ? (
@@ -84,6 +97,19 @@ export default ({ close }) => {
                 </svg>
                 */}
               </button>
+              {invitedCount && (
+                <Flex
+                  row
+                  alignCenter
+                  style={{
+                    paddingBottom: '2px',
+                    marginLeft: '4px',
+                    fontSize: '15px',
+                    color: '#7057d2',
+                    fontWeight: 500,
+                  }}
+                >{`Referred: ${invitedCount}`}</Flex>
+              )}
             </div>
             <div className="col popup-share">
               <FacebookShareButton url={url}>

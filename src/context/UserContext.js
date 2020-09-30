@@ -3,6 +3,7 @@ import { useLocation, useHistory } from 'react-router-dom'
 import * as QueryString from 'query-string'
 import { useQuery } from 'urql'
 import { getMeQuery } from 'api'
+import Loader from 'components/Loader'
 
 const UserContext = createContext()
 
@@ -51,8 +52,11 @@ const UserProvider = ({ children }) => {
       reexecuteQuery({ requestPolicy: 'network-only' })
       setJwt(params.token)
       replace(pathname)
+      // replace(`${pathname}?follow=${params.follow}`)
     }
   }, [search, replace, reexecuteQuery, pathname])
+
+  if (fetching) return <Loader />
 
   return (
     <UserContext.Provider

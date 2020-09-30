@@ -24,6 +24,12 @@ export const getUserQuery = gql`
           ...User
         }
       }
+      followers {
+        ...User
+      }
+      following {
+        ...User
+      }
     }
   }
   ${UserFragment}
@@ -36,7 +42,6 @@ export const getMeQuery = gql`
       ...User
       firstname
       givenname
-      email
       username
       getStreamToken
       stripeId
@@ -49,7 +54,13 @@ export const getMeQuery = gql`
           id
         }
       }
+      books {
+        id
+      }
       following {
+        id
+      }
+      invited {
         id
       }
     }

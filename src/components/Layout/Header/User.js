@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react'
 import { UserContext } from 'context'
 import { Link, useHistory } from 'react-router-dom'
+import Flex from 'components/atoms/flex'
 
 export default () => {
   const [showDropdown, setShowDropdown] = useState(false)
@@ -30,26 +31,30 @@ export default () => {
               push(`/users/${user.username ? `@${user.username}` : user.id}`)
             }
           >
-            <div
-              className="header-notification-user__avatar"
-              style={{
-                background: `url("${user.avatar}")`,
-                backgroundSize: 'cover',
-              }}
-            />
-            <div className="header-notification-user__info">
-              <div className="header-notification-user__name">
-                {user.fullname}
+            <Flex row style={{ cursor: 'pointer' }}>
+              <div
+                className="header-notification-user__avatar"
+                style={{
+                  background: `url("${user.avatar}")`,
+                  backgroundSize: 'cover',
+                  // backgroundSize: 'contain',
+                  cursor: 'pointer',
+                }}
+              />
+              <div className="header-notification-user__info">
+                <div className="header-notification-user__name">
+                  {user.fullname}
+                </div>
+                <div className="header-notification-user__username">
+                  {user.username ? `@${user.username}` : `@user${user.id}`}
+                </div>
               </div>
-              <div className="header-notification-user__username">
-                {user.username ? `@${user.username}` : `@user${user.id}`}
-              </div>
-            </div>
+            </Flex>
           </div>
           <div className="header-notification-user__body">
             <ul className="header-notification-user__list">
               <li>
-                <Link to="/new-book">New story</Link>
+                <Link to="/new-book">New book</Link>
               </li>
               <li>
                 <Link
@@ -59,11 +64,7 @@ export default () => {
                 </Link>
               </li>
               <li>
-                <Link
-                  to={`/users/${user.username ? `@${user.username}` : user.id}`}
-                >
-                  Settings
-                </Link>
+                <Link to={'/explore'}>Explore</Link>
               </li>
               <li>
                 <Link to={`/help`}>Help</Link>

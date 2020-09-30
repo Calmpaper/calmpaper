@@ -32,14 +32,21 @@ export const getBooksQuery = gql`
 
 export const getFollowedBooksQuery = gql`
   query($userId: Int!) {
-    books(where: { readers: { some: { id: { equals: $userId } } } }) {
+    books(
+      where: {
+        OR: [
+          { readers: { some: { id: { equals: $userId } } } }
+          { author: { followers: { some: { id: { equals: $userId } } } } }
+        ]
+      }
+    ) {
       ...Book
       description
-      chapters {
-        ...Chapter
-      }
       reviews {
         stars
+      }
+      chapters {
+        ...Chapter
       }
       author {
         ...User

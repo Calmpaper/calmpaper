@@ -59,9 +59,12 @@ export default () => {
 
   useEffect(() => {
     if (!fetching && chapter) {
-      incrementChapterViews({
-        chapterId: chapter.id,
-      })
+      if (!window.localStorage.getItem(`${window.location.href}-visited`)) {
+        incrementChapterViews({
+          chapterId: chapter.id,
+        })
+        window.localStorage.setItem(`${window.location.href}-visited`, true)
+      }
     }
   }, [fetching])
 
@@ -75,7 +78,6 @@ export default () => {
       chapterId: chapter.id,
     })
   }
-  console.log(location)
 
   return (
     <>

@@ -24,6 +24,9 @@ export const getChapterQuery = gql`
           id
           stars
         }
+        readers {
+          id
+        }
       }
       author {
         ...User
@@ -93,11 +96,15 @@ export const getLastChaptersQuery = gql`
         chapters {
           id
         }
+        author {
+          ...User
+        }
         genres {
           ...Genre
         }
       }
     }
+    chaptersFeedCount
   }
   ${UserFragment}
   ${BookFragment}
@@ -124,6 +131,7 @@ export const getLastChaptersByAuthorQuery = gql`
         }
       }
     }
+    chaptersFeedByAuthorCount
   }
   ${UserFragment}
   ${BookFragment}
@@ -145,6 +153,9 @@ export const getChapterByBookQuery = gql`
         reviews {
           id
           stars
+        }
+        readers {
+          id
         }
         chapters(orderBy: { createdAt: asc }) {
           id

@@ -8,6 +8,7 @@ import {
   removeBookFromFavoritesMutation,
 } from 'api'
 
+import BookCover from 'components/atoms/book-cover'
 import Loader from 'components/Loader'
 import Flex from 'components/Flex'
 
@@ -37,12 +38,7 @@ const Book = ({ book, isFirst }) => {
 
   return (
     <div className="item item01">
-      <div
-        className="item-img"
-        style={{
-          backgroundImage: `url("${book.image || '/img/placeholder.jpg'}")`,
-        }}
-      />
+      <BookCover book={book} isItem hideText />
       <div className="item-info" style={{ width: '100%' }}>
         <div className="item-head">
           <h3 className="item-title">{book.name}</h3>
@@ -63,12 +59,7 @@ const Book = ({ book, isFirst }) => {
           ))}
         </ul>
         <Flex row>
-          <button
-            className={`btn btn-follow ${
-              isFirst && !isFavorite ? 'active' : ''
-            }`}
-            onClick={addToLibrary}
-          >
+          <button className={`btn btn-follow`} onClick={addToLibrary}>
             {isFavorite ? 'Following' : 'Follow'}{' '}
             {!isFavorite && (
               <span>

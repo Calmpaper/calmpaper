@@ -1,15 +1,10 @@
 import React, { useState } from 'react'
 
-const Thumb = ({ like, onLike }) => {
-  const [isLiked, setLiked] = useState(!!like)
-
+const Thumb = ({ isLiked, onLike }) => {
   return (
     <button
       className={`comment-like__button ${isLiked ? '_active' : ''}`}
-      onClick={() => {
-        onLike(like)
-        setLiked(!isLiked)
-      }}
+      onClick={onLike}
     >
       <svg
         className={`comment-like__icon ${isLiked ? '_to_active' : ''}`}
@@ -21,21 +16,40 @@ const Thumb = ({ like, onLike }) => {
   )
 }
 
-const Count = ({ likes }) => (
+const Count = ({ count }) => (
   <span className="comment-likes-info__wrapper">
-    {likes.length > 0 && (
+    {count > 0 && (
       <button className="comment-likes-info__button _is-positive">
-        {likes.length}
+        {count}
       </button>
     )}
   </span>
 )
 
 export default ({ likes, like, onLike }) => {
+  const [isLiked, setLiked] = useState(!!like)
+  const [count, setCount] = useState(likes.length)
+  const [touched, setTouched] = useState(false)
+
   return (
     <div className="comment-footer__controls-likes">
-      <Thumb like={like} onLike={onLike} />
-      <Count likes={likes} />
+      <Thumb
+        isLiked={isLiked}
+        onLike={() => {
+          setLiked(!isLiked)
+
+          if (!touched) {
+            onLike(like)
+            if (isLiked) {
+              setCount((count) => count - 1)
+            } else {
+              setCount((count) => count + 1)
+            }
+            setTouched(true)
+          }
+        }}
+      />
+      <Count count={count} />
     </div>
   )
 }

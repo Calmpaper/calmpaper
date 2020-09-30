@@ -75,7 +75,9 @@ export default () => {
                           </div>
                           <div className="panel-num">920.4k</div>
                         </div>
-                        <div className="about-num-panel-label">All views</div>
+                        <div className="about-num-panel-label">
+                          Unique views
+                        </div>
                       </a>
                       <a href>
                         <div className="about-num-panel-info">

@@ -1,9 +1,30 @@
-import React, { useState } from 'react'
-import DonationModal from 'components/DonationModal'
+import React, { useState, useContext } from 'react'
 import { Link } from 'react-router-dom'
+import { UserContext, GetStreamContext } from 'context'
+import { useMutation } from 'urql'
+import { followUserMutation, unfollowUserMutation } from 'api'
+
+import DonationModal from 'components/DonationModal'
 
 export default ({ chapterId, author }) => {
   const [showDonationModal, setShowDonationModal] = useState(false)
+  const { user } = useContext(UserContext)
+  const { notificationsFeed } = useContext(GetStreamContext)
+
+  const isFollowing = user && user.following.find((u) => u.id === author.id)
+
+  const [, followUser] = useMutation(followUserMutation)
+  const [, unfollowUser] = useMutation(unfollowUserMutation)
+
+  const follow = () => {
+    if (isFollowing) {
+      notificationsFeed.unfollow('user', author.id)
+      unfollowUser({ followerId: user.id, followingId: author.id })
+    } else {
+      notificationsFeed.follow('user', author.id)
+      followUser({ followerId: user.id, followingId: author.id })
+    }
+  }
 
   return (
     <div className="read-book-author">
@@ -45,24 +66,14 @@ export default ({ chapterId, author }) => {
               close={() => setShowDonationModal(false)}
             />
           )}
-          {/*
-        <div className="col col02">
-          <svg className="icon icon-quote">
-            <use xlinkHref="#icon-quote" />
-          </svg>
-          <div className="item-quote">Support Rising from the Depths</div>
-        </div>
-        <div className="col col03">
-          <a href="https://www.patreon.com/jgthms">
-            <button className="btn btn-color">
-              <svg className="icon icon-patreon">
-                <use xlinkHref="#icon-patreon" />
-              </svg>
-              Patreon
+          <div className="col col02">
+            <button className="btn btn-color" onClick={follow}>
+              {isFollowing ? 'Following' : 'Follow'}
             </button>
-          </a>
-        </div>
+            {/*
+        <button className="btn btn-line">Subscribe</button>
         */}
+          </div>
         </div>
       </div>
     </div>

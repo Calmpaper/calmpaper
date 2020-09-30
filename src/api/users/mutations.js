@@ -30,11 +30,9 @@ export const removeBookFromFavoritesMutation = gql`
 
 export const followUserMutation = gql`
   mutation($followingId: Int!, $followerId: Int!) {
-    updateOneUser(
-      where: { id: $followerId }
-      data: { following: { connect: { id: $followingId } } }
-    ) {
+    followUser(followingId: $followingId, followerId: $followerId) {
       id
+      ...User
       following {
         ...User
       }
@@ -64,10 +62,7 @@ export const updateUserMutation = gql`
 
 export const unfollowUserMutation = gql`
   mutation($followingId: Int!, $followerId: Int!) {
-    updateOneUser(
-      where: { id: $followerId }
-      data: { following: { disconnect: { id: $followingId } } }
-    ) {
+    unfollowUser(followingId: $followingId, followerId: $followerId) {
       id
       following {
         ...User

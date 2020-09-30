@@ -6,6 +6,7 @@ import {
   addBookToFavoritesMutation,
   removeBookFromFavoritesMutation,
 } from 'api'
+import BookCover from 'components/atoms/book-cover'
 import Ratings from './Ratings'
 
 export default ({ book }) => {
@@ -54,10 +55,20 @@ export default ({ book }) => {
         )}
         <Ratings book={book} />
         <div className="about-book-main-btn">
-          {book.chapters.length > 0 && (
+          {book.chapters.length > 0 ? (
             <Link to={`/books/${book.id}/1`} className="btn btn-color">
               Read now
             </Link>
+          ) : (
+            book.author.id === user.id && (
+              <Link
+                to={`/books/${book.id}/new-chapter`}
+                className="btn btn-color"
+                style={{ width: 140, marginRight: 8 }}
+              >
+                Add first page
+              </Link>
+            )
           )}
           <button
             className="btn btn-grey"
@@ -77,26 +88,7 @@ export default ({ book }) => {
       </div>
 
       <div className="col col-img">
-        {book.image ? (
-          <div
-            className="about-book-main-img"
-            style={{
-              background: `url("${book.image || '/img/placeholder.jpg'}")`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-            }}
-          />
-        ) : (
-          <div
-            className="about-book-main-img book-cover"
-            style={{ background: `url('/img/book-cover.png' )` }}
-          >
-            <div className="book-cover__title">{book.name}</div>
-            <div className="book-cover__author">{`by ${
-              book.author.username || book.author.fullname
-            }`}</div>
-          </div>
-        )}
+        <BookCover book={book} />
       </div>
     </div>
   )

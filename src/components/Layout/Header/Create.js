@@ -35,6 +35,7 @@ const CreatePopup = ({ bookId }) => {
 }
 
 const AddBook = () => {
+  return null
   return (
     <Link to="/new-book" className="header-nav__link">
       New book
@@ -44,9 +45,11 @@ const AddBook = () => {
 
 const AddChapter = ({ bookId }) => {
   return (
-    <Link to={`/books/${bookId}/new-chapter`} className="header-nav__link">
-      Add page
-    </Link>
+    <li className="header-nav__item">
+      <Link to={`/books/${bookId}/new-chapter`} className="header-nav__link">
+        Add page
+      </Link>
+    </li>
   )
 }
 

@@ -38,7 +38,7 @@ export default ({ book }) => (
         </div>
         <div className="panel-num">{book.views}</div>
       </div>
-      <div className="about-num-panel-label">All views</div>
+      <div className="about-num-panel-label">Views</div>
     </a>
     {/*
       <a href ="/">

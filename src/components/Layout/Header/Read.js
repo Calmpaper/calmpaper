@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react'
 import { UserContext } from 'context'
+import BookCover from 'components/atoms/book-cover'
 import { Link } from 'react-router-dom'
 
 const ReadingList = ({ books, close }) => {
@@ -17,15 +18,14 @@ const ReadingList = ({ books, close }) => {
     >
       {books.map((book) => (
         <Link to={`/books/${book.id}`} key={book.id} onClick={close}>
-          <div
-            className="catalog-img"
+          <BookCover
+            book={book}
+            isCatalog
             style={{
-              backgroundImage: `url('${book.image || '/img/placeholder.jpg'}')`,
               width: 48,
               height: 64,
             }}
           />
-
           <div className="catalog-info">
             <h3 className="catalog-title">{book.name}</h3>
             <p className="catalog-author">
@@ -53,7 +53,6 @@ export default () => {
   return user && user.favoriteBooks.length > 0 ? (
     <>
       <span
-        href="http://dev08.morozovoleg.com/home.html"
         className="header-nav__link"
         onClick={() => setShowDropdown(!showDropdown)}
       >

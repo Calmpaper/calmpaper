@@ -8,7 +8,7 @@ import Book from './Feed/Book'
 
 export default ({ sort }) => {
   const { user } = useContext(UserContext)
-  const [{ data: { books } = {}, fetching, error }] = useQuery({
+  const [{ data: { books = [] } = {}, fetching, error }] = useQuery({
     query: getFollowedBooksQuery,
     variables: {
       userId: user.id,
@@ -17,6 +17,8 @@ export default ({ sort }) => {
 
   if (fetching) return <Loader />
   if (error) return <p>Oh no... {error.message}</p>
+
+  if (books.length === 0) return null
 
   return (
     <div className="catalog catalog02" style={{ marginTop: 80 }}>

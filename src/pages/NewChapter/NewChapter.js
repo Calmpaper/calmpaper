@@ -1,10 +1,11 @@
-import React, { useState, useContext, useRef } from 'react'
+import React, { useState, useContext, useEffect, useRef } from 'react'
 import { UserContext } from 'context'
 import { useHistory, useParams, useLocation } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { useMutation } from 'urql'
 import { createChapterMutation, updateChapterMutation } from 'api'
 import draftToHtml from 'draftjs-to-html'
+import htmlToDraft from 'html-to-draftjs'
 
 // import TextareaAutosize from 'react-textarea-autosize'
 import { Editor } from 'react-draft-wysiwyg'
@@ -44,15 +45,26 @@ export default () => {
     defaultValues: chapter
       ? {
           title: chapter.title,
-          content: chapter.content,
+          content: htmlToDraft(chapter.content),
         }
       : {},
   })
+  useEffect(() => {
+    if (chapter) {
+      const contentBlock = htmlToDraft(chapter.content)
+      const contentState = ContentState.createFromBlockArray(
+        contentBlock.contentBlocks,
+      )
+      const editorState = EditorState.createWithContent(contentState)
+      setValue(editorState)
+    }
+  }, [chapter])
 
   const submit = (data) => {
     if (chapter) {
       updateChapter({
         ...data,
+        content: draftToHtml(convertToRaw(value.getCurrentContent())),
         chapterId: chapter.id,
       }).then(({ data: { updateOneChapter: chapter } }) => {
         const chapterPage =
@@ -66,8 +78,6 @@ export default () => {
     } else {
       createChapter({
         ...data,
-        // content: draftToHtml(value),
-        // content: value,
         content: draftToHtml(convertToRaw(value.getCurrentContent())),
         userId: user.id,
         bookId: parseInt(bookId),
@@ -172,10 +182,8 @@ export default () => {
                   },
                 }}
                 onEditorStateChange={(editorState) => {
+                  console.log('editorState')
                   console.log(editorState)
-                  console.log(
-                    draftToHtml(convertToRaw(editorState.getCurrentContent())),
-                  )
                   setValue(editorState)
                 }}
               />
@@ -200,9 +208,15 @@ export default () => {
             */}
             </div>
             <div className="block block09 add-series-btn">
-              <button className="btn btn-color" type="submit">
-                {!fetching ? 'Add page' : 'Adding...'}
-              </button>
+              {chapter ? (
+                <button className="btn btn-color" type="submit">
+                  {!fetching ? 'Save' : 'Saving...'}
+                </button>
+              ) : (
+                <button className="btn btn-color" type="submit">
+                  {!fetching ? 'Add page' : 'Adding...'}
+                </button>
+              )}
             </div>
           </form>
         </div>

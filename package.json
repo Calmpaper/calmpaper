@@ -5,6 +5,8 @@
   "dependencies": {
     "@stripe/react-stripe-js": "^1.1.2",
     "@stripe/stripe-js": "^1.9.0",
+    "@urql/exchange-graphcache": "^3.1.2",
+    "crypto-js": "^4.0.0",
     "draft-js": "^0.11.7",
     "draftjs-to-html": "^0.9.1",
     "getstream": "^4.5.4",
@@ -13,6 +15,7 @@
     "html-to-draftjs": "^1.5.0",
     "html5-file-selector": "^2.1.0",
     "isomorphic-unfetch": "^3.0.0",
+    "jsonwebtoken": "^8.5.1",
     "localforage": "^1.7.4",
     "moment": "^2.27.0",
     "node-sass": "^4.14.1",

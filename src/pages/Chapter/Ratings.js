@@ -33,7 +33,7 @@ export default ({ chapter }) => (
       <div className="about-num-panel-info">
         <div className="panel-num">{chapter.views}</div>
       </div>
-      <div className="about-num-panel-label">All views</div>
+      <div className="about-num-panel-label">Views</div>
     </a>
     {/*
     <a href>
