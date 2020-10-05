@@ -10,7 +10,9 @@ const UserContext = createContext()
 const UserProvider = ({ children }) => {
   const { search, pathname } = useLocation()
   const { replace } = useHistory()
-  const [jwt, setJwt] = useState(window.localStorage.getItem('jwt'))
+  const [jwt, setJwt] = useState(
+    window && window.localStorage && window.localStorage.getItem('jwt'),
+  )
 
   const [{ data: { me: user } = {}, fetching }, reexecuteQuery] = useQuery({
     query: getMeQuery,
@@ -56,7 +58,7 @@ const UserProvider = ({ children }) => {
     }
   }, [search, replace, reexecuteQuery, pathname])
 
-  if (fetching) return <Loader />
+  if (fetching && navigator.userAgent !== 'ReactSnap') return <Loader />
 
   return (
     <UserContext.Provider

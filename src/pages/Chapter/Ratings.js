@@ -29,7 +29,7 @@ const Stars = ({ reviews, bookId }) => {
 export default ({ chapter }) => (
   <div className="about-num-panel">
     <Stars reviews={chapter.book.reviews} bookId={chapter.book.id} />
-    <a href className="all-views">
+    <a href className="all-views" style={{ cursor: 'default' }}>
       <div className="about-num-panel-info">
         <div className="panel-num">{chapter.views}</div>
       </div>

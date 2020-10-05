@@ -19,11 +19,11 @@ export default ({ home }) => {
         <div className="col">
           <nav className="header-nav">
             <ul className="header-nav__list">
-              {user && (
+              {/* user && (
                 <li className="header-nav__item">
                   <Read />
                 </li>
-              )}
+                  )*/}
               {user && <Create />}
               {user && (
                 <li

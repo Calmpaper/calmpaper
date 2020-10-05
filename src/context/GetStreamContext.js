@@ -4,9 +4,10 @@ import { UserContext } from 'context'
 import { connect } from 'getstream'
 import * as QueryString from 'query-string'
 
-const API_1 = 'c2u3fw52wm4t'
-const API_2 = 'grdr5z6ras7ugc33ezbqswq6k6pggrad4armpg3xjskpgp7gwttmqjgyfg86pn8z'
-const API_3 = '85679'
+const GETSTREAM_API_KEY = process.env.REACT_APP_GETSTREAM_API_TOKEN
+// const GETSTREAM_USER_TOKEN =
+//   'grdr5z6ras7ugc33ezbqswq6k6pggrad4armpg3xjskpgp7gwttmqjgyfg86pn8z'
+const GETSTREAM_APP_ID = process.env.REACT_APP_GETSTREAM_APP_ID
 
 const GetStreamContext = createContext()
 
@@ -41,7 +42,11 @@ const GetStreamProvider = ({ children }) => {
 
   useEffect(() => {
     if (user) {
-      const client = connect(API_1, user.getStreamToken, API_2, API_3)
+      const client = connect(
+        GETSTREAM_API_KEY,
+        user.getStreamToken,
+        GETSTREAM_APP_ID,
+      )
       setClient(client)
 
       setNotificationsFeed(
@@ -54,7 +59,6 @@ const GetStreamProvider = ({ children }) => {
   useEffect(() => {
     if (notificationsFeed) {
       notificationsFeed.get().then(({ results }) => {
-        console.log('notifications feed')
         console.log(results)
         setNotifications(results)
       })
@@ -64,7 +68,6 @@ const GetStreamProvider = ({ children }) => {
   useEffect(() => {
     if (userFeed) {
       userFeed.get().then(({ results }) => {
-        console.log('user feed')
         console.log(results)
         setUserNotifications(results)
       })

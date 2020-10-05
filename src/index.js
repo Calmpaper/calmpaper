@@ -49,7 +49,8 @@ const client = createClient({
   //   fetchExchange,
   // ],
   fetchOptions: () => {
-    const token = window.localStorage.getItem('jwt')
+    const token =
+      window && window.localStorage && window.localStorage.getItem('jwt')
     return {
       headers: { authorization: token ? `Bearer ${token}` : '' },
     }
@@ -142,25 +143,25 @@ const App = () => {
 }
 
 const rootElement = document.getElementById('root')
-// if (rootElement.hasChildNodes()) {
-//   hydrate(
-//     <React.StrictMode>
-//       <Providers>
-//         <App />
-//       </Providers>
-//     </React.StrictMode>,
-//     rootElement,
-//   )
-// } else {
-render(
-  <React.StrictMode>
-    <Providers>
-      <App />
-    </Providers>
-  </React.StrictMode>,
-  rootElement,
-)
-// }
+if (rootElement.hasChildNodes()) {
+  hydrate(
+    <React.StrictMode>
+      <Providers>
+        <App />
+      </Providers>
+    </React.StrictMode>,
+    rootElement,
+  )
+} else {
+  render(
+    <React.StrictMode>
+      <Providers>
+        <App />
+      </Providers>
+    </React.StrictMode>,
+    rootElement,
+  )
+}
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

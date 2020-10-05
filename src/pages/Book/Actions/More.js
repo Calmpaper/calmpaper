@@ -9,8 +9,7 @@ export default ({ bookId, book, hide }) => {
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false)
   const { push } = useHistory()
 
-  // eslint-disable-next-line no-unused-vars
-  const [__, deleteBook] = useMutation(deleteBookMutation)
+  const [, deleteBook] = useMutation(deleteBookMutation)
   const onDelete = () => deleteBook({ id: bookId })
 
   return (

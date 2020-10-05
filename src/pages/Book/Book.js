@@ -51,7 +51,11 @@ export default ({ tab, update }) => {
   const [, incrementBookViews] = useMutation(incrementBookViewsMutation)
 
   useEffect(() => {
-    if (!window.localStorage.getItem(`${window.location.href}-visited`)) {
+    if (
+      window &&
+      window.localStorage &&
+      !window.localStorage.getItem(`${window.location.href}-visited`)
+    ) {
       incrementBookViews({ bookId: parseInt(bookId) })
       window.localStorage.setItem(`${window.location.href}-visited`, true)
     }
@@ -70,7 +74,7 @@ export default ({ tab, update }) => {
 
   const meta = {
     title: `${book.name} by ${
-      book.author.username || book.author.fullname
+      book.author && (book.author.username || book.author.fullname)
     } at Calmpaper`,
     description: book.description,
     image: book.image,

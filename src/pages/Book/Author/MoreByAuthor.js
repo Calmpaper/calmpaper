@@ -21,8 +21,8 @@ export default ({ books = [] }) => {
             <div className="catalog-info">
               <h3 className="catalog-title">{book.name}</h3>
               <p className="catalog-author">{book.author.username}</p>
+              {/*
               <div className="progress">
-                {/*
                 <div className="progress__line">
                   <span
                     className="progress__stat"
@@ -30,9 +30,9 @@ export default ({ books = [] }) => {
                   />
                 </div>
                 <div className="progress__num">{`${avg * 10}%`}</div>
-              */}
               </div>
-              <div className="catalog-stat">
+              */}
+              <div className="catalog-stat" style={{ marginTop: 8 }}>
                 <div className="catalog-stat__box">
                   <svg className="icon icon-rating">
                     <use xlinkHref="#icon-rating" />

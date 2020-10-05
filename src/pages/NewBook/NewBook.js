@@ -10,10 +10,9 @@ import {
   getTagsQuery,
 } from 'api'
 
-import TextareaAutosize from 'react-textarea-autosize'
 import Header from 'components/Layout/Header'
-import Footer from 'components/molecules/footer'
 import FileInput from 'components/Input/FileInput'
+import Editor from 'components/Editor'
 
 import Genres from './Genres'
 import Tags from './Tags'
@@ -85,7 +84,16 @@ export default () => {
               paddingTop: 0,
               marginTop: 0,
             }}
-            onSubmit={handleSubmit(submit)}
+            onSubmit={(e) => {
+              if (
+                e.nativeEvent.submitter.className.indexOf('menubar__button') >
+                -1
+              ) {
+                e.preventDefault()
+              } else {
+                handleSubmit(submit)(e)
+              }
+            }}
           >
             <div
               className="block block01 add-series-img"
@@ -118,6 +126,8 @@ export default () => {
                   <span className="red-title">{` (required)`}</span>
                 )}
               </h3>
+              <Controller name="description" control={control} as={Editor} />
+              {/*
               <TextareaAutosize
                 name="description"
                 type="text"
@@ -127,6 +137,7 @@ export default () => {
                 ref={register({ required: true })}
                 minRows={6}
               />
+              */}
             </div>
             <Controller
               name="genres"

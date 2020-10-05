@@ -63,18 +63,18 @@ export default () => {
                   Profile
                 </Link>
               </li>
-              {/*
               <li>
-                <Link to={'/explore'}>Explore</Link>
+                <Link to={'/dashboard'}>Dashboard</Link>
               </li>
+              {/*
               <li>
                 <Link to={`/help`}>Help</Link>
               </li>
-  */}
+              */}
             </ul>
           </div>
           <div className="header-notification-user__footer">
-            <a href onClick={logout}>
+            <a href onClick={logout} style={{ cursor: 'pointer' }}>
               Sign out
             </a>
           </div>

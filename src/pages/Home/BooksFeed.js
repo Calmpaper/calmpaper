@@ -13,6 +13,7 @@ export default ({ sort }) => {
     variables: {
       userId: user.id,
     },
+    pause: !user,
   })
 
   if (fetching) return <Loader />

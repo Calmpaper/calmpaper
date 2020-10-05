@@ -25,7 +25,7 @@ export default ({ children }) => {
 
   return (
     <div>
-      <Icons />
+      {navigator.userAgent !== 'ReactSnap' && <Icons />}
       {children}
       {/*
       <Header fullWidth={isHome} withLine={isChapter} />

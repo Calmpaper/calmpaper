@@ -384,3 +384,25 @@
   font-weight: 500;
   font-size: 14px;
 }
+
+.page-read-book .read-book-text .container .text p {
+  font-size: 18px;
+}
+
+.page-read-book .pagination {
+  margin-top: 28px;
+}
+
+.page-read-bookk .header {
+  position: initial;
+}
+
+.comments .comment-text P {
+  font-size: 16px;
+  line-height: 180%;
+}
+
+.read-book-text .text img {
+  margin: 0 auto;
+  display: flex;
+}

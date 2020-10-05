@@ -23,3 +23,11 @@ strong {
   color: inherit;
   font-weight: inherit;
 }
+
+.editor__content .ProseMirror {
+  min-height: 100px;
+}
+
+.editor__content code {
+  color: white;
+}

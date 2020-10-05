@@ -15,6 +15,10 @@ import Help from 'pages/Help/Help'
 import Explore from 'pages/Explore/Explore'
 import Welcome from 'pages/Welcome/Welcome'
 import Invite from 'pages/Invite/Invite'
+import Editor from 'components/Editor'
+import CommentsFeed from 'pages/Home/CommentsFeed'
+import AllBooks from 'pages/AllBooks'
+import AllChapters from 'pages/AllChapters'
 
 const Routes = () => (
   <Switch>
@@ -39,7 +43,13 @@ const Routes = () => (
     <Route path="/new-book">
       <NewBook />
     </Route>
-    <Route path="/users/:id">
+    <Route path="/users/@user:id">
+      <User />
+    </Route>
+    <Route path="/users/@:username">
+      <User />
+    </Route>
+    <Route path="/@:username">
       <User />
     </Route>
     <Route path="/signup">
@@ -63,8 +73,20 @@ const Routes = () => (
     <Route path="/invite">
       <Invite />
     </Route>
+    <Route path="/editor">
+      <Editor />
+    </Route>
+    <Route path="/comments">
+      <CommentsFeed />
+    </Route>
     <Route path="/auth-fail">
       <AuthFail />
+    </Route>
+    <Route path="/all-books">
+      <AllBooks />
+    </Route>
+    <Route path="/all-chapters">
+      <AllChapters />
     </Route>
     <Route path="/">
       <Home />

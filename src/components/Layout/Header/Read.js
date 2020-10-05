@@ -12,8 +12,10 @@ const ReadingList = ({ books, close }) => {
         top: 72,
         padding: '16px 24px',
         visibility: 'visible',
+        right: 40,
         opacity: 1,
         marginLeft: -20,
+        cursor: 'pointer',
       }}
     >
       {books.map((book) => (

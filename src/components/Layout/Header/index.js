@@ -3,6 +3,7 @@ import { UserContext } from 'context'
 import Flex from 'components/atoms/flex'
 import StripeSetupModal from 'components/Stripe/PaymentSetupModal'
 import Header from './Header'
+import Headroom from 'react-headroom'
 
 export default ({ fullWidth = false, withLine, black = false }) => {
   const [showStripeSetupModal, setShowStripeSetupModal] = useState(false)

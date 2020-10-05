@@ -17,7 +17,7 @@ export default ({ chapter }) => (
         <div className="text">{chapter.content}</div>
         */}
 
-        <SubscribeBanner book={chapter.book} />
+        <SubscribeBanner chapter={chapter} book={chapter.book} />
       </div>
     </div>
   </div>
