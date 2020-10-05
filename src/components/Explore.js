@@ -37,7 +37,7 @@ const Book = ({ book, isFirst }) => {
   }
 
   return (
-    <div className="item item01">
+    <div className="item item01" onClick={() => push(`/books/${book.id}`)}>
       <BookCover book={book} isItem hideText />
       <div className="item-info" style={{ width: '100%' }}>
         <div className="item-head">

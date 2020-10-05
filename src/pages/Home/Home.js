@@ -1,7 +1,7 @@
 import React, { useEffect, useContext } from 'react'
 import { Helmet } from 'react-helmet'
 import { UserContext } from 'context'
-import { useHistory } from 'react-router-dom'
+import { useHistory, Link } from 'react-router-dom'
 
 import Flex from 'components/atoms/flex'
 import Loader from 'components/atoms/loader'
@@ -44,7 +44,7 @@ export default () => {
     )
   }
 
-  if (!user && navigator.userAgent !== 'ReactSnap') {
+  if (!user || navigator.userAgent === 'ReactSnap') {
     return (
       <>
         <Header fullWidth black />
@@ -85,9 +85,17 @@ const Landing = () => (
             unfinished books.
           </h1>
           <p className="main-text">
-            Share your unfinished books to your friends after finishing the
-            first page, not 300 pages later
+            Share your unfinished books to your fans after finishing the first
+            page, not 300 pages later
           </p>
+          <Link
+            to={`/auth-fail`}
+            className="btn btn-color"
+            style={{ cursor: 'pointer' }}
+          >
+            Get started
+          </Link>
+          {/*
           <a
             href={`${process.env.REACT_APP_BACKEND_URL}/auth/google`}
             className="btn btn-color"
@@ -95,6 +103,7 @@ const Landing = () => (
           >
             Get started
           </a>
+*/}
         </div>
       </div>
     </div>
@@ -107,8 +116,7 @@ const Landing = () => (
             </div>
             <h2 className="item-title">1. Write Anything</h2>
             <p className="item-text">
-              Write guides, stories, comics, fiction, non-fiction... etc. Your
-              book, your rules.
+              Write anything. Your book, your rules. Even 1 page is fine.
             </p>
           </div>
           <div className="item">

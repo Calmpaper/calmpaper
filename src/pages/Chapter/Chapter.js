@@ -10,6 +10,7 @@ import {
 
 import Loader from 'components/Loader'
 import Header from 'components/Layout/Header'
+import Headroom from 'react-headroom'
 import Footer from 'components/molecules/footer'
 import Comments from 'components/Comments'
 import SharePopup from 'components/Popups/SharePopup'
@@ -59,7 +60,11 @@ export default () => {
 
   useEffect(() => {
     if (!fetching && chapter) {
-      if (!window.localStorage.getItem(`${window.location.href}-visited`)) {
+      if (
+        window &&
+        window.localStorage &&
+        !window.localStorage.getItem(`${window.location.href}-visited`)
+      ) {
         incrementChapterViews({
           chapterId: chapter.id,
         })
@@ -80,10 +85,12 @@ export default () => {
   }
 
   return (
-    <>
+    <div className="page-read-bookk">
       <Meta chapter={chapter} chapterPage={chapterPage} />
       {showSharePopup && <SharePopup close={() => setShowSharePopup(false)} />}
-      <Header withLine />
+      <Headroom>
+        <Header withLine />
+      </Headroom>
       <div className="page-read-book">
         <Breadcrumbs chapter={chapter} author={chapter.author} />
         <div className="read-book-main">
@@ -100,7 +107,9 @@ export default () => {
       </div>
 
       <ChapterNavigation chapter={chapter} reexecuteQuery={reexecuteQuery} />
+      {/*
       <Footer centered />
-    </>
+*/}
+    </div>
   )
 }

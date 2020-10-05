@@ -49,17 +49,19 @@ export default () => {
                   user.username || user.givenname
                 }`}</h3>
                 <p className="block-subtitle">{`calmpaper.org/users/${inviteFrom}`}</p>
-                <button
-                  className="btn btn-color"
-                  onClick={() => {
-                    window.location.href = `${process.env.REACT_APP_BACKEND_URL}/auth/google?from=${parsed.from}`
-                  }}
-                >
-                  Join now{' '}
-                  <svg className="icon icon-right">
-                    <use xlinkHref="#icon-right04" />
-                  </svg>
-                </button>
+                {navigator.userAgent !== 'ReactSnap' && (
+                  <button
+                    className="btn btn-color"
+                    onClick={() => {
+                      window.location.href = `${process.env.REACT_APP_BACKEND_URL}/auth/google?from=${parsed.from}`
+                    }}
+                  >
+                    Join now{' '}
+                    <svg className="icon icon-right">
+                      <use xlinkHref="#icon-right04" />
+                    </svg>
+                  </button>
+                )}
               </div>
               <div className="block block02">
                 <h3 className="block-title">

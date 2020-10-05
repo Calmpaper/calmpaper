@@ -81,6 +81,7 @@ export const editUserMutation = gql`
     $username: String
     $fullname: String
     $avatar: String
+    $bio: String
   ) {
     updateOneUser(
       where: { id: $userId }
@@ -88,14 +89,18 @@ export const editUserMutation = gql`
         username: $username
         fullname: $fullname
         givenname: $fullname
+        firstname: $fullname
         avatar: $avatar
+        bio: $bio
       }
     ) {
       id
       username
       fullname
       givenname
+      firstname
       avatar
+      bio
     }
   }
 `

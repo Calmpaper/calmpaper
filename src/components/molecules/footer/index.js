@@ -1,7 +1,9 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const Links = () => (
   <ul className="footer-nav">
+    <Link to="/explore" style={{ visibility: 'hidden' }} />
     <li>
       <a
         href="https://www.iubenda.com/terms-and-conditions/31556758"

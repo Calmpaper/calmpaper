@@ -1,36 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 
-export default ({ value, setValue }) => {
-  // const [value, setValue] = useState('')
-
-  useEffect(() => {
-    let editor = document.createElement('calmpaper-editor')
-    let script = document.createElement('script')
-    let css = document.createElement('link')
-
-    editor.value = value
-    editor.setValue = setValue
-    script.src = 'https://editor-livid.vercel.app/js/app.376fb166.js'
-    css.rel = 'stylesheet'
-    css.href = 'https://editor-livid.vercel.app/css/app.4d7ab9a6.css'
-
-    document.getElementById('editor-portal').appendChild(editor)
-    document.body.appendChild(script)
-    document.head.appendChild(css)
-  }, [])
-
-  useEffect(() => {
-    console.log('value:', value)
-  }, [value])
-
-  return (
-    <div id="editor-portal">
-      <Icons />
-    </div>
-  )
-}
-
-const Icons = () => (
+export default () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     style={{

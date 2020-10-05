@@ -1,20 +1,12 @@
-import React, { useState, useContext, useEffect, useRef } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { UserContext } from 'context'
 import { useHistory, useParams, useLocation } from 'react-router-dom'
-import { useForm } from 'react-hook-form'
+import { useForm, Controller } from 'react-hook-form'
 import { useMutation } from 'urql'
 import { createChapterMutation, updateChapterMutation } from 'api'
-import draftToHtml from 'draftjs-to-html'
-import htmlToDraft from 'html-to-draftjs'
 
-// import TextareaAutosize from 'react-textarea-autosize'
-import { Editor } from 'react-draft-wysiwyg'
-import { EditorState, convertToRaw, ContentState } from 'draft-js'
-import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
-// import Editor from 'react-medium-editor'
 import Header from 'components/Layout/Header'
-// import Editor from 'components/Editor'
-import Footer from 'components/molecules/footer'
+import Editor from 'components/Editor'
 
 function uploadImageCallBack(file) {
   return new Promise((resolve, reject) => {
@@ -37,34 +29,22 @@ function uploadImageCallBack(file) {
 
 export default () => {
   const { user } = useContext(UserContext)
-  const [value, setValue] = useState('')
   const { book: bookId } = useParams()
   const { push } = useHistory()
   const { state: { chapter } = {} } = useLocation()
-  const { register, handleSubmit, errors } = useForm({
+  const { register, control, handleSubmit, errors } = useForm({
     defaultValues: chapter
       ? {
           title: chapter.title,
-          content: htmlToDraft(chapter.content),
+          content: chapter.content,
         }
       : {},
   })
-  useEffect(() => {
-    if (chapter) {
-      const contentBlock = htmlToDraft(chapter.content)
-      const contentState = ContentState.createFromBlockArray(
-        contentBlock.contentBlocks,
-      )
-      const editorState = EditorState.createWithContent(contentState)
-      setValue(editorState)
-    }
-  }, [chapter])
 
   const submit = (data) => {
     if (chapter) {
       updateChapter({
         ...data,
-        content: draftToHtml(convertToRaw(value.getCurrentContent())),
         chapterId: chapter.id,
       }).then(({ data: { updateOneChapter: chapter } }) => {
         const chapterPage =
@@ -78,7 +58,6 @@ export default () => {
     } else {
       createChapter({
         ...data,
-        content: draftToHtml(convertToRaw(value.getCurrentContent())),
         userId: user.id,
         bookId: parseInt(bookId),
       }).then(({ data: { createOneChapter: chapter } }) => {
@@ -122,7 +101,16 @@ export default () => {
               paddingTop: 0,
               marginTop: 0,
             }}
-            onSubmit={handleSubmit(submit)}
+            onSubmit={(e) => {
+              if (
+                e.nativeEvent.submitter.className.indexOf('menubar__button') >
+                -1
+              ) {
+                e.preventDefault()
+              } else {
+                handleSubmit(submit)(e)
+              }
+            }}
           >
             {/*
             <FileInput setImage={setImage} />
@@ -143,8 +131,15 @@ export default () => {
                 autoFocus
                 onKeyDown={(e) => {
                   if (e.key === 'Enter') {
-                    console.log('yoyo')
-                    editorRef.focus()
+                    // e.preventDefault()
+                    // document
+                    //   .getElementsByClassName('menubar__button is-active')[0]
+                    //   .unfocus()
+                    // document
+                    //   .getElementsByClassName('menubar__button')[0]
+                    //   .click()
+                    // e.preventDefault()
+                    // editorRef.focus()
                   }
                 }}
               />
@@ -156,56 +151,7 @@ export default () => {
                   <span className="red-title">{` (required)`}</span>
                 )}
               </h3>
-              <Editor
-                editorState={value}
-                toolbarClassName="toolbarClassName"
-                wrapperClassName="input"
-                editorClassName="editorClassName"
-                editorRef={(ref) => setEditorRef(ref)}
-                stripPastedStyles={true}
-                toolbar={{
-                  options: ['inline', 'list', 'link', 'emoji', 'image'],
-                  inline: {
-                    options: ['bold', 'italic', 'underline', 'strikethrough'],
-                  },
-                  list: {
-                    options: ['unordered', 'ordered'],
-                  },
-                  link: {
-                    showOpenOptionOnHover: false,
-                    defaultTargetOption: '_blank',
-                    options: ['link'],
-                  },
-                  image: {
-                    uploadCallback: uploadImageCallBack,
-                    alt: { present: true, mandatory: false },
-                  },
-                }}
-                onEditorStateChange={(editorState) => {
-                  console.log('editorState')
-                  console.log(editorState)
-                  setValue(editorState)
-                }}
-              />
-              {/*
-              <Editor
-                text={value}
-                onChange={(text) => setValue(text)}
-                className="input"
-                style={{ minHeight: 300 }}
-              />
-*/}
-              {/*
-              <TextareaAutosize
-                name="content"
-                type="text"
-                className="input textarea"
-                placeholder="Content"
-                defaultValue={''}
-                ref={register({ required: true })}
-                minRows={6}
-              />
-            */}
+              <Controller name="content" control={control} as={Editor} />
             </div>
             <div className="block block09 add-series-btn">
               {chapter ? (

@@ -25,6 +25,8 @@ export default ({ author, bookId }) => {
     }
   }
 
+  if (!author) return null
+
   return (
     <div className="sidebar-box sidebar-author">
       <h4 className="title size04">Author</h4>
@@ -33,6 +35,7 @@ export default ({ author, bookId }) => {
         onClick={() =>
           push(`/users/${author.username ? `@${author.username}` : author.id}`)
         }
+        style={{ cursor: 'pointer' }}
       >
         <div
           className="author-avatar"

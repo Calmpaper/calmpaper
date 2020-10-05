@@ -3,20 +3,11 @@ import styled from 'styled-components'
 import Dropzone from 'react-dropzone-uploader'
 import { getDroppedOrSelectedFiles } from 'html5-file-selector'
 
-const Avatar = styled.img`
-  background-image: url("${(props) => props.src}");
-  width: 40px;
-  height: 40px;
-  border-radius: 100%;
-  border: 1px solid rgba(0, 0, 0, 0);
-  user-select: none;
-  background: #fafafa;
-  border: 1px solid #e0e0e0;
-  box-sizing: border-box;
-  margin-right: 8px;
-  :hover {
-    border-color: blue;
-  }
+const Avatar = styled.img.attrs({
+  className: 'user-avatar',
+})`
+  object-position: top;
+  object-fit: cover;
   ${(props) => props.playing && 'border-color: #ae00ff;'}
 `
 
@@ -25,12 +16,13 @@ const BACKEND_URL = process.env.REACT_APP_BACKEND_URL
 const Input = ({
   a: { accept, onFiles, files, getFilesFromEvent } = {},
   avatar,
+  style,
 }) => {
   const text = files.length > 0 ? 'Add more files' : 'Choose files'
 
   return (
     <label>
-      <Avatar src={avatar} />
+      <Avatar src={avatar} style={style} />
       <input
         style={{ display: 'none' }}
         type="file"
@@ -46,7 +38,7 @@ const Input = ({
   )
 }
 
-const CustomInput = ({ avatar, setImage }) => {
+const CustomInput = ({ avatar, setImage, style = {} }) => {
   const handleSubmit = (files, allFiles) => {
     allFiles.forEach((f) => f.remove())
   }
@@ -66,7 +58,7 @@ const CustomInput = ({ avatar, setImage }) => {
       const { path } = JSON.parse(xhr.response)
 
       setImage(`${BACKEND_URL}/${path}`)
-      document.getElementsByTagName('progress')[0].style.display = 'none'
+      // document.getElementsByTagName('progress')[0].style.display = 'none'
       // remove()
     }
 
@@ -90,12 +82,17 @@ const CustomInput = ({ avatar, setImage }) => {
       multiple={false}
       canCancel={false}
       inputContent=""
-      InputComponent={(a) => <Input a={a} avatar={avatar} />}
+      InputComponent={(a) => <Input a={a} avatar={avatar} style={style} />}
+      PreviewComponent={({ meta }) => {
+        console.log(meta)
+        return (
+          <img className="user-avatar" src={meta.previewUrl} alt="Avatar" />
+        )
+      }}
       SubmitButtonComponent={() => <div />}
     />
   )
 }
-// PreviewComponent={() => <div />}
 
 // InputComponent={Input}
 

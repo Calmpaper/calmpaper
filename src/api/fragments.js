@@ -8,6 +8,7 @@ export const UserFragment = gql`
     givenname
     firstname
     avatar
+    bio
   }
 `
 

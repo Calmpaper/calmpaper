@@ -6,7 +6,7 @@ import {
   removeBookFromFavoritesMutation,
 } from 'api'
 
-export default ({ book }) => {
+export default ({ book, chapter }) => {
   const { user } = useContext(UserContext)
   const { notificationsFeed } = useContext(GetStreamContext)
   const [wasFollowing, setWasFollowing] = useState(undefined)
@@ -16,6 +16,10 @@ export default ({ book }) => {
   const [, removeBookFromFavorites] = useMutation(
     removeBookFromFavoritesMutation,
   )
+
+  const pagesCount = chapter.book.chapters.length
+  const currentPage = book.chapters.findIndex((c) => c.id === chapter.id) + 1
+  const isLastPage = currentPage === pagesCount
 
   useEffect(() => {
     // wasFollowing is an initial value whether user was following a book
@@ -48,14 +52,18 @@ export default ({ book }) => {
     <div className="banner" style={{ backgroundImage: 'url(/img/banner.jpg)' }}>
       <div>
         <div className="banner__title">
-          {isFollowing
-            ? 'Stay tuned for updates :)'
-            : 'Do you want to subscribe?'}
+          {isFollowing ? 'Stay tuned for updates :)' : 'Follow this book?'}
         </div>
         {!isFollowing && (
           <div className="banner__subtitle">
-            You have reached the end. To avoid missing out <br /> future updates
-            by author, subscribe.
+            {isLastPage ? (
+              <>
+                You have reached the end. To avoid missing out <br />
+                future updates by the author, follow this book.
+              </>
+            ) : (
+              'To avoid missing out future updates by the author, follow this book.'
+            )}
           </div>
         )}
         <button className="btn btn-line banner__btn" onClick={onFollow}>

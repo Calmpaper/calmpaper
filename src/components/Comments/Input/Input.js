@@ -55,6 +55,7 @@ export default ({
           autoFocus={autoFocus}
           style={{
             resize: 'none',
+            paddingRight: '60px',
           }}
         />
         <S.SendButton

@@ -104,7 +104,7 @@ export const getLastChaptersQuery = gql`
         }
       }
     }
-    chaptersFeedCount
+    chaptersFeedCount(userId: $userId)
   }
   ${UserFragment}
   ${BookFragment}
@@ -131,7 +131,7 @@ export const getLastChaptersByAuthorQuery = gql`
         }
       }
     }
-    chaptersFeedByAuthorCount
+    chaptersFeedByAuthorCount(authorId: $authorId)
   }
   ${UserFragment}
   ${BookFragment}
