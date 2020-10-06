@@ -2,8 +2,8 @@ import gql from 'graphql-tag'
 import { UserFragment, BookFragment } from '../fragments'
 
 export const getUserQuery = gql`
-  query($username: String) {
-    user(where: { username: $username }) {
+  query($username: String, $id: Int) {
+    user(where: { username: $username, id: $id }) {
       ...User
       givenname
       getStreamToken
