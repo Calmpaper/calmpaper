@@ -43,10 +43,13 @@ const Routes = () => (
     <Route path="/new-book">
       <NewBook />
     </Route>
-    <Route path="/users/@user:id">
+    <Route path="/users/@:username">
       <User />
     </Route>
-    <Route path="/users/@:username">
+    <Route path="/users/:id">
+      <User />
+    </Route>
+    <Route path="/@user:id">
       <User />
     </Route>
     <Route path="/@:username">
