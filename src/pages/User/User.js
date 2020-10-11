@@ -17,6 +17,8 @@ import Following from './Following'
 export default () => {
   const [tab, setTab] = useState('feed')
   const { id, username } = useParams()
+  console.log('id')
+  console.log(id)
 
   const [{ data: { user } = {}, fetching, error }] = useQuery({
     query: getUserQuery,

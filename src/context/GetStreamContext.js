@@ -59,7 +59,6 @@ const GetStreamProvider = ({ children }) => {
   useEffect(() => {
     if (notificationsFeed) {
       notificationsFeed.get().then(({ results }) => {
-        console.log(results)
         setNotifications(results)
       })
     }
@@ -68,7 +67,6 @@ const GetStreamProvider = ({ children }) => {
   useEffect(() => {
     if (userFeed) {
       userFeed.get().then(({ results }) => {
-        console.log(results)
         setUserNotifications(results)
       })
     }

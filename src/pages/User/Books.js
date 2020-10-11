@@ -1,5 +1,6 @@
 import React from 'react'
 import { useHistory } from 'react-router-dom'
+import { getUserSlug } from 'helpers'
 import BookCover from 'components/atoms/book-cover'
 import Rating from 'components/Rating'
 
@@ -7,7 +8,10 @@ const Book = ({ book }) => {
   const { push } = useHistory()
 
   return (
-    <div className="col" onClick={() => push(`/books/${book.id}`)}>
+    <div
+      className="col"
+      onClick={() => push(`/${getUserSlug(book.author)}/${book.slug}`)}
+    >
       <a href>
         <BookCover book={book} isCatalog />
         <h3 className="catalog-title">{book.name}</h3>

@@ -11,8 +11,6 @@ export default ({ book }) => (
     <Description description={book.description} />
     <Genres genres={book.genres} />
     <Tags tags={book.tags} />
-    {book.chapters.length > 0 && (
-      <TableOfContent chapters={book.chapters} bookId={book.id} />
-    )}
+    {book.chapters.length > 0 && <TableOfContent book={book} />}
   </>
 )

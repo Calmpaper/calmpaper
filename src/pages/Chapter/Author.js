@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { UserContext, GetStreamContext } from 'context'
 import { useMutation } from 'urql'
 import { followUserMutation, unfollowUserMutation } from 'api'
+import { getUserSlug, getUserDisplayName } from 'helpers'
 
 import DonationModal from 'components/DonationModal'
 
@@ -30,18 +31,14 @@ export default ({ chapterId, author }) => {
     <div className="read-book-author">
       <div className="container">
         <div className="row">
-          <Link
-            to={`/users/${author.username ? `@${author.username}` : author.id}`}
-          >
+          <Link to={`/${getUserSlug(author)}`}>
             <div className="col col01">
               <div
                 className="avatar"
                 style={{ backgroundImage: `url('${author.avatar}')` }}
               />
               <div className="item-info">
-                <h3 className="item-title">
-                  {author.username || author.fullname}
-                </h3>
+                <h3 className="item-title">{getUserDisplayName(author)}</h3>
                 {author.followers.length > 0 && (
                   <p className="item-subtitle">{`${author.followers.length} ${
                     author.followers.length === 1 ? 'follower' : 'followers'

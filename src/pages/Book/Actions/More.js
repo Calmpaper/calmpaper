@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useMutation } from 'urql'
 import { useHistory } from 'react-router-dom'
 import { deleteBookMutation } from 'api'
+import { getUserSlug } from 'helpers'
 
 import ConfirmationModal from 'components/ConfirmationModal'
 
@@ -19,7 +20,10 @@ export default ({ bookId, book, hide }) => {
           type="button"
           className="zen-ui-context-menu__item comment-menu-item _edit"
           onClick={() => {
-            push({ pathname: `/books/${bookId}/edit`, state: { book } })
+            push({
+              pathname: `/${getUserSlug(book.author)}/${book.slug}/edit`,
+              state: { book },
+            })
             // hide()
           }}
         >

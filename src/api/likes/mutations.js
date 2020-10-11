@@ -108,3 +108,31 @@ export const setReviewLikeMutation = gql`
   ${UserFragment}
   ${ReviewFragment}
 `
+
+export const setChapterLikeMutation = gql`
+  mutation($chapterId: Int!, $userId: Int!) {
+    updateOneChapter(
+      where: { id: $chapterId }
+      data: { likes: { create: { author: { connect: { id: $userId } } } } }
+    ) {
+      id
+      author {
+        id
+      }
+    }
+  }
+`
+
+export const removeChapterLikeMutation = gql`
+  mutation($chapterId: Int!, $likeId: Int!) {
+    updateOneChapter(
+      where: { id: $chapterId }
+      data: { likes: { delete: { id: $likeId } } }
+    ) {
+      id
+      author {
+        id
+      }
+    }
+  }
+`

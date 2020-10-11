@@ -11,7 +11,6 @@ import {
 import Loader from 'components/Loader'
 import Header from 'components/Layout/Header'
 import Headroom from 'react-headroom'
-import Footer from 'components/molecules/footer'
 import Comments from 'components/Comments'
 import SharePopup from 'components/Popups/SharePopup'
 
@@ -26,7 +25,7 @@ import Actions from './Actions'
 
 export default () => {
   const { user } = useContext(UserContext)
-  const { book: bookId, chapter: chapterPage } = useParams()
+  const { book: bookSlug, id: bookId, chapter: chapterPage } = useParams()
   const { location } = useHistory()
   const [showSharePopup, setShowSharePopup] = useState(
     location.state ? location.state.showSharePopup : false,
@@ -37,18 +36,33 @@ export default () => {
     reexecuteQuery,
   ] = useQuery({
     query: getChapterByBookQuery,
-    variables: {
-      bookId: parseInt(bookId),
-      skip: parseInt(chapterPage) - 1,
-    },
+    variables: bookSlug
+      ? {
+          bookSlug,
+          skip: parseInt(chapterPage) - 1,
+        }
+      : {
+          bookId: parseInt(bookId),
+          skip: parseInt(chapterPage) - 1,
+        },
   })
   const chapter = chapterByBook[0]
+
+  useEffect(() => {
+    if (chapter) {
+      if (window.location.hash === '#comments') {
+        document.getElementById('comments-input').scrollIntoView()
+        document.getElementById('comments-input').focus()
+      }
+    }
+  }, [chapter])
 
   useEffect(() => {
     if (chapter && window.analytics) {
       window.analytics.page('chapter', {
         chapterId: chapter.id,
         bookId: chapter.book.id,
+        bookSlug: chapter.book.slug,
         chapterTitle: chapter.title,
         bookName: chapter.book.name,
       })

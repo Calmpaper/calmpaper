@@ -22,7 +22,7 @@ const User = ({ user }) => (
         </div>
       </div>
     </Flex>
-    <Link className="btn btn-color" to={`/users/${user.id}`}>
+    <Link className="btn btn-color" to={`/${user.id}`}>
       Visit
     </Link>
   </Flex>

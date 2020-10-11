@@ -1,11 +1,11 @@
-import React, { useState, useContext } from 'react'
+import React, { useContext } from 'react'
 import { UserContext } from 'context'
 import { Link } from 'react-router-dom'
-import moment from 'moment'
-import Flex from 'components/Flex'
 import { useQuery } from 'urql'
-import * as S from './Notification.styled'
 import { getUserQuery, getBookQuery, getChapterQuery } from 'api'
+import { getUserSlug } from 'helpers'
+import Flex from 'components/Flex'
+import * as S from './Notification.styled'
 
 const UserAvatar = ({ userId }) => {
   const [{ data: { user } = {}, fetching }] = useQuery({
@@ -79,7 +79,7 @@ export default ({ notification, closeNotifications: close }) => {
   // console.log(follower)
   if (follower) {
     return (
-      <Link to={`/users/${follower.id}`}>
+      <Link to={`/${follower.id}`}>
         <S.Notification
           style={!isSeen ? { background: 'hsl(218 94% 97% / 1)' } : {}}
         >
@@ -167,52 +167,54 @@ export default ({ notification, closeNotifications: close }) => {
 
   /* ---------------------------------------------------- */
   let action = ` started following your book`
-  let link = `/books/${bookId}`
+  let link = `/${getUserSlug(book.author)}/${book.slug}`
 
   if (notification.verb === 'add') {
     if (activities[0].object.startsWith('book')) {
-      link = `/books/${bookId}`
+      link = `/${getUserSlug(book.author)}/${book.slug}`
       action = ` started a new book`
     }
     if (activities[0].object.startsWith('chapter')) {
-      link = `/books/${bookId}/${chapterPage}`
+      link = `/${getUserSlug(book.author)}/${book.slug}/${chapterPage}`
       action = ` added a new chapter`
     }
   }
   if (notification.verb === 'like') {
     if (activities[0].object.startsWith('comment')) {
       link = chapterPage
-        ? `/books/${bookId}/${chapterPage}`
-        : `/books/${bookId}`
+        ? `/${getUserSlug(book.author)}/${book.slug}/${chapterPage}`
+        : `/${getUserSlug(book.author)}/${book.slug}`
       action = ` liked your comment`
     }
     if (activities[0].object.startsWith('chapter')) {
-      link = `/books/${bookId}/${chapterPage}`
+      link = `/${getUserSlug(book.author)}/${book.slug}/${chapterPage}`
       action = ` liked your chapter`
     }
     if (activities[0].object.startsWith('book')) {
-      link = `/books/${bookId}`
+      link = `/${getUserSlug(book.author)}/${book.slug}`
       action = ` liked your book`
     }
   }
   if (notification.verb === 'reply') {
-    link = chapterPage ? `/books/${bookId}/${chapterPage}` : `/books/${bookId}`
+    link = chapterPage
+      ? `/${getUserSlug(book.author)}/${book.slug}/${chapterPage}`
+      : `/${getUserSlug(book.author)}/${book.slug}`
     action = ` replied to your comment`
   }
 
   if (notification.verb === 'comment') {
     if (activities[0].object.startsWith('book')) {
-      link = `/books/${bookId}`
+      link = `/${getUserSlug(book.author)}/${book.slug}`
       action = ` commented on your book`
     }
     if (activities[0].object.startsWith('chapter')) {
-      link = `/books/${bookId}/${chapterPage}`
+      link = `/${getUserSlug(book.author)}/${book.slug}/${chapterPage}`
       action = ` commented on your chapter`
     }
   }
 
   if (notification.verb === 'review') {
-    link = `/books/${bookId}/reviews`
+    link = `/${getUserSlug(book.author)}/${book.slug}/reviews`
     action = ` left a review on your book`
   }
   /* ---------------------------------------------------- */

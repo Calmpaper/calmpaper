@@ -1,38 +1,24 @@
-import React, { useState, useContext, useEffect } from 'react'
+import React, { useContext } from 'react'
 import { UserContext } from 'context'
 import { useHistory, useParams, useLocation } from 'react-router-dom'
 import { useForm, Controller } from 'react-hook-form'
 import { useMutation } from 'urql'
 import { createChapterMutation, updateChapterMutation } from 'api'
+import { getUserSlug } from 'helpers'
 
 import Header from 'components/Layout/Header'
 import Editor from 'components/Editor'
 
-function uploadImageCallBack(file) {
-  return new Promise((resolve, reject) => {
-    const xhr = new XMLHttpRequest() // eslint-disable-line no-undef
-    xhr.open('POST', 'https://api.imgur.com/3/image')
-    xhr.setRequestHeader('Authorization', 'Client-ID 8d26ccd12712fca')
-    const data = new FormData() // eslint-disable-line no-undef
-    data.append('image', file)
-    xhr.send(data)
-    xhr.addEventListener('load', () => {
-      const response = JSON.parse(xhr.responseText)
-      resolve(response)
-    })
-    xhr.addEventListener('error', () => {
-      const error = JSON.parse(xhr.responseText)
-      reject(error)
-    })
-  })
+function countWords(str = '') {
+  return str.trim().split(/\s+/).length
 }
 
 export default () => {
   const { user } = useContext(UserContext)
-  const { book: bookId } = useParams()
+  const { id: bookId, slug: bookSlug } = useParams()
   const { push } = useHistory()
   const { state: { chapter } = {} } = useLocation()
-  const { register, control, handleSubmit, errors } = useForm({
+  const { register, control, handleSubmit, errors, watch } = useForm({
     defaultValues: chapter
       ? {
           title: chapter.title,
@@ -51,29 +37,28 @@ export default () => {
           chapter.book.chapters.findIndex((c) => c.id === chapter.id) + 1
 
         push({
-          pathname: `/books/${bookId}/${chapterPage}`,
-          // state: { showSharePopup: true },
+          pathname: `/${getUserSlug(user)}/${chapter.book.slug}/${chapterPage}`,
         })
       })
     } else {
       createChapter({
         ...data,
         userId: user.id,
-        bookId: parseInt(bookId),
+        bookId: bookId ? parseInt(bookId) : undefined,
+        bookSlug: bookSlug,
       }).then(({ data: { createOneChapter: chapter } }) => {
-        console.log(chapter.book.chapters)
-
         window.analytics &&
           window.analytics.track('create-chapter', {
             chapterId: chapter.id,
             chapterTitle: chapter.title,
             bookId: chapter.book.id,
+            bookSlug: chapter.book.slug,
             bookName: chapter.book.name,
           })
         const chapterPage =
           chapter.book.chapters.findIndex((c) => c.id === chapter.id) + 1
         push({
-          pathname: `/books/${bookId}/${chapterPage}`,
+          pathname: `/${getUserSlug(user)}/${chapter.book.slug}/${chapterPage}`,
           state: { showSharePopup: true },
         })
       })
@@ -86,12 +71,16 @@ export default () => {
   )
   if (error) return <p>Oh no... {error.message}</p>
 
-  const [editorRef, setEditorRef] = useState(null)
+  const watchContent = watch('content')
+  const is140words = countWords(watchContent) > 140
 
   return (
     <>
       <Header />
-      <div className="page-profile-add-series">
+      <div
+        className="page-profile-add-series"
+        style={{ paddingBottom: '200px' }}
+      >
         <div className="pagination"></div>
         <div className="add-series">
           <form
@@ -151,9 +140,30 @@ export default () => {
                   <span className="red-title">{` (required)`}</span>
                 )}
               </h3>
-              <Controller name="content" control={control} as={Editor} />
+              <Controller
+                name="content"
+                control={control}
+                as={Editor}
+                style={is140words ? { border: '2px solid  #7057d2' } : {}}
+              />
+              {is140words && (
+                <div
+                  style={{
+                    color: '#7057d2',
+                    fontWeight: 500,
+                    marginTop: 12,
+                    fontSize: '15px',
+                  }}
+                >
+                  We recommend less than 140 words per page for better reading
+                  experience. You can add more pages.
+                </div>
+              )}
             </div>
-            <div className="block block09 add-series-btn">
+            <div
+              className="block block09 add-series-btn"
+              style={{ display: 'flex' }}
+            >
               {chapter ? (
                 <button className="btn btn-color" type="submit">
                   {!fetching ? 'Save' : 'Saving...'}

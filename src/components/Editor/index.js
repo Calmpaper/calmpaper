@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Icons from './Icons'
 
 // export default ({ value, setValue }) => {
-export default ({ value, onChange }) => {
+export default ({ value, onChange, style = {} }) => {
   // const [value, setValue] = useState('')
 
   useEffect(() => {
@@ -36,6 +36,7 @@ export default ({ value, onChange }) => {
         padding: '16px',
         borderRadius: '6px',
         minHeight: '180px',
+        ...style,
       }}
     >
       <Icons />

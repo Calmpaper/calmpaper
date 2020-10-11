@@ -3,6 +3,7 @@ import { UserContext, GetStreamContext } from 'context'
 import { useHistory } from 'react-router-dom'
 import { useMutation } from 'urql'
 import { followUserMutation, unfollowUserMutation } from 'api'
+import { getUserSlug } from 'helpers'
 import DonationModal from 'components/DonationModal'
 
 export default ({ author, bookId }) => {
@@ -32,9 +33,7 @@ export default ({ author, bookId }) => {
       <h4 className="title size04">Author</h4>
       <div
         className="sidebar-author-info"
-        onClick={() =>
-          push(`/users/${author.username ? `@${author.username}` : author.id}`)
-        }
+        onClick={() => push(`/${getUserSlug(author)}`)}
         style={{ cursor: 'pointer' }}
       >
         <div
@@ -50,9 +49,7 @@ export default ({ author, bookId }) => {
               author.followers.length === 1 ? 'follower' : 'followers'
             }`}</div>
           ) : (
-            <div className="author-country">
-              {user.username ? `@${user.username}` : `@user${user.id}`}
-            </div>
+            <div className="author-country">{getUserSlug(author)}</div>
           )}
         </div>
       </div>

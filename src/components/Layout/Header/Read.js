@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react'
 import { UserContext } from 'context'
 import BookCover from 'components/atoms/book-cover'
 import { Link } from 'react-router-dom'
+import { getUserSlug } from 'helpers'
 
 const ReadingList = ({ books, close }) => {
   return (
@@ -19,7 +20,11 @@ const ReadingList = ({ books, close }) => {
       }}
     >
       {books.map((book) => (
-        <Link to={`/books/${book.id}`} key={book.id} onClick={close}>
+        <Link
+          to={`/${getUserSlug(book.author)}/${book.slug}`}
+          key={book.id}
+          onClick={close}
+        >
           <BookCover
             book={book}
             isCatalog

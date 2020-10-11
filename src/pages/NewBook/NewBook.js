@@ -9,6 +9,7 @@ import {
   getGenresQuery,
   getTagsQuery,
 } from 'api'
+import { getUserSlug } from 'helpers'
 
 import Header from 'components/Layout/Header'
 import FileInput from 'components/Input/FileInput'
@@ -43,24 +44,24 @@ export default () => {
       ...data,
       userId: parseInt(user.id),
       image,
-      tags: (data.tags || []).map((i) => ({ id: i.value })),
-      genres: (data.genres || []).map((i) => ({ id: i.id })),
+      tags: (data.tags || []).map((i) => i.value),
+      genres: (data.genres || []).map((i) => i.id),
     }
     if (book) {
       updateBook({ ...allData, bookId: book.id }).then(
         ({ data: { updateOneBook: book } }) => {
-          push(`/books/${book.id}`)
+          push(`/${getUserSlug(book.author)}/${book.slug}`)
         },
       )
     } else {
-      createBook(allData).then(({ data: { createOneBook: book } }) => {
+      createBook(allData).then(({ data: { createBook: book } }) => {
         window.analytics &&
           window.analytics.track('create-book', {
             bookId: book.id,
             bookName: book.name,
           })
         push({
-          pathname: `/books/${book.id}`,
+          pathname: `/${getUserSlug(user)}/${book.slug}`,
           // state: { showBookPublishedOverlay: true },
         })
       })
@@ -70,6 +71,8 @@ export default () => {
   const [, updateBook] = useMutation(updateBookMutation)
   const [{ fetching, error }, createBook] = useMutation(createBookMutation)
   if (error) return <p>Oh no... {error.message}</p>
+
+  const isEditing = !!book
 
   return (
     <>
@@ -148,9 +151,15 @@ export default () => {
             />
             <Controller name="tags" control={control} as={Tags} tags={tags} />
             <div className="block block09 add-series-btn">
-              <button className="btn btn-color" type="submit">
-                {!fetching ? 'Add series' : 'Adding...'}
-              </button>
+              {isEditing ? (
+                <button className="btn btn-color" type="submit">
+                  {!fetching ? 'Save' : 'Saving...'}
+                </button>
+              ) : (
+                <button className="btn btn-color" type="submit">
+                  {!fetching ? 'Add series' : 'Adding...'}
+                </button>
+              )}
             </div>
           </form>
         </div>

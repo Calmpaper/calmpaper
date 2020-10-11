@@ -1,4 +1,5 @@
 import React from 'react'
+import { removeHtmlTags } from 'helpers'
 import { Helmet } from 'react-helmet'
 
 export default ({ chapter, chapterPage }) => (
@@ -16,7 +17,7 @@ export default ({ chapter, chapterPage }) => (
         chapter.author.username || chapter.author.fullname
       } at Calmpaper`}
     />
-    <meta property="og:description" content={chapter.content} />
+    <meta property="og:description" content={removeHtmlTags(chapter.content)} />
     <meta property="og:image" content={chapter.book.image} />
     <meta
       property="og:url"

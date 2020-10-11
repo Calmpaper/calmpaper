@@ -8,10 +8,10 @@ import {
   incrementBookViewsMutation,
   sendBookCommentMutation,
 } from 'api'
+import { removeHtmlTags } from 'helpers'
 
 import Loader from 'components/Loader'
 import Header from 'components/Layout/Header'
-import Footer from 'components/molecules/footer'
 import Comments from 'components/Comments'
 import DonationModal from 'components/DonationModal'
 import BookPublishedOverlay from 'components/BookPublishedOverlay'
@@ -23,7 +23,7 @@ import Actions from './Actions'
 
 export default ({ tab, update }) => {
   const [showDonationModal, setShowDonationModal] = useState(false)
-  const { book: bookId } = useParams()
+  const { book: bookSlug, id: bookId } = useParams()
   const { user } = useContext(UserContext)
   const { location } = useHistory()
   const [showBookPublishedOverlay, setShowBookPublishedOverlay] = useState(
@@ -31,17 +31,16 @@ export default ({ tab, update }) => {
   )
 
   const [{ data: { book } = {}, fetching, error }, reexecuteQuery] = useQuery({
-    pause: !bookId,
+    pause: !(bookSlug || bookId),
     query: getBookQuery,
-    variables: {
-      id: parseInt(bookId),
-    },
+    variables: bookSlug ? { slug: bookSlug } : { id: parseInt(bookId) },
   })
 
   useEffect(() => {
     if (book && window.analytics) {
       window.analytics.page('book', {
         bookId: book.id,
+        bookSlug: book.slug,
         bookName: book.name,
       })
     }
@@ -63,7 +62,7 @@ export default ({ tab, update }) => {
 
   const sendComment = (body) => {
     sendBookComment({
-      bookId: parseInt(bookId),
+      bookId: parseInt(book.id),
       userId: parseInt(user.id),
       body,
     })
@@ -76,7 +75,7 @@ export default ({ tab, update }) => {
     title: `${book.name} by ${
       book.author && (book.author.username || book.author.fullname)
     } at Calmpaper`,
-    description: book.description,
+    description: removeHtmlTags(book.description),
     image: book.image,
     url: `https://calmpaper.org/books/${book.id}`,
   }
@@ -148,7 +147,7 @@ export default ({ tab, update }) => {
 */}
             </div>
           </div>
-          {book.author && <Author author={book.author} bookId={bookId} />}
+          {book.author && <Author author={book.author} bookId={book.id} />}
         </div>
       </div>
       {/*
