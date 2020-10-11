@@ -19,7 +19,7 @@ export default ({ book }) => (
       {book.name}
     </h1>
     <Link
-      to={`/users/${
+      to={`/${
         book.author.username ? `@${book.author.username}` : book.author.id
       }`}
     >

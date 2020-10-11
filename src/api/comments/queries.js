@@ -26,3 +26,31 @@ export const getCommentsFeedQuery = gql`
   }
   ${CommentFragment}
 `
+
+export const getCommentsByChapter = gql`
+  query($chapterId: Int!) {
+    commentsByChapter(chapterId: $chapterId) {
+      ...Comment
+      chapter {
+        id
+        title
+        author {
+          id
+          username
+        }
+        book {
+          id
+          slug
+          chapters {
+            id
+          }
+        }
+      }
+      book {
+        id
+        name
+      }
+    }
+  }
+  ${CommentFragment}
+`

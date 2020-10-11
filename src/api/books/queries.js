@@ -67,6 +67,7 @@ export const getFollowedBooksQuery = gql`
         OR: [
           { readers: { some: { id: { equals: $userId } } } }
           { author: { followers: { some: { id: { equals: $userId } } } } }
+          { author: { id: { equals: $userId } } }
         ]
       }
     ) {
@@ -90,10 +91,7 @@ export const getFollowedBooksQuery = gql`
 
 export const getLatestBooksQuery = gql`
   query {
-    books(
-      orderBy: { createdAt: desc }
-      where: { archived: { not: { equals: true } } }
-    ) {
+    books(orderBy: { createdAt: desc }, where: { archived: { not: true } }) {
       ...Book
       description
       chapters {
@@ -121,8 +119,8 @@ export const getLatestBooksQuery = gql`
 `
 
 export const getBookQuery = gql`
-  query($id: Int!) {
-    book(where: { id: $id }) {
+  query($slug: String, $id: Int) {
+    book(where: { slug: $slug, id: $id }) {
       ...Book
       description
       views

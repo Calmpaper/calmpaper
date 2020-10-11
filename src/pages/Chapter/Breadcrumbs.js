@@ -1,19 +1,20 @@
 import React from 'react'
+import { getUserSlug, getUserDisplayName } from 'helpers'
 import { Link } from 'react-router-dom'
 
 export default ({ author, chapter }) => (
   <div className="pagination">
     <div className="row">
-      <Link
-        to={`/users/${author.username ? `@${author.username}` : author.id}`}
-        className="pagination__link"
-      >
-        {author.username || author.fullname}
+      <Link to={`/${getUserSlug(author)}`} className="pagination__link">
+        {getUserDisplayName(author)}
       </Link>
       <svg className="icon icon-arrow-right">
         <use xlinkHref="#icon-arrow-right" />
       </svg>
-      <Link to={`/books/${chapter.book.id}`} className="pagination__link">
+      <Link
+        to={`/${getUserSlug(chapter.book.author)}/${chapter.book.slug}`}
+        className="pagination__link"
+      >
         {chapter.book.name}
       </Link>
       <svg className="icon icon-arrow-right">

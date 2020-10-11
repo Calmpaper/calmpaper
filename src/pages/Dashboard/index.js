@@ -1,9 +1,10 @@
 import React, { useState, useContext } from 'react'
 import moment from 'moment'
+import { Link } from 'react-router-dom'
 import { UserContext } from 'context'
 import { useQuery, useMutation } from 'urql'
 import { getBooksByAuthorQuery, deleteBookMutation } from 'api'
-import { Link } from 'react-router-dom'
+import { getUserSlug } from 'helpers'
 
 import ConfirmationModal from 'components/ConfirmationModal'
 import Header from 'components/Layout/Header'
@@ -174,10 +175,10 @@ const Book = ({ book }) => {
               }}
             />
           )}
-          <Link to={`/books/${book.id}/edit`}>
+          <Link to={`/${getUserSlug(book.author)}/${book.slug}/edit`}>
             <button className="btn btn-grey">Edit</button>
           </Link>
-          <Link to={`/books/${book.id}/new-chapter`}>
+          <Link to={`/${getUserSlug(book.author)}/${book.slug}/new-chapter`}>
             <button className="btn btn-grey dark">Add page</button>
           </Link>
         </div>

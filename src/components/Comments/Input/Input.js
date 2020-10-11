@@ -45,6 +45,7 @@ export default ({
         }}
       >
         <S.Input
+          id="comments-input"
           placeholder={placeholder}
           value={value}
           style={inputStyle}

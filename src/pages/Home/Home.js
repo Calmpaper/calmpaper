@@ -7,6 +7,7 @@ import Flex from 'components/atoms/flex'
 import Loader from 'components/atoms/loader'
 import Footer from 'components/molecules/footer'
 import Header from 'components/Layout/Header'
+import UpdatesFeed from 'components/organisms/feeds/updates_feed'
 
 import BooksFeed from './BooksFeed'
 import ChaptersFeed from './ChaptersFeed'
@@ -65,7 +66,10 @@ export default () => {
         <WelcomeContent />
       </div>
       <Flex column style={{ marginTop: -128 }}>
+        {/*
         <ChaptersFeed />
+        */}
+        <UpdatesFeed />
         <BooksFeed />
       </Flex>
       {/*

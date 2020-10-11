@@ -2,14 +2,14 @@ import React, { useState } from 'react'
 import { useMutation } from 'urql'
 import { useHistory } from 'react-router-dom'
 import { deleteChapterMutation } from 'api'
+import { getUserSlug, getChapterPage } from 'helpers'
 import ConfirmationModal from 'components/ConfirmationModal'
 
 export default ({ bookId, chapterId, chapter, hide }) => {
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false)
   const { push } = useHistory()
 
-  // eslint-disable-next-line no-unused-vars
-  const [__, deleteChapter] = useMutation(deleteChapterMutation)
+  const [, deleteChapter] = useMutation(deleteChapterMutation)
   const onDelete = () => deleteChapter({ id: chapterId })
 
   return (
@@ -20,7 +20,9 @@ export default ({ bookId, chapterId, chapter, hide }) => {
           className="zen-ui-context-menu__item comment-menu-item _edit"
           onClick={() => {
             push({
-              pathname: `/books/${bookId}/${chapterId}/edit`,
+              pathname: `/${getUserSlug(chapter.book.author)}/${
+                chapter.book.slug
+              }/${getChapterPage(chapter)}/edit`,
               state: { chapter },
             })
           }}

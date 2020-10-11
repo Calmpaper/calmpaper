@@ -1,19 +1,27 @@
 import gql from 'graphql-tag'
 
 export const createChapterMutation = gql`
-  mutation($title: String!, $content: String!, $bookId: Int!, $userId: Int!) {
+  mutation(
+    $title: String!
+    $content: String!
+    $bookId: Int
+    $bookSlug: String
+    $userId: Int!
+  ) {
     createOneChapter(
       data: {
         title: $title
         content: $content
         author: { connect: { id: $userId } }
-        book: { connect: { id: $bookId } }
+        book: { connect: { id: $bookId, slug: $bookSlug } }
       }
     ) {
       id
       title
       content
       book {
+        id
+        slug
         chapters {
           id
         }
@@ -32,6 +40,8 @@ export const updateChapterMutation = gql`
       title
       content
       book {
+        id
+        slug
         chapters {
           id
         }
@@ -44,6 +54,7 @@ export const incrementChapterViewsMutation = gql`
   mutation($chapterId: Int!) {
     incrementChapterViews(chapterId: $chapterId) {
       id
+      slug
       title
       views
     }

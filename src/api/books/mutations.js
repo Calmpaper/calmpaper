@@ -5,21 +5,18 @@ export const createBookMutation = gql`
     $name: String!
     $description: String!
     $image: String
-    $userId: Int!
-    $tags: [TagWhereUniqueInput!]
-    $genres: [GenreWhereUniqueInput!]
+    $tags: [Int]
+    $genres: [Int]
   ) {
-    createOneBook(
-      data: {
-        name: $name
-        description: $description
-        image: $image
-        author: { connect: { id: $userId } }
-        tags: { connect: $tags }
-        genres: { connect: $genres }
-      }
+    createBook(
+      name: $name
+      description: $description
+      image: $image
+      tags: $tags
+      genres: $genres
     ) {
       id
+      slug
       name
       description
       image
@@ -50,6 +47,7 @@ export const updateBookMutation = gql`
       }
     ) {
       id
+      slug
       name
       description
       image
@@ -71,8 +69,8 @@ export const deleteBookMutation = gql`
 `
 
 export const incrementBookViewsMutation = gql`
-  mutation($bookId: Int!) {
-    incrementBookViews(bookId: $bookId) {
+  mutation($bookId: Int, $bookSlug: String) {
+    incrementBookViews(bookId: $bookId, bookSlug: $bookSlug) {
       id
       name
       views

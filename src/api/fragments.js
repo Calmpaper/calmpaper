@@ -15,6 +15,7 @@ export const UserFragment = gql`
 export const BookFragment = gql`
   fragment Book on Book {
     id
+    slug
     name
     image
   }
@@ -23,6 +24,7 @@ export const BookFragment = gql`
 export const ChapterFragment = gql`
   fragment Chapter on Chapter {
     id
+    slug
     title
     createdAt
   }
@@ -31,6 +33,7 @@ export const ChapterFragment = gql`
 export const LikeFragment = gql`
   fragment Like on Like {
     id
+    createdAt
     author {
       ...User
     }

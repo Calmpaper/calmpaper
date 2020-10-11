@@ -1,6 +1,8 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState, useContext } from 'react'
 import { UserContext } from 'context'
 import { Link, useHistory } from 'react-router-dom'
+import { getUserSlug } from 'helpers'
 import Flex from 'components/atoms/flex'
 
 export default () => {
@@ -27,9 +29,7 @@ export default () => {
         <div className="dropdown-box notification-box notification-header-box">
           <div
             className="header-notification-user__head"
-            onClick={() =>
-              push(`/users/${user.username ? `@${user.username}` : user.id}`)
-            }
+            onClick={() => push(`/${getUserSlug(user)}`)}
           >
             <Flex row style={{ cursor: 'pointer' }}>
               <div
@@ -46,7 +46,7 @@ export default () => {
                   {user.fullname}
                 </div>
                 <div className="header-notification-user__username">
-                  {user.username ? `@${user.username}` : `@user${user.id}`}
+                  {getUserSlug(user)}
                 </div>
               </div>
             </Flex>
@@ -57,20 +57,11 @@ export default () => {
                 <Link to="/new-book">New book</Link>
               </li>
               <li>
-                <Link
-                  to={`/users/${user.username ? `@${user.username}` : user.id}`}
-                >
-                  Profile
-                </Link>
+                <Link to={`/${getUserSlug(user)}`}>Profile</Link>
               </li>
               <li>
                 <Link to={'/dashboard'}>Dashboard</Link>
               </li>
-              {/*
-              <li>
-                <Link to={`/help`}>Help</Link>
-              </li>
-              */}
             </ul>
           </div>
           <div className="header-notification-user__footer">
@@ -94,13 +85,6 @@ export default () => {
             <li className="header-nav__item">
               <Link to="/" className="header-nav__link">
                 Read
-                {/*
-                <span className="header-nav__link-icon">
-                  <svg className="icon icon-arrow-down">
-                    <use xlinkHref="#icon-arrow-down" />
-                  </svg>
-                </span>
-                */}
               </Link>
             </li>
             <li className="header-nav__item">
@@ -108,28 +92,9 @@ export default () => {
                 Create
               </Link>
             </li>
-            {/*
-            <li className="header-nav__item">
-              <a href className="header-nav__link">
-                Forum
-              </a>
-            </li>
-            <li className="header-nav__item">
-              <a href className="header-nav__link">
-                Search
-              </a>
-            </li>
-*/}
-            {/*
-             */}
           </ul>
         </nav>
       </div>
     </>
   )
 }
-
-// const User = ({ user }) => (
-// )
-
-// export default User

@@ -103,6 +103,15 @@ export const getLastChaptersQuery = gql`
           ...Genre
         }
       }
+      comments {
+        id
+      }
+      likes {
+        id
+        author {
+          id
+        }
+      }
     }
     chaptersFeedCount(userId: $userId)
   }
@@ -140,8 +149,8 @@ export const getLastChaptersByAuthorQuery = gql`
 `
 
 export const getChapterByBookQuery = gql`
-  query($bookId: Int!, $skip: Int) {
-    chapterByBook(bookId: $bookId, skip: $skip) {
+  query($bookId: Int, $bookSlug: String, $skip: Int) {
+    chapterByBook(bookId: $bookId, bookSlug: $bookSlug, skip: $skip) {
       ...Chapter
       content
       views

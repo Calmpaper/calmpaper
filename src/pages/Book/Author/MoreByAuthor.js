@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { getUserSlug } from 'helpers'
 import BookCover from 'components/atoms/book-cover'
 
 export default ({ books = [] }) => {
@@ -16,7 +17,7 @@ export default ({ books = [] }) => {
         var avg = sum / book.reviews.length || 0
 
         return (
-          <Link to={`/books/${book.id}`} key={book.id}>
+          <Link to={`/${getUserSlug(book.author)}/${book.slug}`} key={book.id}>
             <BookCover book={book} isCatalog hideText />
             <div className="catalog-info">
               <h3 className="catalog-title">{book.name}</h3>

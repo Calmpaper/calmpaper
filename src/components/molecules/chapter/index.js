@@ -1,5 +1,6 @@
 import React from 'react'
 import moment from 'moment'
+import { getUserSlug } from 'helpers'
 import { Link } from 'react-router-dom'
 
 import BookCover from 'components/atoms/book-cover'
@@ -11,7 +12,10 @@ const Chapter = ({ chapter }) => {
   var regex = /(<([^>]+)>)/gi
 
   return (
-    <Link to={`/books/${chapter.book.id}/${chapterPage}`} className="item">
+    <Link
+      to={`/${getUserSlug(chapter.author)}/${chapter.book.slug}/${chapterPage}`}
+      className="item"
+    >
       <BookCover book={chapter.book} isItem hideText />
       <div className="item-info" style={{ width: '100%' }}>
         <div

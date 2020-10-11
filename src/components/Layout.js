@@ -1,7 +1,8 @@
 import React from 'react'
-import { useHistory, useLocation, useRouteMatch, Link } from 'react-router-dom'
+import { useRouteMatch, Link } from 'react-router-dom'
 import { useQuery } from 'urql'
 import { getBookQuery } from 'api'
+import { getUserSlug } from 'helpers'
 import styled from 'styled-components'
 
 const Btn = styled.button`
@@ -37,7 +38,11 @@ const NextEpisode = ({ bookId, chapterPage }) => {
   if (book.chapters.length === parseInt(chapterPage)) return null
 
   return (
-    <Link to={`/books/${bookId}/${parseInt(chapterPage) + 1}`}>
+    <Link
+      to={`/${getUserSlug(book.author)}/${book.slug}/${
+        parseInt(chapterPage) + 1
+      }`}
+    >
       <Btn right>Next Episode</Btn>
     </Link>
   )

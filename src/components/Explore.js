@@ -7,6 +7,7 @@ import {
   addBookToFavoritesMutation,
   removeBookFromFavoritesMutation,
 } from 'api'
+import { getUserSlug } from 'helpers'
 
 import BookCover from 'components/atoms/book-cover'
 import Loader from 'components/Loader'
@@ -37,7 +38,10 @@ const Book = ({ book, isFirst }) => {
   }
 
   return (
-    <div className="item item01" onClick={() => push(`/books/${book.id}`)}>
+    <div
+      className="item item01"
+      onClick={() => push(`/${getUserSlug(book.author)}/${book.slug}`)}
+    >
       <BookCover book={book} isItem hideText />
       <div className="item-info" style={{ width: '100%' }}>
         <div className="item-head">
@@ -72,7 +76,9 @@ const Book = ({ book, isFirst }) => {
           {isFavorite && (
             <button
               className={`btn btn-follow active`}
-              onClick={() => push(`/books/${book.id}/1`)}
+              onClick={() =>
+                push(`/${getUserSlug(book.author)}/${book.slug}/1`)
+              }
               style={{ marginLeft: 8 }}
             >
               Read
