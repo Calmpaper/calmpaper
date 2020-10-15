@@ -30,6 +30,7 @@
     "react-headroom": "^3.0.0",
     "react-helmet": "^6.1.0",
     "react-hook-form": "^6.9.2",
+    "react-infinite-scroll-component": "^5.1.0",
     "react-medium-editor": "^1.8.1",
     "react-modal": "^3.11.2",
     "react-number-format": "^4.4.1",
@@ -40,6 +41,7 @@
     "react-share": "^4.3.0",
     "react-stripe-elements": "^6.1.2",
     "react-textarea-autosize": "^8.2.0",
+    "react-virtualized": "^9.22.2",
     "styled-components": "^5.2.0",
     "urql": "^1.10.1",
     "use-sound": "^1.0.2"
@@ -52,7 +54,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "yarn build && scp -rp -i ~/Documents/calmpaper-client.pem build/* ubuntu@ec2-54-236-43-193.compute-1.amazonaws.com:/var/www/html"
   },
   "eslintConfig": {
     "extends": "react-app"

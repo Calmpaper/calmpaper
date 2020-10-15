@@ -23,9 +23,7 @@ export default ({ chapter }) => {
       setLike({
         authorId: user.id,
         chapterId: chapter.id,
-      }).then(({ data: { setCommentLike: res = {} } = {} }) => {
-        console.log(res)
-      })
+      }).then(({ data: { setCommentLike: res = {} } = {} }) => {})
     }
   }
 

@@ -8,14 +8,14 @@ export default ({ chapter, chapterPage }) => (
     <title>
       {`${chapter.title}. ${chapter.book.name} by ${
         chapter.author.username || chapter.author.fullname
-      } at Calmpaper`}{' '}
+      }`}
     </title>
 
     <meta
       property="og:title"
       content={`${chapter.title}. ${chapter.book.name} by ${
         chapter.author.username || chapter.author.fullname
-      } at Calmpaper`}
+      }`}
     />
     <meta property="og:description" content={removeHtmlTags(chapter.content)} />
     <meta property="og:image" content={chapter.book.image} />

@@ -6,11 +6,10 @@ import { useHistory } from 'react-router-dom'
 import Flex from 'components/atoms/flex'
 import Loader from 'components/atoms/loader'
 import Header from 'components/Layout/Header'
-// import Landing from 'pages/Landing'
-import Explore from 'components/Explore'
+import Landing from 'pages/Landing'
 
 import WelcomeContent from 'pages/Welcome/Content'
-import UpdatesFeed from 'components/organisms/feeds/updates_feed'
+import FollowedBooksFeed from 'components/organisms/feeds/followed_books'
 
 export default () => {
   const { user, fetching } = useContext(UserContext)
@@ -18,7 +17,7 @@ export default () => {
 
   useEffect(() => {
     if (window.analytics) {
-      window.analytics.page('home')
+      window.analytics.page('followed-books')
     }
   }, [])
 
@@ -43,20 +42,8 @@ export default () => {
   }
 
   if (!user) {
-    return (
-      <div className="page-home">
-        <Header />
-        <Flex column style={{ marginTop: 124 }}>
-          <Explore />
-        </Flex>
-        {/*
-      <Footer centered />
-      */}
-      </div>
-    )
+    return <Landing />
   }
-
-  // return <UpdatesFeed />
 
   return (
     <div className="page-home">
@@ -69,7 +56,7 @@ export default () => {
         <WelcomeContent />
       </div>
       <Flex column style={{ marginTop: -128 }}>
-        <UpdatesFeed />
+        <FollowedBooksFeed />
       </Flex>
     </div>
   )

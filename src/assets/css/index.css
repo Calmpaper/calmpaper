@@ -414,6 +414,12 @@
   margin-bottom: 8px;
 }
 
+.follow-updates-card__text * {
+  font-size: inherit;
+  line-height: inherit;
+  color: inherit;
+}
+
 .clickable {
   cursor: pointer;
 }
@@ -427,4 +433,10 @@
 .page-read-bookk,
 .page-profile-add-series {
   padding-bottom: 120px;
+}
+
+.font-inherit {
+  font-size: inherit !important;
+  font-weight: inherit !important;
+  color: inherit !important;
 }

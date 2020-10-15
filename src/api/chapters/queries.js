@@ -83,8 +83,9 @@ export const getChapterQuery = gql`
 // `
 
 export const getLastChaptersQuery = gql`
-  query($skip: Int!, $userId: Int!) {
-    chaptersFeed(skip: $skip, userId: $userId) {
+  query($skip: Int, $take: Int, $userId: Int!) {
+    chaptersFeed(skip: $skip, take: $take, userId: $userId) {
+      __typename
       ...Chapter
       createdAt
       content

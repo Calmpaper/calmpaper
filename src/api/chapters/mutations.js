@@ -8,13 +8,12 @@ export const createChapterMutation = gql`
     $bookSlug: String
     $userId: Int!
   ) {
-    createOneChapter(
-      data: {
-        title: $title
-        content: $content
-        author: { connect: { id: $userId } }
-        book: { connect: { id: $bookId, slug: $bookSlug } }
-      }
+    createChapter(
+      title: $title
+      content: $content
+      userId: $userId
+      bookId: $bookId
+      bookSlug: $bookSlug
     ) {
       id
       title

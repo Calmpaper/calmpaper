@@ -58,7 +58,7 @@ export default ({
           {book.name}
         </div>
       )}
-      {!hideText && (
+      {!hideText && book.author && (
         <div className="book-cover__author">{`by ${
           book.author.username || book.author.fullname
         }`}</div>

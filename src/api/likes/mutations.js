@@ -3,6 +3,7 @@ import {
   UserFragment,
   BookFragment,
   ChapterFragment,
+  GenreFragment,
   ReviewFragment,
 } from '../fragments'
 
@@ -111,24 +112,45 @@ export const setReviewLikeMutation = gql`
 
 export const setChapterLikeMutation = gql`
   mutation($chapterId: Int!, $userId: Int!) {
-    updateOneChapter(
-      where: { id: $chapterId }
-      data: { likes: { create: { author: { connect: { id: $userId } } } } }
-    ) {
-      id
+    setChapterLikee(chapterId: $chapterId, userId: $userId) {
+      ...Chapter
+      createdAt
+      content
       author {
+        ...User
+      }
+      book {
+        ...Book
+        chapters {
+          id
+        }
+        author {
+          ...User
+        }
+        genres {
+          ...Genre
+        }
+      }
+      comments {
         id
+      }
+      likes {
+        id
+        author {
+          id
+        }
       }
     }
   }
+  ${UserFragment}
+  ${BookFragment}
+  ${ChapterFragment}
+  ${GenreFragment}
 `
 
 export const removeChapterLikeMutation = gql`
   mutation($chapterId: Int!, $likeId: Int!) {
-    updateOneChapter(
-      where: { id: $chapterId }
-      data: { likes: { delete: { id: $likeId } } }
-    ) {
+    removeChapterLikee(chapterId: $chapterId, likeId: $likeId) {
       id
       author {
         id

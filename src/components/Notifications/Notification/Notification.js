@@ -75,11 +75,9 @@ export default ({ notification, closeNotifications: close }) => {
 
   if (bookFetching || chapterFetching || isFollowerFetching) return null
 
-  // console.log('follower')
-  // console.log(follower)
   if (follower) {
     return (
-      <Link to={`/${follower.id}`}>
+      <Link to={`/@user${follower.id}`}>
         <S.Notification
           style={!isSeen ? { background: 'hsl(218 94% 97% / 1)' } : {}}
         >

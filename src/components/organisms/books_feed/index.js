@@ -1,2 +1,0 @@
-// <title />
-// <books sort={} filter={} />

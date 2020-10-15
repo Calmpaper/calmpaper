@@ -40,6 +40,7 @@ export default ({ chapter }) => {
   const activityFeed = comments
     .concat(likes)
     .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+    .slice(0, 5)
 
   if (commentsError) return <p>Oh no... {commentsError.message}</p>
   if (likesError) return <p>Oh no... {likesError.message}</p>

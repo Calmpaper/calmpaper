@@ -6,7 +6,7 @@ import {
   addBookToFavoritesMutation,
   removeBookFromFavoritesMutation,
 } from 'api'
-import { getUserSlug } from 'helpers'
+import { getUserSlug, getUserDisplayName } from 'helpers'
 import BookCover from 'components/atoms/book-cover'
 import Ratings from './Ratings'
 
@@ -43,16 +43,8 @@ export default ({ book }) => {
         {book.author && (
           <p
             className="about-book-author"
-            onClick={() =>
-              push(
-                `/${
-                  book.author.username
-                    ? `@${book.author.username}`
-                    : book.author.id
-                }`,
-              )
-            }
-          >{`by ${book.author.username || book.author.fullname}`}</p>
+            onClick={() => push(`/${getUserSlug(book.author)}`)}
+          >{`by ${getUserDisplayName(book.author)}`}</p>
         )}
         <Ratings book={book} />
         <div className="about-book-main-btn">
@@ -64,6 +56,7 @@ export default ({ book }) => {
               Read now
             </Link>
           ) : (
+            user &&
             book.author.id === user.id && (
               <Link
                 to={`/${getUserSlug(book.author)}/${book.slug}/new-chapter`}

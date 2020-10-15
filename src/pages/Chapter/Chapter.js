@@ -25,7 +25,7 @@ import Actions from './Actions'
 
 export default () => {
   const { user } = useContext(UserContext)
-  const { book: bookSlug, id: bookId, chapter: chapterPage } = useParams()
+  const { bookSlug, bookId, chapter: chapterPage } = useParams()
   const { location } = useHistory()
   const [showSharePopup, setShowSharePopup] = useState(
     location.state ? location.state.showSharePopup : false,
@@ -54,6 +54,12 @@ export default () => {
         document.getElementById('comments-input').scrollIntoView()
         document.getElementById('comments-input').focus()
       }
+    }
+  }, [chapter])
+
+  useEffect(() => {
+    if (chapter && chapter.id) {
+      window.prerenderReady = true
     }
   }, [chapter])
 

@@ -8,8 +8,6 @@ export default () => {
   const [showInvitePopup, setShowInvitePopup] = useState(false)
   const { user } = useContext(UserContext)
   const { push } = useHistory()
-  console.log('user!!!!1')
-  console.log(user)
 
   return (
     <div className="item" style={{ paddingTop: 0 }}>

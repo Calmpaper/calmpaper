@@ -4,7 +4,7 @@ import { useQuery } from 'urql'
 import { getFollowedBooksQuery } from 'api'
 
 import Loader from 'components/Loader'
-import Book from './Feed/Book'
+import Book from 'components/molecules/book'
 
 export default ({ sort }) => {
   const { user } = useContext(UserContext)
@@ -25,7 +25,7 @@ export default ({ sort }) => {
     <div className="catalog catalog02" style={{ marginTop: 80 }}>
       <div className="container">
         <div className="row">
-          <h2 className="title size02">Books you follow</h2>
+          <h2 className="title size02">Followed books</h2>
         </div>
 
         <div className="row">

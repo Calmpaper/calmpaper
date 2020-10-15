@@ -9,7 +9,7 @@ import Input from 'components/Comments/Input'
 import Review from './Review'
 
 const AddReview = ({ book, reexecuteQuery }) => {
-  const { book: bookId } = useParams()
+  const { bookSlug, bookId } = useParams()
   const [stars, setStars] = useState(0)
   const { user } = useContext(UserContext)
   const [{ error }, addReview] = useMutation(addReviewMutation)
@@ -19,7 +19,8 @@ const AddReview = ({ book, reexecuteQuery }) => {
       stars,
       message,
       authorId: user.id,
-      bookId: parseInt(bookId),
+      bookId: bookId ? parseInt(bookId) : undefined,
+      bookSlug: bookSlug || undefined,
       bookAuthorId: book.author.id,
     }).then((r) => reexecuteQuery())
   }
