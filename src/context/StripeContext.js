@@ -28,7 +28,6 @@ const StripeProvider = ({ children }) => {
   useEffect(() => {
     const params = QueryString.parse(search)
     if (params.code) {
-      console.log('handle')
       handle(params.code)
     }
   }, [search, replace, pathname])

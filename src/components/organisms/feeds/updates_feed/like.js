@@ -6,9 +6,6 @@ import { getUserSlug, getUserDisplayName, getChapterPage } from 'helpers'
 export default ({ like }) => {
   const { push } = useHistory()
   const bookSlug = like.chapter.book.slug
-  console.log('like')
-  console.log(like)
-  console.log(like.chapter.book)
 
   if (!like) return null
 
@@ -41,7 +38,7 @@ export default ({ like }) => {
           {getUserDisplayName(like.author)}
         </div>
         <div className="follow-updates-comments__text">
-          Liked your book.{' '}
+          Likes this.{' '}
           <svg className="icon icon-like">
             <use xlinkHref="#icon-like02" />
           </svg>

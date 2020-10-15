@@ -7,7 +7,7 @@ import {
   addBookToFavoritesMutation,
   removeBookFromFavoritesMutation,
 } from 'api'
-import { getUserSlug } from 'helpers'
+import { getUserSlug, removeHtmlTags } from 'helpers'
 
 import BookCover from 'components/atoms/book-cover'
 import Loader from 'components/Loader'
@@ -52,8 +52,10 @@ const Book = ({ book, isFirst }) => {
         </div>
         <p className="item-text">
           {book.description.replace(/\s+/g, '').length > 400
-            ? `${book.description.replace(regex, '').substring(0, 400)}...`
-            : book.description}{' '}
+            ? removeHtmlTags(
+                `${book.description.replace(regex, '').substring(0, 400)}...`,
+              )
+            : removeHtmlTags(book.description)}{' '}
         </p>
         <ul className="item-category">
           {book.tags.map((tag) => (
@@ -62,6 +64,7 @@ const Book = ({ book, isFirst }) => {
             </li>
           ))}
         </ul>
+        {/*
         <Flex row>
           <button className={`btn btn-follow`} onClick={addToLibrary}>
             {isFavorite ? 'Following' : 'Follow'}{' '}
@@ -85,6 +88,7 @@ const Book = ({ book, isFirst }) => {
             </button>
           )}
         </Flex>
+        */}
       </div>
     </div>
   )
@@ -103,7 +107,7 @@ export default () => {
       <div className="latest">
         <div className="container">
           <div className="row">
-            <h2 className="title size02">Find some great story</h2>
+            <h2 className="title size02">Latest unfinished books</h2>
           </div>
           <div className="row" style={{ maxWidth: '750px', margin: 'auto' }}>
             {books

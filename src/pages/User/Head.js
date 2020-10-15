@@ -6,7 +6,7 @@ import { editUserMutation, followUserMutation, unfollowUserMutation } from 'api'
 import AvatarInput from 'components/Input/AvatarInput'
 
 export default ({ user }) => {
-  const { id, username } = useParams()
+  const { userId, username } = useParams()
 
   const [isEditing, setEditing] = useState(false)
   const [editingUsername, setEditingUsername] = useState(null)
@@ -49,7 +49,7 @@ export default ({ user }) => {
 
   const isYou =
     loggedUser &&
-    (loggedUser.id === parseInt(id) || loggedUser.username === username)
+    (loggedUser.id === parseInt(userId) || loggedUser.username === username)
 
   return (
     <div className="user-block">

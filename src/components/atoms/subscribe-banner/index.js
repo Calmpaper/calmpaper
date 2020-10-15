@@ -49,7 +49,10 @@ export default ({ book, chapter }) => {
   }
 
   return (
-    <div className="banner" style={{ backgroundImage: 'url(/img/banner.jpg)' }}>
+    <div
+      className="banner"
+      style={{ backgroundImage: 'url(/img/banner.jpg)', marginTop: 48 }}
+    >
       <div>
         <div className="banner__title">
           {isFollowing ? 'Stay tuned for updates :)' : 'Follow this book?'}

@@ -199,9 +199,6 @@ export default () => {
   if (fetching) return <Loader />
   if (error) return <p>Oh no... {error.message}</p>
 
-  console.log('books')
-  console.log(books)
-
   return (
     <>
       <Header withLine />

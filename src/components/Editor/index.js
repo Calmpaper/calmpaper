@@ -22,7 +22,7 @@ export default ({ value, onChange, style = {} }) => {
   }, [])
 
   useEffect(() => {
-    console.log('value:', value)
+    // console.log('value:', value)
   }, [value])
 
   return (

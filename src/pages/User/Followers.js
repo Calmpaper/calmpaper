@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { getUserSlug } from 'helpers'
 import Flex from 'components/Flex'
 
 const User = ({ user }) => (
@@ -22,7 +23,7 @@ const User = ({ user }) => (
         </div>
       </div>
     </Flex>
-    <Link className="btn btn-color" to={`/${user.id}`}>
+    <Link className="btn btn-color" to={`/${getUserSlug(user)}`}>
       Visit
     </Link>
   </Flex>

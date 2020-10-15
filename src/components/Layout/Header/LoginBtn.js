@@ -7,7 +7,7 @@ const LoginBtn = () => (
         className="header-nav__link"
         href={`${process.env.REACT_APP_BACKEND_URL}/auth/google`}
       >
-        Join
+        Signup
       </a>
     )}
   </li>

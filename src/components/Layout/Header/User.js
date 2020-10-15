@@ -26,7 +26,10 @@ export default () => {
           />
           {user.username || user.givenname}
         </button>
-        <div className="dropdown-box notification-box notification-header-box">
+        <div
+          className="dropdown-box notification-box notification-header-box"
+          style={{ padding: 0 }}
+        >
           <div
             className="header-notification-user__head"
             onClick={() => push(`/${getUserSlug(user)}`)}
@@ -60,8 +63,16 @@ export default () => {
                 <Link to={`/${getUserSlug(user)}`}>Profile</Link>
               </li>
               <li>
+                <Link to={'/books'}>Followed books</Link>
+              </li>
+              <li>
+                <Link to={'/explore'}>Explore</Link>
+              </li>
+              {/*
+              <li>
                 <Link to={'/dashboard'}>Dashboard</Link>
               </li>
+              */}
             </ul>
           </div>
           <div className="header-notification-user__footer">

@@ -12,6 +12,7 @@ import 'assets/css/index.css'
 import 'assets/css/yandex.css'
 import 'assets/css/ADDITIONS.css'
 import 'assets/css/editor.css'
+import 'react-virtualized/styles.css'
 
 import * as serviceWorker from './serviceWorker'
 

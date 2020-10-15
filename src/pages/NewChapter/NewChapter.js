@@ -7,6 +7,7 @@ import { createChapterMutation, updateChapterMutation } from 'api'
 import { getUserSlug } from 'helpers'
 
 import Header from 'components/Layout/Header'
+import Flex from 'components/atoms/flex'
 import Editor from 'components/Editor'
 
 function countWords(str = '') {
@@ -15,7 +16,7 @@ function countWords(str = '') {
 
 export default () => {
   const { user } = useContext(UserContext)
-  const { id: bookId, slug: bookSlug } = useParams()
+  const { bookId, bookSlug } = useParams()
   const { push } = useHistory()
   const { state: { chapter } = {} } = useLocation()
   const { register, control, handleSubmit, errors, watch } = useForm({
@@ -46,7 +47,7 @@ export default () => {
         userId: user.id,
         bookId: bookId ? parseInt(bookId) : undefined,
         bookSlug: bookSlug,
-      }).then(({ data: { createOneChapter: chapter } }) => {
+      }).then(({ data: { createChapter: chapter } }) => {
         window.analytics &&
           window.analytics.track('create-chapter', {
             chapterId: chapter.id,
@@ -146,19 +147,30 @@ export default () => {
                 as={Editor}
                 style={is140words ? { border: '2px solid  #7057d2' } : {}}
               />
-              {is140words && (
-                <div
+              <Flex row justifyEnd>
+                <span
                   style={{
-                    color: '#7057d2',
-                    fontWeight: 500,
-                    marginTop: 12,
-                    fontSize: '15px',
+                    marginTop: 4,
+                    fontSize: '14px',
+                    color: 'rgba(0, 0, 0, .5)',
                   }}
                 >
-                  We recommend less than 140 words per page for better reading
-                  experience. You can add more pages.
-                </div>
-              )}
+                  {countWords(watchContent) > 1 ? countWords(watchContent) : ''}
+                </span>
+                {is140words && (
+                  <div
+                    style={{
+                      color: '#7057d2',
+                      fontWeight: 500,
+                      marginTop: 12,
+                      fontSize: '15px',
+                    }}
+                  >
+                    We recommend less than 140 words per page for better reading
+                    experience. You can add more pages.
+                  </div>
+                )}
+              </Flex>
             </div>
             <div
               className="block block09 add-series-btn"

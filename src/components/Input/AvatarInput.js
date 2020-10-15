@@ -84,7 +84,6 @@ const CustomInput = ({ avatar, setImage, style = {} }) => {
       inputContent=""
       InputComponent={(a) => <Input a={a} avatar={avatar} style={style} />}
       PreviewComponent={({ meta }) => {
-        console.log(meta)
         return (
           <img className="user-avatar" src={meta.previewUrl} alt="Avatar" />
         )

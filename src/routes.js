@@ -16,7 +16,7 @@ import Explore from 'pages/Explore/Explore'
 import Welcome from 'pages/Welcome/Welcome'
 import Invite from 'pages/Invite/Invite'
 import Editor from 'components/Editor'
-import CommentsFeed from 'pages/Home/CommentsFeed'
+import FollowedBooksPage from 'pages/FollowedBooksPage'
 
 const Routes = () => (
   <Switch>
@@ -47,9 +47,6 @@ const Routes = () => (
     <Route path="/editor">
       <Editor />
     </Route>
-    <Route path="/comments">
-      <CommentsFeed />
-    </Route>
     <Route path="/auth-fail">
       <AuthFail />
     </Route>
@@ -61,60 +58,70 @@ const Routes = () => (
     </Route>
 
     {/* Books */}
+    <Route path="/books">
+      <FollowedBooksPage />
+    </Route>
     <Route
       path={[
-        '/@user:id/:book/reviews',
-        '/@:username/:book/reviews',
-        '/books/:id/reviews',
+        '/@user:userId/:bookSlug/reviews',
+        '/@:username/:bookSlug/reviews',
+        '/books/:bookId/reviews',
       ]}
     >
       <Book tab="reviews" />
     </Route>
     <Route
       path={[
-        '/@user:id/:book/new-chapter',
-        '/@:username/:book/new-chapter',
-        '/books/:id/new-chapter',
+        '/@user:userId/:bookSlug/new-chapter',
+        '/@:username/:bookSlug/new-chapter',
+        '/books/:bookId/new-chapter',
       ]}
     >
       <NewChapter />
     </Route>
     <Route
       path={[
-        '/@user:id/:book/edit',
-        '/@:username/:book/edit',
-        '/books/:id/edit',
+        '/@user:userId/:bookSlug/edit',
+        '/@:username/:bookSlug/edit',
+        '/books/:bookId/edit',
       ]}
     >
       <NewBook />
     </Route>
     <Route
       path={[
-        '/@user:id/:book/:chapter/edit',
-        '/@:username/:book/:chapter/edit',
-        '/books/:chapter:/edit',
+        '/@user:userId/:bookSlug/:chapter/edit',
+        '/@:username/:bookSlug/:chapter/edit',
+        '/books/:bookId/:chapter:/edit',
       ]}
     >
       <NewChapter />
     </Route>
     <Route
       path={[
-        '/@user:id/:book/:chapter',
-        '/@:username/:book/:chapter',
-        '/books/:id/:chapter',
+        '/@user:userId/:bookSlug/:chapter',
+        '/@:username/:bookSlug/:chapter',
+        '/books/:bookId/:chapter',
       ]}
     >
       <Chapter />
     </Route>
-    <Route path={['/@user:id/:book', '/@:username/:book', '/books/:id']}>
+    <Route
+      path={[
+        '/@user:userId/:bookSlug',
+        '/@:username/:bookSlug',
+        '/books/:bookId',
+      ]}
+    >
       <Book tab="details" />
     </Route>
+
     {/* Users */}
     <Route
       path={[
-        '/users/@user@:id',
+        '/users/@user@:userId',
         '/users/@:username',
-        '/@user:id',
+        '/@user:userId',
         '/@:username',
       ]}
     >

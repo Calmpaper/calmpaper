@@ -21,18 +21,27 @@ const AddChapter = ({ book }) => {
 }
 
 export default () => {
-  const bookMatch = useRouteMatch('/books/:book')
-  const bookId = bookMatch && bookMatch.params.book
+  const bookIdMatch = useRouteMatch('/books/:id')
+  const bookSlugMatch =
+    useRouteMatch('/@user:id/:book') || useRouteMatch('/@:username/:book')
+  let bookId
+  let bookSlug
+  bookSlug = bookSlugMatch && bookSlugMatch.params.book
+  bookId = bookIdMatch && bookIdMatch.params.book
   const { user } = useContext(UserContext)
 
   const [{ data: { book } = {} }] = useQuery({
-    pause: !bookId,
+    pause: !(bookId || bookSlug),
     query: getBookQuery,
-    variables: {
-      id: parseInt(bookId),
-    },
+    variables: bookSlug
+      ? {
+          slug: bookSlug,
+        }
+      : {
+          id: parseInt(bookId),
+        },
   })
 
-  if (!bookId || (book && book.author.id !== user.id)) return null
+  if (!book || (book && book.author.id !== user.id)) return null
   return <AddChapter book={book} />
 }

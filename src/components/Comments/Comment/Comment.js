@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react'
 import moment from 'moment'
+import { useHistory } from 'react-router-dom'
 import { UserContext } from 'context'
 import { useMutation } from 'urql'
 import {
@@ -8,6 +9,7 @@ import {
   setLikeMutation,
   removeLikeMutation,
 } from 'api'
+import { getUserSlug, getUserDisplayName } from 'helpers'
 
 import Like from 'components/atoms/like'
 // import More from 'components/atoms/more'
@@ -25,6 +27,7 @@ const Comment = ({ comment }) => {
   const [isEditing, setEditing] = useState(false)
   const [showReplies, setShowReplies] = useState(false)
   const [showReplyInput, setShowReplyInput] = useState(false)
+  const { push } = useHistory()
 
   const [, editComment] = useMutation(editCommentMutation)
   const [, sendCommentReply] = useMutation(sendCommentReplyMutation)
@@ -59,8 +62,9 @@ const Comment = ({ comment }) => {
   return (
     <div className="comment-item">
       <div
-        className="comment-avatar"
+        className="comment-avatar clickable"
         style={{ backgroundImage: `url('${comment.author.avatar}')` }}
+        onClick={() => push(`/${getUserSlug(comment.author)}`)}
       />
       <div className="comment-info">
         {comment && isEditing ? (
@@ -74,7 +78,12 @@ const Comment = ({ comment }) => {
         ) : (
           <>
             <h4 className="comment-title">
-              {comment.author.username || comment.author.fullname}{' '}
+              <span
+                className="clickable font-inherit"
+                onClick={() => push(`/${getUserSlug(comment.author)}`)}
+              >
+                {getUserDisplayName(comment.author)}{' '}
+              </span>
               <span>· {moment(comment.createdAt).fromNow()}</span>
             </h4>
             <div className="comment-text">

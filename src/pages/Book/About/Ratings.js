@@ -29,7 +29,7 @@ const Stars = ({ reviews }) => {
 export default ({ book }) => (
   <div className="about-num-panel">
     {book.reviews.length > 0 && <Stars reviews={book.reviews} />}
-    <a href="/" style={{ cursor: 'default' }} style={{ cursor: 'default' }}>
+    <a style={{ cursor: 'default' }}>
       <div className="about-num-panel-info">
         <div className="icon-box">
           <svg className="icon icon-eye">
@@ -53,7 +53,7 @@ export default ({ book }) => (
       <div className="about-num-panel-label">Favorites</div>
     </a>
     */}
-    <a href="/" style={{ cursor: 'default' }}>
+    <a style={{ cursor: 'default' }}>
       <div className="about-num-panel-info">
         <div className="icon-box">
           <svg className="icon icon-customers">
