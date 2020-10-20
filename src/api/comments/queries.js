@@ -1,8 +1,8 @@
 import gql from 'graphql-tag'
 import {
-  // UserFragment,
-  // BookFragment,
-  // ChapterFragment,
+  UserFragment,
+  BookFragment,
+  ChapterFragment,
   // TagFragment,
   CommentFragment,
 } from '../fragments'
@@ -53,4 +53,35 @@ export const getCommentsByChapter = gql`
     }
   }
   ${CommentFragment}
+`
+
+export const getAllCommentsQuery = gql`
+  query($first: Int) {
+    comments(orderBy: { createdAt: desc }, first: $first) {
+      ...Comment
+      book {
+        ...Book
+        author {
+          ...User
+        }
+      }
+      chapter {
+        ...Chapter
+        author {
+          ...User
+        }
+        book {
+          ...Book
+          chapters {
+            id
+          }
+        }
+      }
+    }
+    commentsCount
+  }
+  ${UserFragment}
+  ${CommentFragment}
+  ${BookFragment}
+  ${ChapterFragment}
 `

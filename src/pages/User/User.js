@@ -12,7 +12,7 @@ import Feed from './Feed'
 import Books from './Books'
 import Followers from './Followers'
 import Following from './Following'
-// import ActivityFeed from './ActivityFeed'
+import ActivityFeed from './ActivityFeed'
 
 export default () => {
   const [tab, setTab] = useState('feed')
@@ -43,7 +43,9 @@ export default () => {
         {tab === 'books' && <Books books={user.books} />}
         {tab === 'followers' && <Followers users={user.followers} />}
         {tab === 'following' && <Following users={user.following} />}
-        {/* tab === 'activity' && <ActivityFeed authorId={user.id} /> */}
+        {tab === 'activity' && (
+          <ActivityFeed userId={userId} username={username} />
+        )}
       </div>
     </>
   )

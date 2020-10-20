@@ -1,23 +1,20 @@
 import React, { useEffect, useContext } from 'react'
 import { Helmet } from 'react-helmet'
 import { UserContext } from 'context'
-import { useHistory } from 'react-router-dom'
 
 import Flex from 'components/atoms/flex'
 import Loader from 'components/atoms/loader'
 import Header from 'components/Layout/Header'
-import Landing from 'pages/Landing'
 
 import WelcomeContent from 'pages/Welcome/Content'
-import FollowedBooksFeed from 'components/organisms/feeds/books_feed/followed_books'
+import UpdatesFeed from 'components/organisms/feeds/updates_feed'
 
 export default () => {
-  const { user, fetching } = useContext(UserContext)
-  const { push } = useHistory()
+  const { fetching } = useContext(UserContext)
 
   useEffect(() => {
     if (window.analytics) {
-      window.analytics.page('followed-books')
+      window.analytics.page('feed')
     }
   }, [])
 
@@ -28,11 +25,6 @@ export default () => {
       </div>
     )
   }
-
-  if (!user) {
-    return <Landing />
-  }
-
   return (
     <div className="page-home">
       <Helmet>
@@ -44,7 +36,7 @@ export default () => {
         <WelcomeContent />
       </div>
       <Flex column style={{ marginTop: -128 }}>
-        <FollowedBooksFeed />
+        <UpdatesFeed />
       </Flex>
     </div>
   )

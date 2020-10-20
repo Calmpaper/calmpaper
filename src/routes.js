@@ -12,20 +12,36 @@ import Login from 'pages/Auth/Login'
 import AuthFail from 'pages/Auth/Fail'
 import Dashboard from 'pages/Dashboard'
 import Help from 'pages/Help/Help'
-import Explore from 'pages/Explore/Explore'
 import Welcome from 'pages/Welcome/Welcome'
 import Invite from 'pages/Invite/Invite'
+import Landing from 'pages/Landing'
 import Editor from 'components/Editor'
+import Feed from 'pages/Feed'
 import FollowedBooksPage from 'pages/FollowedBooksPage'
+import AdminCommentsFeed from 'pages/Admin/Feed/Comments'
+import AdminLikesFeed from 'pages/Admin/Feed/Likes'
 
 const Routes = () => (
   <Switch>
+    <Route path="/about">
+      <Landing />
+    </Route>
     {/* Auth */}
     <Route path="/signup">
       <SignUp />
     </Route>
     <Route path="/login">
       <Login />
+    </Route>
+    <Route path="/feed">
+      <Feed />
+    </Route>
+
+    <Route path="/last-comments" exact>
+      <AdminCommentsFeed />
+    </Route>
+    <Route path="/admin/feed/likes" exact>
+      <AdminLikesFeed />
     </Route>
 
     {/* Misc */}
@@ -34,9 +50,6 @@ const Routes = () => (
     </Route>
     <Route path="/help">
       <Help />
-    </Route>
-    <Route path="/explore">
-      <Explore />
     </Route>
     <Route path="/welcome">
       <Welcome />
@@ -58,7 +71,7 @@ const Routes = () => (
     </Route>
 
     {/* Books */}
-    <Route path="/books">
+    <Route path="/books" exact>
       <FollowedBooksPage />
     </Route>
     <Route

@@ -1,5 +1,4 @@
-import React, { useContext } from 'react'
-import { UserContext } from 'context'
+import React from 'react'
 import { Link } from 'react-router-dom'
 import { useQuery } from 'urql'
 import { getUserQuery, getBookQuery, getChapterQuery } from 'api'
@@ -36,8 +35,6 @@ const User = ({ userId }) => {
 }
 
 export default ({ notification, closeNotifications: close }) => {
-  const { user: loggedUser } = useContext(UserContext)
-
   const isSeen = notification.is_seen
   let { activities } = notification
   // activities = activities.map((activity) => activity.user.id !== loggedUser.id)
@@ -65,19 +62,19 @@ export default ({ notification, closeNotifications: close }) => {
   )
 
   const [
-    { data: { user: follower } = {}, fetching: isFollowerFetching, error },
+    { data: { user: follower } = {}, fetching: isFollowerFetching },
   ] = useQuery({
+    pause: !followerId,
     query: getUserQuery,
     variables: { id: parseInt(followerId) },
-
-    pause: !followerId,
   })
 
   if (bookFetching || chapterFetching || isFollowerFetching) return null
 
+  // Below is a messy block. Change later
   if (follower) {
     return (
-      <Link to={`/@user${follower.id}`}>
+      <Link to={`/${getUserSlug(follower)}`}>
         <S.Notification
           style={!isSeen ? { background: 'hsl(218 94% 97% / 1)' } : {}}
         >
@@ -93,19 +90,6 @@ export default ({ notification, closeNotifications: close }) => {
                 </Flex>
               </Flex>
             </Flex>
-
-            {/*
-          <div
-            className="ravatars"
-            style={{
-              marginRight: '6px',
-            }}
-          >
-            <S.Avatar className="ravatar">
-              <img src={follower.avatar} alt={`${follower.avatar}-pic`} />
-            </S.Avatar>
-          </div>
-*/}
           </Flex>
         </S.Notification>
       </Link>
@@ -167,6 +151,7 @@ export default ({ notification, closeNotifications: close }) => {
   let action = ` started following your book`
   let link = `/${getUserSlug(book.author)}/${book.slug}`
 
+  // New book or new chapter
   if (notification.verb === 'add') {
     if (activities[0].object.startsWith('book')) {
       link = `/${getUserSlug(book.author)}/${book.slug}`
@@ -177,6 +162,8 @@ export default ({ notification, closeNotifications: close }) => {
       action = ` added a new chapter`
     }
   }
+
+  // Like comment/book/chapter
   if (notification.verb === 'like') {
     if (activities[0].object.startsWith('comment')) {
       link = chapterPage
@@ -193,6 +180,8 @@ export default ({ notification, closeNotifications: close }) => {
       action = ` liked your book`
     }
   }
+
+  // Reply to comment
   if (notification.verb === 'reply') {
     link = chapterPage
       ? `/${getUserSlug(book.author)}/${book.slug}/${chapterPage}`
@@ -200,6 +189,7 @@ export default ({ notification, closeNotifications: close }) => {
     action = ` replied to your comment`
   }
 
+  // Comment on book/chapter
   if (notification.verb === 'comment') {
     if (activities[0].object.startsWith('book')) {
       link = `/${getUserSlug(book.author)}/${book.slug}`
@@ -211,6 +201,7 @@ export default ({ notification, closeNotifications: close }) => {
     }
   }
 
+  // Review on book
   if (notification.verb === 'review') {
     link = `/${getUserSlug(book.author)}/${book.slug}/reviews`
     action = ` left a review on your book`

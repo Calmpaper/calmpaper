@@ -4,7 +4,7 @@ import { useQuery } from 'urql'
 import { getFollowedBooksQuery } from 'api'
 
 import Loader from 'components/Loader'
-import Book from 'components/molecules/book'
+import Book from 'components/molecules/book/card'
 
 export default ({ sort }) => {
   const { user } = useContext(UserContext)

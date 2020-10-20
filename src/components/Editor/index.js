@@ -2,7 +2,13 @@ import React, { useState, useEffect } from 'react'
 import Icons from './Icons'
 
 // export default ({ value, setValue }) => {
-export default ({ value, onChange, style = {} }) => {
+export default ({
+  value,
+  onChange,
+  style = {},
+  hideIcons = false,
+  className = '',
+}) => {
   // const [value, setValue] = useState('')
 
   useEffect(() => {
@@ -12,9 +18,9 @@ export default ({ value, onChange, style = {} }) => {
 
     editor.value = value
     editor.setValue = onChange
-    script.src = 'https://editor.ignatif.vercel.app/js/app.be017bc5.js'
+    script.src = 'https://editor-5th8pcl9r.vercel.app/js/app.3cdc624e.js'
     css.rel = 'stylesheet'
-    css.href = 'https://editor.ignatif.vercel.app/css/app.9a6da66a.css'
+    css.href = 'https://editor-5th8pcl9r.vercel.app/css/app.ee41d9fb.css'
 
     document.getElementById('editor-portal').appendChild(editor)
     document.body.appendChild(script)
@@ -28,6 +34,7 @@ export default ({ value, onChange, style = {} }) => {
   return (
     <div
       id="editor-portal"
+      className={className}
       style={{
         // position: 'absolute',
         // top: 48,
