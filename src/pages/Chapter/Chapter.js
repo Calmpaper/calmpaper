@@ -113,10 +113,8 @@ export default () => {
       </Headroom>
       <div className="page-read-book">
         <Breadcrumbs chapter={chapter} author={chapter.author} />
-        <div className="read-book-main">
-          <Book book={chapter.book} />
-          <Ratings chapter={chapter} />
-        </div>
+
+        <Book chapter={chapter} />
         <Content chapter={chapter} />
 
         <Author author={chapter.author} chapterId={chapter.id} />

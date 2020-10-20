@@ -11,11 +11,11 @@ export default () => {
   const location = useLocation()
   const parsed = queryString.parse(location.search)
 
-  var decrypted = CryptoJS.AES.decrypt(parsed.from, 'Look, a smart ass!')
-  var originalText = decrypted.toString(CryptoJS.enc.Utf8)
-  const inviteFrom = parseInt(originalText.substring(4))
+  var parsedWordArray = CryptoJS.enc.Base64.parse(parsed.from)
+  var parsedStr = parsedWordArray.toString(CryptoJS.enc.Utf8)
 
-  let userId = inviteFrom
+  const inviteFrom = parsedStr.substring(4)
+  let userId = parseInt(inviteFrom)
 
   const [{ data: { user } = {}, fetching, error }] = useQuery({
     query: getUserQuery,

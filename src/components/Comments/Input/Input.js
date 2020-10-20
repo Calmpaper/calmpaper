@@ -50,9 +50,12 @@ export default ({
           value={value}
           style={inputStyle}
           onChange={(e) => setValue(e.target.value)}
-          onKeyDown={({ key, shiftKey }) =>
-            shiftKey && key === 'Enter' && canSubmit && submit(value)
-          }
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' && canSubmit) {
+              e.preventDefault()
+              submit(value)
+            }
+          }}
           autoFocus={autoFocus}
           style={{
             resize: 'none',

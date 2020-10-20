@@ -33,7 +33,7 @@ export const updateChapterMutation = gql`
   mutation($title: String!, $content: String!, $chapterId: Int!) {
     updateOneChapter(
       where: { id: $chapterId }
-      data: { title: $title, content: $content }
+      data: { title: { set: $title }, content: { set: $content } }
     ) {
       id
       title

@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useClearCache } from 'react-clear-cache'
 import { render } from 'react-dom'
 
 import Layout from 'components/Layout/Layout'
@@ -18,6 +19,13 @@ import * as serviceWorker from './serviceWorker'
 
 const App = () => {
   useAnalytics()
+  const { isLatestVersion, emptyCacheStorage } = useClearCache()
+
+  useEffect(() => {
+    if (!isLatestVersion) {
+      emptyCacheStorage()
+    }
+  }, [isLatestVersion, emptyCacheStorage])
 
   return (
     <Providers>

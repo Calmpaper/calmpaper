@@ -90,8 +90,12 @@ export const getFollowedBooksQuery = gql`
 `
 
 export const getLatestBooksQuery = gql`
-  query {
-    books(orderBy: { createdAt: desc }, where: { archived: { not: true } }) {
+  query($first: Int) {
+    books(
+      orderBy: { createdAt: desc }
+      where: { archived: { not: { equals: true } } }
+      first: $first
+    ) {
       ...Book
       description
       chapters {
@@ -111,6 +115,7 @@ export const getLatestBooksQuery = gql`
         ...Tag
       }
     }
+    booksCount
   }
   ${UserFragment}
   ${BookFragment}

@@ -45,6 +45,8 @@ export default ({ chapter }) => {
   if (commentsError) return <p>Oh no... {commentsError.message}</p>
   if (likesError) return <p>Oh no... {likesError.message}</p>
 
+  if (!chapter.book) return null
+
   return (
     <div className="follow-updates-item">
       <Chapter chapter={chapter} />
