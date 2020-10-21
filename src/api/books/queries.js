@@ -91,7 +91,10 @@ export const getFollowedBooksQuery = gql`
 
 export const getLatestBooksQuery = gql`
   query {
-    books(orderBy: { createdAt: desc }, where: { archived: { not: true } }) {
+    books(
+      orderBy: { createdAt: desc }
+      where: { archived: { not: { equals: true } } }
+    ) {
       ...Book
       description
       chapters {
