@@ -25,6 +25,24 @@ const VotesItem = ({ picked, text, length, number }) => {
   )
 }
 
+const VoteButton = ({ disabled, onClick }) => (
+  <button
+    class="btn btn-color"
+    disabled={disabled}
+    style={
+      disabled
+        ? {
+            background: '#f3f3f3',
+            pointerEvents: 'none',
+            color: '#c5c5c5',
+          }
+        : {}
+    }
+  >
+    Vote
+  </button>
+)
+
 const options = [
   'I would be Very Disappointed if I don’t get to continue reading the story',
   'I would be Somewhat Disappointed if I don’t get to continue reading the story',
@@ -52,13 +70,17 @@ export default ({ chapterId }) => {
 
   if (error) return <p>Oh no... {error.message}</p>
 
+  const token = window?.localStorage.getItem('jwt')
+
+  const hideForm = poll?.myVote !== 'none' || !token
+
   const expires = moment(poll.expires).toNow(true)
   return poll ? (
     <div className="votes">
       <div className="container">
         <div className="row">
           <div className="votes__count">{poll.totalVotes} VOTES</div>
-          {poll?.myVote !== 'none' ? (
+          {hideForm ? (
             <div className="votes__result">
               {options.map((text, index) => (
                 <VotesItem
@@ -82,18 +104,8 @@ export default ({ chapterId }) => {
                 />
               ))}
               <div className="votes__button">
-                <button
-                  class="btn btn-color"
+                <VoteButton
                   disabled={!opt}
-                  style={
-                    !opt
-                      ? {
-                          background: '#f3f3f3',
-                          pointerEvents: 'none',
-                          color: '#c5c5c5',
-                        }
-                      : {}
-                  }
                   onClick={() => {
                     vote({
                       pollId: poll.id,
@@ -102,9 +114,7 @@ export default ({ chapterId }) => {
                       reexecuteQuery({ requestPolicy: 'network-only' }),
                     )
                   }}
-                >
-                  Vote
-                </button>
+                />
                 <div class="votes__time">expires in {expires}</div>
               </div>
             </div>
