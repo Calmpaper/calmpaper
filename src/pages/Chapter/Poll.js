@@ -29,6 +29,7 @@ const VoteButton = ({ disabled, onClick }) => (
   <button
     class="btn btn-color"
     disabled={disabled}
+    onClick={onClick}
     style={
       disabled
         ? {
