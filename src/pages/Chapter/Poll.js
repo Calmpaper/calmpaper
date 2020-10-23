@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useMutation, useQuery } from 'urql'
 import { voteMutation, PollQuery } from 'api'
+import 'assets/css/poll.css'
 import moment from 'moment'
 
 const RadioOption = ({ picked, text, onClick }) => (
@@ -78,6 +79,7 @@ export default ({ chapterId }) => {
   const hideForm = poll?.myVote !== 'none' || !token || expired
 
   const expires = moment(poll.expires).toNow(true)
+
   return poll ? (
     <div className="votes">
       <div className="container">
