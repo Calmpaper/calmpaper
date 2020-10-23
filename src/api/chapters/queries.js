@@ -6,6 +6,7 @@ import {
   LikeFragment,
   CommentFragment,
   GenreFragment,
+  TagFragment,
   DonationFragment,
 } from '../fragments'
 
@@ -75,6 +76,9 @@ export const getAllChaptersQuery = gql`
         genres {
           ...Genre
         }
+        tags {
+          ...Tag
+        }
       }
       comments {
         id
@@ -92,6 +96,7 @@ export const getAllChaptersQuery = gql`
   ${BookFragment}
   ${ChapterFragment}
   ${GenreFragment}
+  ${TagFragment}
 `
 
 export const getLastChaptersQuery = gql`

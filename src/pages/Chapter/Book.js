@@ -12,13 +12,9 @@ export default ({ chapter }) => {
     <div className="read-book-main">
       <div className="container">
         <div className="col col01">
-          <h1 className="title size01">
-            {chapter.book.name}
-            <br />
-            {chapter.title}
-          </h1>
+          <h1 className="title size01">{chapter.book.name}</h1>
           <div
-            className="author"
+            className="author clickable"
             onClick={() => push(`/${getUserSlug(book.author)}`)}
           >
             {getUserDisplayName(book.author)}
