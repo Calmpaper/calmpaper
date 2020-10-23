@@ -62,6 +62,8 @@ export function useAnalytics() {
           analytics.page()
         }
     }
-    init()
+    if (process.env.NODE_ENV === 'production') {
+      init()
+    }
   }, [])
 }

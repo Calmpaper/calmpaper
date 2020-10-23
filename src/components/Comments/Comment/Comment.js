@@ -86,8 +86,15 @@ const Comment = ({ comment }) => {
               </span>
               <span>· {moment(comment.createdAt).fromNow()}</span>
             </h4>
-            <div className="comment-text">
+            <div
+              className="comment-text"
+              dangerouslySetInnerHTML={{
+                __html: comment.body.replace(/(?:\r\n|\r|\n)/g, '<br />'),
+              }}
+            >
+              {/*
               <p>{comment.body}</p>
+*/}
             </div>
           </>
         )}

@@ -83,7 +83,7 @@ export const deleteCommentMutation = gql`
 
 export const editCommentMutation = gql`
   mutation($id: Int!, $body: String!) {
-    updateOneComment(where: { id: $id }, data: { body: $body }) {
+    updateOneComment(where: { id: $id }, data: { body: { set: $body } }) {
       id
       body
     }

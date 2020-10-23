@@ -387,6 +387,12 @@
 
 .page-read-book .read-book-text .container .text p {
   font-size: 18px;
+  min-height: 26px;
+  margin-bottom: 20px !important;
+}
+
+.page-read-book .read-book-text .container .text * {
+  font-size: inherit;
 }
 
 .page-read-book .pagination {
@@ -441,3 +447,26 @@
   color: inherit !important;
 }
 
+
+.suggestion-list {
+  z-index: 2;
+  position: absolute;
+  background: white;
+}
+
+.suggestion-list__item {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.comments-input .menubar {
+  display: none;
+}
+
+.page-books-follows .latest .item .item-category li {
+  margin-bottom: 4px;
+}
+
+.comment-text {
+  line-height: 150%;
+}

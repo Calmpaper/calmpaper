@@ -1,5 +1,10 @@
 import gql from 'graphql-tag'
-import { UserFragment, BookFragment } from '../fragments'
+import {
+  UserFragment,
+  BookFragment,
+  ChapterFragment,
+  CommentFragment,
+} from '../fragments'
 
 export const getUserQuery = gql`
   query($username: String, $id: Int) {
@@ -68,4 +73,38 @@ export const getMeQuery = gql`
   }
   ${UserFragment}
   ${BookFragment}
+`
+
+export const getCommentsByUser = gql`
+  query($username: String, $userId: Int) {
+    comments(
+      where: {
+        author: { username: { equals: $username }, id: { equals: $userId } }
+      }
+      orderBy: { createdAt: desc }
+    ) {
+      ...Comment
+      book {
+        ...Book
+        author {
+          ...User
+        }
+      }
+      chapter {
+        ...Chapter
+        author {
+          ...User
+        }
+        book {
+          ...Book
+          chapters {
+            id
+          }
+        }
+      }
+    }
+  }
+  ${CommentFragment}
+  ${BookFragment}
+  ${ChapterFragment}
 `

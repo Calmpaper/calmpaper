@@ -20,6 +20,13 @@ export default ({ tab, setTab, followingCount, followersCount }) => (
           Books
         </a>
         <a
+          onClick={() => setTab('activity')}
+          className={tab === 'activity' ? 'active' : ''}
+          style={{ cursor: 'pointer' }}
+        >
+          Activity
+        </a>
+        <a
           onClick={() => setTab('following')}
           className={tab === 'following' ? 'active' : ''}
           style={{ cursor: 'pointer' }}
@@ -33,15 +40,6 @@ export default ({ tab, setTab, followingCount, followersCount }) => (
         >
           {`Followers (${followersCount})`}
         </a>
-        {/*
-        <a
-          onClick={() => setTab('activity')}
-          className={tab === 'activity' ? 'active' : ''}
-          style={{ cursor: 'pointer' }}
-        >
-          Activity
-        </a>
-        */}
       </div>
     </div>
   </div>

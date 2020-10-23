@@ -6,6 +6,7 @@ import {
   LikeFragment,
   CommentFragment,
   GenreFragment,
+  TagFragment,
   DonationFragment,
   PollFragment,
 } from '../fragments'
@@ -56,37 +57,52 @@ export const getChapterQuery = gql`
   ${LikeFragment}
 `
 
-// All:
-// export const getLastChaptersQuery = gql`
-//   query($skip: Int!) {
-//     chaptersFeed(skip: $skip) {
-//       ...Chapter
-//       createdAt
-//       content
-//       author {
-//         ...User
-//       }
-//       book {
-//         ...Book
-//         chapters {
-//           id
-//         }
-//         genres {
-//           ...Genre
-//         }
-//       }
-//     }
-//   }
-//   ${UserFragment}
-//   ${BookFragment}
-//   ${ChapterFragment}
-//   ${GenreFragment}
-// `
+export const getAllChaptersQuery = gql`
+  query($first: Int) {
+    chapters(first: $first, orderBy: { createdAt: desc }) {
+      ...Chapter
+      createdAt
+      content
+      author {
+        ...User
+      }
+      book {
+        ...Book
+        chapters {
+          id
+        }
+        author {
+          ...User
+        }
+        genres {
+          ...Genre
+        }
+        tags {
+          ...Tag
+        }
+      }
+      comments {
+        id
+      }
+      likes {
+        id
+        author {
+          id
+        }
+      }
+    }
+    chaptersCount
+  }
+  ${UserFragment}
+  ${BookFragment}
+  ${ChapterFragment}
+  ${GenreFragment}
+  ${TagFragment}
+`
 
 export const getLastChaptersQuery = gql`
   query($skip: Int, $take: Int, $userId: Int!) {
     chaptersFeed(skip: $skip, take: $take, userId: $userId) {
-      __typename
       ...Chapter
       createdAt
       content

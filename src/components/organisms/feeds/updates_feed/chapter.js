@@ -82,8 +82,12 @@ export default ({ chapter }) => {
             padding: '0px 5px',
           }}
         >
-          <div className="book-cover__title">Your book here</div>
-          <div className="book-cover__author">by Arthur D.</div>
+          <div className="book-cover__title">{chapter.book.name}</div>
+          {chapter.book.author && (
+            <div className="book-cover__author">
+              by {getUserDisplayName(chapter.book.author)}
+            </div>
+          )}
         </div>
       )}
       <div className="follow-updates-card__info" style={{ width: '100%' }}>
@@ -136,7 +140,11 @@ export default ({ chapter }) => {
         <p
           className="follow-updates-card__text"
           dangerouslySetInnerHTML={{
-            __html: chapter.content.replace(/(?:\r\n|\r|\n)/g, '<br />'),
+            __html: chapter.content
+              .replace(/(?:\r\n|\r|\n)/g, '<br />')
+              .split(' ')
+              .splice(0, 140)
+              .join(' '),
           }}
         />
         <div className="follow-updates-card__progress" ref={actionsRef}>
