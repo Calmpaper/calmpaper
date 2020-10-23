@@ -4,6 +4,22 @@ import { useHistory } from 'react-router-dom'
 import CryptoJS from 'crypto-js'
 import SharePopup from 'components/Popups/SharePopup'
 
+const Share = ({ setShowInvitePopup, user }) => {
+  var rawStr = `user${user.id}`
+  var wordArray = CryptoJS.enc.Utf8.parse(rawStr)
+  var base64 = CryptoJS.enc.Base64.stringify(wordArray)
+
+  return (
+    <SharePopup
+      close={() => setShowInvitePopup(false)}
+      url={`https://calmpaper.org/invite?from=${base64}`}
+      title="Invite your friends to write"
+      invitedCount={user.invited.length || null}
+      labelText="Send link (You will autofollow each other)"
+    />
+  )
+}
+
 export default () => {
   const [showInvitePopup, setShowInvitePopup] = useState(false)
   const { user } = useContext(UserContext)
@@ -59,16 +75,7 @@ export default () => {
         */}
 
         {showInvitePopup && (
-          <SharePopup
-            close={() => setShowInvitePopup(false)}
-            url={`https://calmpaper.org/invite?from=${CryptoJS.AES.encrypt(
-              `user${user.id}`,
-              'Look, a smart ass!',
-            )}`}
-            title="Invite your friends to write"
-            invitedCount={user.invited.length || null}
-            labelText="Send link (You will autofollow each other)"
-          />
+          <Share setShowInvitePopup={setShowInvitePopup} user={user} />
         )}
       </div>
     </div>

@@ -4,7 +4,7 @@ import { useHistory, useParams, useLocation } from 'react-router-dom'
 import { useForm, Controller } from 'react-hook-form'
 import { useMutation } from 'urql'
 import { createChapterMutation, updateChapterMutation } from 'api'
-import { getUserSlug } from 'helpers'
+import { getUserSlug, removeHtmlTags } from 'helpers'
 
 import Header from 'components/Layout/Header'
 import Flex from 'components/atoms/flex'
@@ -73,7 +73,15 @@ export default () => {
   if (error) return <p>Oh no... {error.message}</p>
 
   const watchContent = watch('content')
-  const is140words = countWords(watchContent) > 140
+  // const is140words = countWords(removeHtmlTags(watchContent || '', true)) >
+  // 140
+
+  var cont = watchContent || ''
+  cont = cont.replace(/<[^>]*>/g, ' ')
+  cont = cont.replace(/\s+/g, ' ')
+  cont = cont.trim()
+  var n = cont.split(' ').length
+  const is140words = n >= 140
 
   return (
     <>
@@ -155,7 +163,7 @@ export default () => {
                     color: 'rgba(0, 0, 0, .5)',
                   }}
                 >
-                  {countWords(watchContent) > 1 ? countWords(watchContent) : ''}
+                  {n > 1 ? `${n} words` : ''}
                 </span>
                 {is140words && (
                   <div

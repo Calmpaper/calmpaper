@@ -1,21 +1,18 @@
 import React, { useContext } from 'react'
 import { UserContext, GetStreamContext } from 'context'
 import { useHistory } from 'react-router-dom'
-import { useQuery, useMutation } from 'urql'
+import { useMutation } from 'urql'
 import {
-  getLatestBooksQuery,
   addBookToFavoritesMutation,
   removeBookFromFavoritesMutation,
 } from 'api'
 import { getUserSlug, removeHtmlTags } from 'helpers'
 
 import BookCover from 'components/atoms/book-cover'
-import Loader from 'components/Loader'
-import Flex from 'components/Flex'
 
 var regex = /(<([^>]+)>)/gi
 
-const Book = ({ book, isFirst }) => {
+export default ({ book, isFirst }) => {
   const { user } = useContext(UserContext)
   const { notificationsFeed } = useContext(GetStreamContext)
   const { push } = useHistory()
@@ -89,34 +86,6 @@ const Book = ({ book, isFirst }) => {
           )}
         </Flex>
         */}
-      </div>
-    </div>
-  )
-}
-
-export default () => {
-  const [{ data: { books } = {}, fetching, error }] = useQuery({
-    query: getLatestBooksQuery,
-  })
-
-  if (fetching) return <Loader />
-  if (error) return <p>Oh no... {error.message}</p>
-
-  return (
-    <div className="page-books-follows">
-      <div className="latest">
-        <div className="container">
-          <div className="row">
-            <h2 className="title size02">Latest unfinished books</h2>
-          </div>
-          <div className="row" style={{ maxWidth: '750px', margin: 'auto' }}>
-            {books
-              .filter((book) => book.chapters.length > 0)
-              .map((book, key) => (
-                <Book book={book} key={book.id} isFirst={key === 0} />
-              ))}
-          </div>
-        </div>
       </div>
     </div>
   )

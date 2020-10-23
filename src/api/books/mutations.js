@@ -40,9 +40,9 @@ export const updateBookMutation = gql`
     updateOneBook(
       where: { id: $bookId }
       data: {
-        name: $name
-        description: $description
-        image: $image
+        name: { set: $name }
+        description: { set: $description }
+        image: { set: $image }
         author: { connect: { id: $userId } }
       }
     ) {

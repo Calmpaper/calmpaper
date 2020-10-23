@@ -2,7 +2,7 @@ import React from 'react'
 import moment from 'moment'
 import { Link } from 'react-router-dom'
 import { useQuery } from 'urql'
-import { getCommentsByUser } from 'api'
+import { getAllCommentsQuery } from 'api'
 import { getUserDisplayName, getUserSlug, getChapterPage } from 'helpers'
 
 import Loader from 'components/Loader'
@@ -51,15 +51,9 @@ const Comment = ({ comment, isFirst, isLast }) => {
   )
 }
 
-export default ({ username, userId }) => {
+export default () => {
   const [{ data: { comments = [] } = {}, fetching, error }] = useQuery({
-    query: getCommentsByUser,
-    variables: username
-      ? {
-          username,
-        }
-      : { userId: parseInt(userId) },
-    pause: !(userId || username),
+    query: getAllCommentsQuery,
   })
 
   if (fetching) return <Loader />

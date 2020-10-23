@@ -1,5 +1,6 @@
 import React, { useContext } from 'react'
 import { UserContext } from 'context'
+import { Link } from 'react-router-dom'
 
 import Notifications from 'components/Notifications'
 import Logo from './Logo'
@@ -25,6 +26,13 @@ export default ({ home }) => {
                 </li>
                   )*/}
               {user && <Create />}
+              {user && (
+                <li className="header-nav__item">
+                  <Link to={`/feed`} className="header-nav__link">
+                    Following
+                  </Link>
+                </li>
+              )}
               {user && (
                 <li
                   className="header-nav__item"

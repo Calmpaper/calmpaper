@@ -4,10 +4,29 @@ import { UserContext } from 'context'
 import { Link, useHistory } from 'react-router-dom'
 import { getUserSlug } from 'helpers'
 import Flex from 'components/atoms/flex'
+import CryptoJS from 'crypto-js'
+import SharePopup from 'components/Popups/SharePopup'
+
+const Share = ({ setShowInvitePopup, user }) => {
+  var rawStr = `user${user.id}`
+  var wordArray = CryptoJS.enc.Utf8.parse(rawStr)
+  var base64 = CryptoJS.enc.Base64.stringify(wordArray)
+
+  return (
+    <SharePopup
+      close={() => setShowInvitePopup(false)}
+      url={`https://calmpaper.org/invite?from=${base64}`}
+      title="Invite your friends to write"
+      invitedCount={user.invited.length || null}
+      labelText="Send link (You will autofollow each other)"
+    />
+  )
+}
 
 export default () => {
   const [showDropdown, setShowDropdown] = useState(false)
   const [showMenu, setShowMenu] = useState(false)
+  const [showInvitePopup, setShowInvitePopup] = useState(false)
   const { push } = useHistory()
   const { logout, user } = useContext(UserContext)
 
@@ -57,16 +76,16 @@ export default () => {
           <div className="header-notification-user__body">
             <ul className="header-notification-user__list">
               <li>
-                <Link to="/new-book">New book</Link>
-              </li>
-              <li>
                 <Link to={`/${getUserSlug(user)}`}>Profile</Link>
               </li>
               <li>
-                <Link to={'/books'}>Followed books</Link>
+                <Link to="/new-book">New book</Link>
               </li>
               <li>
-                <Link to={'/explore'}>Explore</Link>
+                <a onClick={() => setShowInvitePopup(true)}>Invite people</a>
+              </li>
+              <li>
+                <Link to={'/books'}>Followed books</Link>
               </li>
               {/*
               <li>
@@ -94,18 +113,32 @@ export default () => {
         <nav className="header-nav">
           <ul className="header-nav__list">
             <li className="header-nav__item">
-              <Link to="/" className="header-nav__link">
-                Read
-              </Link>
-            </li>
-            <li className="header-nav__item">
-              <Link to="/new-book" className="header-nav__link">
-                Create
-              </Link>
+              <li className="header-nav__item">
+                <Link to="/new-book" className="header-nav__link">
+                  Add book
+                </Link>
+              </li>
+              <li className="header-nav__item">
+                <a
+                  onClick={() => setShowInvitePopup(true)}
+                  className="header-nav__link"
+                >
+                  Invite
+                </a>
+              </li>
+              <li className="header-nav__item">
+                <Link to={'/feed'} className="header-nav__link">
+                  Following
+                </Link>
+              </li>
             </li>
           </ul>
         </nav>
       </div>
+
+      {showInvitePopup && (
+        <Share setShowInvitePopup={setShowInvitePopup} user={user} />
+      )}
     </>
   )
 }

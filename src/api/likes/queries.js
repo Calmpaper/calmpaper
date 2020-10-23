@@ -29,3 +29,33 @@ export const getLikesByChapter = gql`
   }
   ${LikeFragment}
 `
+
+// export const getAllLikesQuery = gql`
+//   query {
+//     likes {
+//       ...Comment
+//       book {
+//         ...Book
+//         author {
+//           ...User
+//         }
+//       }
+//       chapter {
+//         ...Chapter
+//         author {
+//           ...User
+//         }
+//         book {
+//           ...Book
+//           chapters {
+//             id
+//           }
+//         }
+//       }
+//     }
+//   }
+//   ${UserFragment}
+//   ${LikeFragment}
+//   ${BookFragment}
+//   ${ChapterFragment}
+// `
