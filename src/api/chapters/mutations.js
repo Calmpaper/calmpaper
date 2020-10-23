@@ -67,3 +67,12 @@ export const deleteChapterMutation = gql`
     }
   }
 `
+
+export const voteMutation = gql`
+  mutation($pollId: Int!, $option: VoteOption!) {
+    vote(pollId: $pollId, option: $option) {
+      id
+      option
+    }
+  }
+`

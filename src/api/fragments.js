@@ -93,3 +93,17 @@ export const DonationFragment = gql`
   }
   ${UserFragment}
 `
+
+export const PollFragment = gql`
+  fragment Poll on Poll {
+    id
+    opt1
+    opt2
+    opt3
+    opt4
+    opt5
+    totalVotes
+    myVote
+    expires
+  }
+`
