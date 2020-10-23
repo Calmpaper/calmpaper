@@ -5,7 +5,7 @@ import { getAllChaptersQuery } from 'api'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import Loader from 'components/atoms/loader'
 import Flex from 'components/atoms/flex'
-import Item from '../updates_feed/item'
+import Chapter from 'components/molecules/chapter/list_item'
 
 export default () => {
   const [page, setPage] = useState(1)
@@ -31,11 +31,15 @@ export default () => {
   return (
     <div className="page-follow" style={{ padding: 0 }}>
       <div className="container">
-        <div className="follow-updates" style={{ padding: 0 }}>
+        <div
+          className="row"
+          style={{ padding: 0, maxWidth: 750, margin: '0 auto' }}
+        >
           <InfiniteScroll
             dataLength={chapters.length}
             next={() => setPage(page + 1)}
             hasMore={chapters.length !== chaptersCount}
+            style={{ paddingTop: 10, marginTop: -10 }}
             loader={
               <Flex
                 justifyCenter
@@ -50,7 +54,7 @@ export default () => {
             }
           >
             {chapters.map((chapter, index) => (
-              <Item chapter={chapter} key={chapter.id} />
+              <Chapter chapter={chapter} key={chapter.id} />
             ))}
           </InfiniteScroll>
         </div>
