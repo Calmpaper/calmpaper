@@ -8,6 +8,7 @@ import {
   GenreFragment,
   TagFragment,
   DonationFragment,
+  PollFragment,
 } from '../fragments'
 
 export const getChapterQuery = gql`
@@ -217,4 +218,13 @@ export const getChapterByBookQuery = gql`
   ${CommentFragment}
   ${LikeFragment}
   ${DonationFragment}
+`
+
+export const PollQuery = gql`
+  query poll($chapterId: Int!) {
+    poll(chapterId: $chapterId) {
+      ...Poll
+    }
+  }
+  ${PollFragment}
 `

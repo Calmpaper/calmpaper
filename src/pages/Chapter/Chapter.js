@@ -22,6 +22,7 @@ import Content from './Content'
 import Ratings from './Ratings'
 import Author from './Author'
 import Actions from './Actions'
+import Poll from './Poll'
 
 export default () => {
   const { user } = useContext(UserContext)
@@ -120,6 +121,8 @@ export default () => {
         <Author author={chapter.author} chapterId={chapter.id} />
 
         <Actions chapter={chapter} />
+
+        <Poll chapterId={chapter.id} reexecuteQuery={reexecuteQuery}/>
 
         <Comments comments={chapter.comments} onSubmit={sendComment} />
       </div>
