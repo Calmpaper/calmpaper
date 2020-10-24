@@ -413,6 +413,12 @@
   display: flex;
 }
 
+.follow-updates-card__text {
+  font-size: 15px !important;
+  line-height: 160% !important;
+  color: rgb(4, 0, 39) !important;
+}
+
 .follow-updates-card__text > p {
   font-size: inherit;
   line-height: inherit;
@@ -447,7 +453,6 @@
   color: inherit !important;
 }
 
-
 .suggestion-list {
   z-index: 2;
   position: absolute;
@@ -469,4 +474,10 @@
 
 .comment-text {
   line-height: 150%;
+}
+
+.page-follow .follow-updates-comments__text {
+  font-size: 15px;
+  color: #57586c;
+  line-height: 160%;
 }

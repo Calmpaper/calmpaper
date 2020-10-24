@@ -9,7 +9,8 @@ import Flex from 'components/atoms/flex'
 import Loader from 'components/atoms/loader'
 
 import BooksFeed from 'components/organisms/feeds/books_feed/all_books'
-import ChaptersFeed from 'components/organisms/feeds/chapters_feed/all_chapters'
+// import ChaptersFeed from 'components/organisms/feeds/chapters_feed/all_chapters'
+import ChaptersFeed from 'components/organisms/feeds/updates_feed'
 import CommentsFeed from 'components/organisms/feeds/comments_feed'
 
 export default () => {
