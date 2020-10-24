@@ -49,7 +49,7 @@ const options = [
   'I would be Very Disappointed if I don’t get to continue reading the story',
   'I would be Somewhat Disappointed if I don’t get to continue reading the story',
   'I would feel fine if I don’t get to read it anymore',
-  'I am glad I don’t have to read it anymore',
+  // 'I am glad I don’t have to read it anymore',
   'I just want to see the results of this poll',
 ]
 
@@ -95,9 +95,11 @@ export default ({ chapterId }) => {
                   length={getProgress(index)}
                 />
               ))}
+              {/*
               <div className="votes__button">
                 <div class="votes__time">expires in {expires}</div>
               </div>
+              */}
             </div>
           ) : (
             <div className="votes__form">
@@ -120,11 +122,11 @@ export default ({ chapterId }) => {
                     )
                   }}
                 />
-                {!expired ? (
+                {/* !expired ? (
                   <div class="votes__time">expires in {expires}</div>
                 ) : (
                   <div class="votes__time">expired</div>
-                )}
+                )*/}
               </div>
             </div>
           )}

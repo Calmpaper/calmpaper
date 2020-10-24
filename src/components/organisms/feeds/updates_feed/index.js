@@ -38,7 +38,10 @@ export default () => {
   return (
     <div className="page-follow" style={{ padding: 0 }}>
       <div className="container">
-        <div className="follow-updates" style={{ padding: 0 }}>
+        <div
+          className="follow-updates"
+          style={{ padding: 0, width: 750, margin: '0 auto' }}
+        >
           <InfiniteScroll
             dataLength={chapters.length}
             next={() => setPage(page + 1)}
