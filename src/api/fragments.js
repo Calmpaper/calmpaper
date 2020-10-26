@@ -12,6 +12,19 @@ export const UserFragment = gql`
   }
 `
 
+export const PollFragment = gql`
+  fragment Poll on Poll {
+    id
+    opt1
+    opt2
+    opt3
+    opt4
+    totalVotes
+    myVote
+    expires
+  }
+`
+
 export const BookFragment = gql`
   fragment Book on Book {
     id
@@ -27,7 +40,12 @@ export const ChapterFragment = gql`
     slug
     title
     createdAt
+    rating
+    poll {
+      totalVotes
+    }
   }
+
 `
 
 export const LikeFragment = gql`
@@ -92,18 +110,4 @@ export const DonationFragment = gql`
     }
   }
   ${UserFragment}
-`
-
-export const PollFragment = gql`
-  fragment Poll on Poll {
-    id
-    opt1
-    opt2
-    opt3
-    opt4
-   
-    totalVotes
-    myVote
-    expires
-  }
 `
