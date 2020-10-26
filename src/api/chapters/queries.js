@@ -59,7 +59,11 @@ export const getChapterQuery = gql`
 
 export const getAllChaptersQuery = gql`
   query($first: Int) {
-    chapters(first: $first, orderBy: { createdAt: desc }) {
+    chapters(
+      first: $first
+      where: { bookId: { not: { equals: null } } }
+      orderBy: { createdAt: desc }
+    ) {
       ...Chapter
       createdAt
       content

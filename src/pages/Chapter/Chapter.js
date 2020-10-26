@@ -110,7 +110,7 @@ export default () => {
       <Meta chapter={chapter} chapterPage={chapterPage} />
       {showSharePopup && <SharePopup close={() => setShowSharePopup(false)} />}
       <Headroom>
-        <Header withLine>
+        <Header>
           <Actions chapter={chapter} />
         </Header>
       </Headroom>
@@ -127,9 +127,7 @@ export default () => {
         <Comments comments={chapter.comments} onSubmit={sendComment} />
       </div>
 
-      {/*
       <ChapterNavigation chapter={chapter} reexecuteQuery={reexecuteQuery} />
-      */}
       {/*
       <Footer centered />
 */}

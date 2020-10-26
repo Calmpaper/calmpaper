@@ -22,11 +22,18 @@ export default ({ chapter }) => {
           <Ratings chapter={chapter} />
         </div>
         <div className="col col02">
-          {book.image ? (
-            <img src={book.image || '/img/placeholder.jpg'} alt={book.name} />
-          ) : (
-            <BookCover book={book} isChapterPage />
-          )}
+          <BookCover
+            book={book}
+            isChapterPage
+            size="book-cover-size01"
+            style={{
+              maxWidth: '180px',
+              boxShadow: '0px 30px 30px rgba(44, 26, 22, 0.2)',
+              height: '250px',
+              width: '180px',
+              borderRadius: '6px',
+            }}
+          />
         </div>
       </div>
     </div>
