@@ -123,6 +123,35 @@ export const getLatestBooksQuery = gql`
   ${TagFragment}
 `
 
+export const topRatedBooksQuery = gql`
+  query($skip: Int, $take: Int) {
+    topRatedBooks(take: $take, skip: $skip) {
+      ...Book
+      description
+      chapters {
+        ...Chapter
+      }
+      reviews {
+        stars
+      }
+      author {
+        ...User
+      }
+
+      readers {
+        id
+      }
+      tags {
+        ...Tag
+      }
+    }   
+  }
+  ${UserFragment}
+  ${BookFragment}
+  ${ChapterFragment}
+  ${TagFragment}
+`
+
 export const getBookQuery = gql`
   query($slug: String, $id: Int) {
     book(where: { slug: $slug, id: $id }) {
