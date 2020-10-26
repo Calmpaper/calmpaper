@@ -9,14 +9,13 @@ import Flex from 'components/atoms/flex'
 import Loader from 'components/atoms/loader'
 
 import BooksFeed from 'components/organisms/feeds/books_feed/all_books'
-// import ChaptersFeed from 'components/organisms/feeds/chapters_feed/all_chapters'
-import ChaptersFeed from 'components/organisms/feeds/updates_feed'
+import ChaptersFeed from 'components/organisms/feeds/chapters_feed/all_chapters'
 import CommentsFeed from 'components/organisms/feeds/comments_feed'
 
 export default () => {
   const { user, fetching: userFetching } = useContext(UserContext)
   const { push } = useHistory()
-  const [tab, setTab] = useState('books')
+  const [tab, setTab] = useState('updates')
 
   useEffect(() => {
     if (window.analytics) {

@@ -81,7 +81,7 @@ export default () => {
   cont = cont.replace(/\s+/g, ' ')
   cont = cont.trim()
   var n = cont.split(' ').length
-  const is140words = n >= 140
+  const is1000words = n >= 1000
 
   return (
     <>
@@ -153,7 +153,7 @@ export default () => {
                 name="content"
                 control={control}
                 as={Editor}
-                style={is140words ? { border: '2px solid  #7057d2' } : {}}
+                style={is1000words ? { border: '2px solid  #7057d2' } : {}}
               />
               <Flex row justifyEnd>
                 <span
@@ -165,7 +165,7 @@ export default () => {
                 >
                   {n > 1 ? `${n} words` : ''}
                 </span>
-                {is140words && (
+                {is1000words && (
                   <div
                     style={{
                       color: '#7057d2',
@@ -174,8 +174,8 @@ export default () => {
                       fontSize: '15px',
                     }}
                   >
-                    We recommend less than 140 words per page for better reading
-                    experience. You can add more pages.
+                    We recommend less than 1000 words per page for better
+                    reading experience. You can add more pages.
                   </div>
                 )}
               </Flex>
