@@ -110,7 +110,9 @@ export default () => {
       <Meta chapter={chapter} chapterPage={chapterPage} />
       {showSharePopup && <SharePopup close={() => setShowSharePopup(false)} />}
       <Headroom>
-        <Header withLine />
+        <Header withLine>
+          <Actions chapter={chapter} />
+        </Header>
       </Headroom>
       <div className="page-read-book">
         <Breadcrumbs chapter={chapter} author={chapter.author} />
@@ -120,14 +122,14 @@ export default () => {
 
         <Author author={chapter.author} chapterId={chapter.id} />
 
-        <Actions chapter={chapter} />
-
-        <Poll chapterId={chapter.id} reexecuteQuery={reexecuteQuery}/>
+        <Poll chapterId={chapter.id} reexecuteQuery={reexecuteQuery} />
 
         <Comments comments={chapter.comments} onSubmit={sendComment} />
       </div>
 
+      {/*
       <ChapterNavigation chapter={chapter} reexecuteQuery={reexecuteQuery} />
+      */}
       {/*
       <Footer centered />
 */}
