@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useMutation, useQuery } from 'urql'
 import { voteMutation, PollQuery } from 'api'
 import 'assets/css/poll.css'
-import moment from 'moment'
+/* import moment from 'moment' */
 
 const RadioOption = ({ picked, text, onClick }) => (
   <label className="radio">
@@ -55,6 +55,12 @@ const options = [
 
 export default ({ chapterId }) => {
   const [opt, setOpt] = useState()
+  const [form, setForm] = useState(false)
+
+  useEffect(() => {
+    setForm(false)
+    setOpt()
+  }, [chapterId])
 
   const [, vote] = useMutation(voteMutation)
 
@@ -72,8 +78,8 @@ export default ({ chapterId }) => {
 
   if (error) return <p>Oh no... {error.message}</p>
 
- /*  const expired = Number(new Date(poll?.expires)) < Date.now()
- */
+  /*  const expired = Number(new Date(poll?.expires)) < Date.now()
+   */
   const token = window?.localStorage.getItem('jwt')
 
   const hideForm = poll?.myVote !== 'none' || !token /* || expired */
@@ -85,16 +91,18 @@ export default ({ chapterId }) => {
       <div className="container">
         <div className="row">
           <div className="votes__count">{poll.totalVotes} VOTES</div>
-          {hideForm ? (
+          {hideForm || form ? (
             <div className="votes__result">
-              {options.map((text, index) => (
-                <VotesItem
-                  picked={`opt${index + 1}` === poll.myVote}
-                  text={text}
-                  number={poll[`opt${index + 1}`]}
-                  length={getProgress(index)}
-                />
-              ))}
+              {options.map((text, index) =>
+                index < 3 ? (
+                  <VotesItem
+                    picked={`opt${index + 1}` === poll.myVote}
+                    text={text}
+                    number={poll[`opt${index + 1}`]}
+                    length={getProgress(index)}
+                  />
+                ) : null,
+              )}
               {/*
               <div className="votes__button">
                 <div class="votes__time">expires in {expires}</div>
@@ -114,12 +122,14 @@ export default ({ chapterId }) => {
                 <VoteButton
                   disabled={!opt}
                   onClick={() => {
-                    vote({
-                      pollId: poll.id,
-                      option: `opt${opt}`,
-                    }).then((r) =>
-                      reexecuteQuery({ requestPolicy: 'network-only' }),
-                    )
+                    opt !== 4
+                      ? vote({
+                          pollId: poll.id,
+                          option: `opt${opt}`,
+                        }).then((r) =>
+                          reexecuteQuery({ requestPolicy: 'network-only' }),
+                        )
+                      : setForm(true)
                   }}
                 />
                 {/* !expired ? (
