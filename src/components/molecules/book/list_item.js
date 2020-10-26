@@ -39,7 +39,7 @@ export default ({ book, isFirst }) => {
       className="item item01"
       onClick={() => push(`/${getUserSlug(book.author)}/${book.slug}`)}
     >
-      <BookCover book={book} isItem hideText />
+      <BookCover book={book} isItem />
       <div className="item-info" style={{ width: '100%' }}>
         <div className="item-head">
           <h3 className="item-title">{book.name}</h3>
