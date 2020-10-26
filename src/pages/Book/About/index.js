@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { UserContext, GetStreamContext } from 'context'
 import { useHistory, Link } from 'react-router-dom'
 import { useMutation } from 'urql'
@@ -9,8 +9,10 @@ import {
 import { getUserSlug, getUserDisplayName } from 'helpers'
 import BookCover from 'components/atoms/book-cover'
 import Ratings from './Ratings'
+// import Reward from 'react-rewards'
 
 export default ({ book }) => {
+  // const [ref, setRef] = useState()
   const { user } = useContext(UserContext)
   const { notificationsFeed } = useContext(GetStreamContext)
   const { push } = useHistory()
@@ -27,6 +29,7 @@ export default ({ book }) => {
       removeBookFromFavorites({ userId: user.id, bookId: book.id })
       notificationsFeed.unfollow('book', book.id)
     } else {
+      // ref && ref.rewardMe()
       addBookToFavorites({ userId: user.id, bookId: book.id })
       notificationsFeed.follow('book', book.id)
     }
@@ -67,6 +70,7 @@ export default ({ book }) => {
               </Link>
             )
           )}
+
           <button
             className="btn btn-grey"
             onClick={addToLibrary}
