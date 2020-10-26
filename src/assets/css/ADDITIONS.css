@@ -4,18 +4,18 @@
   background: white;
 }
 
-@media screen and (min-width: 1023px) {
-  .read-book-text .text {
-    font-size: 19px;
-  }
+/* @media screen and (min-width: 1023px) { */
+/*   .read-book-text .text { */
+/*     font-size: 19px; */
+/*   } */
 
-  .page-read-book .read-book-text .container {
-    max-width: 760px;
-    font-size: 19px;
-  }
+/*   .page-read-book .read-book-text .container { */
+/*     max-width: 760px; */
+/*     font-size: 19px; */
+/*   } */
 
-  .page-read-book .read-book-text .container .title.size04 {
-    font-size: 17px;
-    margin-bottom: 45px;
-  }
-}
+/*   .page-read-book .read-book-text .container .title.size04 { */
+/*     font-size: 17px; */
+/*     margin-bottom: 45px; */
+/*   } */
+/* } */
