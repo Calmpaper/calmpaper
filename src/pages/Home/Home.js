@@ -9,6 +9,7 @@ import Flex from 'components/atoms/flex'
 import Loader from 'components/atoms/loader'
 
 import BooksFeed from 'components/organisms/feeds/books_feed/all_books'
+import TopRatedFeed from 'components/organisms/feeds/books_feed/top_rated_books'
 // import ChaptersFeed from 'components/organisms/feeds/chapters_feed/all_chapters'
 import ChaptersFeed from 'components/organisms/feeds/updates_feed'
 import CommentsFeed from 'components/organisms/feeds/comments_feed'
@@ -16,7 +17,7 @@ import CommentsFeed from 'components/organisms/feeds/comments_feed'
 export default () => {
   const { user, fetching: userFetching } = useContext(UserContext)
   const { push } = useHistory()
-  const [tab, setTab] = useState('books')
+  const [tab, setTab] = useState('topRated')
 
   useEffect(() => {
     if (window.analytics) {
@@ -100,7 +101,14 @@ export default () => {
                       <div
                         className="row"
                         style={{ display: 'flex', justifyContent: 'center' }}
-                      >
+                      >                        
+                        <a
+                          className={tab === 'topRated' ? 'active' : ''}
+                          style={{ cursor: 'pointer' }}
+                          onClick={() => setTab('topRated')}
+                        >
+                          Top rated books
+                        </a>
                         <a
                           className={tab === 'books' ? 'active' : ''}
                           style={{ cursor: 'pointer' }}
@@ -126,6 +134,7 @@ export default () => {
                     </div>
                   </div>
                 </Flex>
+                {tab === 'topRated' && <TopRatedFeed />}
                 {tab === 'books' && <BooksFeed />}
                 {tab === 'updates' && <ChaptersFeed />}
                 {tab === 'comments' && <CommentsFeed />}
