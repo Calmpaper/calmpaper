@@ -79,7 +79,11 @@ export default ({ tab, update }) => {
   return (
     <>
       <Meta book={book} />
-      <Header />
+      <Header>
+        {user && user.id === book.author.id && (
+          <Actions bookId={book.id} book={book} />
+        )}
+      </Header>
       <div className="page-about-book">
         {showBookPublishedOverlay && (
           <BookPublishedOverlay
@@ -91,11 +95,6 @@ export default ({ tab, update }) => {
             <div className="items">
               <About book={book} />
               <Tabs book={book} tab={tab} reexecuteQuery={reexecuteQuery} />
-              {user && user.id === book.author.id && (
-                <div style={{ marginTop: 16 }}>
-                  <Actions bookId={book.id} book={book} />
-                </div>
-              )}
 
               {book.author.stripeId && (
                 <button

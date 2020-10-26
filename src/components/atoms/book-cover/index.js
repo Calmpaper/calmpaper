@@ -8,6 +8,7 @@ export default ({
   isChapterPage = false,
   className: addClassName = '',
   size: bookCoverSize = '',
+  style = {},
 }) => {
   let className = 'about-book-main-img'
   if (isCatalog) {
@@ -62,6 +63,7 @@ export default ({
         background: `url("${book.image}")`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
+        ...style,
       }}
     />
   ) : (
@@ -71,11 +73,9 @@ export default ({
       style={
         isChapterPage
           ? {
-              width: '250px',
-              margin: 'auto',
-              height: '350px',
               background: `url('/img/book-cover.png' )`,
               backgroundSize: 'cover',
+              borderRadius: 6,
             }
           : {
               background: `url('/img/book-cover.png' )`,
