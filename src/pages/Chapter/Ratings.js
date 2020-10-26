@@ -12,7 +12,7 @@ export default ({ chapter }) => {
   /* var avg = sum / reviews.length || 0 */
 
   const rating = (rating) =>
-    rating === undefined || null
+    rating === (undefined || null)
       ? 'N/A'
       : rating > 70
       ? 'S++'
