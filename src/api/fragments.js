@@ -101,7 +101,7 @@ export const PollFragment = gql`
     opt2
     opt3
     opt4
-    opt5
+   
     totalVotes
     myVote
     expires
