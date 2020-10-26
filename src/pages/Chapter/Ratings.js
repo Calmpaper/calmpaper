@@ -9,7 +9,20 @@ export default ({ chapter }) => {
     sum += parseInt(reviews[i].stars, 10) //don't forget to add the base
   }
 
-  var avg = sum / reviews.length || 0
+  /* var avg = sum / reviews.length || 0 */
+
+  const rating = (rating) =>
+    !rating
+      ? 'N/A'
+      : rating > 70
+      ? 'S++'
+      : rating > 60
+      ? 'S+'
+      : rating > 50
+      ? 'S'
+      : rating > 40
+      ? 'A'
+      : 'B'
 
   return (
     <div className="about-num-panel">
@@ -20,10 +33,10 @@ export default ({ chapter }) => {
               <use xlinkHref="#icon-rating" />
             </svg>
           </div>
-          <div className="panel-num">{avg}</div>
+          <div className="panel-num">{rating(chapter.rating)}</div>
         </div>
         <div className="about-num-panel-label">
-          {reviews.length === 0 ? 'No reviews' : reviews.length}
+          {chapter.poll.totalVotes} votes
         </div>
       </Link>
       <a href className="all-views" style={{ cursor: 'default' }}>
