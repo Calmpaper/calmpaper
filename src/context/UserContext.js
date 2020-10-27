@@ -10,9 +10,7 @@ const UserContext = createContext()
 const UserProvider = ({ children }) => {
   const { search, pathname } = useLocation()
   const { replace } = useHistory()
-  const [jwt, setJwt] = useState(
-    window && window.localStorage && window.localStorage.getItem('jwt'),
-  )
+  const [jwt, setJwt] = useState(window.localStorage.getItem('jwt'))
 
   const [{ data: { me: user } = {}, fetching }, reexecuteQuery] = useQuery({
     query: getMeQuery,
