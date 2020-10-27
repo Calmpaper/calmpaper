@@ -78,13 +78,10 @@ export default ({ chapterId }) => {
 
   if (error) return <p>Oh no... {error.message}</p>
 
-  /*  const expired = Number(new Date(poll?.expires)) < Date.now()
-   */
+  // const expired = Number(new Date(poll?.expires)) < Date.now()
+  // const expires = moment(poll.expires).toNow(true)
   const token = window?.localStorage.getItem('jwt')
-
   const hideForm = poll?.myVote !== 'none' || !token /* || expired */
-
-  /* const expires = moment(poll.expires).toNow(true) */
 
   return poll ? (
     <div className="votes">

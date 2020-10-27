@@ -1,24 +1,22 @@
 import React from 'react'
 import moment from 'moment'
-import { getUserDisplayName } from 'helpers'
+import BookCover from 'components/atoms/book-cover'
+import { getUserDisplayName, removeHtmlTags } from 'helpers'
 
 export default ({ chapter }) => {
   return (
-    <div className="item" style={{ width: '100%' }}>
-      <div
-        className="item-img"
-        style={{ backgroundImage: `url("${chapter.book.image}")` }}
-      />
-      <div className="item-info">
+    <div className="item">
+      <BookCover book={chapter.book} isItem />
+      <div className="item-info" style={{ width: '100%' }}>
         <div className="item-head">
           <h3 className="item-title">
             {chapter.book.name} · <span>{chapter.title}</span>
           </h3>
-          <div className="item-time">{`${getUserDisplayName}, ${moment(
-            chapter.createdAt,
-          ).fromNow()}`}</div>
+          <div className="item-time">{`${getUserDisplayName(
+            chapter.book.author,
+          )}, ${moment(chapter.createdAt).fromNow()}`}</div>
         </div>
-        <p className="item-text">{chapter.content}</p>
+        <p className="item-text">{removeHtmlTags(chapter.content)}</p>
         <ul className="item-category">
           {chapter.book.tags.map((tag) => (
             <li key={tag.id}>

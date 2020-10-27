@@ -10,7 +10,7 @@ import LoginBtn from './LoginBtn'
 import SignupBtn from './SignupBtn'
 import User from './User'
 
-export default ({ home }) => {
+export default ({ home, children }) => {
   const { user } = useContext(UserContext)
 
   return (
@@ -20,6 +20,7 @@ export default ({ home }) => {
         <div className="col">
           <nav className="header-nav">
             <ul className="header-nav__list">
+              {children}
               {/* user && (
                 <li className="header-nav__item">
                   <Read />

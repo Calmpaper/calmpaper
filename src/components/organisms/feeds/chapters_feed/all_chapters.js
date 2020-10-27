@@ -5,7 +5,8 @@ import { getAllChaptersQuery } from 'api'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import Loader from 'components/atoms/loader'
 import Flex from 'components/atoms/flex'
-import Chapter from 'components/molecules/chapter/list_item'
+import Chapter from 'components/molecules/chapter'
+// import Chapter from 'components/molecules/chapter/list_item'
 
 export default () => {
   const [page, setPage] = useState(1)
@@ -45,7 +46,7 @@ export default () => {
                 justifyCenter
                 alignCenter
                 style={{
-                  width: '100%',
+                  width: '750px',
                   height: '100px',
                 }}
               >
