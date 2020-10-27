@@ -144,7 +144,8 @@ export const topRatedBooksQuery = gql`
       tags {
         ...Tag
       }
-    }   
+    }
+    booksCount   
   }
   ${UserFragment}
   ${BookFragment}
