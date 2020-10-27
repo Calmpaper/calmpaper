@@ -26,6 +26,19 @@ const Stars = ({ reviews }) => {
   )
 }
 
+const rating = (rating) =>
+    rating === (undefined || null)
+      ? 'N/A'
+      : rating > 70
+      ? 'S++'
+      : rating > 60
+      ? 'S+'
+      : rating > 50
+      ? 'S'
+      : rating > 40
+      ? 'A'
+      : 'B'
+
 export default ({ book }) => (
   <div className="about-num-panel">
     {book.reviews.length > 0 && <Stars reviews={book.reviews} />}
@@ -64,5 +77,18 @@ export default ({ book }) => (
       </div>
       <div className="about-num-panel-label">Followers</div>
     </a>
+    {book.rating && (
+      <a style={{ cursor: 'default' }}>
+        <div className="about-num-panel-info">
+          <div className="icon-box icon-box-paint">
+            <svg className="icon icon-rating">
+              <use xlinkHref="#icon-rating" />
+            </svg>
+          </div>
+          <div className="panel-num">{rating(book.rating)}</div>
+        </div>
+        <div className="about-num-panel-label">Rating</div>
+      </a>
+    )}
   </div>
 )
