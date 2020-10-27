@@ -6,7 +6,7 @@ import { getUserSlug } from 'helpers'
 
 import ConfirmationModal from 'components/ConfirmationModal'
 
-export default ({ bookId, book, hide }) => {
+export default ({ bookId, book, hide, hideEdit }) => {
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false)
   const { push } = useHistory()
 
@@ -21,19 +21,23 @@ export default ({ bookId, book, hide }) => {
       >
         <div className="header-notification-user__body">
           <ul className="header-notification-user__list">
-            <li>
-              <a
-                href
-                onClick={() => {
-                  push({
-                    pathname: `/${getUserSlug(book.author)}/${book.slug}/edit`,
-                    state: { book },
-                  })
-                }}
-              >
-                Edit book
-              </a>
-            </li>
+            {!hideEdit && (
+              <li>
+                <a
+                  href
+                  onClick={() => {
+                    push({
+                      pathname: `/${getUserSlug(book.author)}/${
+                        book.slug
+                      }/edit`,
+                      state: { book },
+                    })
+                  }}
+                >
+                  Edit book
+                </a>
+              </li>
+            )}
             <li>
               <a href onClick={() => setShowDeleteConfirmation(true)}>
                 Delete book

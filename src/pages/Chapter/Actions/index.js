@@ -6,7 +6,7 @@ export default ({ chapter }) => {
   const [showDropdown, setShowDropdown] = useState(false)
   const { user } = useContext(UserContext)
 
-  if (!user || user.id !== chapter.author.id) return null
+  if (!user || (user.id !== chapter.author.id && !user.isAdmin)) return null
 
   return (
     <li className="header-nav__item">
@@ -28,6 +28,7 @@ export default ({ chapter }) => {
           chapterId={chapter.id}
           chapter={chapter}
           hide={() => setShowDropdown(false)}
+          hideEdit={user.isAdmin && user.id !== chapter.author.id}
         />
       </div>
     </li>
