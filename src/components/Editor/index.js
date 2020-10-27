@@ -18,9 +18,9 @@ export default ({
 
     editor.value = value
     editor.setValue = onChange
-    script.src = 'https://editor-5th8pcl9r.vercel.app/js/app.3cdc624e.js'
+    script.src = 'https://editor-9i1815j4m.vercel.app/js/app.97cc8a29.js'
     css.rel = 'stylesheet'
-    css.href = 'https://editor-5th8pcl9r.vercel.app/css/app.ee41d9fb.css'
+    css.href = 'https://editor-9i1815j4m.vercel.app/css/app.ee41d9fb.css'
 
     document.getElementById('editor-portal').appendChild(editor)
     document.body.appendChild(script)

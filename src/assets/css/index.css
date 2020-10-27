@@ -488,3 +488,7 @@
   object-position: center center;
   border-radius: 6px;
 }
+
+.infinite-scroll-component {
+  overflow: hidden !important;
+}
