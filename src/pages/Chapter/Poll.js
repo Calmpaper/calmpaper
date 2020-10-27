@@ -125,6 +125,7 @@ export default ({ chapterId }) => {
                     opt !== 4
                       ? vote({
                           pollId: poll.id,
+                          chapterId,
                           option: `opt${opt}`,
                         }).then((r) =>
                           reexecuteQuery({ requestPolicy: 'network-only' }),

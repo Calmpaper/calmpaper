@@ -69,8 +69,8 @@ export const deleteChapterMutation = gql`
 `
 
 export const voteMutation = gql`
-  mutation($pollId: Int!, $option: VoteOption!) {
-    vote(pollId: $pollId, option: $option) {
+  mutation($chapterId: Int!, $pollId: Int!, $option: VoteOption!) {
+    vote(chapterId: $chapterId, pollId: $pollId, option: $option) {
       id
       option
     }
