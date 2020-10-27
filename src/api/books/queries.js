@@ -156,6 +156,7 @@ export const getBookQuery = gql`
   query($slug: String, $id: Int) {
     book(where: { slug: $slug, id: $id }) {
       ...Book
+      rank
       rating
       description
       views
