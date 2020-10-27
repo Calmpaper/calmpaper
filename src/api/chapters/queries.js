@@ -170,6 +170,7 @@ export const getChapterByBookQuery = gql`
   query($bookId: Int, $bookSlug: String, $skip: Int) {
     chapterByBook(bookId: $bookId, bookSlug: $bookSlug, skip: $skip) {
       ...Chapter
+      rating
       content
       views
       book {
