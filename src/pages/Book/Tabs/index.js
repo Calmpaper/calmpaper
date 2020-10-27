@@ -15,12 +15,12 @@ export default ({ book, tab, reexecuteQuery }) => {
         >
           Details
         </Link>
-        <Link
+       {/*  <Link
           to={`/${getUserSlug(book.author)}/${book.slug}/reviews`}
           className={tab === 'reviews' ? 'active' : ''}
         >
           Reviews
-        </Link>
+        </Link> */}
       </div>
 
       {tab === 'details' && <Details book={book} />}

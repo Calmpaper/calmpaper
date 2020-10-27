@@ -1,4 +1,6 @@
 import React from 'react'
+
+import 'assets/css/about.css'
 // import Rating from 'components/Rating'
 // <Rating ratings={book.reviews} bookId={book.id} />
 const Stars = ({ reviews }) => {
@@ -41,7 +43,7 @@ const rating = (rating) =>
 
 export default ({ book }) => (
   <div className="about-num-panel">
-    {book.reviews.length > 0 && <Stars reviews={book.reviews} />}
+    {/* {book.reviews.length > 0 && <Stars reviews={book.reviews} />} */}
     <a style={{ cursor: 'default' }}>
       <div className="about-num-panel-info">
         <div className="icon-box">
@@ -87,7 +89,15 @@ export default ({ book }) => (
           </div>
           <div className="panel-num">{rating(book.rating)}</div>
         </div>
-        <div className="about-num-panel-label">Rating</div>
+        <div className="about-num-panel-label">Avg rating</div>
+      </a>
+    )}
+    {book.rank <= 10 && (
+      <a style={{ cursor: 'default' }}>
+        <div className="about-num-panel-info">          
+          <div className="outline-box-rank">#{book.rank} TOP</div>
+        </div>
+        <div className="about-num-panel-label">Reward</div>
       </a>
     )}
   </div>
