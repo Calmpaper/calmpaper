@@ -5,30 +5,26 @@ export default ({ bookId, book }) => {
   const [showDropdown, setShowDropdown] = useState(false)
 
   return (
-    <div className="row">
-      <button
-        className="comment-context-menu__button"
-        onClick={() => setShowDropdown(!showDropdown)}
-        style={{
-          color: '#4375fc',
-          opacity: 1,
-        }}
+    <li className="header-nav__item">
+      <div
+        className={`dropdown header-notification-edit ${
+          showDropdown ? 'in' : ''
+        }`}
       >
-        <svg
-          viewBox="0 0 18 18"
-          className="comment-context-menu__icon"
-          style={{ width: 24, height: 24 }}
+        <button
+          className="dropdown-btn"
+          onClick={() => setShowDropdown(!showDropdown)}
         >
-          <use xlinkHref="#dots-s--inline" />
-        </svg>
-      </button>
-      {showDropdown && (
+          <svg className="icon icon-dots">
+            <use xlinkHref="#icon-dots" />
+          </svg>
+        </button>
         <MoreMenu
           hide={() => setShowDropdown(false)}
           bookId={bookId}
           book={book}
         />
-      )}
-    </div>
+      </div>
+    </li>
   )
 }

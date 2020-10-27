@@ -57,6 +57,7 @@ export default ({ chapter, reexecuteQuery }) => {
   const isLastPage = currentPage === pagesCount
   const isOnlyPage = pagesCount === 1
 
+  if (isOnlyPage) return null
   return (
     <div className="page-widgets in">
       <div className="widget-page-menu">
@@ -66,13 +67,18 @@ export default ({ chapter, reexecuteQuery }) => {
               className={`widget-page-menu__btn-nav btn-prev ${
                 isFirstPage ? 'disabled' : ''
               }`}
-              style={isFirstPage ? { cursor: 'disabled' } : {}}
+              style={
+                isFirstPage
+                  ? { cursor: 'disabled', marginRight: 8 }
+                  : { marginRight: 8 }
+              }
               onClick={!isFirstPage && toPreviousChapter}
             >
               Previous
             </button>
           )}
 
+          {/*
           <button className="widget-btn" onClick={onLike}>
             <svg
               className="icon icon-like"
@@ -86,6 +92,7 @@ export default ({ chapter, reexecuteQuery }) => {
               <use xlinkHref="#icon-comments" />
             </svg>
           </button>
+          */}
           {/*
           <button className="widget-btn">
             <svg className="icon icon-list">
@@ -103,7 +110,9 @@ export default ({ chapter, reexecuteQuery }) => {
               className={`widget-page-menu__btn-nav btn-next ${
                 isLastPage ? 'disabled' : ''
               }`}
-              style={isLastPage ? { cursor: 'disabled' } : {}}
+              style={
+                isLastPage ? { cursor: 'disabled' } : { background: '#7057d2' }
+              }
               onClick={!isLastPage && toNextChapter}
             >
               Next page

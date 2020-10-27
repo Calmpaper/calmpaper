@@ -33,9 +33,9 @@
 .logo:hover {
   cursor: pointer !important;
 }
-.page-read-book .read-book-main img {
-  max-width: 250px;
-}
+/* .page-read-book .read-book-main img { */
+/*   max-width: 250px; */
+/* } */
 
 .comment-footer__container {
   font-size: 17px;
@@ -250,9 +250,9 @@
   line-height: 14px;
 }
 
-.read-book-main img {
-  max-width: 250px !important;
-}
+/* .read-book-main img { */
+/*   max-width: 250px !important; */
+/* } */
 
 /* .popup2 { */
 /*   border: 1px solid #ebeaeb; */
@@ -385,11 +385,11 @@
   font-size: 14px;
 }
 
-.page-read-book .read-book-text .container .text p {
-  font-size: 18px;
-  min-height: 26px;
-  margin-bottom: 20px !important;
-}
+/* .page-read-book .read-book-text .container .text p { */
+/*   font-size: 18px; */
+/*   min-height: 26px; */
+/*   margin-bottom: 20px !important; */
+/* } */
 
 .page-read-book .read-book-text .container .text * {
   font-size: inherit;
@@ -480,4 +480,15 @@
   font-size: 15px;
   color: #57586c;
   line-height: 160%;
+}
+
+.page-read-book .read-book-main img {
+  height: 250px;
+  object-fit: cover;
+  object-position: center center;
+  border-radius: 6px;
+}
+
+.infinite-scroll-component {
+  overflow: hidden !important;
 }
