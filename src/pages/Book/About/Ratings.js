@@ -29,17 +29,17 @@ const Stars = ({ reviews }) => {
 }
 
 const rating = (rating) =>
-    rating === (undefined || null)
-      ? 'N/A'
-      : rating > 70
-      ? 'S++'
-      : rating > 60
-      ? 'S+'
-      : rating > 50
-      ? 'S'
-      : rating > 40
-      ? 'A'
-      : 'B'
+  rating === (undefined || null)
+    ? 'N/A'
+    : rating > 70
+    ? 'S++'
+    : rating > 60
+    ? 'S+'
+    : rating > 50
+    ? 'S'
+    : rating > 40
+    ? 'A'
+    : 'B'
 
 export default ({ book }) => (
   <div className="about-num-panel">
@@ -92,9 +92,9 @@ export default ({ book }) => (
         <div className="about-num-panel-label">Avg rating</div>
       </a>
     )}
-    {book.rank <= 10 && (
+    {Boolean(book.rank) && book.rank <= 10 && (
       <a style={{ cursor: 'default' }}>
-        <div className="about-num-panel-info">          
+        <div className="about-num-panel-info">
           <div className="outline-box-rank">#{book.rank} TOP</div>
         </div>
         <div className="about-num-panel-label">Reward</div>
