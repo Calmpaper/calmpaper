@@ -80,8 +80,12 @@ export default ({ tab, update }) => {
     <>
       <Meta book={book} />
       <Header>
-        {user && user.id === book.author.id && (
-          <Actions bookId={book.id} book={book} />
+        {user && (user.id === book.author.id || user.isAdmin) && (
+          <Actions
+            bookId={book.id}
+            book={book}
+            hideEdit={user.isAdmin && user.id !== book.author.id}
+          />
         )}
       </Header>
       <div className="page-about-book">

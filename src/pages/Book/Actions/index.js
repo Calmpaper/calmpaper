@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import MoreMenu from './More'
 
-export default ({ bookId, book }) => {
+export default ({ bookId, book, hideEdit }) => {
   const [showDropdown, setShowDropdown] = useState(false)
 
   return (
@@ -23,6 +23,7 @@ export default ({ bookId, book }) => {
           hide={() => setShowDropdown(false)}
           bookId={bookId}
           book={book}
+          hideEdit={hideEdit}
         />
       </div>
     </li>
