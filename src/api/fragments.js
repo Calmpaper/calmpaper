@@ -9,6 +9,7 @@ export const UserFragment = gql`
     firstname
     avatar
     bio
+    isAdmin
   }
 `
 
@@ -45,7 +46,6 @@ export const ChapterFragment = gql`
       totalVotes
     }
   }
-
 `
 
 export const LikeFragment = gql`

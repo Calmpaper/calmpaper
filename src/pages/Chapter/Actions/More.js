@@ -5,7 +5,7 @@ import { deleteChapterMutation, deletePollMutation } from 'api'
 import { getUserSlug, getChapterPage } from 'helpers'
 import ConfirmationModal from 'components/ConfirmationModal'
 
-export default ({ bookId, chapterId, chapter, hide }) => {
+export default ({ bookId, chapterId, chapter, hide, hideEdit }) => {
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false)
   const { push } = useHistory()
 
@@ -23,21 +23,23 @@ export default ({ bookId, chapterId, chapter, hide }) => {
       <div className="dropdown-box notification-box notification-header-box">
         <div className="header-notification-user__body">
           <ul className="header-notification-user__list">
-            <li>
-              <a
-                href
-                onClick={() => {
-                  push({
-                    pathname: `/${getUserSlug(chapter.book.author)}/${
-                      chapter.book.slug
-                    }/${getChapterPage(chapter)}/edit`,
-                    state: { chapter },
-                  })
-                }}
-              >
-                Edit page
-              </a>
-            </li>
+            {!hideEdit && (
+              <li>
+                <a
+                  href
+                  onClick={() => {
+                    push({
+                      pathname: `/${getUserSlug(chapter.book.author)}/${
+                        chapter.book.slug
+                      }/${getChapterPage(chapter)}/edit`,
+                      state: { chapter },
+                    })
+                  }}
+                >
+                  Edit page
+                </a>
+              </li>
+            )}
             <li>
               <a href onClick={() => setShowDeleteConfirmation(true)}>
                 Delete page
