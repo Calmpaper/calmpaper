@@ -83,7 +83,7 @@ export default ({ book }) => (
       </div>
       <div className="about-num-panel-label">Followers</div>
     </a>
-    {/*book.rating && (
+    {book.rating && (
       <a style={{ cursor: 'default' }}>
         <div className="about-num-panel-info">
           <div className="icon-box icon-box-paint">
@@ -95,8 +95,8 @@ export default ({ book }) => (
         </div>
         <div className="about-num-panel-label">Avg rating</div>
       </a>
-        )*/}
-    {/* Boolean(book.rank) && book.rank <= 10 ? (
+    )}
+    {Boolean(book.rank) && book.rank <= 10 ? (
       <a style={{ cursor: 'default' }}>
         <div className="about-num-panel-info">
           <div className="outline-box-rank">#{book.rank} TOP</div>
@@ -105,6 +105,6 @@ export default ({ book }) => (
       </a>
     ) : (
       <div />
-        )*/}
+    )}
   </div>
 )
