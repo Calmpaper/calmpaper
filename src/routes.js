@@ -63,7 +63,7 @@ const Routes = () => (
     <Route path="/auth-fail">
       <AuthFail />
     </Route>
-    <Route path="/new-book">
+    <Route path="/publish">
       <NewBook />
     </Route>
     <Route path="/" exact>
@@ -71,7 +71,7 @@ const Routes = () => (
     </Route>
 
     {/* Books */}
-    <Route path="/books" exact>
+    <Route path="/followed" exact>
       <FollowedBooksPage />
     </Route>
     <Route
@@ -85,9 +85,9 @@ const Routes = () => (
     </Route>
     <Route
       path={[
-        '/@user:userId/:bookSlug/new-chapter',
-        '/@:username/:bookSlug/new-chapter',
-        '/books/:bookId/new-chapter',
+        '/@user:userId/:bookSlug/new-page',
+        '/@:username/:bookSlug/new-page',
+        '/books/:bookId/new-page',
       ]}
     >
       <NewChapter />

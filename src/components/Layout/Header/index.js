@@ -10,13 +10,14 @@ export default ({ fullWidth = false, withLine, black = false, children }) => {
       {fullWidth ? (
         <header
           className={`header ${black ? 'header-black' : ''}`}
-          style={window.location.pathname === '/' && !user ? {} : {}}
+          style={{ background: 'white' }}
         >
           <Header home>{children}</Header>
         </header>
       ) : (
         <header
           className={`header header-black ${withLine ? 'header-line' : ''}`}
+          style={{ background: 'white' }}
         >
           <Header>{children}</Header>
         </header>

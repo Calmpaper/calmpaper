@@ -22,8 +22,8 @@ export default () => {
                 Share your finished or unfinished books
               </p>
               {user ? (
-                <Link className="btn btn-color clickable" to={`/new-book`}>
-                  Write a book
+                <Link className="btn btn-color clickable" to={`/publish`}>
+                  Publish
                 </Link>
               ) : (
                 <a

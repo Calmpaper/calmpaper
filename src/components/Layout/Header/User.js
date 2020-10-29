@@ -79,19 +79,17 @@ export default () => {
                 <Link to={`/${getUserSlug(user)}`}>Profile</Link>
               </li>
               <li>
-                <Link to="/new-book">New book</Link>
+                <Link to="/publish">New serial</Link>
               </li>
               <li>
                 <a onClick={() => setShowInvitePopup(true)}>Invite people</a>
               </li>
               <li>
-                <Link to={'/books'}>Followed books</Link>
+                <Link to={'/followed'}>Followed serials</Link>
               </li>
-              {/*
               <li>
                 <Link to={'/dashboard'}>Dashboard</Link>
               </li>
-              */}
             </ul>
           </div>
           <div className="header-notification-user__footer">
@@ -114,7 +112,7 @@ export default () => {
           <ul className="header-nav__list">
             <li className="header-nav__item">
               <li className="header-nav__item">
-                <Link to="/new-book" className="header-nav__link">
+                <Link to="/publish" className="header-nav__link">
                   Add book
                 </Link>
               </li>
