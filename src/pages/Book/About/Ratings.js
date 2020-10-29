@@ -29,7 +29,7 @@ const Stars = ({ reviews }) => {
 }
 
 const rating = (rating) =>
-  rating === (undefined || null)
+  rating === (undefined || null || 0)
     ? 'N/A'
     : rating > 70
     ? 'S++'
@@ -83,7 +83,7 @@ export default ({ book }) => (
       </div>
       <div className="about-num-panel-label">Followers</div>
     </a>
-    {!!book.rating && (
+    {/* {!!book.rating && ( */}
       <a style={{ cursor: 'default' }}>
         <div className="about-num-panel-info">
           <div className="icon-box icon-box-paint">
@@ -95,7 +95,7 @@ export default ({ book }) => (
         </div>
         <div className="about-num-panel-label">Avg rating</div>
       </a>
-    )}
+    {/* )} */}
     {!!book.rank && book.rank <= 10 && (
       <a style={{ cursor: 'default' }}>
         <div className="about-num-panel-info">
