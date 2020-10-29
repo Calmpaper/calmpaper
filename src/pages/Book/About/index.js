@@ -62,7 +62,7 @@ export default ({ book }) => {
             user &&
             book.author.id === user.id && (
               <Link
-                to={`/${getUserSlug(book.author)}/${book.slug}/new-chapter`}
+                to={`/${getUserSlug(book.author)}/${book.slug}/new-page`}
                 className="btn btn-color"
                 style={{ width: 140, marginRight: 8 }}
               >

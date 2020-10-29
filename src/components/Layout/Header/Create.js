@@ -11,7 +11,7 @@ const AddChapter = ({ book }) => {
   return (
     <li className="header-nav__item">
       <Link
-        to={`/${getUserSlug(book.author)}/${book.slug}/new-chapter`}
+        to={`/${getUserSlug(book.author)}/${book.slug}/new-page`}
         className="header-nav__link"
       >
         Add page
