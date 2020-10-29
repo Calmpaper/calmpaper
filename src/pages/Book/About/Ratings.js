@@ -39,7 +39,11 @@ const rating = (rating) =>
     ? 'S'
     : rating > 40
     ? 'A'
-    : 'B'
+    : rating > 30
+    ? 'B'
+    : rating > 20
+    ? 'C'
+    : 'D'
 
 export default ({ book }) => (
   <div className="about-num-panel">
