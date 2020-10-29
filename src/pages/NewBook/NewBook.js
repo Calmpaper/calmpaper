@@ -8,6 +8,7 @@ import {
   updateBookMutation,
   getGenresQuery,
   getTagsQuery,
+  createChapterMutation,
 } from 'api'
 import { getUserSlug } from 'helpers'
 
@@ -36,6 +37,10 @@ export default () => {
 
   const { push } = useHistory()
 
+  const [{ fetching: chapterFetching }, createChapter] = useMutation(
+    createChapterMutation,
+  )
+
   const [{ data: { genres = [] } = {} }] = useQuery({ query: getGenresQuery })
   const [{ data: { tags = [] } = {} }] = useQuery({ query: getTagsQuery })
 
@@ -54,12 +59,19 @@ export default () => {
         },
       )
     } else {
-      createBook(allData).then(({ data: { createBook: book } }) => {
+      createBook(allData).then(async ({ data: { createBook: book } }) => {
         window.analytics &&
           window.analytics.track('create-book', {
             bookId: book.id,
             bookName: book.name,
           })
+        await createChapter({
+          title: allData.name,
+          content: allData.description,
+          userId: user.id,
+          bookId: undefined,
+          bookSlug: book.slug,
+        })
         push({
           pathname: `/${getUserSlug(user)}/${book.slug}`,
           // state: { showBookPublishedOverlay: true },
@@ -157,7 +169,7 @@ export default () => {
                 </button>
               ) : (
                 <button className="btn btn-color" type="submit">
-                  {!fetching ? 'Add series' : 'Adding...'}
+                  {!(fetching || chapterFetching) ? 'Publish' : 'Publishing...'}
                 </button>
               )}
             </div>

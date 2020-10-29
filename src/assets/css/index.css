@@ -492,3 +492,7 @@
 .infinite-scroll-component {
   overflow: hidden !important;
 }
+
+.page-read-book .read-book-text .container .text img {
+  max-width: 100%;
+}
