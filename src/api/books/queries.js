@@ -145,7 +145,40 @@ export const topRatedBooksQuery = gql`
         ...Tag
       }
     }
-    booksCount   
+    booksCount
+  }
+  ${UserFragment}
+  ${BookFragment}
+  ${ChapterFragment}
+  ${TagFragment}
+`
+
+export const getPopularBooks = gql`
+  query($first: Int) {
+    books(
+      first: $first
+      where: { archived: { equals: false } }
+      orderBy: { views: desc }
+    ) {
+      ...Book
+      description
+      chapters {
+        ...Chapter
+      }
+      reviews {
+        stars
+      }
+      author {
+        ...User
+      }
+      readers {
+        id
+      }
+      tags {
+        ...Tag
+      }
+    }
+    booksCount
   }
   ${UserFragment}
   ${BookFragment}
