@@ -9,7 +9,8 @@ import Flex from 'components/atoms/flex'
 import Loader from 'components/atoms/loader'
 
 import BooksFeed from 'components/organisms/feeds/books_feed/all_books'
-//import ChaptersFeed from 'components/organisms/feeds/chapters_feed/all_chapters'
+// import BooksFeedHorizontal from 'components/organisms/feeds/books_feed/all_books_horizontal'
+// import ChaptersFeed from 'components/organisms/feeds/chapters_feed/all_chapters'
 import TopRatedFeed from 'components/organisms/feeds/books_feed/top_rated_books'
 import PopularFeed from 'components/organisms/feeds/books_feed/popular_books'
 // import ChaptersFeed from 'components/organisms/feeds/updates_feed'
@@ -54,9 +55,7 @@ export default () => {
                     alignItems: 'center',
                   }}
                 >
-                  <h2 className="title size02">
-                    Read and write for stress relief
-                  </h2>
+                  <h2 className="title size02">Read and review web serials</h2>
                   <div
                     className="item-buttons"
                     style={{
@@ -71,7 +70,7 @@ export default () => {
                       className="btn btn-color"
                       onClick={() => {
                         if (user) {
-                          push(`/new-book`)
+                          push(`/publish`)
                         } else {
                           window.location.href = `${process.env.REACT_APP_BACKEND_URL}/auth/google`
                         }
@@ -82,7 +81,7 @@ export default () => {
                         width: 'auto',
                       }}
                     >
-                      {user ? 'Write a book' : 'Get started'}
+                      {user ? 'Publish' : 'Get started'}
                     </button>
                     <button
                       className="btn btn-line"
@@ -144,8 +143,8 @@ export default () => {
                 </Flex>
                 {tab === 'topRated' && <TopRatedFeed />}
                 {tab === 'books' && <BooksFeed />}
-               {/*  {tab === 'updates' && <ChaptersFeed />} */}
-               {/*  {tab === 'comments' && <CommentsFeed />} */}
+                {/*  {tab === 'updates' && <ChaptersFeed />} */}
+                {/*  {tab === 'comments' && <CommentsFeed />} */}
                 {tab === 'popular' && <PopularFeed />}
               </div>
             </div>

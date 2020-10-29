@@ -9,6 +9,7 @@ export default ({
   className: addClassName = '',
   size: bookCoverSize = '',
   style = {},
+  onClick = () => {},
 }) => {
   let className = 'about-book-main-img'
   if (isCatalog) {
@@ -59,6 +60,7 @@ export default ({
   return book.image ? (
     <div
       className={`${className} ${addClassName}`}
+      onClick={onClick}
       style={{
         background: `url("${book.image}")`,
         backgroundSize: 'cover',
@@ -69,6 +71,7 @@ export default ({
   ) : (
     <div
       className={`${className} book-cover ${bookCoverSize}`}
+      onClick={onClick}
       ref={bookCoverRef}
       style={
         isChapterPage

@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react'
 import moment from 'moment'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { UserContext } from 'context'
 import { useQuery, useMutation } from 'urql'
 import { getBooksByAuthorQuery, deleteBookMutation } from 'api'
@@ -9,6 +9,7 @@ import { getUserSlug } from 'helpers'
 import ConfirmationModal from 'components/ConfirmationModal'
 import Header from 'components/Layout/Header'
 import Loader from 'components/Loader'
+import BookCover from 'components/atoms/book-cover'
 
 const regex = /(<([^>]+)>)/gi
 
@@ -18,6 +19,8 @@ const Book = ({ book }) => {
     sum += parseInt(book.reviews[i].stars, 10) //don't forget to add the base
   }
 
+  const { push } = useHistory()
+
   var avg = sum / book.reviews.length || 0
 
   const [, deleteBook] = useMutation(deleteBookMutation)
@@ -26,13 +29,20 @@ const Book = ({ book }) => {
 
   return (
     <div className="item01 item">
-      <div
-        className="item-img"
-        style={{ backgroundImage: 'url(img/dashboard/book01.jpg)' }}
+      <BookCover
+        book={book}
+        isItem
+        onClick={() => push(`/${getUserSlug(book.author)}/${book.slug}`)}
+        className="clickable"
       />
       <div className="item-info" style={{ width: '100%' }}>
         <div className="item-head">
-          <h2 className="item-title">{book.name}</h2>
+          <h2
+            className="item-title clickable"
+            onClick={() => push(`/${getUserSlug(book.author)}/${book.slug}`)}
+          >
+            {book.name}
+          </h2>
           <div className="item-date">
             {moment(book.createdAt).format('MMM DD, YYYY')}
           </div>
@@ -52,6 +62,7 @@ const Book = ({ book }) => {
         </div>
         <div className="item-nums">
           <div className="about-num-panel">
+            {/*
             <a href>
               <div className="about-num-panel-info">
                 <div className="icon-box icon-box-paint">
@@ -63,6 +74,7 @@ const Book = ({ book }) => {
               </div>
               <div className="about-num-panel-label">{book.reviews.length}</div>
             </a>
+            */}
             <a href>
               <div className="about-num-panel-info">
                 <div className="icon-box">
@@ -96,7 +108,7 @@ const Book = ({ book }) => {
                 </div>
                 <div className="panel-num">{book.readers.length}</div>
               </div>
-              <div className="about-num-panel-label">Readers</div>
+              <div className="about-num-panel-label">Followers</div>
             </a>
             <a href>
               <div className="about-num-panel-info">
@@ -133,17 +145,6 @@ const Book = ({ book }) => {
             <div className="about-num-panel-label">Words</div>
           </a>
 */}
-            <a href>
-              <div className="about-num-panel-info">
-                <div className="icon-box">
-                  <svg className="icon icon-pan">
-                    <use xlinkHref="#icon-pan" />
-                  </svg>
-                </div>
-                <div className="panel-num">{book.reviews.length}</div>
-              </div>
-              <div className="about-num-panel-label">Reviews</div>
-            </a>
           </div>
         </div>
         <div className="item-tags">
@@ -175,10 +176,15 @@ const Book = ({ book }) => {
               }}
             />
           )}
-          <Link to={`/${getUserSlug(book.author)}/${book.slug}/edit`}>
+          <Link
+            to={{
+              pathname: `/${getUserSlug(book.author)}/${book.slug}/edit`,
+              state: { book },
+            }}
+          >
             <button className="btn btn-grey">Edit</button>
           </Link>
-          <Link to={`/${getUserSlug(book.author)}/${book.slug}/new-chapter`}>
+          <Link to={`/${getUserSlug(book.author)}/${book.slug}/new-page`}>
             <button className="btn btn-grey dark">Add page</button>
           </Link>
         </div>
@@ -219,9 +225,9 @@ export default () => {
         <div className="page-head">
           <div className="container">
             <div className="row">
-              <h1 className="page-title title size02">Your books</h1>
-              <Link to="/new-book" className="btn btn-color">
-                Add book
+              <h1 className="page-title title size02">Your works</h1>
+              <Link to="/publish" className="btn btn-color">
+                Add serial
               </Link>
             </div>
           </div>

@@ -42,10 +42,10 @@ export default () => {
         <div className="item-buttons">
           <button
             className="btn btn-color"
-            onClick={() => push('/new-book')}
+            onClick={() => push('/publish')}
             style={{ padding: '0 16px', width: 'auto' }}
           >
-            Write a book
+            Publish
           </button>
           <button
             className="btn btn-line"
