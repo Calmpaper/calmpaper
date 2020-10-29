@@ -9,11 +9,12 @@ import Flex from 'components/atoms/flex'
 import Loader from 'components/atoms/loader'
 
 import BooksFeed from 'components/organisms/feeds/books_feed/all_books'
-import BooksFeedHorizontal from 'components/organisms/feeds/books_feed/all_books_horizontal'
-import ChaptersFeed from 'components/organisms/feeds/chapters_feed/all_chapters'
+// import BooksFeedHorizontal from 'components/organisms/feeds/books_feed/all_books_horizontal'
+// import ChaptersFeed from 'components/organisms/feeds/chapters_feed/all_chapters'
 import TopRatedFeed from 'components/organisms/feeds/books_feed/top_rated_books'
+import PopularFeed from 'components/organisms/feeds/books_feed/popular_books'
 // import ChaptersFeed from 'components/organisms/feeds/updates_feed'
-import CommentsFeed from 'components/organisms/feeds/comments_feed'
+//import CommentsFeed from 'components/organisms/feeds/comments_feed'
 
 export default () => {
   const { user, fetching: userFetching } = useContext(UserContext)
@@ -106,43 +107,45 @@ export default () => {
                           style={{ cursor: 'pointer' }}
                           onClick={() => setTab('topRated')}
                         >
-                          Top rated books
+                          Top rated
                         </a>
                         <a
                           className={tab === 'books' ? 'active' : ''}
                           style={{ cursor: 'pointer' }}
                           onClick={() => setTab('books')}
                         >
-                          Latest books
+                          New
                         </a>
                         <a
+                          className={tab === 'popular' ? 'active' : ''}
+                          style={{ cursor: 'pointer' }}
+                          onClick={() => setTab('popular')}
+                        >
+                          Popular
+                        </a>
+                        {/* <a
                           className={tab === 'updates' ? 'active' : ''}
                           style={{ cursor: 'pointer' }}
                           onClick={() => setTab('updates')}
                         >
                           New pages
-                        </a>
-                        <a
+                        </a> */}
+                        {/* <a
                           className={tab === 'comments' ? 'active' : ''}
                           style={{ cursor: 'pointer' }}
                           onClick={() => setTab('comments')}
                         >
                           Latest comments
-                        </a>
+                        </a> */}
                       </div>
                     </div>
                   </div>
                 </Flex>
                 {tab === 'topRated' && <TopRatedFeed />}
                 {tab === 'books' && <BooksFeed />}
-                {/* tab === 'updates' && <ChaptersFeed /> */}
-                {tab === 'updates' && (
-                  <>
-                    <BooksFeed />
-                    <ChaptersFeed />
-                  </>
-                )}
-                {tab === 'comments' && <CommentsFeed />}
+                {/*  {tab === 'updates' && <ChaptersFeed />} */}
+                {/*  {tab === 'comments' && <CommentsFeed />} */}
+                {tab === 'popular' && <PopularFeed />}
               </div>
             </div>
           </div>
