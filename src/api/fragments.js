@@ -32,6 +32,7 @@ export const BookFragment = gql`
     slug
     name
     image
+    rating
   }
 `
 
