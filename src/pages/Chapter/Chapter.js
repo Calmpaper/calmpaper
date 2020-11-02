@@ -110,7 +110,7 @@ export default () => {
       <Meta chapter={chapter} chapterPage={chapterPage} />
       {showSharePopup && <SharePopup close={() => setShowSharePopup(false)} />}
       <Headroom>
-        <Header>
+        <Header style={{ background: 'white' }}>
           <Actions chapter={chapter} />
         </Header>
       </Headroom>

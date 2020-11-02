@@ -2,7 +2,13 @@ import React, { useContext } from 'react'
 import { UserContext } from 'context'
 import Header from './Header'
 
-export default ({ fullWidth = false, withLine, black = false, children }) => {
+export default ({
+  fullWidth = false,
+  withLine,
+  black = false,
+  children,
+  style = {},
+}) => {
   const { user } = useContext(UserContext)
 
   return (
@@ -10,14 +16,14 @@ export default ({ fullWidth = false, withLine, black = false, children }) => {
       {fullWidth ? (
         <header
           className={`header ${black ? 'header-black' : ''}`}
-          style={{ background: 'white' }}
+          style={style}
         >
           <Header home>{children}</Header>
         </header>
       ) : (
         <header
           className={`header header-black ${withLine ? 'header-line' : ''}`}
-          style={{ background: 'white' }}
+          style={style}
         >
           <Header>{children}</Header>
         </header>
