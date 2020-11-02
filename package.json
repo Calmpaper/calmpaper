@@ -1,6 +1,6 @@
 {
   "name": "calmpaper",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "private": true,
   "dependencies": {
     "@stripe/react-stripe-js": "^1.1.2",

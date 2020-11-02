@@ -128,6 +128,7 @@ export const topRatedBooksQuery = gql`
     topRatedBooks(take: $take, skip: $skip) {
       ...Book
       description
+      rating
       chapters {
         ...Chapter
       }

@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { transformRating } from 'helpers'
 
 export default ({ chapter }) => {
   const reviews = chapter.book.reviews
@@ -11,23 +12,6 @@ export default ({ chapter }) => {
 
   /* var avg = sum / reviews.length || 0 */
 
-  const rating = (rating) =>
-    rating === (undefined || null)
-      ? 'N/A'
-      : rating > 70
-      ? 'S++'
-      : rating > 60
-      ? 'S+'
-      : rating > 50
-      ? 'S'
-      : rating > 40
-      ? 'A'
-      : rating > 30
-      ? 'B'
-      : rating > 20
-      ? 'C'
-      : 'D'
-
   return (
     <div className="about-num-panel">
       <Link to={`/books/${chapter.book.id}/reviews`}>
@@ -37,7 +21,7 @@ export default ({ chapter }) => {
               <use xlinkHref="#icon-rating" />
             </svg>
           </div>
-          <div className="panel-num">{rating(chapter.rating)}</div>
+          <div className="panel-num">{transformRating(chapter.rating)}</div>
         </div>
         <div className="about-num-panel-label">
           {chapter.poll.totalVotes} votes
