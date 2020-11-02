@@ -211,6 +211,7 @@ export const getChapterByBookQuery = gql`
       }
       comments(orderBy: { createdAt: desc }) {
         ...Comment
+        vote
         replies(orderBy: { createdAt: asc }) {
           ...Comment
         }
