@@ -55,7 +55,7 @@ export default ({ book }) => (
             <use xlinkHref="#icon-eye" />
           </svg>
         </div>
-        <div className="panel-num">{book.views}</div>
+        <div className="panel-num">{book.totalViews}</div>
       </div>
       <div className="about-num-panel-label">Views</div>
     </a>
