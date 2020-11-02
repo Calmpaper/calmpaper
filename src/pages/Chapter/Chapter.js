@@ -13,6 +13,7 @@ import Header from 'components/Layout/Header'
 import Headroom from 'react-headroom'
 import Comments from 'components/Comments'
 import SharePopup from 'components/Popups/SharePopup'
+import NotFoundPage from 'pages/404'
 
 import ChapterNavigation from 'components/molecules/chapter_navigation'
 import Meta from './Chapter.meta'
@@ -94,8 +95,10 @@ export default () => {
     }
   }, [fetching])
 
-  if (fetching && !chapter) return <Loader />
+  if (fetching) return <Loader />
   if (error) return <p>Oh no... {error.message}</p>
+
+  if (!fetching && !chapter) return <NotFoundPage />
 
   const sendComment = (body) => {
     sendChapterComment({
