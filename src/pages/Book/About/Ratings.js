@@ -13,7 +13,7 @@ export default ({ book }) => (
             <use xlinkHref="#icon-eye" />
           </svg>
         </div>
-        <div className="panel-num">{book.views}</div>
+        <div className="panel-num">{book.totalViews}</div>
       </div>
       <div className="about-num-panel-label">Views</div>
     </a>
@@ -41,31 +41,17 @@ export default ({ book }) => (
       </div>
       <div className="about-num-panel-label">Followers</div>
     </a>
-    {!!book.rating ? (
-      <a style={{ cursor: 'default' }}>
-        <div className="about-num-panel-info">
-          <div className="icon-box icon-box-paint">
-            <svg className="icon icon-rating">
-              <use xlinkHref="#icon-rating" />
-            </svg>
-          </div>
-          <div className="panel-num">{transformRating(book.rating)}</div>
+    <a style={{ cursor: 'default' }}>
+      <div className="about-num-panel-info">
+        <div className="icon-box icon-box-paint">
+          <svg className="icon icon-rating">
+            <use xlinkHref="#icon-rating" />
+          </svg>
         </div>
-        <div className="about-num-panel-label">Avg rating</div>
-      </a>
-    ) : (
-      <a style={{ cursor: 'default' }}>
-        <div className="about-num-panel-info">
-          <div className="icon-box icon-box-paint">
-            <svg className="icon icon-rating">
-              <use xlinkHref="#icon-rating" />
-            </svg>
-          </div>
-          <div className="panel-num">N/A</div>
-        </div>
-        <div className="about-num-panel-label">Rating</div>
-      </a>
-    )}
+        <div className="panel-num">{transformRating(book.rating)}</div>
+      </div>
+      <div className="about-num-panel-label">Avg rating</div>
+    </a>
     {!!book.rank && book.rank <= 10 && (
       <a style={{ cursor: 'default' }}>
         <div className="about-num-panel-info">
