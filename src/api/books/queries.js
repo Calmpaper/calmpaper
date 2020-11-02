@@ -195,6 +195,7 @@ export const getBookQuery = gql`
       rating
       description
       views
+      totalViews
       reviews {
         id
         stars
