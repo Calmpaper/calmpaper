@@ -8,7 +8,7 @@ export default ({
   onSubmit,
   placeholder,
   style,
-  inputStyle,
+  inputStyle, 
 }) => (
   <div className="comments" id="comments-section">
     <div className="container">

@@ -22,6 +22,12 @@ import Replies from '../Replies'
 import More from './More'
 import Input from '../Input'
 
+const options = {
+  opt1: 'I would be Very Disappointed if I don’t get to continue reading' ,
+  opt2: 'I would be Somewhat Disappointed if I don’t get to continue reading',
+  opt3: 'I would feel fine if I don’t get to read it anymore' ,
+}
+
 const Comment = ({ comment }) => {
   const { user } = useContext(UserContext)
   const [isEditing, setEditing] = useState(false)
@@ -85,6 +91,7 @@ const Comment = ({ comment }) => {
                 {getUserDisplayName(comment.author)}{' '}
               </span>
               <span>· {moment(comment.createdAt).fromNow()}</span>
+              <span> · voted  “{!!comment.vote && options[comment.vote]}”</span>
             </h4>
             <div
               className="comment-text"
@@ -96,6 +103,7 @@ const Comment = ({ comment }) => {
               <p>{comment.body}</p>
 */}
             </div>
+            
           </>
         )}
 
@@ -142,6 +150,7 @@ const Comment = ({ comment }) => {
               }
               onLike={onLike}
             />
+           
           </div>
           {user && user.id === comment.author.id && (
             <div className="comment-context-menu__container">
