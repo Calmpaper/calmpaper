@@ -55,7 +55,7 @@ export default () => {
                     alignItems: 'center',
                   }}
                 >
-                  <h2 className="title size02">Read and review web serials</h2>
+                  <h2 className="title size02">We rate web serials</h2>
                   <div
                     className="item-buttons"
                     style={{
@@ -81,7 +81,7 @@ export default () => {
                         width: 'auto',
                       }}
                     >
-                      {user ? 'Publish' : 'Get started'}
+                      {user ? 'Publish now' : 'Get started'}
                     </button>
                     <button
                       className="btn btn-line"
@@ -116,6 +116,7 @@ export default () => {
                         >
                           New
                         </a>
+                        {/*
                         <a
                           className={tab === 'popular' ? 'active' : ''}
                           style={{ cursor: 'pointer' }}
@@ -123,6 +124,7 @@ export default () => {
                         >
                           Popular
                         </a>
+                        */}
                         {/* <a
                           className={tab === 'updates' ? 'active' : ''}
                           style={{ cursor: 'pointer' }}

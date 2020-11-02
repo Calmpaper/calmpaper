@@ -496,3 +496,11 @@
 .page-read-book .read-book-text .container .text img {
   max-width: 100%;
 }
+
+.icon.icon-rating.empty.filled {
+  fill: #f0ba03;
+}
+
+.icon.icon-rating.empty {
+  fill: #95959d !important;
+}

@@ -79,13 +79,13 @@ export default () => {
                 <Link to={`/${getUserSlug(user)}`}>Profile</Link>
               </li>
               <li>
-                <Link to="/publish">New serial</Link>
+                <Link to="/publish">Publish</Link>
               </li>
               <li>
                 <a onClick={() => setShowInvitePopup(true)}>Invite people</a>
               </li>
               <li>
-                <Link to={'/followed'}>Followed serials</Link>
+                <Link to={'/followed'}>Followed</Link>
               </li>
               <li>
                 <Link to={'/dashboard'}>Dashboard</Link>

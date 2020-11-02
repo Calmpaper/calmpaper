@@ -8,6 +8,7 @@ import {
 } from 'api'
 import { getUserSlug, removeHtmlTags } from 'helpers'
 
+import Rating from 'components/atoms/rating'
 import BookCover from 'components/atoms/book-cover'
 
 var regex = /(<([^>]+)>)/gi
@@ -54,12 +55,24 @@ export default ({ book, isFirst }) => {
               )
             : removeHtmlTags(book.description)}{' '}
         </p>
-        <ul className="item-category">
+        <ul
+          className="item-category about-num-panel"
+          style={{ marginLeft: 0, marginTop: 0 }}
+        >
           {book.tags.map((tag) => (
             <li>
-              <a href>{tag.label}</a>
+              <a href style={{ marginRight: 0 }}>
+                {tag.label}
+              </a>
             </li>
           ))}
+          {!!book.rating && (
+            <a
+              style={{ cursor: 'default', marginLeft: '4px', marginTop: '6px' }}
+            >
+              <Rating rating={book.rating} />
+            </a>
+          )}
         </ul>
         {/*
         <Flex row>
