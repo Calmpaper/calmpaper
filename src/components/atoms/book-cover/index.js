@@ -52,6 +52,22 @@ export default ({
           authorNode.style.bottom = '2%'
         }
 
+        if (coverWidth > 120) {
+          titleNode.style.position = 'absolute'
+          titleNode.style.top = 0
+          titleNode.style.marginTop = `${coverWidth / 2}px`
+          if (book.name.split(' ').length > 2) {
+            titleNode.style.marginTop = `${
+              coverWidth / 2 - authorNode.clientHeight
+            }px`
+          }
+          if (book.name.split(' ').length > 4) {
+            titleNode.style.marginTop = `${
+              coverWidth / 2 - authorNode.clientHeight * 2
+            }px`
+          }
+        }
+
         authorNode.style.fontSize = `${coverAuthorFont}px`
       }
     }
@@ -91,8 +107,8 @@ export default ({
         style={
           isCatalog
             ? {
-                position: 'absolute',
-                top: 'calc(50% - 20px)',
+                // position: 'absolute',
+                // top: 'calc(50% - 20px)',
               }
             : {}
         }
