@@ -15,24 +15,19 @@ export default () => {
           <div className="container">
             <div className="row">
               <h1 className="main-title">
-                Read and write <br />
-                for stress relief
+                We rate <br />
+                web serials
               </h1>
               <p className="main-text">
-                Share your finished or unfinished books
+                Submit your web serial. Readers will review it.
               </p>
-              {user ? (
-                <Link className="btn btn-color clickable" to={`/publish`}>
-                  Publish
-                </Link>
-              ) : (
-                <a
-                  href={`${process.env.REACT_APP_BACKEND_URL}/auth/google`}
-                  className="btn btn-color clickable"
-                >
-                  Get started
-                </a>
-              )}
+              <a
+                className="btn btn-color clickable"
+                href="https://www.notion.so/calmpaper/Calmpaper-98cc389255594c5784502d8603bdcee4"
+                target="_blank"
+              >
+                Full details
+              </a>
             </div>
           </div>
         </div>
@@ -52,9 +47,10 @@ export default () => {
                 <div className="item-img">
                   <img src="img/home04/home-img02.svg" alt="home-img" />
                 </div>
-                <h2 className="item-title">2. Share</h2>
+                <h2 className="item-title">2. Readers review it</h2>
                 <p className="item-text">
-                  Let people follow your books and receive updates.
+                  15-30 readers will vote on your submission with their feedback
+                  and rank it.
                 </p>
               </div>
               <div className="item">
@@ -65,9 +61,10 @@ export default () => {
                     className="item-img"
                   />
                 </div>
-                <h2 className="item-title">3. Get feedback</h2>
+                <h2 className="item-title">3. Get a Ranking</h2>
                 <p className="item-text">
-                  Get comments and feedback, while you write on your own time.
+                  Your submission will be ranked based on the feedback from
+                  readers.
                 </p>
               </div>
             </div>

@@ -153,6 +153,7 @@ export default () => {
                 name="content"
                 control={control}
                 as={Editor}
+                // onChange=
                 style={is1000words ? { border: '2px solid  #7057d2' } : {}}
               />
               <Flex row justifyEnd>
