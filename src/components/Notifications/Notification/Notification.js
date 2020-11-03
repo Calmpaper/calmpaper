@@ -196,7 +196,13 @@ export default ({ notification, closeNotifications: close }) => {
       action = ` commented on your book`
     }
     if (activities[0].object.startsWith('chapter')) {
-      link = `/${getUserSlug(book.author)}/${book.slug}/${chapterPage}`
+      link = {
+        pathname: `/${getUserSlug(book.author)}/${book.slug}/${chapterPage}`,
+        // state: {
+        //   commentId:
+        // }
+      }
+
       action = ` commented on your chapter`
     }
   }

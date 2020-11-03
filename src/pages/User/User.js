@@ -5,6 +5,7 @@ import { getUserQuery } from 'api'
 
 import Header from 'components/Layout/Header'
 import Loader from 'components/Loader'
+import NotFoundPage from 'pages/404'
 
 import UserHead from './Head'
 import Tabs from './Tabs'
@@ -27,6 +28,8 @@ export default () => {
 
   if (fetching) return <Loader />
   if (error) return <p>Oh no... {error.message}</p>
+
+  if (!fetching && !user) return <NotFoundPage />
 
   return (
     <>
