@@ -55,7 +55,7 @@ export default () => {
                     alignItems: 'center',
                   }}
                 >
-                  <h2 className="title size02">We rate web serials</h2>
+                  <h2 className="title size02">Rate web fiction</h2>
                   <div
                     className="item-buttons"
                     style={{
