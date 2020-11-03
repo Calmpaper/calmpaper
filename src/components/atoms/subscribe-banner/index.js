@@ -55,17 +55,17 @@ export default ({ book, chapter }) => {
     >
       <div>
         <div className="banner__title">
-          {isFollowing ? 'Stay tuned for updates :)' : 'Follow this book?'}
+          {isFollowing ? 'Stay tuned for updates :)' : 'Follow for updates?'}
         </div>
         {!isFollowing && (
           <div className="banner__subtitle">
             {isLastPage ? (
               <>
                 You have reached the end. To avoid missing out <br />
-                future updates by the author, follow this book.
+                future updates by the author, click follow.
               </>
             ) : (
-              'To avoid missing out future updates by the author, follow this book.'
+              'To avoid missing out future updates by the author, click follow.'
             )}
           </div>
         )}
