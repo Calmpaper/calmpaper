@@ -9,7 +9,7 @@ import { useOnClickOutside } from 'hooks'
 
 export default ({ bookId, chapterId, chapter, hide, hideEdit }) => {
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false)
-  const { push } = useHistory()  
+  const { push } = useHistory()
 
   const [, deleteChapter] = useMutation(deleteChapterMutation)
   const [, deletePoll] = useMutation(deletePollMutation)
@@ -21,14 +21,15 @@ export default ({ bookId, chapterId, chapter, hide, hideEdit }) => {
   }
 
   const popupRef = useRef()
-  
+
   useOnClickOutside(popupRef, () => hide())
 
   return (
     <>
       <div
         ref={popupRef}
-       className="dropdown-box notification-box notification-header-box">
+        className="dropdown-box notification-box notification-header-box"
+      >
         <div className="header-notification-user__body">
           <ul className="header-notification-user__list">
             {!hideEdit && (
