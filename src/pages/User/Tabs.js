@@ -13,11 +13,11 @@ export default ({ tab, setTab, followingCount, followersCount }) => (
           Feed
         </a>
         <a
-          onClick={() => setTab('books')}
-          className={tab === 'books' ? 'active' : ''}
+          onClick={() => setTab('works')}
+          className={tab === 'works' ? 'active' : ''}
           style={{ cursor: 'pointer' }}
         >
-          Books
+          Works
         </a>
         <a
           onClick={() => setTab('activity')}
@@ -31,14 +31,14 @@ export default ({ tab, setTab, followingCount, followersCount }) => (
           className={tab === 'following' ? 'active' : ''}
           style={{ cursor: 'pointer' }}
         >
-          {`Following (${followingCount})`}
+         {`Following ${followingCount}`}
         </a>
         <a
           onClick={() => setTab('followers')}
           className={tab === 'followers' ? 'active' : ''}
           style={{ cursor: 'pointer' }}
         >
-          {`Followers (${followersCount})`}
+          {`${followersCount} Followers`}
         </a>
       </div>
     </div>

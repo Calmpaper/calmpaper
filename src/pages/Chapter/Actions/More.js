@@ -1,13 +1,15 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import { useMutation } from 'urql'
 import { useHistory } from 'react-router-dom'
 import { deleteChapterMutation, deletePollMutation } from 'api'
 import { getUserSlug, getChapterPage } from 'helpers'
 import ConfirmationModal from 'components/ConfirmationModal'
 
+import { useOnClickOutside } from 'hooks'
+
 export default ({ bookId, chapterId, chapter, hide, hideEdit }) => {
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false)
-  const { push } = useHistory()
+  const { push } = useHistory()  
 
   const [, deleteChapter] = useMutation(deleteChapterMutation)
   const [, deletePoll] = useMutation(deletePollMutation)
@@ -18,9 +20,15 @@ export default ({ bookId, chapterId, chapter, hide, hideEdit }) => {
     push(`/`)
   }
 
+  const popupRef = useRef()
+  
+  useOnClickOutside(popupRef, () => hide())
+
   return (
     <>
-      <div className="dropdown-box notification-box notification-header-box">
+      <div
+        ref={popupRef}
+       className="dropdown-box notification-box notification-header-box">
         <div className="header-notification-user__body">
           <ul className="header-notification-user__list">
             {!hideEdit && (

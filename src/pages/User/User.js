@@ -43,7 +43,7 @@ export default () => {
           followingCount={user.following.length}
         />
         {tab === 'feed' && <Feed authorId={user.id} />}
-        {tab === 'books' && <Books books={user.books} />}
+        {tab === 'works' && <Books books={user.books} />}
         {tab === 'followers' && <Followers users={user.followers} />}
         {tab === 'following' && <Following users={user.following} />}
         {tab === 'activity' && (

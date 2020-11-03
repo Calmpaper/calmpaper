@@ -1,10 +1,12 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useRef } from 'react'
 import {
   FacebookShareButton,
   TwitterShareButton,
   LinkedinShareButton,
 } from 'react-share'
 import Flex from 'components/Flex'
+
+import { useOnClickOutside } from 'hooks'
 
 export default ({
   close,
@@ -16,23 +18,7 @@ export default ({
   const [isCopied, setCopied] = useState(false)
   const popupRef = useRef()
 
-  const handleClick = (e) => {
-    if (popupRef.current.contains(e.target)) {
-      // inside click
-      return
-    }
-    // outside click
-    close()
-  }
-
-  useEffect(() => {
-    // add when mounted
-    document.addEventListener('mousedown', handleClick)
-    // return function to be called when unmounted
-    return () => {
-      document.removeEventListener('mousedown', handleClick)
-    }
-  }, [])
+  useOnClickOutside(popupRef, () => close())
 
   return (
     <div id="popup-invite" className="popup popup-invite in">
