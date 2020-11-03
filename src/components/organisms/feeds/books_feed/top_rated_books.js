@@ -18,7 +18,7 @@ export default () => {
   ] = useQuery({
     query: topRatedBooksQuery,
     variables: {
-     /*  skip: 5 * (page - 1), */
+      /*  skip: 5 * (page - 1), */
       take: 5 * page,
     },
   })
@@ -56,7 +56,7 @@ export default () => {
       }}
     >
       {books
-        /* .filter((book) => book.chapters.length > 0) */
+        .sort((a, b) => a.rating > b.rating)
         .map((book, key) => (
           <Book book={book} key={book.id} isFirst={key === 0} />
         ))}
