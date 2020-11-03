@@ -16,7 +16,7 @@ const Book = ({ book }) => {
             {book.author.username || book.author.fullname}
           </p>
         )}
-        <Rating ratings={book.rating} />
+        <Rating ratings={book.rating} isBookCard />
       </Link>
     </div>
   )

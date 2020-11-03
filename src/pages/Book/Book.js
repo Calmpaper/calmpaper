@@ -13,6 +13,7 @@ import Header from 'components/Layout/Header'
 import Comments from 'components/Comments'
 import DonationModal from 'components/DonationModal'
 import BookPublishedOverlay from 'components/BookPublishedOverlay'
+import NotFoundPage from 'pages/404'
 
 import Meta from './Book.meta'
 import About from './About'
@@ -75,6 +76,8 @@ export default ({ tab, update }) => {
 
   if (fetching) return <Loader />
   if (error) return <p>Oh no... {error.message}</p>
+
+  if (!fetching && !book) return <NotFoundPage />
 
   return (
     <>

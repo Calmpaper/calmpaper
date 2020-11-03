@@ -18,7 +18,7 @@ const Book = ({ book }) => {
         <p className="catalog-author" style={{ marginBottom: 8 }}>
           {book.author.fullname}
         </p>
-        <Rating rating={book.rating} />
+        <Rating rating={book.rating} isBookCard />
       </a>
     </div>
   )
