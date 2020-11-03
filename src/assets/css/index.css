@@ -504,3 +504,14 @@
 .icon.icon-rating.empty {
   fill: #95959d !important;
 }
+
+.comment__voted-for {
+  display: none;
+  font-size: 13px;
+  line-height: 16px;
+  color: #949495;
+}
+
+.comment-item:hover .comment__voted-for {
+  display: inline;
+}

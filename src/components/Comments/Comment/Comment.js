@@ -92,7 +92,10 @@ const Comment = ({ comment }) => {
               </span>
               <span>· {moment(comment.createdAt).fromNow()}</span>
               {!!comment.vote && comment.vote !== ('opt4' || 'opt5') && (
-                <span> · voted “{options[comment.vote]}”</span>
+                <span className="comment__voted-for">
+                  {' '}
+                  · voted “{options[comment.vote]}”
+                </span>
               )}
             </h4>
             <div
