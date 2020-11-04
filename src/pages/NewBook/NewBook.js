@@ -22,13 +22,13 @@ import Tags from './Tags'
 export default () => {
   const { user } = useContext(UserContext)
   const draftKey = user && `bookDraft${user.id}`
-  const imageDraftKey = user && `bookImageDraft${user.id}`
+  // const imageDraftKey = user && `bookImageDraft${user.id}`
   const draft = window && {
     ...JSON.parse(window.localStorage.getItem(draftKey)),
-    ...JSON.parse(window.localStorage.getItem(imageDraftKey)),
+    // ...JSON.parse(window.localStorage.getItem(imageDraftKey)),
   }
   const { state: { book } = {} } = useLocation()
-  const [image, setImage] = useState(book ? book.image : draft?.image)
+  const [image, setImage] = useState(book ? book.image : null/* draft?.image */)
   const { register, control, handleSubmit, errors, setValue, watch } = window && useForm({
     defaultValues: book
       ? {
@@ -39,7 +39,7 @@ export default () => {
           genres: book.genres,
         }
       : {
-        image: draft?.image,
+        // image: draft?.image,
         name: draft?.name,
         description: draft?.description,
         tags: draft?.tags,
@@ -47,12 +47,12 @@ export default () => {
       },
   })
 
-  useEffect(() => {
-    image &&
-      window &&
-      !book &&
-      window.localStorage.setItem(imageDraftKey, JSON.stringify({ image }))
-  }, [image])
+  // useEffect(() => {
+  //   image &&
+  //     window &&
+  //     !book &&
+  //     window.localStorage.setItem(imageDraftKey, JSON.stringify({ image }))
+  // }, [image])
 
   window &&
     user &&
@@ -96,7 +96,7 @@ export default () => {
           bookSlug: book.slug,
         })
         window.localStorage && window.localStorage.removeItem(draftKey)
-        window.localStorage && window.localStorage.removeItem(imageDraftKey)
+        // window.localStorage && window.localStorage.removeItem(imageDraftKey)
         push({
           pathname: `/${getUserSlug(user)}/${book.slug}`,
           // state: { showBookPublishedOverlay: true },
