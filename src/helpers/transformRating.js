@@ -1,5 +1,5 @@
 export const transformRating = (rating) =>
-  rating === undefined || rating === null || rating === 0
+  rating === undefined || rating === null
     ? 'N/A'
     : rating > 70
     ? 'S++'
