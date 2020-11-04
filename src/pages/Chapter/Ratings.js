@@ -33,7 +33,7 @@ export default ({ chapter }) => {
                   <div class="icon-box">
                       <svg class="icon icon-eye"><use xlink:href="#icon-eye"></use></svg>
                   </div>
-*/}
+          */}
           <div className="panel-num">{chapter.views}</div>
         </div>
         <div className="about-num-panel-label">Views</div>
