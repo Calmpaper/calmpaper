@@ -40,8 +40,7 @@ export default () => {
             <h2 className="item-title">Join Calmpaper</h2>
             <p className="item-text">
               <b>{user.username || user.givenname}</b> has invited you to use
-              Calmpaper with them to read and write unfinished books. Even 1
-              page is ok!
+              Calmpaper with them.
             </p>
             <div className="item-blocks">
               <div className="block block01">
