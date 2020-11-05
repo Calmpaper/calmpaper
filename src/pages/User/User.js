@@ -46,9 +46,9 @@ export default () => {
         {tab === 'works' && <Books books={user.books} />}
         {tab === 'followers' && <Followers users={user.followers} />}
         {tab === 'following' && <Following users={user.following} />}
-        {tab === 'activity' && (
+        {/* {tab === 'activity' && (
           <ActivityFeed userId={userId} username={username} />
-        )}
+        )} */}
       </div>
     </>
   )
