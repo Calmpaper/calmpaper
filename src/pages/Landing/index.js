@@ -15,8 +15,8 @@ export default () => {
           <div className="container">
             <div className="row">
               <h1 className="main-title">
-                We rate <br />
-                web serials
+                Read, Rate and <br />
+                Relax
               </h1>
               <p className="main-text">
                 Submit your web serial. Readers will review it.
