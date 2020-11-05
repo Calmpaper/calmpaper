@@ -19,13 +19,13 @@ export default ({ tab, setTab, followingCount, followersCount }) => (
         >
           Works
         </a>
-        <a
+        {/* <a
           onClick={() => setTab('activity')}
           className={tab === 'activity' ? 'active' : ''}
           style={{ cursor: 'pointer' }}
         >
           Activity
-        </a>
+        </a> */}
         <a
           onClick={() => setTab('following')}
           className={tab === 'following' ? 'active' : ''}
