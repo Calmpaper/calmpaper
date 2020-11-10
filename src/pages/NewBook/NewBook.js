@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react'
+import React, { useState, useContext } from 'react'
 import { UserContext } from 'context'
 import { useHistory, useLocation } from 'react-router-dom'
 import { useForm, Controller } from 'react-hook-form'
@@ -21,15 +21,9 @@ import Tags from './Tags'
 
 export default () => {
   const { user } = useContext(UserContext)
-  const draftKey = user && `bookDraft${user.id}`
-  // const imageDraftKey = user && `bookImageDraft${user.id}`
-  const draft = window && {
-    ...JSON.parse(window.localStorage.getItem(draftKey)),
-    // ...JSON.parse(window.localStorage.getItem(imageDraftKey)),
-  }
   const { state: { book } = {} } = useLocation()
-  const [image, setImage] = useState(book ? book.image : null/* draft?.image */)
-  const { register, control, handleSubmit, errors, setValue, watch } = window && useForm({
+  const [image, setImage] = useState(book ? book.image : null)
+  const { register, control, handleSubmit, errors, setValue } = useForm({
     defaultValues: book
       ? {
           image: book.image,
@@ -38,26 +32,9 @@ export default () => {
           tags: book.tags,
           genres: book.genres,
         }
-      : {
-        // image: draft?.image,
-        name: draft?.name,
-        description: draft?.description,
-        tags: draft?.tags,
-        genres: draft?.genres,
-      },
+      : {},
   })
 
-  // useEffect(() => {
-  //   image &&
-  //     window &&
-  //     !book &&
-  //     window.localStorage.setItem(imageDraftKey, JSON.stringify({ image }))
-  // }, [image])
-
-  window &&
-    user &&
-    window.localStorage.setItem(draftKey, JSON.stringify({ ...watch() }))
-  console.log(draft)
   const { push } = useHistory()
 
   const [{ fetching: chapterFetching }, createChapter] = useMutation(
@@ -95,8 +72,6 @@ export default () => {
           bookId: undefined,
           bookSlug: book.slug,
         })
-        window.localStorage && window.localStorage.removeItem(draftKey)
-        // window.localStorage && window.localStorage.removeItem(imageDraftKey)
         push({
           pathname: `/${getUserSlug(user)}/${book.slug}`,
           // state: { showBookPublishedOverlay: true },
