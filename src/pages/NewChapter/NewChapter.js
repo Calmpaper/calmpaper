@@ -17,27 +17,16 @@ function countWords(str = '') {
 export default () => {
   const { user } = useContext(UserContext)
   const { bookId, bookSlug } = useParams()
-
   const { push } = useHistory()
   const { state: { chapter } = {} } = useLocation()
-
-  const draftKey = bookSlug && `chapterDraft${bookSlug}`
-  const draft =
-    window && bookSlug && JSON.parse(window.localStorage.getItem(draftKey))
-
-  const { register, control, handleSubmit, errors, watch } =
-    window &&
-    useForm({
-      defaultValues: chapter
-        ? {
-            title: chapter.title,
-            content: chapter.content,
-          }
-        : {
-            title: draft?.title,
-            content: draft?.content,
-          },
-    })
+  const { register, control, handleSubmit, errors, watch } = useForm({
+    defaultValues: chapter
+      ? {
+          title: chapter.title,
+          content: chapter.content,
+        }
+      : {},
+  })
 
   const submit = (data) => {
     if (chapter) {
@@ -67,7 +56,6 @@ export default () => {
             bookSlug: chapter.book.slug,
             bookName: chapter.book.name,
           })
-        window.localStorage && window.localStorage.removeItem(draftKey)
         const chapterPage =
           chapter.book.chapters.findIndex((c) => c.id === chapter.id) + 1
         push({
@@ -87,10 +75,6 @@ export default () => {
   const watchContent = watch('content')
   // const is140words = countWords(removeHtmlTags(watchContent || '', true)) >
   // 140
-
-  window &&
-    bookSlug &&
-    window.localStorage.setItem(draftKey, JSON.stringify(watch()))
 
   var cont = watchContent || ''
   cont = cont.replace(/<[^>]*>/g, ' ')
