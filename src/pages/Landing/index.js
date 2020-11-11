@@ -15,11 +15,11 @@ export default () => {
           <div className="container">
             <div className="row">
               <h1 className="main-title">
-                We rate <br />
-                web serials
+                Read, Rate and <br />
+                Relax
               </h1>
               <p className="main-text">
-                Submit your web serial. Readers will review it.
+                Submit your web fiction. Readers will review it.
               </p>
               <a
                 className="btn btn-color clickable"
@@ -40,7 +40,7 @@ export default () => {
                 </div>
                 <h2 className="item-title">1. Write Anything</h2>
                 <p className="item-text">
-                  Write anything. Your book, your rules. Even 1 page is fine.
+                  Write anything. Your fiction, your rules. Even 1 page is fine.
                 </p>
               </div>
               <div className="item">
@@ -49,7 +49,7 @@ export default () => {
                 </div>
                 <h2 className="item-title">2. Readers review it</h2>
                 <p className="item-text">
-                  15-30 readers will vote on your submission with their feedback
+                  Readers will vote on your submission with their feedback
                   and rank it.
                 </p>
               </div>

@@ -40,18 +40,21 @@ export default ({ book }) => (
         <div className="panel-num">{book.readers.length}</div>
       </div>
       <div className="about-num-panel-label">Followers</div>
-    </a>
-    <a style={{ cursor: 'default' }}>
-      <div className="about-num-panel-info">
-        <div className="icon-box icon-box-paint">
-          <svg className="icon icon-rating">
-            <use xlinkHref="#icon-rating" />
-          </svg>
+    </a>{' '}
+    {!!book?.rating && (
+      <a style={{ cursor: 'default' }}>
+        <div className="about-num-panel-info">
+          <div className="icon-box icon-box-paint">
+            <svg className="icon icon-rating">
+              <use xlinkHref="#icon-rating" />
+            </svg>
+          </div>
+
+          <div className="panel-num">{transformRating(book.rating)}</div>
         </div>
-        <div className="panel-num">{transformRating(book.rating)}</div>
-      </div>
-      <div className="about-num-panel-label">Avg rating</div>
-    </a>
+        <div className="about-num-panel-label">Avg rating</div>
+      </a>
+    )}
     {!!book.rank && book.rank <= 10 && (
       <a style={{ cursor: 'default' }}>
         <div className="about-num-panel-info">
