@@ -29,15 +29,15 @@ export default () => {
     <div className="item" style={{ paddingTop: 0 }}>
       <div>
         <img src="/img/empty/empty01.svg" alt="Welcome!" />
-        <h1 className="item-title">Follow a book or create one.</h1>
+        <h1 className="item-title">See updates here</h1>
         {/*
             <h1 className="item-title">
               Create your first book
             </h1>
             */}
         <p className="item-text">
-          Follow a book to see it's updates here, or write one yourself. <br />
-          You can also invite friends to write.
+          Follow an author or a fiction to see it's updates here, or write one yourself. <br />
+          You can also invite people to write.
         </p>
         <div className="item-buttons">
           <button
