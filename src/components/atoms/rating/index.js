@@ -21,9 +21,9 @@ export default ({ rating, isBookCard }) => {
           style={
             isBookCard
               ? {
-                  // width: '16px',
-                  // marginRight: '4px',
-                  // height: '16px',
+                  width: '16px',
+                  marginRight: '4px',
+                  height: '16px',
                 }
               : {}
           }
