@@ -86,12 +86,12 @@ export const editUserMutation = gql`
     updateOneUser(
       where: { id: $userId }
       data: {
-        username: $username
-        fullname: $fullname
-        givenname: $fullname
-        firstname: $fullname
-        avatar: $avatar
-        bio: $bio
+        username: { set: $username }
+        fullname: { set: $fullname }
+        givenname: { set: $fullname }
+        firstname: { set: $fullname }
+        avatar: { set: $avatar }
+        bio: { set: $bio }
       }
     ) {
       id
