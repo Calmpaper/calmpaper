@@ -82,6 +82,7 @@ const Chapter = ({ chapter }) => {
           {moment(chapter.createdAt).fromNow()}
         </p>
         <p className="item-text">{`${chapter.content
+          .replace(/&nbsp;/g, '')
           .replace(regex, '')
           .substring(0, 255)}...`}</p>
         <ul className="item-category">
