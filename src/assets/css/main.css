@@ -1680,17 +1680,18 @@ footer.footer-col .footer-social a {
     z-index: 1889;
   }
 
-  .header .header-nav {
+  /* .header .header-nav {
     display: none;
-  }
+  } */
 
-  .header .header-nav__item {
+  .header .header-nav__item {    
     display: block;
   }
 
   .header .header-nav__link {
     font-size: 30px;
     padding: 18px 0;
+    display: none;
   }
 
   .header .header-nav__link-icon {
@@ -1699,8 +1700,16 @@ footer.footer-col .footer-social a {
     margin-left: 10px;
   }
 
+  .header .header-nav__item .notifications-wrapper {
+    display: none;
+  }
+
+  .header .header-nav__item .dropdown {
+    margin-top: 8px;
+  }
+  
   .header .header-nav__link-icon .icon {
-    width: 13px;
+    width: 13px;    
   }
 
   .header .nav-box-mobile .header-nav {
