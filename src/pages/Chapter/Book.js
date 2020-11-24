@@ -1,12 +1,14 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { UserContext } from 'context'
 import { useHistory } from 'react-router-dom'
 import { getUserSlug, getUserDisplayName } from 'helpers'
 import BookCover from 'components/atoms/book-cover'
 import Ratings from './Ratings'
 
 export default ({ chapter }) => {
-  const book = chapter.book
+  const { user } = useContext(UserContext)
   const { push } = useHistory()
+  const book = chapter.book
 
   return (
     <div className="read-book-main">
@@ -19,7 +21,7 @@ export default ({ chapter }) => {
           >
             {getUserDisplayName(book.author)}
           </div>
-          <Ratings chapter={chapter} />
+          {user.id === book.author.id && <Ratings chapter={chapter} />}
         </div>
         <div className="col col02">
           <BookCover
