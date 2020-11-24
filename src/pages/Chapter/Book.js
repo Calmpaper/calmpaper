@@ -21,7 +21,7 @@ export default ({ chapter }) => {
           >
             {getUserDisplayName(book.author)}
           </div>
-          {user.id === book.author.id && <Ratings chapter={chapter} />}
+          {user && user.id === book.author.id && <Ratings chapter={chapter} />}
         </div>
         <div className="col col02">
           <BookCover
