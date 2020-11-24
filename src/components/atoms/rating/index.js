@@ -4,6 +4,8 @@ import { transformRating } from 'helpers'
 export default ({ rating, isBookCard }) => {
   const isNA = rating === undefined || rating === null || rating === 0
 
+  return null
+
   return (
     <div
       className="about-num-panel-info"
