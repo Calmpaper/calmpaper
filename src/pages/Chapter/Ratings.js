@@ -14,6 +14,7 @@ export default ({ chapter }) => {
 
   return (
     <div className="about-num-panel">
+      {/*
       <Link to={`/books/${chapter.book.id}/reviews`}>
         <div className="about-num-panel-info">
           <div className="icon-box icon-box-paint">
@@ -27,6 +28,7 @@ export default ({ chapter }) => {
           {chapter.poll.totalVotes} votes
         </div>
       </Link>
+      */}
       <a href className="all-views" style={{ cursor: 'default' }}>
         <div className="about-num-panel-info">
           {/*
