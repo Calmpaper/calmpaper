@@ -85,7 +85,10 @@ export default () => {
                 <a onClick={() => setShowInvitePopup(true)}>Invite people</a>
               </li>
               <li>
-                <Link to={'/followed'}>Followed</Link>
+                <Link to={'/followed'}>Followed books</Link>
+              </li>
+              <li>
+                <Link to={`/feed`}>Feed</Link>
               </li>
               <li>
                 <Link to={'/dashboard'}>Dashboard</Link>

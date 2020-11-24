@@ -28,13 +28,6 @@ export default ({ home, children }) => {
                   )*/}
               {user && <Create />}
               {user && (
-                <li className="header-nav__item">
-                  <Link to={`/feed`} className="header-nav__link">
-                    Following
-                  </Link>
-                </li>
-              )}
-              {user && (
                 <li
                   className="header-nav__item"
                   style={{ position: 'relative' }}
