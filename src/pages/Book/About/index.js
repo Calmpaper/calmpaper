@@ -42,7 +42,7 @@ export default ({ book }) => {
             onClick={() => push(`/${getUserSlug(book.author)}`)}
           >{`by ${getUserDisplayName(book.author)}`}</p>
         )}
-        {book.author.id === user.id && <Ratings book={book} />}
+        {user && book.author.id === user.id && <Ratings book={book} />}
         <div className="about-book-main-btn">
           {book.chapters.length > 0 ? (
             <Link
