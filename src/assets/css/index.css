@@ -515,3 +515,18 @@
 .comment-item:hover .comment__voted-for {
   display: inline;
 }
+
+pre {
+  padding: 0.7rem 1rem;
+  border-radius: 5px;
+  background: #000;
+  font-size: 0.8rem;
+  overflow-x: auto;
+  width: auto;
+  padding-right: 64px;
+}
+
+code {
+  font-size: 15px;
+  color: rgb(211, 241, 255) !important;
+}
