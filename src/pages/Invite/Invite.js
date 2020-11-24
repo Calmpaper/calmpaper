@@ -76,12 +76,14 @@ export default () => {
                 </a>
               </div>
             </div>
+            {/*
             <h2 className="item-title">What is Calmpaper?</h2>
             <p className="item-text">
               A platform for unfinished books. Share your unfinished books after
               finishing the first page, not 300 pages later. The site is
               currently in beta and is invite-only.
             </p>
+            */}
           </div>
         </div>
       </div>
