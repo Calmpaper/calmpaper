@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { useParams } from 'react-router-dom'
 import { useQuery } from 'urql'
 import { getUserQuery } from 'api'
+import { UserContext } from 'context'
 
 import Header from 'components/Layout/Header'
 import Loader from 'components/Loader'
@@ -18,6 +19,7 @@ import ActivityFeed from './ActivityFeed'
 export default () => {
   const [tab, setTab] = useState('feed')
   const { userId, username } = useParams()
+  const { user: loggedUser } = useContext(UserContext)
 
   const [{ data: { user } = {}, fetching, error }] = useQuery({
     query: getUserQuery,
@@ -44,8 +46,12 @@ export default () => {
         />
         {tab === 'feed' && <Feed authorId={user.id} />}
         {tab === 'works' && <Books books={user.books} />}
-        {tab === 'followers' && <Followers users={user.followers} />}
-        {tab === 'following' && <Following users={user.following} />}
+        {tab === 'followers' && user.id === loggedUser.id && (
+          <Followers users={user.followers} />
+        )}
+        {tab === 'following' && user.id === loggedUser.id && (
+          <Following users={user.following} />
+        )}
         {/* {tab === 'activity' && (
           <ActivityFeed userId={userId} username={username} />
         )} */}
