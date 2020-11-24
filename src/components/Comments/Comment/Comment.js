@@ -65,6 +65,8 @@ const Comment = ({ comment }) => {
     }
   }
 
+  const isBookComment = !!comment.book
+
   return (
     <div className="comment-item">
       <div
@@ -155,11 +157,14 @@ const Comment = ({ comment }) => {
               onLike={onLike}
             />
           </div>
-          {user && user.id === comment.author.id && (
-            <div className="comment-context-menu__container">
-              <More commentId={comment.id} setEditing={setEditing} />
-            </div>
-          )}
+          {user &&
+            (user.id === comment.author.id || user.id === isBookComment
+              ? comment.book.author.id
+              : comment.chapter.author.id) && (
+              <div className="comment-context-menu__container">
+                <More commentId={comment.id} setEditing={setEditing} />
+              </div>
+            )}
         </div>
         {showReplyInput && (
           <Input

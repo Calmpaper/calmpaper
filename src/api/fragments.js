@@ -66,6 +66,16 @@ export const CommentFragment = gql`
     body
     createdAt
     isChild
+    chapter {
+      author {
+        id
+      }
+    }
+    book {
+      author {
+        id
+      }
+    }
     author {
       ...User
     }
