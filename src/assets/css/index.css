@@ -530,3 +530,7 @@ code {
   font-size: 15px;
   color: rgb(211, 241, 255) !important;
 }
+
+.editor {
+  max-width: unset !important;
+}
