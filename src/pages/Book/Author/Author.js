@@ -44,13 +44,14 @@ export default ({ author, bookId }) => {
           <div className="author-name">
             {author.username || author.fullname}
           </div>
-          {author.followers.length > 0 ? (
+          <div className="author-country">Author</div>
+          {/* author.followers.length > 0 ? (
             <div className="author-country">{`${author.followers.length} ${
               author.followers.length === 1 ? 'follower' : 'followers'
             }`}</div>
           ) : (
             <div className="author-country">{getUserSlug(author)}</div>
-          )}
+              )*/}
         </div>
       </div>
       <div className="buttons">

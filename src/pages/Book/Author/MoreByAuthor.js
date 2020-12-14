@@ -25,6 +25,7 @@ export default ({ books = [] }) => {
                 <div className="progress__num">{`${avg * 10}%`}</div>
               </div>
               */}
+            {/*
             <div className="catalog-stat" style={{ marginTop: 8 }}>
               <div className="catalog-stat__box">
                 <svg className="icon icon-rating">
@@ -40,6 +41,7 @@ export default ({ books = [] }) => {
                 <span>{book.views}</span>
               </div>
             </div>
+            */}
           </div>
         </Link>
       ))}

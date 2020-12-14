@@ -3,6 +3,7 @@
   "version": "0.1.5",
   "private": true,
   "dependencies": {
+    "@moneybutton/react-money-button": "^0.38.4",
     "@stripe/react-stripe-js": "^1.1.2",
     "@stripe/stripe-js": "^1.9.0",
     "@urql/exchange-graphcache": "^3.1.4",
