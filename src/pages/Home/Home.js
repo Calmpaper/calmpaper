@@ -43,7 +43,16 @@ export default () => {
       </Helmet>
       <div className="page-home">
         <Header />
-        <Flex column style={{ marginTop: 124 }}>
+        <Flex
+          column
+          style={{
+            marginTop: 124,
+            height: '70vh',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
           <div className="page-books-follows">
             <div className="latest">
               <div className="container">
@@ -55,7 +64,9 @@ export default () => {
                     alignItems: 'center',
                   }}
                 >
-                  <h2 className="title size02">Rate web fiction</h2>
+                  <h2 className="title size02">
+                    Free platform to host your writing
+                  </h2>
                   <div
                     className="item-buttons"
                     style={{
@@ -95,59 +106,6 @@ export default () => {
                     </button>
                   </div>
                 </div>
-                <Flex row justifyCenter style={{ marginBottom: 24 }}>
-                  <div className="tabs">
-                    <div className="container">
-                      <div
-                        className="row"
-                        style={{ display: 'flex', justifyContent: 'center' }}
-                      >
-                        <a
-                          className={tab === 'topRated' ? 'active' : ''}
-                          style={{ cursor: 'pointer' }}
-                          onClick={() => setTab('topRated')}
-                        >
-                          Top rated
-                        </a>
-                        <a
-                          className={tab === 'books' ? 'active' : ''}
-                          style={{ cursor: 'pointer' }}
-                          onClick={() => setTab('books')}
-                        >
-                          New
-                        </a>
-                        {/*
-                        <a
-                          className={tab === 'popular' ? 'active' : ''}
-                          style={{ cursor: 'pointer' }}
-                          onClick={() => setTab('popular')}
-                        >
-                          Popular
-                        </a>
-                        */}
-                        {/* <a
-                          className={tab === 'updates' ? 'active' : ''}
-                          style={{ cursor: 'pointer' }}
-                          onClick={() => setTab('updates')}
-                        >
-                          New pages
-                        </a> */}
-                        {/* <a
-                          className={tab === 'comments' ? 'active' : ''}
-                          style={{ cursor: 'pointer' }}
-                          onClick={() => setTab('comments')}
-                        >
-                          Latest comments
-                        </a> */}
-                      </div>
-                    </div>
-                  </div>
-                </Flex>
-                {tab === 'topRated' && <TopRatedFeed />}
-                {tab === 'books' && <BooksFeed />}
-                {/*  {tab === 'updates' && <ChaptersFeed />} */}
-                {/*  {tab === 'comments' && <CommentsFeed />} */}
-                {tab === 'popular' && <PopularFeed />}
               </div>
             </div>
           </div>
@@ -156,3 +114,57 @@ export default () => {
     </>
   )
 }
+
+// <Flex row justifyCenter style={{ marginBottom: 24 }}>
+//   <div className="tabs">
+//     <div className="container">
+//       <div
+//         className="row"
+//         style={{ display: 'flex', justifyContent: 'center' }}
+//       >
+//         <a
+//           className={tab === 'topRated' ? 'active' : ''}
+//           style={{ cursor: 'pointer' }}
+//           onClick={() => setTab('topRated')}
+//         >
+//           Top rated
+//         </a>
+//         <a
+//           className={tab === 'books' ? 'active' : ''}
+//           style={{ cursor: 'pointer' }}
+//           onClick={() => setTab('books')}
+//         >
+//           New
+//         </a>
+//         {/*
+//         <a
+//           className={tab === 'popular' ? 'active' : ''}
+//           style={{ cursor: 'pointer' }}
+//           onClick={() => setTab('popular')}
+//         >
+//           Popular
+//         </a>
+//         */}
+//         {/* <a
+//           className={tab === 'updates' ? 'active' : ''}
+//           style={{ cursor: 'pointer' }}
+//           onClick={() => setTab('updates')}
+//         >
+//           New pages
+//         </a> */}
+//         {/* <a
+//           className={tab === 'comments' ? 'active' : ''}
+//           style={{ cursor: 'pointer' }}
+//           onClick={() => setTab('comments')}
+//         >
+//           Latest comments
+//         </a> */}
+//       </div>
+//     </div>
+//   </div>
+// </Flex>
+// {tab === 'topRated' && <TopRatedFeed />}
+// {tab === 'books' && <BooksFeed />}
+// {/*  {tab === 'updates' && <ChaptersFeed />} */}
+// {/*  {tab === 'comments' && <CommentsFeed />} */}
+// {tab === 'popular' && <PopularFeed />}

@@ -39,11 +39,12 @@ export default ({ chapterId, author }) => {
               />
               <div className="item-info">
                 <h3 className="item-title">{getUserDisplayName(author)}</h3>
-                {author.followers.length > 0 && (
+                <p className="item-subtitle">Author</p>
+                {/*author.followers.length > 0 && (
                   <p className="item-subtitle">{`${author.followers.length} ${
                     author.followers.length === 1 ? 'follower' : 'followers'
                   }`}</p>
-                )}
+                    )*/}
               </div>
             </div>
           </Link>

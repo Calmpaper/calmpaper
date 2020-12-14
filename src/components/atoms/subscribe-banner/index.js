@@ -34,6 +34,8 @@ export default ({ book, chapter }) => {
     }
   }, [user, book, setFollowing, isFollowing, wasFollowing])
 
+  if (!isLastPage) return null
+
   const onFollow = () => {
     if (isFollowing) {
       removeBookFromFavorites({ userId: user.id, bookId: book.id })
