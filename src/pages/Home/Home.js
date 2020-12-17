@@ -47,7 +47,7 @@ export default () => {
           column
           style={{
             marginTop: 124,
-            height: '70vh',
+            // height: '70vh',
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
@@ -106,6 +106,59 @@ export default () => {
                     </button>
                   </div>
                 </div>
+                <Flex row justifyCenter style={{ marginBottom: 24 }}>
+                  <div className="tabs">
+                    <div className="container">
+                      <div
+                        className="row"
+                        style={{ display: 'flex', justifyContent: 'center' }}
+                      >
+                        <a
+                          className={tab === 'topRated' ? 'active' : ''}
+                          style={{ cursor: 'pointer' }}
+                          onClick={() => setTab('topRated')}
+                        >
+                          Top rated
+                        </a>
+                        <a
+                          className={tab === 'books' ? 'active' : ''}
+                          style={{ cursor: 'pointer' }}
+                          onClick={() => setTab('books')}
+                        >
+                          New
+                        </a>
+                        {/*
+        <a
+          className={tab === 'popular' ? 'active' : ''}
+          style={{ cursor: 'pointer' }}
+          onClick={() => setTab('popular')}
+        >
+          Popular
+        </a>
+        */}
+                        {/* <a
+          className={tab === 'updates' ? 'active' : ''}
+          style={{ cursor: 'pointer' }}
+          onClick={() => setTab('updates')}
+        >
+          New pages
+        </a> */}
+                        {/* <a
+          className={tab === 'comments' ? 'active' : ''}
+          style={{ cursor: 'pointer' }}
+          onClick={() => setTab('comments')}
+        >
+          Latest comments
+        </a> */}
+                      </div>
+                    </div>
+                  </div>
+                </Flex>
+                {tab === 'topRated' && <TopRatedFeed />}
+                {tab === 'books' && <BooksFeed />}
+                {/*  {tab === 'updates' && <ChaptersFeed />} */}
+                {/*  {tab === 'comments' && <CommentsFeed />} */}
+                {tab === 'popular' && <PopularFeed />}
               </div>
             </div>
           </div>
@@ -114,57 +167,3 @@ export default () => {
     </>
   )
 }
-
-// <Flex row justifyCenter style={{ marginBottom: 24 }}>
-//   <div className="tabs">
-//     <div className="container">
-//       <div
-//         className="row"
-//         style={{ display: 'flex', justifyContent: 'center' }}
-//       >
-//         <a
-//           className={tab === 'topRated' ? 'active' : ''}
-//           style={{ cursor: 'pointer' }}
-//           onClick={() => setTab('topRated')}
-//         >
-//           Top rated
-//         </a>
-//         <a
-//           className={tab === 'books' ? 'active' : ''}
-//           style={{ cursor: 'pointer' }}
-//           onClick={() => setTab('books')}
-//         >
-//           New
-//         </a>
-//         {/*
-//         <a
-//           className={tab === 'popular' ? 'active' : ''}
-//           style={{ cursor: 'pointer' }}
-//           onClick={() => setTab('popular')}
-//         >
-//           Popular
-//         </a>
-//         */}
-//         {/* <a
-//           className={tab === 'updates' ? 'active' : ''}
-//           style={{ cursor: 'pointer' }}
-//           onClick={() => setTab('updates')}
-//         >
-//           New pages
-//         </a> */}
-//         {/* <a
-//           className={tab === 'comments' ? 'active' : ''}
-//           style={{ cursor: 'pointer' }}
-//           onClick={() => setTab('comments')}
-//         >
-//           Latest comments
-//         </a> */}
-//       </div>
-//     </div>
-//   </div>
-// </Flex>
-// {tab === 'topRated' && <TopRatedFeed />}
-// {tab === 'books' && <BooksFeed />}
-// {/*  {tab === 'updates' && <ChaptersFeed />} */}
-// {/*  {tab === 'comments' && <CommentsFeed />} */}
-// {tab === 'popular' && <PopularFeed />}
